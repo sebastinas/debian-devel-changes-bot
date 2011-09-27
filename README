@@ -48,7 +48,7 @@ Installation
      - http://lists.debian.org/debian-bugs-dist/
      - http://lists.debian.org/debian-bugs-closed/
      - http://lists.debian.org/debian-security-announce/
-     - http://lists.backports.org/mailman/listinfo/backports-changes
+     - http://lists.debian.org/debian-backports-changes/
 
   * Configure the bot to start on bootup:
 
