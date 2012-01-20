@@ -21,8 +21,6 @@ set -eu
 RUN_DIR="/var/run/debian-devel-changes"
 FIFO="${RUN_DIR}/fifo"
 
-mkdir -p "${RUN_DIR}"
-
 Get_lock () {
 	trap "lockfile-remove ${RUN_DIR}/lockfile" EXIT
 	lockfile-create "${RUN_DIR}/lockfile"
