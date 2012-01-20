@@ -154,7 +154,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 'You realise they don\'t fix themselves, right?',
                 'How about fixing yourself some caffeine and then poking at the bug list?',
             ))
-            txt = "%s %s! There are currently %d RC bugs in squeeze. %s Try !random." % \
+            txt = "%s %s! There are currently %d RC bugs in wheezy. %s Try !random." % \
                 (prefix, msg.nick, num_bugs, advice)
         else:
             txt = "%s %s!" % (prefix, msg.name)
@@ -181,7 +181,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         num_bugs = len(TestingRCBugs().get_bugs())
         if type(num_bugs) is int:
             irc.reply("There are %d release-critical bugs in the testing distribution. " \
-                "See http://bts.turmzimmer.net/details.php?bydist=squeeze&igncontrib=on&ignnonfree=on" % num_bugs)
+                "See http://bts.turmzimmer.net/details.php?bydist=wheezy&igncontrib=on&ignnonfree=on" % num_bugs)
         else:
             irc.reply("No data at this time.")
     rc = wrap(rc)
@@ -189,7 +189,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def randombug(self, irc, msg, args):
         bug = random.choice(list(TestingRCBugs().get_bugs()))
-        msg = "Your randomly chosen squeeze RC bug is: %s. Happy bugfixing!" % bug_synopsis(str(bug)).for_irc()
+        msg = "Your randomly chosen wheezy RC bug is: %s. Happy bugfixing!" % bug_synopsis(str(bug)).for_irc()
         irc.reply(colourise(msg))
     randombug = wrap(randombug)
     random = wrap(randombug)
