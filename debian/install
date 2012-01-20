@@ -1,1 +1,2 @@
 bin/* /usr/lib/debian-devel-changes-bot
+bot-config /var/lib/debian-devel-changes-bot/
