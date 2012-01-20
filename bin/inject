@@ -18,7 +18,7 @@
 
 set -eu
 
-RUN_DIR="/var/run/debian-devel-changes"
+RUN_DIR="/var/run/debian-devel-changes-bot"
 FIFO="${RUN_DIR}/fifo"
 
 Get_lock () {
