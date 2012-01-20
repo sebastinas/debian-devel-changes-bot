@@ -53,7 +53,7 @@ Send_to_fifo () {
 	PID=${!}
 
 	# Wait until we have finished writing or timeout
-	( sleep 5; kill ${PID} > /dev/null 2>&1; ) &
+	( sleep 3; kill ${PID} > /dev/null 2>&1; ) &
 	wait ${PID}
 
 	RET=${?}
