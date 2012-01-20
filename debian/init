@@ -19,12 +19,12 @@ DESC="#debian-devel-changes IRC bot"
 USER=ddc-bot
 GROUP=${USER}
 DAEMON=/usr/bin/supybot
-RUNDIR=/var/lib/debian-devel-changes-bot
+LIBDIR=/var/lib/debian-devel-changes-bot
 PIDFILE=/var/run/${NAME}/${NAME}.pid
 
 set -e
 
-if [ ! -d ${RUNDIR} ]
+if [ ! -d ${LIBDIR} ]
 then
 	exit 0
 fi
@@ -43,7 +43,7 @@ case "$1" in
 	chown ${USER}:${GROUP} $(dirname ${PIDFILE})
 
 	if start-stop-daemon --start --oknodo --quiet --pidfile ${PIDFILE} \
-		--chuid ${USER}:${GROUP} --chdir ${RUNDIR} \
+		--chuid ${USER}:${GROUP} --chdir ${LIBDIR} \
 		--exec ${DAEMON} -- --daemon bot-config/BTS.conf
 	then
 		echo "${NAME}."
