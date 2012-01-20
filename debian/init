@@ -40,6 +40,7 @@ case "$1" in
 	fi
 
 	mkdir -p $(dirname ${PIDFILE})
+	chmod 777 $(dirname ${PIDFILE})
 	chown ${USER}:${GROUP} $(dirname ${PIDFILE})
 
 	if start-stop-daemon --start --oknodo --quiet --pidfile ${PIDFILE} \
