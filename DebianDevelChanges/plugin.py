@@ -349,14 +349,6 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     swirl = wrap(_swirl)
     debian = wrap(_swirl)
 
-    def _pas(self, irc, msg, args):
-        line = "[desc]Packages-arch-specific[reset]: [url]http://cvs.debian.org/srcdep/Packages-arch-specific?root=dak&view=auto[/url]"
-        irc.reply(colourise(line))
-    pas = wrap(_pas)
-    packages_arch_specific = wrap(_pas)
-    not_for_us = wrap(_pas)
-    nfu = wrap(_pas)
-
     def _new(self, irc, msg, args):
         line = "[desc]NEW queue is[reset]: [url]%s[/url]. [desc]Current size is:[reset] %d" % \
             ("http://ftp-master.debian.org/new.html", NewQueue().get_size())
