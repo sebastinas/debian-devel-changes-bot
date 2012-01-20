@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -eu
+
+USER="ddc-bot"
+GROUP="$USER"
+
+chown -R $USER:$GROUP /var/lib/debian-devel-changes-bot
+
+#DEBHELPER#
