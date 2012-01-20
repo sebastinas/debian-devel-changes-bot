@@ -2,4 +2,4 @@
 
 from setuptools import setup, find_packages
 
-setup(packages=find_packages())
+setup(name='debian-devel-changes-bot', packages=find_packages())
