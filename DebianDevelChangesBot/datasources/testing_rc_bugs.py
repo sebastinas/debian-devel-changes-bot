@@ -49,7 +49,6 @@ class TestingRCBugs(Datasource):
         bugs = set()
 
         for link in soup('a', {'href': self.RE_PATTERN}):
-            bug = link.get('name', '')
             try:
                 bugs.add(int(link.text[1:]))
             except ValueError:
