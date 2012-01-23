@@ -30,8 +30,9 @@ from DebianDevelChangesBot import Datasource
 class TestingRCBugs(Datasource):
     _shared_state = {}
 
-    URL = 'http://bts.turmzimmer.net/details.php?bydist=wheezy&igncontrib=on&ignnonfree=on'
+    URL = 'http://udd.debian.org/bugs.cgi?release=wheezy&notmain=ign&merged=ign&rc=1'
     INTERVAL = 60 * 10
+    RE_PATTERN = re.compile('^http://bugs.debian.org/\d+$')
 
     lock = thread.allocate_lock()
     bugs = None
@@ -47,10 +48,10 @@ class TestingRCBugs(Datasource):
 
         bugs = set()
 
-        for link in soup('a'):
+        for link in soup('a', {'href': self.RE_PATTERN}):
             bug = link.get('name', '')
             try:
-                bugs.add(int(bug))
+                bugs.add(int(link.text[1:]))
             except ValueError:
                 pass
 

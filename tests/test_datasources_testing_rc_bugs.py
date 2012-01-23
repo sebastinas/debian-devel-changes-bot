@@ -39,7 +39,7 @@ class TestDatasourceTestingRCBugs(unittest.TestCase):
         """
         self.assert_(len(self.datasource.URL) > 5)
         self.assert_(self.datasource.URL.startswith('http'))
-        self.assert_('dist' in self.datasource.URL)
+        self.assert_('release' in self.datasource.URL)
 
     def testInterval(self):
         """
@@ -53,7 +53,7 @@ class TestDatasourceTestingRCBugs(unittest.TestCase):
         val = self.datasource.get_bugs()
 
         self.assert_(type(val) is set)
-        self.assertEqual(len(val), 538)
+        self.assertEqual(len(val), 834)
 
     def testParseEmpty(self):
         fileobj = open('/dev/null')
