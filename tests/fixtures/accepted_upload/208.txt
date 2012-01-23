@@ -27,7 +27,7 @@ X-BeenThere: backports-changes@lists.backports.org
 X-Mailman-Version: 2.1.9
 Precedence: list
 Reply-To: backports-users@lists.backports.org
-List-Id: "backports.org changes" <backports-changes.lists.backports.org>
+List-Id: <debian-backports-changes.lists.debian.org>
 List-Unsubscribe: <http://lists.backports.org/mailman/listinfo/backports-changes>,
 	<mailto:backports-changes-request@lists.backports.org?subject=unsubscribe>
 List-Archive: <http://lists.backports.org/lurker/list/backports-changes.html>
