@@ -23,7 +23,7 @@ import urllib2
 from BeautifulSoup import BeautifulSoup
 
 import socket
-socket.setdefaulttimeout(10)
+socket.setdefaulttimeout(30)
 
 from DebianDevelChangesBot import Datasource
 
@@ -31,7 +31,7 @@ class TestingRCBugs(Datasource):
     _shared_state = {}
 
     URL = 'http://udd.debian.org/bugs.cgi?release=wheezy&notmain=ign&merged=ign&rc=1'
-    INTERVAL = 60 * 10
+    INTERVAL = 60 * 20
     RE_PATTERN = re.compile('^http://bugs.debian.org/\d+$')
 
     lock = thread.allocate_lock()
