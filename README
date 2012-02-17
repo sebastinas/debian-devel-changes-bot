@@ -1,57 +1,12 @@
 debian-devel-changes IRC bot
 ============================
 
-Requirements:
-
- * Python >= 2.4
- * Beautiful Soup (python-beautifulsoup)
- * Supybot
- * Local MTA
- * lockfile-progs
- * python-btsutils
-
-Installation
-------------
-
-  * Obtain a copy of the bot sources and place in an empty directory. We will
-    refer to this dir as $SOURCE_DIR.
-
-  * Ensure that
-     - $SOURCE_DIR/bin/ is writable by the supybot user (so that it can create
-       a FIFO)
-     - $SOURCE_DIR/bin/lockfile/ is writable by your MTA
-
-  * Create an email address which outputs mail directed to it to the STDIN of
-    $SOURCE_DIR/bin/debian-devel-changes-bot.sh. Under Exim you can use the
-    "pipe" transport for this.
-
-    You should keep this email address secret so that 3rd-parties cannot inject
-    specially crafted messages onto the channel.
-
-  * Configure a Supybot instance using the "supybot-wizard" command. You are
-    recommended to run this in the "bot-config" directory under $SOURCE_DIR (it
-    will be ignored by the revision control system).
-
-  * Add "$SOURCE_DIR/plugin" to the "supybot.directories.plugins" directive in
-    your ".conf" file.
-
-  * Run supybot $SOURCE_DIR/bot-config/<conffile>.conf to start the bot.
-
-  * Call the following for every channel you wish the bot to emit change
-    notices:
-  
-      !channel <#channel> supybot.plugins.DebianDevelChanges.show_changes True
-
-  * Subscribe the bot to the following lists:
+  * You will need to subscribe the bot to the following lists:
 
      - http://lists.debian.org/debian-devel-changes/
      - http://lists.debian.org/debian-bugs-dist/
      - http://lists.debian.org/debian-bugs-closed/
      - http://lists.debian.org/debian-security-announce/
      - http://lists.debian.org/debian-backports-changes/
-
-  * Configure the bot to start on bootup:
-
-      @reboot supybot --daemon $SOURCE_DIR/bot-config/<conffile>.conf
 
   * (Optional) Disable spam checking for messages sent to the bot
