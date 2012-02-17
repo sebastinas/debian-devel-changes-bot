@@ -1,339 +1,320 @@
-
-  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-  <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="ROBOTS" content="NOFOLLOW">
-<link type="text/css" title="User selected" rel="stylesheet" href="../common/default.css">
-<link type="text/css" title="Official" rel="alternate stylesheet" href="../common/revamp.css">
-<link type="text/css" title="Legacy PTS" rel="alternate stylesheet" href="../common/pts.css">
-<link type="text/css" title="Compact rendering" rel="alternate stylesheet" href="../common/compact.css">
-<script type="text/javascript" src="../common/pts.js"></script><link rel="alternate" type="application/rss+xml" title="RSS" href="swi-prolog/news.rss20.xml">
-<title>Overview of swi-prolog source package</title>
-</head>
-<body onload="javascript:onLoad();">
-<div id="quickforms" style="float: right;">
-<form method="get" action="/common/index.html"><p><span title="Jump to package">Go:</span><input type="text" name="src" value=""></p></form>
-<form id="csspref-form" method="get" action="/common/set-csspref.php"><p>Switch style: <select name="csspref" onchange="javascript:onChangeStyle();"><option value="revamp.css">Default</option>
-<option value="compact.css">Compact</option>
-<option value="pts.css">Legacy</option></select></p></form>
-</div>
-<h1>Overview of
-  <a href="http://packages.debian.org/src:swi-prolog">swi-prolog</a>
-  source package</h1>
-<div id="body">
-<table class="containertable"><tr class="containerrow" valign="top">
-<td class="containercell">
-<table class="lefttable">
-<tr class="titlerow"><td class="titlecell" colspan="2">
-      General information
-    </td></tr>
-<tr class="normalrow">
-<td class="labelcell">Latest version</td>
-<td class="contentcell">5.6.57-1</td>
-</tr>
-<tr class="normalrow">
-<td class="labelcell">Maintainer</td>
-<td class="contentcell">
-<a href="http://qa.debian.org/developer.php?login=chris@chris-lamb.co.uk">Chris Lamb</a> <a class="email" href="mailto:chris@chris-lamb.co.uk"><img alt="[email]" src="../common/email.png" title="email"></a>
-</td>
-</tr>
-<tr class="normalrow">
-<td class="labelcell"><a href="http://www.debian.org/doc/manuals/developers-reference/ch-pkgs.en.html#s-collaborative-maint">Uploaders</a></td>
-<td class="contentcell"><a class="none" title="You should find some co-maintainers ..." name="fake">None</a></td>
-</tr>
-<tr class="normalrow">
-<td class="labelcell">Standards version</td>
-<td class="contentcell">3.8.0</td>
-</tr>
-<tr class="normalrow">
-<td class="labelcell">Priority</td>
-<td class="contentcell">optional</td>
-</tr>
-<tr class="normalrow">
-<td class="labelcell">Section</td>
-<td class="contentcell">interpreters</td>
-</tr>
-<tr>
-<td class="labelcell">Version Control</td>
-<td class="contentcell">
-<a href="http://git.chris-lamb.co.uk/?p=pkg-swi-prolog.git">browser</a><br>raw: <a href="git://git.chris-lamb.co.uk/pkg-swi-prolog.git">Git</a>
-</td>
-</tr>
-<tr class="titlerow"><td class="titlecell" colspan="2">
-      Available versions
-  </td></tr>
-<tr class="normalrow">
-<td class="labelcell"><a href="http://www.debian.org/releases/sarge/">Oldstable</a></td>
-<td class="contentcell"><a href="http://packages.debian.org/source/oldstable/swi-prolog">5.2.13-1</a></td>
-</tr>
-<tr class="normalrow">
-<td class="labelcell"><a href="http://www.debian.org/releases/testing/">Testing</a></td>
-<td class="contentcell"><a href="http://packages.debian.org/source/testing/swi-prolog">5.6.55-1</a></td>
-</tr>
-<tr class="normalrow">
-<td class="labelcell">Unstable</td>
-<td class="contentcell"><a href="http://packages.debian.org/source/unstable/swi-prolog">5.6.57-1</a></td>
-</tr>
-</table>
-<table class="lefttable">
-<tr class="titlerow"><td class="titlecell" colspan="2">
-      Source package
-  </td></tr>
-<tr class="titlerow">
-<td class="labelcell"><a href="http://ftp.debian.org/debian/pool/main/s/swi-prolog/">Files</a></td>
-<td class="contentcell" id="src_files"><ul>
-<li class="srcfile" id="srcfile_dsc"><a class="srcfile" href="http://ftp.debian.org/debian/pool/main/s/swi-prolog/swi-prolog_5.6.57-1.dsc" title="swi-prolog_5.6.57-1.dsc: 1426 bytes">.dsc</a></li>
-<li class="srcfile" id="srcfile_orig"><a class="srcfile" href="http://ftp.debian.org/debian/pool/main/s/swi-prolog/swi-prolog_5.6.57.orig.tar.gz" title="swi-prolog_5.6.57.orig.tar.gz: 11866526 bytes">.orig</a></li>
-<li class="srcfile" id="srcfile_diff"><a class="srcfile" href="http://ftp.debian.org/debian/pool/main/s/swi-prolog/swi-prolog_5.6.57-1.diff.gz" title="swi-prolog_5.6.57-1.diff.gz: 11397 bytes">.diff</a></li>
-</ul></td>
-</tr>
-<tr class="titlerow"><td class="titlecell" colspan="2">
-      Binary package(s)
-  </td></tr>
-<tr class="normalrow"><td class="normalcell" colspan="2" style="text-align: left"><ul>
-<li class="binpkg">
-<a class="binpkg" href="http://packages.debian.org/swi-prolog">swi-prolog</a><span style="font-size: 70%">
-	      (<a href="http://bugs.debian.org/swi-prolog">2 bugs</a>: 
-
-	      <a title="critical, grave and serious" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=critical&amp;sev-inc=grave&amp;sev-inc=serious">0</a>, 
-
-	      <a title="important and normal" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=important&amp;sev-inc=normal">0</a>, 
-
-	      <a title="wishlist and minor" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=minor&amp;sev-inc=wishlist">2</a>, 
-
-	      <a title="pending and fixed" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog&amp;archive=no&amp;pend-inc=pending-fixed&amp;pend-inc=fixed">0</a>)
-	    </span>
-</li>
-<li class="binpkg">
-<a class="binpkg" href="http://packages.debian.org/swi-prolog-clib">swi-prolog-clib</a><span style="font-size: 70%">
-	      (<a href="http://bugs.debian.org/swi-prolog-clib">0 bugs</a>: 
-
-	      <a title="critical, grave and serious" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-clib&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=critical&amp;sev-inc=grave&amp;sev-inc=serious">0</a>, 
-
-	      <a title="important and normal" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-clib&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=important&amp;sev-inc=normal">0</a>, 
-
-	      <a title="wishlist and minor" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-clib&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=minor&amp;sev-inc=wishlist">0</a>, 
-
-	      <a title="pending and fixed" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-clib&amp;archive=no&amp;pend-inc=pending-fixed&amp;pend-inc=fixed">0</a>)
-	    </span>
-</li>
-<li class="binpkg">
-<a class="binpkg" href="http://packages.debian.org/swi-prolog-http">swi-prolog-http</a><span style="font-size: 70%">
-	      (<a href="http://bugs.debian.org/swi-prolog-http">0 bugs</a>: 
-
-	      <a title="critical, grave and serious" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-http&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=critical&amp;sev-inc=grave&amp;sev-inc=serious">0</a>, 
-
-	      <a title="important and normal" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-http&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=important&amp;sev-inc=normal">0</a>, 
-
-	      <a title="wishlist and minor" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-http&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=minor&amp;sev-inc=wishlist">0</a>, 
-
-	      <a title="pending and fixed" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-http&amp;archive=no&amp;pend-inc=pending-fixed&amp;pend-inc=fixed">0</a>)
-	    </span>
-</li>
-<li class="binpkg">
-<a class="binpkg" href="http://packages.debian.org/swi-prolog-odbc">swi-prolog-odbc</a><span style="font-size: 70%">
-	      (<a href="http://bugs.debian.org/swi-prolog-odbc">0 bugs</a>: 
-
-	      <a title="critical, grave and serious" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-odbc&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=critical&amp;sev-inc=grave&amp;sev-inc=serious">0</a>, 
-
-	      <a title="important and normal" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-odbc&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=important&amp;sev-inc=normal">0</a>, 
-
-	      <a title="wishlist and minor" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-odbc&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=minor&amp;sev-inc=wishlist">0</a>, 
-
-	      <a title="pending and fixed" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-odbc&amp;archive=no&amp;pend-inc=pending-fixed&amp;pend-inc=fixed">0</a>)
-	    </span>
-</li>
-<li class="binpkg">
-<a class="binpkg" href="http://packages.debian.org/swi-prolog-semweb">swi-prolog-semweb</a><span style="font-size: 70%">
-	      (<a href="http://bugs.debian.org/swi-prolog-semweb">0 bugs</a>: 
-
-	      <a title="critical, grave and serious" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-semweb&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=critical&amp;sev-inc=grave&amp;sev-inc=serious">0</a>, 
-
-	      <a title="important and normal" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-semweb&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=important&amp;sev-inc=normal">0</a>, 
-
-	      <a title="wishlist and minor" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-semweb&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=minor&amp;sev-inc=wishlist">0</a>, 
-
-	      <a title="pending and fixed" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-semweb&amp;archive=no&amp;pend-inc=pending-fixed&amp;pend-inc=fixed">0</a>)
-	    </span>
-</li>
-<li class="binpkg">
-<a class="binpkg" href="http://packages.debian.org/swi-prolog-sgml">swi-prolog-sgml</a><span style="font-size: 70%">
-	      (<a href="http://bugs.debian.org/swi-prolog-sgml">0 bugs</a>: 
-
-	      <a title="critical, grave and serious" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-sgml&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=critical&amp;sev-inc=grave&amp;sev-inc=serious">0</a>, 
-
-	      <a title="important and normal" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-sgml&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=important&amp;sev-inc=normal">0</a>, 
-
-	      <a title="wishlist and minor" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-sgml&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=minor&amp;sev-inc=wishlist">0</a>, 
-
-	      <a title="pending and fixed" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-sgml&amp;archive=no&amp;pend-inc=pending-fixed&amp;pend-inc=fixed">0</a>)
-	    </span>
-</li>
-<li class="binpkg">
-<a class="binpkg" href="http://packages.debian.org/swi-prolog-table">swi-prolog-table</a><span style="font-size: 70%">
-	      (<a href="http://bugs.debian.org/swi-prolog-table">0 bugs</a>: 
-
-	      <a title="critical, grave and serious" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-table&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=critical&amp;sev-inc=grave&amp;sev-inc=serious">0</a>, 
-
-	      <a title="important and normal" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-table&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=important&amp;sev-inc=normal">0</a>, 
-
-	      <a title="wishlist and minor" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-table&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=minor&amp;sev-inc=wishlist">0</a>, 
-
-	      <a title="pending and fixed" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-table&amp;archive=no&amp;pend-inc=pending-fixed&amp;pend-inc=fixed">0</a>)
-	    </span>
-</li>
-<li class="binpkg">
-<a class="binpkg" href="http://packages.debian.org/swi-prolog-xpce">swi-prolog-xpce</a><span style="font-size: 70%">
-	      (<a href="http://bugs.debian.org/swi-prolog-xpce">0 bugs</a>: 
-
-	      <a title="critical, grave and serious" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-xpce&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=critical&amp;sev-inc=grave&amp;sev-inc=serious">0</a>, 
-
-	      <a title="important and normal" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-xpce&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=important&amp;sev-inc=normal">0</a>, 
-
-	      <a title="wishlist and minor" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-xpce&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=minor&amp;sev-inc=wishlist">0</a>, 
-
-	      <a title="pending and fixed" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=swi-prolog-xpce&amp;archive=no&amp;pend-inc=pending-fixed&amp;pend-inc=fixed">0</a>)
-	    </span>
-</li>
-</ul></td></tr>
-</table>
-</td>
-<td class="containercell">
-<table class="righttable">
-<tr class="titlerow"><td class="titlecell" id="todo">
-	Todo
-    </td></tr>
-<tr class="normalrow"><td class="contentcell2"><ul><li>A new upstream version is available:
-          <a href="http://dehs.alioth.debian.org/maintainer.php?name=swi-prolog">5.6.58</a>,
-          you should consider packaging it.</li></ul></td></tr>
-<tr class="titlerow"><td class="titlecell" id="problems">
-	Problems
-    </td></tr>
-<tr class="normalrow"><td class="contentcell2"><ul><li>The package has not yet entered <a href="http://ftp-master.debian.org/testing/update_excuses.html.gz#swi-prolog">testing</a>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:str="http://exslt.org/strings">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="ROBOTS" content="NOFOLLOW" />
+    <link type="text/css" title="User selected" rel="stylesheet" href="../common/default.css" />
+    <link type="text/css" title="Official" rel="alternate stylesheet" href="../common/revamp.css" />
+    <link type="text/css" title="Legacy PTS" rel="alternate stylesheet" href="../common/pts.css" />
+    <link type="text/css" title="Compact rendering" rel="alternate stylesheet" href="../common/compact.css" />
+    <script type="text/javascript" src="../common/pts.js"></script>
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="redis/news.rss20.xml" />
+    <title>Debian Package Tracking System -
+	redis</title>
+  </head>
+  <body onload="javascript:onLoad();">
+    <div class="quickform" style="float: right;">
+      <form title="jump to the PTS page of another source package" method="get" action="/common/index.html">
+        <p>
+          <input type="text" size="14" name="src" value="" />
+          <input type="submit" value="jump to" />
+        </p>
+      </form>
+    </div>
+    <h1>redis<br /><small>source package</small></h1>
+    <div id="body">
+      <div class="left maincol">
+        <div class="block info">
+          <a name="general" id="general"></a>
+          <h2>general</h2>
+          <dl>
+            <dt>source</dt>
+            <dd><a href="http://packages.debian.org/src:redis">redis</a>
+	(<span id="priority" title="priority"><small>source</small></span>,
+	<span id="section" title="section"><small>database</small></span>)
+      </dd>
+            <dt>version</dt>
+            <dd>
+              <span id="latest_version">2:2.4.5-1</span>
+            </dd>
+            <dt title="Maintainer and Uploaders">maint</dt>
+            <dd class="maintainer">
+              <a href="http://qa.debian.org/developer.php?login=lamby@debian.org">
+                <span class="name" title="maintainer">Chris Lamb</span>
+              </a>
+            </dd>
+            <dt title="Standards-Version">std-ver</dt>
+            <dd>
+              <span id="standards_version">3.9.2</span>
+            </dd>
+            <dt title="Version Control System">VCS</dt>
+            <dd><a title="raw Git repository" href="git://github.com/lamby/pkg-redis.git">Git</a> (<a title="browse the repository" href="https://github.com/lamby/pkg-redis">browse</a>)</dd>
+          </dl>
+        </div>
+        <div class="block versions">
+          <a name="versions" id="versions"></a>
+          <h2>versions
+      <a href="http://qa.debian.org/madison.php?package=redis"><img src="../common/external.png" title="more versions can be listed by madison" alt="..." /></a> <a href="http://snapshot.debian.org/package/redis/"><img src="../common/external.png" title="old versions available from snapshot.debian.org" alt="..." /></a><a class="dsc" href="http://cdn.debian.net/debian/pool/main/r/redis"><img src="../common/folder.png" alt="pool" title="pool directory" /></a></h2>
+          <dl>
+            <dt>stable</dt>
+            <dd>
+              <a class="dsc" href="http://cdn.debian.net/debian/pool/main/r/redis/redis_1.2.6-1.dsc" title=".dsc, use dget on this link to retrieve source package">
+                <img src="../common/save.png" alt="save" />
+              </a>
+              <a href="http://packages.debian.org/source/stable/redis">
+                <span class="srcversion" title="stable">2:1.2.6-1</span>
+              </a>
+            </dd>
+            <dt title="backports for the stable release">stable-bpo</dt>
+            <dd>
+              <a class="dsc" href="http://backports.debian.org/debian-backports/pool/main/r/redis/redis_2.4.2-1~bpo60+1.dsc" title=".dsc, use dget on this link to retrieve source package">
+                <img src="../common/save.png" alt="save" />
+              </a>
+              <span class="srcversion" title="stable-backports">2:2.4.2-1~bpo60+1</span>
+            </dd>
+            <dt>testing</dt>
+            <dd>
+              <a class="dsc" href="http://cdn.debian.net/debian/pool/main/r/redis/redis_2.2.12-1.dsc" title=".dsc, use dget on this link to retrieve source package">
+                <img src="../common/save.png" alt="save" />
+              </a>
+              <a href="http://packages.debian.org/source/testing/redis">
+                <span class="srcversion" title="testing">2:2.2.12-1</span>
+              </a>
+            </dd>
+            <dt>unstable</dt>
+            <dd>
+              <a class="dsc" href="http://cdn.debian.net/debian/pool/main/r/redis/redis_2.4.5-1.dsc" title=".dsc, use dget on this link to retrieve source package">
+                <img src="../common/save.png" alt="save" />
+              </a>
+              <a href="http://packages.debian.org/source/unstable/redis">
+                <span class="srcversion" title="unstable">2:2.4.5-1</span>
+              </a>
+            </dd>
+          </dl>
+        </div>
+        <div class="block binaries">
+          <a name="binaries" id="binaries"></a>
+          <h2>binaries</h2>
+          <ul>
+            <li class="binpkg">
+              <a class="binpkg" title="redis-server: Persistent key-value database with network interface" href="http://packages.debian.org/redis-server">
+                <span class="binpkg">redis-server</span>
+              </a>
+              <span style="font-size: 70%">
+	    (<a href="http://bugs.debian.org/redis-server">0 bugs</a>: 
+	    <a title="critical, grave and serious" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=redis-server&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=critical&amp;sev-inc=grave&amp;sev-inc=serious">0</a>, 
+	    <a title="important and normal" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=redis-server&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=important&amp;sev-inc=normal">0</a>, 
+	    <a title="wishlist and minor" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=redis-server&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=minor&amp;sev-inc=wishlist">0</a>, 
+	    <a title="pending and fixed" href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=pkg&amp;data=redis-server&amp;archive=no&amp;pend-inc=pending-fixed&amp;pend-inc=fixed">0</a>)
+	  </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="center maincol">
+        <div class="block todo">
+          <a name="todo" id="todo"></a>
+          <h2>todo</h2>
+          <ul>
+            <li><a href="http://lintian.debian.org">Lintian</a> reports <a href="http://lintian.debian.org/maintainer/lamby@debian.org.html#redis">8 warnings</a>
+	about this package. You should make the package <em>lintian clean</em>
+	getting rid of them.
+      </li>
+          </ul>
+        </div>
+        <div class="block problems">
+          <a name="problems" id="problems"></a>
+          <h2>problems</h2>
+          <ul>
+            <li>The package has not yet entered <a href="http://ftp-master.debian.org/testing/update_excuses.html.gz#redis">testing</a>
 	even though the 10-day
 	delay is over.
-        <a href="http://release.debian.org/migration/testing.pl?package=swi-prolog">Check why</a>.</li></ul></td></tr>
-</table>
-<table class="righttable">
-<tr class="titlerow"><td class="titlecell">
-	Testing status
-    </td></tr>
-<tr class="normalrow"><td class="contentcell2" style="text-align: left"><ul>
-<li>20 days old (needed 10 days)</li>
-<li><a href="http://buildd.debian.org/build.php?arch=arm&amp;pkg=swi-prolog&amp;ver=5.6.57-1">out of date on arm: swi-prolog, swi-prolog-clib, swi-prolog-http, swi-prolog-odbc, swi-prolog-semweb, swi-prolog-sgml, swi-prolog-table, swi-prolog-xpce (from 5.6.55-1)</a></li>
-<li>Not considered</li>
-</ul></td></tr>
-<tr class="titlerow"><td class="titlecell">
-      Latest news <a class="feedlink" href="swi-prolog/news.rss20.xml">RSS</a>
-</td></tr>
-<tr class="normalrow"><td class="contentcell2"><ul id="news-list">
-<li>[2008-07-03] <a href="swi-prolog/news/20080703T160205Z.html">Accepted 5.6.57-1 in unstable (low)</a> (Chris Lamb)</li>
-<li>[2008-05-24] <a href="swi-prolog/news/20080524T223920Z.html">swi-prolog 5.6.55-1 MIGRATED to testing</a> (Britney)</li>
-<li>[2008-05-14] <a href="swi-prolog/news/20080514T061710Z.html">Accepted 5.6.55-1 in unstable (low)</a> (Chris Lamb)</li>
-<li>[2008-04-19] <a href="swi-prolog/news/20080419T151711Z.html">Accepted 5.6.54-1 in unstable (low)</a> (Chris Lamb)</li>
-<li>[2008-04-16] <a href="swi-prolog/news/20080416T234708Z.html">Accepted 5.6.53-2 in unstable (low)</a> (Chris Lamb)</li>
-<li>[2008-04-16] <a href="swi-prolog/news/20080416T110207Z.html">Accepted 5.6.53-1 in unstable (low)</a> (Chris Lamb)</li>
-<li>[2008-04-06] <a href="swi-prolog/news/20080406T131202Z.html">Accepted 5.6.52-2 in unstable (low)</a> (Chris Lamb)</li>
-<li>[2008-04-02] <a href="swi-prolog/news/20080402T223924Z.html">swi-prolog 5.6.52-1 MIGRATED to testing</a> (Britney)</li>
-<li>[2008-03-22] <a href="swi-prolog/news/20080322T154718Z.html">Accepted 5.6.52-1 in unstable (low)</a> (Chris Lamb)</li>
-<li>[2008-03-11] <a href="swi-prolog/news/20080311T223923Z.html">swi-prolog 5.6.51-1 MIGRATED to testing</a> (Britney)</li>
-<li>[2008-02-29] <a href="swi-prolog/news/20080229T084708Z.html">Accepted 5.6.51-1 in unstable (low)</a> (Chris Lamb)</li>
-<li>[2008-02-22] <a href="swi-prolog/news/20080222T233923Z.html">swi-prolog 5.6.50 MIGRATED to testing</a> (Britney)</li>
-<li>[2008-02-11] <a href="swi-prolog/news/20080211T143212Z.html">Accepted 5.6.50 in unstable (low)</a> (Chris Lamb)</li>
-<li>[2008-02-08] <a href="swi-prolog/news/20080208T233924Z.html">swi-prolog 5.6.49-2 MIGRATED to testing</a> (Britney)</li>
-<li>[2008-01-26] <a href="swi-prolog/news/20080126T173207Z.html">Accepted 5.6.49-2 in unstable (low)</a> (Chris Lamb)</li>
-<li>[2008-01-24] <a href="swi-prolog/news/20080124T204717Z.html">Accepted 5.6.49-1 in unstable (low)</a> (Chris Lamb)</li>
-<li>[2008-01-10] <a href="swi-prolog/news/20080110T160205Z.html">Accepted 5.6.48-1 in unstable (low)</a> (Chris Lamb)</li>
-<li>[2007-12-07] <a href="swi-prolog/news/20071207T124705Z.html">Accepted 5.6.47-1 in unstable (low)</a> (Chris Lamb)</li>
-<li>[2006-06-17] <a href="swi-prolog/news/20060617T071724Z.html">Accepted 5.6.14-1 in unstable (low)</a> (Gerardo Curiel)</li>
-<li>[2006-02-04] <a href="swi-prolog/news/20060204T220950Z.html">swi-prolog REMOVED from testing</a> (Britney)</li>
-<li>[2006-02-02] <a href="swi-prolog/news/20060202T220851Z.html">swi-prolog 5.2.13-1 MIGRATED to testing</a> (Britney)</li>
-<li>[2004-07-19] <a href="swi-prolog/news/20040719T075022Z.html">Accepted 5.2.13-1 in unstable (low)</a> (Michael Piefel)</li>
-<li>[2003-09-09] <a href="swi-prolog/news/20030909T143235Z.html">Accepted 5.2.7-1 in unstable (low)</a> (Michael Piefel)</li>
-<li>[2003-08-21] <a href="swi-prolog/news/20030821T131730Z.html">Accepted 5.2.6-1 in unstable (low)</a> (Michael Piefel)</li>
-<li>[2003-08-20] <a href="swi-prolog/news/20030820T094744Z.html">Accepted 5.2.5-1 in unstable (low)</a> (Michael Piefel)</li>
-<li>[2003-02-14] <a href="swi-prolog/news/20030214T181806Z.html">Accepted 5.0.10-3 in unstable (low)</a> (Michael Piefel)</li>
-<li>[2003-01-12] <a href="swi-prolog/news/20030112T120248Z.html">Accepted 5.0.10-2 in unstable (low)</a> (Michael Piefel)</li>
-<li>[2002-12-30] <a href="swi-prolog/news/20021230T171751Z.html">Accepted 5.0.10-1 in unstable (low)</a> (Michael Piefel)</li>
-<li>[2002-03-20] <a href="swi-prolog/news/20020320T110216Z.html">Accepted 5.0.0-2 in unstable (low)</a> (Michael Piefel)</li>
-<li>[2002-02-05] <a href="swi-prolog/news/20020205T200940Z.html">Accepted 5.0.0-1 in unstable (low)</a> (Michael Piefel)</li>
-</ul></td></tr>
-</table>
-</td>
-<td class="containercell">
-<table class="lefttable">
-<tr class="titlerow"><td class="titlecell" colspan="2">
-      Bugs count 
-    </td></tr>
-<tr class="normalrow" id="bugs_all">
-<td class="labelcell">All bugs
-       (<a href="http://people.debian.org/~glandium/bts/s/swi-prolog.png">graph</a>)</td>
-<td class="contentcell"><a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?repeatmerged=no&amp;src=swi-prolog">2</a></td>
-</tr>
-<tr class="normalrow" id="bugs_rc">
-<td class="labelcell"><span class="indented"><acronym title="Release Critical">RC</acronym> bugs</span></td>
-<td class="contentcell"><a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?src=swi-prolog&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=critical&amp;sev-inc=grave&amp;sev-inc=serious&amp;repeatmerged=no">0</a></td>
-</tr>
-<tr class="normalrow" id="bugs_in">
-<td class="labelcell"><span class="indented"><acronym title="Important and Normal">I&amp;N</acronym> bugs</span></td>
-<td class="contentcell"><a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?src=swi-prolog&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=important&amp;sev-inc=normal&amp;repeatmerged=no">0</a></td>
-</tr>
-<tr class="normalrow" id="bugs_mw">
-<td class="labelcell"><span class="indented"><acronym title="Minor and Wishlist">M&amp;W</acronym> bugs</span></td>
-<td class="contentcell"><a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?src=swi-prolog&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=minor&amp;sev-inc=wishlist&amp;repeatmerged=no">2</a></td>
-</tr>
-<tr class="normalrow" id="bugs_fp">
-<td class="labelcell"><span class="indented"><acronym title="Fixed and Pending">F&amp;P</acronym> bugs</span></td>
-<td class="contentcell"><a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?src=swi-prolog&amp;archive=no&amp;pend-inc=pending-fixed&amp;pend-inc=fixed&amp;repeatmerged=no">0</a></td>
-</tr>
-<tr class="titlerow"><td class="titlecell" colspan="2">
-<a class="titlelink" href="http://www.debian.org/doc/manuals/developers-reference/ch-resources.en.html#s-pkg-tracking-system"><acronym title="Package Tracking System">PTS</acronym></a> subscription
-  </td></tr>
-<tr class="normalrow">
-<td class="labelcell">Subscribers count</td>
-<td class="contentcell">2</td>
-</tr>
-<tr class="normalrow"><td class="contentcell" colspan="2"><form method="post" action="/cgi-bin/pts.cgi"><p><input type="hidden" name="package" value="swi-prolog"><select name="what"><option value="subscribe">Subscribe</option>
-<option value="unsubscribe">Unsubscribe</option>
-<option value="advanced">Advanced mode</option></select><input type="text" name="email" size="15" value="your email" onFocus="if(email.value=='your email'){email.value=''}"><input type="submit" name="submit" value="Send"></p></form></td></tr>
-</table>
-<table class="lefttable">
-<tr class="titlerow"><td class="titlecell" colspan="2">
-      Other links
-  </td></tr>
-<tr><td class="contentcell" colspan="2" style="text-align: left"><ul>
-<li><a href="http://www.swi-prolog.org">Upstream homepage</a></li>
-<li>
-<a href="http://packages.debian.org/changelogs/pool/main/s/swi-prolog/current/changelog">Changelog</a>
-	  /
-	  <a href="http://packages.debian.org/changelogs/pool/main/s/swi-prolog/current/copyright">Copyright</a>
-</li>
-<li>Buildd: <a href="http://buildd.debian.org/pkg.cgi?pkg=swi-prolog" title="buildd.debian.org build logs">logs</a>, <a href="http://buildd.debian.org/~jeroen/status/package.php?p=swi-prolog" title="jeroen's build logs on buildd.debian.org">more</a>, <a href="http://experimental.debian.net/build.php?pkg=swi-prolog" title="experimental.debian.net build logs">exp</a>, <a href="http://buildd.debian-ports.org/status/package.php?p=swi-prolog" title="debian ports build logs">ports</a>
-</li>
-<li><a href="http://lintian.debian.org/reports/maintainer/chris@chris-lamb.co.uk.html#swi-prolog">Lintian report</a></li>
-<li><a href="http://qa.debian.org/developer.php?popcon=swi-prolog">Popcon stats</a></li>
-</ul></td></tr>
-</table>
-<table class="lefttable" id="ubuntubox">
-<tr class="titlerow"><td class="titlecell" colspan="2">
-	Ubuntu
-    </td></tr>
-<tr><td class="contentcell" colspan="2" style="text-align: left"><ul>
-<li>
-		    Version: <a href="https://launchpad.net/ubuntu/+source/swi-prolog">5.6.55-1</a>
-</li>
-<li><a href="https://bugs.launchpad.net/ubuntu/+source/swi-prolog">7 open bugs</a></li>
-</ul></td></tr>
-</table>
-</td>
-</tr></table>
-<hr>
-<div class="footer"><p><a href="http://www.debian.org">Debian</a> Package Tracking System -
-      Copyright 2002-2008 Raphaël Hertzog and others.<br>
-      Report problems to the <a href="http://bugs.debian.org/qa.debian.org"><tt>qa.debian.org</tt> pseudopackage</a> in the <a href="http://bugs.debian.org">Debian <acronym title="Bug Tracking System">BTS</acronym></a>.<br>
-      Last modified: Thu Jul 24 00:41:30 UTC 2008.
-    </p></div>
-</div>
-</body>
+	<a href="http://release.debian.org/migration/testing.pl?package=redis">Check why</a>.</li>
+          </ul>
+        </div>
+        <div class="block testing"><a name="testing" id="testing"></a><h2>testing migration</h2><a title="reasons why the package is not moving to testing" href="http://qa.debian.org/excuses.php?package=redis">excuses</a>:
+	<ul class="testing-excuses"><li>36 days old (needed 10 days)</li><li><a href="http://buildd.debian.org/status/logs.php?arch=armel&amp;pkg=redis&amp;ver=2%3A2.4.5-1">out of date on armel: redis-doc, redis-server (from 2:2.2.12-1)</a></li><li><a href="http://buildd.debian.org/status/logs.php?arch=kfreebsd-amd64&amp;pkg=redis&amp;ver=2%3A2.4.5-1">out of date on kfreebsd-amd64: redis-server (from 2:2.4.2-2)</a></li><li><a href="http://buildd.debian.org/status/logs.php?arch=kfreebsd-i386&amp;pkg=redis&amp;ver=2%3A2.4.5-1">out of date on kfreebsd-i386: redis-server (from 2:2.4.2-2)</a></li><li><a href="http://buildd.debian.org/status/logs.php?arch=s390&amp;pkg=redis&amp;ver=2%3A2.4.5-1">out of date on s390: redis-doc, redis-server (from 2:2.2.12-1)</a></li><li><a href="http://buildd.debian.org/status/logs.php?arch=sparc&amp;pkg=redis&amp;ver=2%3A2.4.5-1">out of date on sparc: redis-server (from 2:2.4.2-2)</a></li><li>Not considered</li></ul></div>
+        <div class="block news">
+          <a name="news" id="news"></a>
+          <h2>news <a class="feedlink" href="redis/news.rss20.xml">RSS</a></h2>
+          <ul id="news-list">
+            <li>[2012-01-11] <a href="redis/news/20120111T124842Z.html">Accepted 2:2.4.5-1 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2011-12-07] <a href="redis/news/20111207T171959Z.html">Accepted 2:2.4.2-2 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2011-11-16] <a href="redis/news/20111116T162014Z.html">Accepted 2:2.4.2-1 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2011-08-07] <a href="redis/news/20110807T163913Z.html">redis 2:2.2.12-1 MIGRATED to testing</a> (Britney)</li>
+            <li>[2011-07-29] <a href="redis/news/20110729T194900Z.html">Accepted 2:2.4.0~rc5-1 in experimental (low)</a> (Chris Lamb)</li>
+            <li>[2011-07-27] <a href="redis/news/20110727T173303Z.html">Accepted 2:2.2.12-1 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2011-07-18] <a href="redis/news/20110718T123543Z.html">Accepted 2:2.2.11-3 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2011-07-17] <a href="redis/news/20110717T163913Z.html">redis 2:2.2.11-2 MIGRATED to testing</a> (Britney)</li>
+            <li>[2011-07-06] <a href="redis/news/20110706T214748Z.html">Accepted 2:2.2.11-2 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2011-07-02] <a href="redis/news/20110702T000312Z.html">Accepted 2:2.2.11-1 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2011-06-29] <a href="redis/news/20110629T163911Z.html">redis 2:2.2.10-1 MIGRATED to testing</a> (Britney)</li>
+            <li>[2011-06-18] <a href="redis/news/20110618T163914Z.html">redis 2:2.2.8-1 MIGRATED to testing</a> (Britney)</li>
+            <li>[2011-06-18] <a href="redis/news/20110618T144935Z.html">Accepted 2:2.2.10-1 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2011-06-07] <a href="redis/news/20110607T160423Z.html">Accepted 2:2.2.8-1 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2011-05-07] <a href="redis/news/20110507T163913Z.html">redis 2:2.2.5-1 MIGRATED to testing</a> (Britney)</li>
+            <li>[2011-04-25] <a href="redis/news/20110425T131710Z.html">Accepted 2:2.2.5-1 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2011-04-22] <a href="redis/news/20110422T131814Z.html">Accepted 2:2.2.4-1 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2011-03-26] <a href="redis/news/20110326T163914Z.html">redis 2:2.2.2-1 MIGRATED to testing</a> (Britney)</li>
+            <li>[2011-03-15] <a href="redis/news/20110315T111745Z.html">Accepted 2:2.2.2-1 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2011-03-07] <a href="redis/news/20110307T163916Z.html">redis 2:2.2.1-1 MIGRATED to testing</a> (Britney)</li>
+            <li>[2011-02-24] <a href="redis/news/20110224T205058Z.html">Accepted 2:2.2.1-1 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2011-02-06] <a href="redis/news/20110206T165347Z.html">redis 2:2.0.1-2 MIGRATED to testing</a> (Britney)</li>
+            <li>[2010-09-10] <a href="redis/news/20100910T144824Z.html">Accepted 2:2.0.1-2 in unstable (low)</a> (Chris Lamb)</li>
+            <li>[2010-09-10] <a href="redis/news/20100910T134707Z.html">Accepted 2:2.0.1-1 in experimental (low)</a> (Chris Lamb)</li>
+            <li>[2010-07-29] <a href="redis/news/20100729T131720Z.html">Accepted 2:2.0.0~rc4-1 in experimental (low)</a> (Chris Lamb)</li>
+            <li>[2010-07-23] <a href="redis/news/20100723T111758Z.html">Accepted 2:2.0.0~rc3-1 in experimental (low)</a> (Chris Lamb)</li>
+            <li>[2010-07-01] <a href="redis/news/20100701T223247Z.html">Accepted 2:2.0.0~rc2-1 in experimental (low)</a> (Chris Lamb)</li>
+            <li>[2010-06-28] <a href="redis/news/20100628T103253Z.html">Accepted 2:2.0.0~rc1-2 in experimental (low)</a> (Chris Lamb)</li>
+            <li>[2010-06-01] <a href="redis/news/20100601T101931Z.html">Accepted 2:2.0.0~rc1-1 in experimental (low)</a> (Chris Lamb)</li>
+            <li>[2010-04-14] <a href="redis/news/20100414T163935Z.html">redis 2:1.2.6-1 MIGRATED to testing</a> (Britney)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="right maincol">
+        <div class="block bugs">
+          <a name="bugs" id="bugs"></a>
+          <h2>bugs</h2>
+          <dl>
+            <dt id="bugs_all">
+	all
+	<a href="http://qa.debian.org/data/bts/graphs/r/redis.png" title="bug history graph"><img alt="bug history graph" src="../common/bug-graph.png" /></a></dt>
+            <dd>
+              <a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?repeatmerged=no&amp;src=redis">
+                <span class="bugcount" title="all">0</span>
+              </a>
+            </dd>
+            <dt id="bugs_rc" title="Release Critical">
+              <span class="indented">RC</span>
+            </dt>
+            <dd>
+              <a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?src=redis&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=critical&amp;sev-inc=grave&amp;sev-inc=serious&amp;repeatmerged=no">
+                <span class="bugcount" title="rc">0</span>
+              </a>
+            </dd>
+            <dt id="bugs_in" title="Important and Normal">
+              <span class="indented">I&amp;N</span>
+            </dt>
+            <dd>
+              <a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?src=redis&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=important&amp;sev-inc=normal&amp;repeatmerged=no">
+                <span class="bugcount" title="in">0</span>
+              </a>
+            </dd>
+            <dt id="bugs_mw" title="Minor and Wishlist">
+              <span class="indented">M&amp;W</span>
+            </dt>
+            <dd>
+              <a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?src=redis&amp;archive=no&amp;pend-exc=pending-fixed&amp;pend-exc=fixed&amp;pend-exc=done&amp;sev-inc=minor&amp;sev-inc=wishlist&amp;repeatmerged=no">
+                <span class="bugcount" title="mw">0</span>
+              </a>
+            </dd>
+            <dt id="bugs_fp" title="Fixed and Pending">
+              <span class="indented">F&amp;P</span>
+            </dt>
+            <dd>
+              <a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?src=redis&amp;archive=no&amp;pend-inc=pending-fixed&amp;pend-inc=fixed&amp;repeatmerged=no">
+                <span class="bugcount" title="fp">0</span>
+              </a>
+            </dd>
+          </dl>
+        </div>
+        <div class="block links">
+          <a name="links" id="links"></a>
+          <h2>links</h2>
+          <ul>
+            <li>
+              <a title="upstream web homepage" href="http://redis.io/">homepage</a>
+            </li>
+            <li><a href="http://packages.debian.org/changelogs/pool/main/r/redis/current/changelog">changelog</a>
+	/
+	<a href="http://packages.debian.org/changelogs/pool/main/r/redis/current/copyright">copyright</a></li>
+            <li>buildd: <a href="https://buildd.debian.org/status/package.php?p=redis" title="buildd.debian.org build logs">logs</a>, <a href="http://buildd.debian-ports.org/status/package.php?p=redis" title="build logs for unofficial ports">ports</a></li>
+            <li>
+	  debcheck:
+	   <a href="http://qa.debian.org/debcheck.php?dist=unstable&amp;package=redis">unstable</a> <a href="http://qa.debian.org/debcheck.php?dist=testing&amp;package=redis">testing</a> <a href="http://qa.debian.org/debcheck.php?dist=stable&amp;package=redis">stable</a></li>
+            <li><a title="report about packaging issues spotted by lintian" href="http://lintian.debian.org/maintainer/lamby@debian.org.html#redis">lintian</a> <small>
+              (<span id="lintian_errors" title="errors">0</span>,
+	      <span id="lintian_warnings" title="warnings">8</span>)
+            </small></li>
+            <li>
+              <a title="package popularity" href="http://qa.debian.org/popcon.php?package=redis">popcon</a>
+            </li>
+            <li>
+              <a title="edit all debtags" href="http://debtags.debian.net/rep/todo/maint/lamby@debian.org#redis">debtags</a>
+            </li>
+          </ul>
+        </div>
+        <div class="block ubuntu">
+          <a name="ubuntu" id="ubuntu"></a>
+          <h2>ubuntu
+	<img src="../common/ubuntu.png" alt="ubuntu" /> <a href="https://wiki.ubuntu.com/Ubuntu/ForDebianDevelopers"><img src="../common/external.png" title="Information about Ubuntu for Debian Developers" alt="..." /></a></h2>
+          <ul>
+            <li>
+	  version: <a href="https://launchpad.net/ubuntu/+source/redis">2:2.2.12-1build1</a></li>
+            <li>
+              <a href="https://bugs.launchpad.net/ubuntu/+source/redis">3
+	    bugs</a>
+            </li>
+          </ul>
+        </div>
+        <div class="block patch-tracker">
+          <a name="patch-tracker" id="patch-tracker"></a>
+          <h2>patch-tracker
+	<a href="http://patch-tracker.debian.org/package/redis"><img src="../common/external.png" title="Link to patch tracker" alt="..." /></a></h2>
+          <dl>
+            <dt>stable</dt>
+            <dd>
+              <a href="http://patch-tracker.debian.org/package/redis/2:1.2.6-1">
+                <span class="srcversion" title="stable">2:1.2.6-1</span>
+              </a>
+            </dd>
+            <dt>testing</dt>
+            <dd>
+              <a href="http://patch-tracker.debian.org/package/redis/2:2.2.12-1">
+                <span class="srcversion" title="testing">2:2.2.12-1</span>
+              </a>
+            </dd>
+            <dt>unstable</dt>
+            <dd>
+              <a href="http://patch-tracker.debian.org/package/redis/2:2.4.5-1">
+                <span class="srcversion" title="unstable">2:2.4.5-1</span>
+              </a>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <hr />
+      <div class="footer">
+        <table width="100%">
+          <tr>
+            <td>
+              <div class="quickform">
+                <form method="post" action="/cgi-bin/pts.cgi">
+                  <p><input type="hidden" name="package" value="redis" />
+      subscribe to this package<br /><input type="text" name="email" size="10" value="email" onfocus="if(email.value=='your email'){email.value=''}" /><select name="what"><option value="subscribe">sub</option><option value="unsubscribe">unsub</option><option value="advanced">opts</option></select><input type="submit" name="submit" value="go" /></p>
+                </form>
+              </div>
+            </td>
+            <td>
+              <p><em><a href="http://www.debian.org">Debian</a>
+                    Package Tracking System</em> - Copyright ©
+                    2002-2009 Raphaël Hertzog, Stefano Zacchiroli and
+                    others.<br /> Report problems to the
+                  <a href="http://bugs.debian.org/qa.debian.org"><tt>qa.debian.org</tt>
+                    pseudopackage</a> in the <a href="http://bugs.debian.org">Debian
+                    <acronym title="Bug Tracking System">BTS</acronym></a>.<br /><a href="svn://svn.debian.org/svn/qa/trunk/pts">Checkout SVN repository</a> |
+                    <a href="http://anonscm.debian.org/viewvc/qa/trunk/pts/">Browse SVN repository</a><br />
+                  Last modified: Fri Feb 17 20:34:44 UTC 2012.
+                </p>
+            </td>
+            <td>
+              <a href="http://validator.w3.org/check?uri=referer">
+                <img src="http://www.w3.org/Icons/valid-xhtml10-blue" alt="Valid XHTML 1.0 Strict" height="31" width="88" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
 </html>

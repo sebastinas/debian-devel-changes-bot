@@ -35,7 +35,7 @@ class TestDatasourceTestingNewQueue(unittest.TestCase):
 
     def testInfo(self):
         info = self.datasource.get_maintainer('swi-prolog', fileobj=open(self.fixture))
-        self.assertEqual(info['email'], 'chris@chris-lamb.co.uk')
+        self.assertEqual(info['email'], 'lamby@debian.org')
         self.assertEqual(info['name'], 'Chris Lamb')
 
 if __name__ == "__main__":
