@@ -2,7 +2,10 @@ Source: debian-devel-changes-bot
 Section: misc
 Priority: extra
 Maintainer: Chris Lamb <lamby@debian.org>
-Build-Depends: debhelper (>= 7.0.50)
+Build-Depends:
+ debhelper (>= 7.0.50),
+ python-debian,
+ python-beautifulsoup,
 Standards-Version: 3.9.3
 Homepage: http://chris-lamb.co.uk/projects/debian-devel-changes-bot/
 Vcs-Git: git://github.com/lamby/debian-devel-changes-bot.git
@@ -10,7 +13,13 @@ Vcs-Browser: https://github.com/lamby/debian-devel-changes-bot
 
 Package: debian-devel-changes-bot
 Architecture: all
-Depends: ${python:Depends}, ${misc:Depends}, python-debian, python-beautifulsoup, lockfile-progs, supybot
+Depends:
+ ${python:Depends},
+ ${misc:Depends},
+ python-debian,
+ python-beautifulsoup,
+ lockfile-progs,
+ supybot,
 Description: IRC bot that announces Debian package and bug activity
  The #debian-devel-changes IRC bot is a Supybot-based bot that lives on the
  #debian-devel-changes channel on OFTC.
