@@ -6,6 +6,7 @@ Build-Depends:
  debhelper (>= 7.0.50),
  python-debian,
  python-beautifulsoup,
+ python-btsutils,
 Standards-Version: 3.9.3
 Homepage: http://chris-lamb.co.uk/projects/debian-devel-changes-bot/
 Vcs-Git: git://github.com/lamby/debian-devel-changes-bot.git
@@ -17,6 +18,7 @@ Depends:
  ${python:Depends},
  ${misc:Depends},
  python-debian,
+ python-btsutils,
  python-beautifulsoup,
  lockfile-progs,
  supybot,
