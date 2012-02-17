@@ -25,11 +25,6 @@ socket.setdefaulttimeout(10)
 from DebianDevelChangesBot import Datasource
 
 class Maintainer(Datasource):
-    _shared_state = {}
-
-    def __init__(self):
-        self.__dict__ = self._shared_state
-
     def get_maintainer(self, package, fileobj=None):
         if fileobj is None:
             def get_pool_url(package):
