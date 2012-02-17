@@ -35,8 +35,6 @@ class Maintainer(Datasource):
         self.__dict__ = self._shared_state
 
     def get_maintainer(self, package, fileobj=None):
-        info = {}
-
         self.lock.acquire()
         try:
             if fileobj is None:
@@ -57,10 +55,11 @@ class Maintainer(Datasource):
             soup = BeautifulSoup(fileobj)
 
             base = soup.find('span', {'class': 'name', 'title': 'maintainer'})
-            info['name'] = base.string
-            info['email'] = base.parent['href'].split('=', 1)[1]
+
+            return {
+                'name': base.string,
+                'email': base.parent['href'].split('=', 1)[1],
+            }
 
         finally:
             self.lock.release()
-
-        return info
