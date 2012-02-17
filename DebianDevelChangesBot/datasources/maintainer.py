@@ -16,10 +16,11 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import socket
 import urllib2
+
 from BeautifulSoup import BeautifulSoup
 
-import socket
 socket.setdefaulttimeout(10)
 
 from DebianDevelChangesBot import Datasource
@@ -30,16 +31,18 @@ class Maintainer(Datasource):
             def get_pool_url(package):
                 if package.startswith('lib'):
                     return (package[:4], package)
-                else:
-                    return (package[:1], package)
+                return (package[:1], package)
+
             try:
-                fileobj = urllib2.urlopen("http://packages.qa.debian.org/%s/%s.html" % get_pool_url(package))
+                fileobj = urllib2.urlopen(
+                    'http://packages.qa.debian.org/%s/%s.html' % \
+                        get_pool_url(package),
+                )
             except urllib2.HTTPError, e:
                 if e.code == 404:
                     # Package does not exist
                     return None
-                else:
-                    raise
+                raise
 
         soup = BeautifulSoup(fileobj)
 
