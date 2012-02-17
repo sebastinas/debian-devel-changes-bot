@@ -56,9 +56,9 @@ class Maintainer(Datasource):
 
             soup = BeautifulSoup(fileobj)
 
-            base = soup.find('a', {'class': 'email'})
-            info['name'] = base.findPreviousSibling().string
-            info['email'] = base['href'].replace('mailto:', '')
+            base = soup.find('span', {'class': 'name', 'title': 'maintainer'})
+            info['name'] = base.string
+            info['email'] = base.parent['href'].split('=', 1)[1]
 
         finally:
             self.lock.release()
