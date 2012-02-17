@@ -27,8 +27,6 @@ from DebianDevelChangesBot import Datasource
 class Maintainer(Datasource):
     _shared_state = {}
 
-    packages = {}
-
     def __init__(self):
         self.__dict__ = self._shared_state
 
