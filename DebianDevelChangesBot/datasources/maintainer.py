@@ -16,7 +16,6 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import thread
 import urllib2
 from BeautifulSoup import BeautifulSoup
 
@@ -29,37 +28,31 @@ class Maintainer(Datasource):
     _shared_state = {}
 
     packages = {}
-    lock = thread.allocate_lock()
 
     def __init__(self):
         self.__dict__ = self._shared_state
 
     def get_maintainer(self, package, fileobj=None):
-        self.lock.acquire()
-        try:
-            if fileobj is None:
-                def get_pool_url(package):
-                    if package.startswith('lib'):
-                        return (package[:4], package)
-                    else:
-                        return (package[:1], package)
-                try:
-                    fileobj = urllib2.urlopen("http://packages.qa.debian.org/%s/%s.html" % get_pool_url(package))
-                except urllib2.HTTPError, e:
-                    if e.code == 404:
-                        # Package does not exist
-                        return None
-                    else:
-                        raise
+        if fileobj is None:
+            def get_pool_url(package):
+                if package.startswith('lib'):
+                    return (package[:4], package)
+                else:
+                    return (package[:1], package)
+            try:
+                fileobj = urllib2.urlopen("http://packages.qa.debian.org/%s/%s.html" % get_pool_url(package))
+            except urllib2.HTTPError, e:
+                if e.code == 404:
+                    # Package does not exist
+                    return None
+                else:
+                    raise
 
-            soup = BeautifulSoup(fileobj)
+        soup = BeautifulSoup(fileobj)
 
-            base = soup.find('span', {'class': 'name', 'title': 'maintainer'})
+        base = soup.find('span', {'class': 'name', 'title': 'maintainer'})
 
-            return {
-                'name': base.string,
-                'email': base.parent['href'].split('=', 1)[1],
-            }
-
-        finally:
-            self.lock.release()
+        return {
+            'name': base.string,
+            'email': base.parent['href'].split('=', 1)[1],
+        }
