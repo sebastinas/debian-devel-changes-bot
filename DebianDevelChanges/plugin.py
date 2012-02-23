@@ -92,7 +92,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 package_regex = self.registryValue(
                     'package_regex',
                     channel,
-                ) or 'a^'
+                ) or 'a^' # match nothing by default
 
                 if not re.search(package_regex, msg.package):
                     continue
