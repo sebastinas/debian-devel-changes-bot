@@ -89,10 +89,12 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             self.last_n_messages = self.last_n_messages[:20]
 
             for channel in self.irc.state.channels:
-                regex = self.registryValue('package_regex', channel) or 'a^'
-                if re.search(regex, msg.package):
-                    ircmsg = supybot.ircmsgs.privmsg(channel, txt)
-                    self.irc.queueMsg(ircmsg)
+                package_regex = self.registryValue('package_regex', channel) or 'a^'
+                if not re.search(package_regex, msg.package):
+                    continue
+
+                ircmsg = supybot.ircmsgs.privmsg(channel, txt)
+                self.irc.queueMsg(ircmsg)
 
         except:
             log.exception('Uncaught exception')
