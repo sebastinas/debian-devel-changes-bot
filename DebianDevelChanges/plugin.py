@@ -97,6 +97,23 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 if not re.search(package_regex, msg.package):
                     continue
 
+                distribution_regex = self.registryValue(
+                    'distribution_regex',
+                    channel,
+                )
+
+                if distribution_regex:
+                    if not hasattr(msg, 'distribution'):
+                        # If this channel has a distribution regex, don't
+                        # bother continuing unless the message actually has a
+                        # distribution. This filters security messages, etc.
+                        continue
+
+                    if not re.search(distribution_regex, msg.distribution)
+                        # Distribution doesn't match regex; don't send this
+                        # message.
+                        continue
+
                 ircmsg = supybot.ircmsgs.privmsg(channel, txt)
                 self.irc.queueMsg(ircmsg)
 
