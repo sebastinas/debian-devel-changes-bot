@@ -109,7 +109,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                         # distribution. This filters security messages, etc.
                         continue
 
-                    if not re.search(distribution_regex, msg.distribution)
+                    if not re.search(distribution_regex, msg.distribution):
                         # Distribution doesn't match regex; don't send this
                         # message.
                         continue
