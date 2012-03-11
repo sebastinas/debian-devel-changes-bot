@@ -88,13 +88,18 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             self.last_n_messages.insert(0, txt)
             self.last_n_messages = self.last_n_messages[:20]
 
+            log.info("Processing message")
+
             for channel in self.irc.state.channels:
+                log.info("Processing channel %s", channel)
+
                 package_regex = self.registryValue(
                     'package_regex',
                     channel,
                 ) or 'a^' # match nothing by default
 
                 if not re.search(package_regex, msg.package):
+                    log.info("Not sending message to this channel package regex does not match")
                     continue
 
                 distribution_regex = self.registryValue(
@@ -102,17 +107,23 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                     channel,
                 )
 
+                log.info("Distribution regex %r", distribution_regex)
+
                 if distribution_regex:
                     if not hasattr(msg, 'distribution'):
                         # If this channel has a distribution regex, don't
                         # bother continuing unless the message actually has a
                         # distribution. This filters security messages, etc.
+                        log.info("Skipping channel/message as message has no distribution")
                         continue
 
                     if not re.search(distribution_regex, msg.distribution):
                         # Distribution doesn't match regex; don't send this
                         # message.
+                        log.info("Skipping channel/message as message as distribution %r does not match", msg.distribution)
                         continue
+
+                log.info("Sending message to this channel")
 
                 ircmsg = supybot.ircmsgs.privmsg(channel, txt)
                 self.irc.queueMsg(ircmsg)
