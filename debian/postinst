@@ -5,7 +5,7 @@ set -eu
 USER="ddc-bot"
 GROUP="$USER"
 
-ln -sf /var/lib/debian-devel-changes-bot/bot-config/forward /var/lib/debian-devel-changes-bot/.forwar
+ln -sf /var/lib/debian-devel-changes-bot/bot-config/forward /var/lib/debian-devel-changes-bot/.forward
 
 chown -R $USER:$GROUP /var/lib/debian-devel-changes-bot
 
