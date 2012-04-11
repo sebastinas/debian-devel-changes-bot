@@ -10,3 +10,11 @@ debian-devel-changes IRC bot
      - http://lists.debian.org/debian-backports-changes/
 
   * (Optional) Disable spam checking for messages sent to the bot
+
+
+The following script might work:
+
+for X in debian-devel-changes debian-bugs-dist debian-bugs-closed debian-security-announce debian-security-announce debian-backports-changes
+do
+	echo | mail -s "subscribe" ${X}-REQUEST@lists.debian.org
+done
