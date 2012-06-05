@@ -25,7 +25,7 @@ def parse_mail(fileobj):
     msg = email.message_from_file(fileobj)
 
     for k, v in msg.items():
-        headers[k] = quoted_printable(v).replace('\n', '').strip()
+        headers[k] = quoted_printable(v).replace('\n', '').replace('\t', ' ').strip()
 
     for line in email.Iterators.body_line_iterator(msg):
         line = unicode(line, 'utf-8', 'replace').replace('\n', '')
