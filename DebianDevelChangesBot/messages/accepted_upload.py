@@ -34,7 +34,7 @@ class AcceptedUploadMessage(Message):
         if self.distribution != 'unstable':
             msg += "to [distribution]%s[reset] " % self.distribution
 
-        if self.urgency != 'low':
+        if self.urgency == 'high':
             msg += "with urgency [urgency]%s[reset] " % self.urgency
 
         msg += "by [by]%s[reset] " % self.by
