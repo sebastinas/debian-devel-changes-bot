@@ -2,11 +2,37 @@
 
 set -eu
 
-USER="ddc-bot"
-GROUP="$USER"
-
-ln -sf /var/lib/debian-devel-changes-bot/bot-config/forward /var/lib/debian-devel-changes-bot/.forward
-
-chown -R $USER:$GROUP /var/lib/debian-devel-changes-bot
-
 #DEBHELPER#
+
+BASE="/var/lib/debian-devel-changes-bot"
+USER="ddc-bot"
+GROUP="${USER}"
+
+case "${1}" in
+	configure)
+		addgroup --system ${GROUP} --quiet
+
+		adduser \
+			--system \
+			--disabled-login \
+			--ingroup ${GROUP} \
+			--home ${BASE} \
+			--gecos "${USER} server" \
+			--shell /bin/false \
+			${USER}  >/dev/null
+
+		ln -sf ${BASE}/bot-config/forward ${BASE}/.forward
+
+		chown -R ${USER}:${GROUP} ${BASE}
+		;;
+
+	abort-upgrade|abort-remove|abort-deconfigure)
+		;;
+
+	*)
+		echo "postinst called with unknown argument \`${1}'" >&2
+		exit 1
+		;;
+esac
+
+exit 0
