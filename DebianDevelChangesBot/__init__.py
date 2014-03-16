@@ -51,6 +51,11 @@ pseudo_packages = {
     'buildd.debian.org': 'Problems and requests related to the Debian Buildds',
     'debian-maintainers': 'Problems and requests related to Debian Maintainers',
     'snapshot.debian.org': 'Issues with the snapshot.debian.org service',
+    'sponsorship-requests': 'Requests for package review and sponsorship',
+    'debian-live': 'General problems with Debian Live systems',
+    'pet.debian.net': 'The Debian Package Entropy Tracker',
+    'cloud.debian.org': 'Issues involving Debian images for public/private clouds',
+    'piuparts.debian.org': 'Issues with the piuparts.debian.org service',
 }
 
 class Datasource(object):
