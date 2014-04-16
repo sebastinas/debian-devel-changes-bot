@@ -2,8 +2,6 @@
 
 set -eu
 
-#DEBHELPER#
-
 BASE="/var/lib/debian-devel-changes-bot"
 USER="ddc-bot"
 GROUP="${USER}"
@@ -34,5 +32,7 @@ case "${1}" in
 		exit 1
 		;;
 esac
+
+#DEBHELPER#
 
 exit 0
