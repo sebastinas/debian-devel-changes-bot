@@ -31,7 +31,7 @@ from DebianDevelChangesBot.mailparsers import get_message
 from DebianDevelChangesBot.datasources import get_datasources, TestingRCBugs, \
     NewQueue, RmQueue, Maintainer
 from DebianDevelChangesBot.utils import parse_mail, FifoReader, colourise, \
-    rewrite_topic, madison, bug_synopsis, format_email_address, popcon
+    rewrite_topic, madison, format_email_address, popcon
 
 class DebianDevelChanges(supybot.callbacks.Plugin):
     threaded = True
@@ -210,13 +210,6 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     rc = wrap(rc)
     bugs = wrap(rc)
 
-    def randombug(self, irc, msg, args):
-        bug = random.choice(list(TestingRCBugs().get_bugs()))
-        msg = "Your randomly chosen wheezy RC bug is: %s. Happy bugfixing!" % bug_synopsis(str(bug)).for_irc()
-        irc.reply(colourise(msg))
-    randombug = wrap(randombug)
-    random = wrap(randombug)
-
     def update(self, irc, msg, args):
         if not ircdb.checkCapability(msg.prefix, 'owner'):
             irc.reply("You are not authorised to run this command.")
@@ -245,18 +238,6 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         except Exception, e:
             irc.reply("Error: %s" % e.message)
     madison = wrap(madison, ['text'])
-
-    def bug(self, irc, msg, args, bug_string):
-        try:
-            msg = bug_synopsis(bug_string)
-            if msg:
-                irc.reply(colourise(msg.for_irc()), prefixNick=False)
-        except ValueError:
-            irc.reply('Could not parse bug number')
-        except Exception, e:
-            irc.reply("Error: %s" % e.message)
-
-    bug = wrap(bug, ['text'])
 
     def get_pool_url(self, package):
         if package.startswith('lib'):
