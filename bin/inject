@@ -61,6 +61,7 @@ Send_to_fifo () {
 
 Cleanup () {
 	chmod 666 ${TEMP}
+	rm -f ${TEMP}
 }
 
 Exit () {
