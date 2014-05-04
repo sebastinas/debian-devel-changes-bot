@@ -45,7 +45,7 @@ case "$1" in
 
 	if start-stop-daemon --start --oknodo --quiet --pidfile ${PIDFILE} \
 		--chuid ${USER}:${GROUP} --chdir ${LIBDIR} \
-		--exec ${DAEMON} -- --daemon bot-config/BTS.conf
+		--startas ${DAEMON} -- --daemon bot-config/BTS.conf
 	then
 		echo "${NAME}."
 	else
