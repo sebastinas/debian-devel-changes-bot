@@ -1,2 +1,0 @@
-check process debian-devel-changes
-    with pidfile /var/run/debian-devel-changes-bot/debian-devel-changes-bot.pid
