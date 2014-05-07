@@ -29,6 +29,8 @@ then
 	exit 0
 fi
 
+. /lib/lsb/init-functions
+
 case "$1" in
   start)
 	echo -n "Starting ${DESC}: "
