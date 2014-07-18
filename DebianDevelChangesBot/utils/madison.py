@@ -29,6 +29,6 @@ def madison(package, suites=()):
         'text': 'on',
     })
 
-    fileobj = urllib2.urlopen('http://qa.debian.org/madison.php?%s' % data)
+    fileobj = urllib2.urlopen('https://qa.debian.org/madison.php?%s' % data)
 
     return fileobj.readlines()

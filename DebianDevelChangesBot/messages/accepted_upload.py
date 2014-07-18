@@ -43,6 +43,6 @@ class AcceptedUploadMessage(Message):
             bug_list = ', '.join(["[bug]#%s[/bug]" % x for x in self.closes])
             msg += "(Closes: %s) " % bug_list
 
-        msg += "[url]http://packages.qa.debian.org/%s[/url]" % self.package
+        msg += "[url]https://packages.qa.debian.org/%s[/url]" % self.package
 
         return msg

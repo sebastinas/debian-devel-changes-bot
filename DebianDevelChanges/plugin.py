@@ -204,7 +204,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         num_bugs = len(TestingRCBugs().get_bugs())
         if type(num_bugs) is int:
             irc.reply("There are %d release-critical bugs in the testing distribution. " \
-                "See http://udd.debian.org/bugs.cgi?release=wheezy&notmain=ign&merged=ign&rc=1" % num_bugs)
+                "See https://udd.debian.org/bugs.cgi?release=wheezy&notmain=ign&merged=ign&rc=1" % num_bugs)
         else:
             irc.reply("No data at this time.")
     rc = wrap(rc)
@@ -256,7 +256,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                     login = login.replace('@debian.org', '')
 
                 msg = "[desc]Maintainer for[reset] [package]%s[reset] [desc]is[reset] [by]%s[reset]: " % (package, display_name)
-                msg += "[url]http://qa.debian.org/developer.php?login=%s[/url]" % login
+                msg += "[url]https://qa.debian.org/developer.php?login=%s[/url]" % login
             else:
                 msg = 'Unknown source package "%s"' % package
 
@@ -267,7 +267,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _qa(self, irc, msg, args, items):
         for package in items:
-            url = "http://packages.qa.debian.org/%s/%s.html" % self.get_pool_url(package)
+            url = "https://packages.qa.debian.org/%s/%s.html" % self.get_pool_url(package)
             msg = "[desc]QA page for[reset] [package]%s[reset]: [url]%s[/url]" % (package, url)
             irc.reply(colourise(msg), prefixNick=False)
     qa = wrap(_qa, [many('anything')])
@@ -278,7 +278,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _changelog(self, irc, msg, args, items):
         for package in items:
-            url = "http://packages.debian.org/changelogs/pool/main/%s/%s/current/changelog" % self.get_pool_url(package)
+            url = "https://packages.debian.org/changelogs/pool/main/%s/%s/current/changelog" % self.get_pool_url(package)
             msg = "[desc]debian/changelog for[reset] [package]%s[reset]: [url]%s[/url]" % (package, url)
             irc.reply(colourise(msg), prefixNick=False)
     changelog = wrap(_changelog, [many('anything')])
@@ -286,7 +286,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _copyright(self, irc, msg, args, items):
         for package in items:
-            url = "http://packages.debian.org/changelogs/pool/main/%s/%s/current/copyright" % self.get_pool_url(package)
+            url = "https://packages.debian.org/changelogs/pool/main/%s/%s/current/copyright" % self.get_pool_url(package)
             msg = "[desc]debian/copyright for[reset] [package]%s[reset]: [url]%s[/url]" % (package, url)
             irc.reply(colourise(msg), prefixNick=False)
     copyright = wrap(_copyright, [many('anything')])
@@ -301,7 +301,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _buildd(self, irc, msg, args, items):
         for package in items:
-            msg = "[desc]buildd status for[reset] [package]%s[reset]: [url]http://buildd.debian.org/pkg.cgi?pkg=%s[/url]" % \
+            msg = "[desc]buildd status for[reset] [package]%s[reset]: [url]https://buildd.debian.org/pkg.cgi?pkg=%s[/url]" % \
                 (package, package)
             irc.reply(colourise(msg), prefixNick=False)
     buildd = wrap(_buildd, [many('anything')])
@@ -327,7 +327,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _testing(self, irc, msg, args, items):
         for package in items:
-            msg = "[desc]Testing migration status for[reset] [package]%s[reset]: [url]http://release.debian.org/migration/testing.pl?package=%s[/url]" % \
+            msg = "[desc]Testing migration status for[reset] [package]%s[reset]: [url]https://release.debian.org/migration/testing.pl?package=%s[/url]" % \
                 (package, package)
             irc.reply(colourise(msg), prefixNick=False)
     testing = wrap(_testing, [many('anything')])
@@ -335,7 +335,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _dehs(self, irc, msg, args, items):
         for package in items:
-            msg = "[desc]Debian External Health Status for[reset] [package]%s[reset]: [url]http://dehs.alioth.debian.org/report.php?package=%s[/url]" % \
+            msg = "[desc]Debian External Health Status for[reset] [package]%s[reset]: [url]https://dehs.alioth.debian.org/report.php?package=%s[/url]" % \
                 (package, urllib.quote(package))
             irc.reply(colourise(msg), prefixNick=False)
     dehs = wrap(_dehs, [many('anything')])
@@ -345,7 +345,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         swirl = [
             "  [brightred] ,''`.[reset]",
             "  [brightred]: :' :[reset]           [b]Debian GNU/Linux[/b]",
-            "  [brightred]`. `' [reset]           [url]http://www.debian.org/[/url]",
+            "  [brightred]`. `' [reset]           [url]https://www.debian.org/[/url]",
             "  [brightred]  `-  [reset]",
         ]
         for line in swirl:
@@ -355,7 +355,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _new(self, irc, msg, args):
         line = "[desc]NEW queue is[reset]: [url]%s[/url]. [desc]Current size is:[reset] %d" % \
-            ("http://ftp-master.debian.org/new.html", NewQueue().get_size())
+            ("https://ftp-master.debian.org/new.html", NewQueue().get_size())
         irc.reply(colourise(line))
     new = wrap(_new)
     new_queue = wrap(_new)

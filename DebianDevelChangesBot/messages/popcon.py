@@ -27,6 +27,6 @@ class Popcon(Message):
         for field in ('inst', 'vote', 'old', 'recent', 'nofiles'):
             msg += "[category]%s[/category]: %d " % (field, getattr(self, field))
 
-        msg += u"- [url]http://qa.debian.org/developer.php?popcon=%s[/url]" % self.package
+        msg += u"- [url]https://qa.debian.org/developer.php?popcon=%s[/url]" % self.package
 
         return msg

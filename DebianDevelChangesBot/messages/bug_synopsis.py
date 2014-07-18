@@ -36,6 +36,6 @@ class BugSynopsis(Message):
             else:
                 msg += "(%s) " % self.severity
 
-        msg += u"[url]http://bugs.debian.org/%d[/url]" % self.bug_number
+        msg += u"[url]https://bugs.debian.org/%d[/url]" % self.bug_number
 
         return msg
