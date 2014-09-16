@@ -21,7 +21,7 @@ import urllib2
 import socket
 socket.setdefaulttimeout(10)
 
-# Synced from https://bugs.debian.org/pseudopackages/pseudo-packages.description
+# curl -qs https://bugs.debian.org/pseudopackages/pseudo-packages.description | sed -e 's@\([^\t ]*\)[\t ]*\(.*\)@    '\''\1'\'': "\2"\,@g'
 pseudo_packages = {
     'base': 'Base system general bugs',
     'cdrom': 'Installation system',
