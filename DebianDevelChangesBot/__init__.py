@@ -29,7 +29,7 @@ pseudo_packages = {
     'press': 'Press release issues',
     'project': 'Problems related to project administration',
     'general': 'General problems (e.g. "many manpages are mode 755")',
-    'nm.debian.org': 'New Maintainer process and nm.debian.org webpages',
+    'nm.debian.org': 'New Member process and nm.debian.org webpages',
     'qa.debian.org': 'The Quality Assurance group',
     'ftp.debian.org': 'Problems with the FTP site',
     'www.debian.org': 'Problems with the WWW site',
@@ -50,12 +50,14 @@ pseudo_packages = {
     'buildd.emdebian.org': 'Problems related to building packages for Emdebian',
     'buildd.debian.org': 'Problems and requests related to the Debian Buildds',
     'debian-maintainers': 'Problems and requests related to Debian Maintainers',
-    'snapshot.debian.org': 'Issues with the snapshot.debian.org service',
+    'snapshot.debian.org': 'Issues with the snapshot.debian.org service ',
     'sponsorship-requests': 'Requests for package review and sponsorship',
     'debian-live': 'General problems with Debian Live systems',
     'pet.debian.net': 'The Debian Package Entropy Tracker',
     'cloud.debian.org': 'Issues involving Debian images for public/private clouds',
     'piuparts.debian.org': 'Issues with the piuparts.debian.org service',
+    'sso.debian.org': 'Problems and requests related to the Debian Single Sign On system',
+    'tracker.debian.org': 'Issues with the Debian Package Tracker and coordination of its maintenance',
 }
 
 class Datasource(object):
