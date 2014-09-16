@@ -21,7 +21,7 @@ import urllib2
 import socket
 socket.setdefaulttimeout(10)
 
-# Synced from http://bugs.debian.org/pseudopackages/pseudo-packages.description
+# Synced from https://bugs.debian.org/pseudopackages/pseudo-packages.description
 pseudo_packages = {
     'base': 'Base system general bugs',
     'cdrom': 'Installation system',
