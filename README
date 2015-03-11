@@ -14,7 +14,7 @@ debian-devel-changes IRC bot
 
 The following script might work:
 
-for X in debian-devel-changes debian-bugs-dist debian-bugs-closed debian-security-announce debian-security-announce debian-backports-changes
+for X in debian-devel-changes debian-bugs-dist debian-bugs-closed debian-security-announce debian-backports-changes
 do
 	echo | sudo -u ddc-bot mail -s "subscribe" ${X}-REQUEST@lists.debian.org
 done
