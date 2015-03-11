@@ -7,7 +7,7 @@ Build-Depends:
  python-debian,
  python-beautifulsoup,
  python-twisted,
-Standards-Version: 3.9.3
+Standards-Version: 3.9.6
 Homepage: http://chris-lamb.co.uk/projects/debian-devel-changes-bot/
 Vcs-Git: git://github.com/lamby/debian-devel-changes-bot.git
 Vcs-Browser: https://github.com/lamby/debian-devel-changes-bot
