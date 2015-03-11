@@ -4,9 +4,11 @@ Priority: extra
 Maintainer: Chris Lamb <lamby@debian.org>
 Build-Depends:
  debhelper (>= 9),
+ python,
+ dh-python,
  python-debian,
  python-beautifulsoup,
- python-twisted,
+ python-twisted
 Standards-Version: 3.9.6
 Homepage: http://chris-lamb.co.uk/projects/debian-devel-changes-bot/
 Vcs-Git: git://github.com/lamby/debian-devel-changes-bot.git
