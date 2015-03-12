@@ -48,7 +48,7 @@ case "$1" in
 
   if [ ! -p "${FIFO}" ]
   then
-    mkfifo --mode=666 "${FIFO}"
+    mkfifo --mode=660 "${FIFO}"
     chmod ${USER}:${GROUP} "${FIFO}"
   fi
 
