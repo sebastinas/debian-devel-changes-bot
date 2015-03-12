@@ -1,0 +1,15 @@
+[Unit]
+Description=#debian-devel-changes IRC bot
+Requires=network.target
+
+[Service]
+Type=forking
+WorkingDirectory=/var/lib/debian-devel-changes-bot
+ExecStart=/usr/bin/supybot --daemon bot-config/BTS.conf
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+User=ddc-bot
+Group=ddc-bot
+
+[Install]
+WnatedBy=multi-user.target
