@@ -1,6 +1,6 @@
 Source: debian-devel-changes-bot
 Section: misc
-Priority: extra
+Priority: optional
 Maintainer: Sebastian Ramacher <sramacher@debian.org>
 Build-Depends:
  debhelper (>= 9),
@@ -11,9 +11,9 @@ Build-Depends:
  python-beautifulsoup,
  python-twisted
 Standards-Version: 3.9.6
-Homepage: http://chris-lamb.co.uk/projects/debian-devel-changes-bot/
-Vcs-Git: git://github.com/lamby/debian-devel-changes-bot.git
-Vcs-Browser: https://github.com/lamby/debian-devel-changes-bot
+Homepage: https://github.com/sebastinas/debian-devel-changes-bot
+Vcs-Git: git://github.com/sebastinas/debian-devel-changes-bot.git
+Vcs-Browser: https://github.com/sebastinas/debian-devel-changes-bot
 
 Package: debian-devel-changes-bot
 Architecture: all
@@ -28,5 +28,5 @@ Description: IRC bot that announces Debian package and bug activity
  #debian-devel-changes channel on OFTC.
  .
  It emits newly opened bugs, accepted uploads and closed bugs in the Debian
- GNU/Linux distribution when they occur, as well as responds to a number of
+ distribution when they occur, as well as responds to a number of
  developer-oriented commands.
