@@ -21,8 +21,6 @@ Depends:
  ${python:Depends},
  ${misc:Depends},
  adduser,
- python-debian,
- python-beautifulsoup,
  lockfile-progs,
  supybot,
 Description: IRC bot that announces Debian package and bug activity
