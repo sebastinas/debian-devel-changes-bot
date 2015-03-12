@@ -2,9 +2,10 @@ debian-devel-changes-bot (20150312) unstable; urgency=low
 
   * Adopt debian-devel-changes-bot.
   * Add systemd unit file.
+  * Store logs in /var/log/debian-devel-changes-bot.
   * Minor improvements here and there.
 
- -- Sebastian Ramacher <sramacher@debian.org>  Thu, 12 Mar 2015 22:07:15 +0100
+ -- Sebastian Ramacher <sramacher@debian.org>  Thu, 12 Mar 2015 22:52:10 +0100
 
 debian-devel-changes-bot (0) UNRELEASED; urgency=low
 
