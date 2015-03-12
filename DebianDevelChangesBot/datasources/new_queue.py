@@ -16,7 +16,7 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import thread
+import threading
 import urllib2
 from debian_bundle.deb822 import Deb822
 
@@ -32,41 +32,32 @@ class NewQueue(Datasource):
     INTERVAL = 60 * 30
 
     packages = {}
-    lock = thread.allocate_lock()
+    lock = threading.Lock()
 
     def __init__(self):
         self.__dict__ = self._shared_state
 
     def update(self, fileobj=None):
-        self.lock.acquire()
-        try:
-            if fileobj is None:
-                fileobj = urllib2.urlopen(self.URL)
+        if fileobj is None:
+            fileobj = urllib2.urlopen(self.URL)
 
-            packages = {}
-            for para in Deb822.iter_paragraphs(fileobj):
-                pkg = para['Source']
-                if para['Queue'] == 'new':
-                    packages[pkg] = para['Version'].split(' ')
+        packages = {}
+        for para in Deb822.iter_paragraphs(fileobj):
+            pkg = para['Source']
+            if para['Queue'] == 'new':
+                packages[pkg] = para['Version'].split(' ')
 
+        with self.lock:
             self.packages = packages
-        finally:
-            self.lock.release()
 
     def is_new(self, package, version):
-        self.lock.acquire()
-        try:
+        with self.lock:
             versions = self.packages.get(package, [])
             return version in versions
-        finally:
-            self.lock.release()
 
     def get_size(self):
-        self.lock.acquire()
-        try:
+        with self.lock:
             size = len(self.packages)
-            if size > 0:
-                return size
-            return None
-        finally:
-            self.lock.release()
+        if size > 0:
+            return size
+        return None

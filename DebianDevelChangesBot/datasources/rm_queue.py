@@ -17,7 +17,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-import thread
+import threading
 import urllib2
 
 import socket
@@ -34,7 +34,7 @@ class RmQueue(Datasource):
     INTERVAL = 60 * 30
 
     packages = set()
-    lock = thread.allocate_lock()
+    lock = threading.Lock()
 
     def __init__(self):
         self.__dict__ = self._shared_state
@@ -45,25 +45,16 @@ class RmQueue(Datasource):
 
         packages = MATCHER.findall(fileobj.read())
 
-        self.lock.acquire()
-        try:
+        with self.lock:
             self.packages = packages
-        finally:
-            self.lock.release()
 
     def get_size(self):
-        self.lock.acquire()
-        try:
+        with self.lock:
             size = len(self.packages)
             if size > 0:
                 return size
             return None
-        finally:
-            self.lock.release()
 
     def is_rm(self, pkg):
-        self.lock.acquire()
-        try:
+        with self.lock:
             return pkg in self.packages
-        finally:
-            self.lock.release()

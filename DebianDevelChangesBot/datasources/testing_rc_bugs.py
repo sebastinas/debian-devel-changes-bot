@@ -17,7 +17,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-import thread
+import threading
 import urllib2
 
 from BeautifulSoup import BeautifulSoup
@@ -34,7 +34,7 @@ class TestingRCBugs(Datasource):
     INTERVAL = 60 * 20
     RE_PATTERN = re.compile('^http://bugs.debian.org/\d+$')
 
-    lock = thread.allocate_lock()
+    lock = threading.Lock()
     bugs = None
 
     def __init__(self):
@@ -55,18 +55,12 @@ class TestingRCBugs(Datasource):
                 pass
 
         if bugs:
-            self.lock.acquire()
-            try:
+            with self.lock:
                 self.bugs = bugs
-            finally:
-                self.lock.release()
         else:
             # Zarro bugs found; probably an error.
             raise Datasource.DataError()
 
     def get_bugs(self):
-        self.lock.acquire()
-        try:
+        with self.lock:
             return self.bugs
-        finally:
-            self.lock.release()
