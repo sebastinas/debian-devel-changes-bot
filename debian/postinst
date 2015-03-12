@@ -22,6 +22,12 @@ then
   ln -sf ${BASE}/bot-config/forward ${BASE}/.forward
 
   chown -R ${USER}:${GROUP} ${BASE}
+
+  if [ ! -d /var/log/debian-devel-changes-bot ]
+  then
+    mkdir /var/log/debian-devel-changes-bot
+    chown -R ${USER}:adm /var/log/debian-devel-changes-bot
+  fi
 fi
 
 #DEBHELPER#
