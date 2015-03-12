@@ -1,3 +1,11 @@
+debian-devel-changes-bot (20150312) unstable; urgency=low
+
+  * Adopt debian-devel-changes-bot.
+  * Add systemd unit file.
+  * Minor improvements here and there.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Thu, 12 Mar 2015 22:07:15 +0100
+
 debian-devel-changes-bot (0) UNRELEASED; urgency=low
 
   * Initial release.
