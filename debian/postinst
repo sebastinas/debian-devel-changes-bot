@@ -6,32 +6,23 @@ BASE="/var/lib/debian-devel-changes-bot"
 USER="ddc-bot"
 GROUP="${USER}"
 
-case "${1}" in
-	configure)
-		addgroup --system ${GROUP} --quiet
+if [ "$1" = "configure" ]
+then
+  addgroup --system ${GROUP} --quiet
 
-		adduser \
-			--system \
-			--disabled-login \
-			--ingroup ${GROUP} \
-			--home ${BASE} \
-			--gecos "${USER} server" \
-			--shell /bin/false \
-			${USER}  >/dev/null
+  adduser \
+    --system \
+    --disabled-login \
+    --ingroup ${GROUP} \
+    --home ${BASE} \
+    --gecos "${USER} server" \
+    --shell /bin/false \
+    ${USER}  >/dev/null
 
-		ln -sf ${BASE}/bot-config/forward ${BASE}/.forward
+  ln -sf ${BASE}/bot-config/forward ${BASE}/.forward
 
-		chown -R ${USER}:${GROUP} ${BASE}
-		;;
-
-	abort-upgrade|abort-remove|abort-deconfigure)
-		;;
-
-	*)
-		echo "postinst called with unknown argument \`${1}'" >&2
-		exit 1
-		;;
-esac
+  chown -R ${USER}:${GROUP} ${BASE}
+fi
 
 #DEBHELPER#
 

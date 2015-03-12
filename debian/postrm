@@ -4,8 +4,8 @@ set -e
 
 if [ "$1" = "purge" ]
 then
-	rm -rf /var/lib/debian-devel-changes-bot
-	userdel ddc-bot
+  rm -rf /var/lib/debian-devel-changes-bot
+  userdel ddc-bot
 fi
 
 #DEBHELPER#
