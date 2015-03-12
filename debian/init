@@ -21,6 +21,7 @@ GROUP=${USER}
 DAEMON=/usr/bin/supybot
 LIBDIR=/var/lib/debian-devel-changes-bot
 PIDFILE=/var/run/${NAME}/${NAME}.pid
+FIFO=/var/run/${NAME}/fifo
 
 set -e
 
@@ -44,6 +45,13 @@ case "$1" in
 	mkdir -p $(dirname ${PIDFILE})
 	chmod 777 $(dirname ${PIDFILE})
 	chown ${USER}:${GROUP} $(dirname ${PIDFILE})
+
+  if [ ! -p "${FIFO}" ]
+  then
+    mkfifo --mode=666 "${FIFO}"
+    chmod ${USER}:${GROUP} "${FIFO}"
+  fi
+
 
 	if start-stop-daemon --start --oknodo --quiet --pidfile ${PIDFILE} \
 		--chuid ${USER}:${GROUP} --chdir ${LIBDIR} \
