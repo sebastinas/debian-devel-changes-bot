@@ -1,7 +1,7 @@
 Source: debian-devel-changes-bot
 Section: misc
 Priority: extra
-Maintainer: Chris Lamb <lamby@debian.org>
+Maintainer: Sebastian Ramacher <sramacher@debian.org>
 Build-Depends:
  debhelper (>= 9),
  python,
