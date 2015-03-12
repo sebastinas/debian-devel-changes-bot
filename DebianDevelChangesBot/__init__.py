@@ -58,6 +58,8 @@ pseudo_packages = {
     'piuparts.debian.org': 'Issues with the piuparts.debian.org service',
     'sso.debian.org': 'Problems and requests related to the Debian Single Sign On system',
     'tracker.debian.org': 'Issues with the Debian Package Tracker and coordination of its maintenance',
+    'd-i.debian.org': 'Issues regarding the d-i.debian.org service and general Debian Installer tasks',
+    'summit.debconf.org': 'Problems and requests related to the DebConf Summit instance',
 }
 
 class Datasource(object):
