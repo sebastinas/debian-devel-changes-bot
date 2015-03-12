@@ -20,6 +20,7 @@ Architecture: all
 Depends:
  ${python:Depends},
  ${misc:Depends},
+ adduser,
  python-debian,
  python-beautifulsoup,
  lockfile-progs,
