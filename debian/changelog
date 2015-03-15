@@ -1,3 +1,13 @@
+debian-devel-changes-bot (20150315) UNRELEASED; urgency=medium
+
+  [ Paul Wise ]
+  * Add #debian-publicity.
+
+  [ Sebastian Ramacher ]
+  * Reduce permissions of the FIFO.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 15 Mar 2015 15:43:56 +0100
+
 debian-devel-changes-bot (20150312) unstable; urgency=low
 
   * Adopt debian-devel-changes-bot.
