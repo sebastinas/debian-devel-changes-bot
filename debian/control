@@ -9,7 +9,8 @@ Build-Depends:
  dh-systemd,
  python-debian,
  python-beautifulsoup,
- python-twisted
+ python-twisted,
+ python-setuptools
 Standards-Version: 3.9.6
 Homepage: https://github.com/sebastinas/debian-devel-changes-bot
 Vcs-Git: git://github.com/sebastinas/debian-devel-changes-bot.git
