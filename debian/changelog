@@ -1,4 +1,4 @@
-debian-devel-changes-bot (20150315) UNRELEASED; urgency=medium
+debian-devel-changes-bot (20150315) unstable; urgency=medium
 
   [ Paul Wise ]
   * Add #debian-publicity.
@@ -6,7 +6,7 @@ debian-devel-changes-bot (20150315) UNRELEASED; urgency=medium
   [ Sebastian Ramacher ]
   * Reduce permissions of the FIFO.
 
- -- Sebastian Ramacher <sramacher@debian.org>  Sun, 15 Mar 2015 15:43:56 +0100
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 15 Mar 2015 15:54:35 +0100
 
 debian-devel-changes-bot (20150312) unstable; urgency=low
 
