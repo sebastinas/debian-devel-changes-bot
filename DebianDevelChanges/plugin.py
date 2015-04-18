@@ -37,8 +37,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     threaded = True
 
     def __init__(self, irc):
-        self.__parent = super(DebianDevelChanges, self)
-        self.__parent.__init__(irc)
+        super(DebianDevelChanges, self).__init__(irc)
         self.irc = irc
         self.topic_lock = threading.Lock()
 
