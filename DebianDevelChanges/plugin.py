@@ -116,19 +116,17 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 ircmsg = supybot.ircmsgs.privmsg(channel, txt)
                 self.irc.queueMsg(ircmsg)
 
-        except:
-            log.exception('Uncaught exception')
+        except Exception as e:
+            log.exception('Uncaught exception: %s ' % e)
 
     def _topic_callback(self):
-        self.topic_lock.acquire()
-
         sections = {
             lambda: len(TestingRCBugs().get_bugs()): 'RC bug count:',
             NewQueue().get_size: 'NEW queue:',
             RmQueue().get_size: 'RM queue:',
         }
 
-        try:
+        with self.topic_lock:
             values = {}
             for callback, prefix in sections.iteritems():
                 values[callback] = callback()
@@ -151,20 +149,15 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                         pass
                     schedule.addEvent(lambda channel=channel: self._update_topic(channel),
                         time.time() + 60, event_name)
-        finally:
-            self.topic_lock.release()
 
     def _update_topic(self, channel):
-        self.topic_lock.acquire()
-        try:
+        with self.topic_lock:
             try:
                 new_topic = self.queued_topics[channel]
                 log.info("Changing topic in #%s to '%s'" % (channel, new_topic))
                 self.irc.queueMsg(supybot.ircmsgs.topic(channel, new_topic))
             except KeyError:
                 pass
-        finally:
-            self.topic_lock.release()
 
     def greeting(self, prefix, irc, msg, args):
         num_bugs = len(TestingRCBugs().get_bugs())
