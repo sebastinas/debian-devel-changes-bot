@@ -20,7 +20,8 @@ from DebianDevelChangesBot import Message
 from DebianDevelChangesBot.datasources import NewQueue
 
 class AcceptedUploadMessage(Message):
-    FIELDS = ('package', 'version', 'distribution', 'urgency', 'by')
+    FIELDS = ('package', 'version', 'distribution', 'urgency', 'by',
+              'maintainer')
     OPTIONAL = ('closes',)
 
     def format(self):

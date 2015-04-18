@@ -37,6 +37,7 @@ class AcceptedUploadParser(MailParser):
             'Urgency': 'urgency',
             'Changed-By': 'by',
             'Closes': 'closes',
+            'Maintainer': 'maintainer'
         }
 
         for line in body:
@@ -62,5 +63,8 @@ class AcceptedUploadParser(MailParser):
 
         if msg.urgency:
             msg.urgency = msg.urgency.lower()
+
+        if msg.maintainer:
+            msg.maintainer = format_email_address(quoted_printable(msg.by))
 
         return msg
