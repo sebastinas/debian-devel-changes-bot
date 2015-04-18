@@ -93,7 +93,18 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                     channel,
                 ) or 'a^' # match nothing by default
 
-                if not re.search(package_regex, msg.package):
+                package_match = re.search(package_regex, msg.package)
+
+                maintainer_match = False
+                maintainer_regex = self.registryValue(
+                    'maintainer_regex',
+                    channel)
+                if maintainer_regex:
+                    info = Maintainer().get_maintainer(msg.package)
+                    if info:
+                        maintainer_match = re.search(maintainer_regex, info['email'])
+
+                if not package_match and not maintainer_match:
                     continue
 
                 distribution_regex = self.registryValue(

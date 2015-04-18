@@ -33,6 +33,10 @@ conf.registerChannelValue(DebianDevelChanges, 'package_regex', registry.Regexp(
     '', "Determines which package announcements should be printed to the channel",
 ))
 
+conf.registerChannelValue(DebianDevelChanges, 'maintainer_regex', registry.Regexp(
+    '', "Determines which maintainer announcements should be printed to the channel",
+))
+
 conf.registerChannelValue(DebianDevelChanges, 'distribution_regex', registry.Regexp(
     '', "Determines which distribution announcements should be printed to the channel",
 ))
