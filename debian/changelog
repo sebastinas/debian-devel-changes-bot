@@ -1,3 +1,11 @@
+debian-devel-changes-bot (20150418) unstable; urgency=medium
+
+  * Add #debian-perl as requested by dam.
+  * Allow to match by maintainer.
+  * Some code clean up.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sat, 18 Apr 2015 20:06:19 +0200
+
 debian-devel-changes-bot (20150315) unstable; urgency=medium
 
   [ Paul Wise ]
