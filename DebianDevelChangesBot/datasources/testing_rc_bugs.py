@@ -41,7 +41,11 @@ class TestingRCBugs(Datasource):
         if fileobj is None:
             fileobj = urllib2.urlopen(self.URL)
 
-        data = json.load(fileobj)
+        try:
+            data = json.load(fileobj)
+        except ValueError:
+            raise Datasource.DataError()
+
         bugs = set()
         for bug in data:
             try:
