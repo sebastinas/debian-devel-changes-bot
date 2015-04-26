@@ -30,7 +30,7 @@ from DebianDevelChangesBot import Datasource
 class TestingRCBugs(Datasource):
     _shared_state = {}
 
-    URL = 'http://udd.debian.org/bugs.cgi?release=jessie&notmain=ign&merged=ign&rc=1'
+    URL = 'http://udd.debian.org/bugs.cgi?release=stretch&notmain=ign&merged=ign&rc=1'
     INTERVAL = 60 * 20
     RE_PATTERN = re.compile('^http://bugs.debian.org/\d+$')
 
