@@ -17,7 +17,6 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import re
 import threading
 import urllib2
 import json
@@ -29,7 +28,6 @@ class TestingRCBugs(Datasource):
 
     URL = 'http://udd.debian.org/bugs.cgi?release=stretch&notmain=ign&merged=ign&rc=1&format=json'
     INTERVAL = 60 * 20
-    RE_PATTERN = re.compile('^http://bugs.debian.org/\d+$')
 
     lock = threading.Lock()
     bugs = None
