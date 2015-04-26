@@ -180,7 +180,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 'You realise they don\'t fix themselves, right?',
                 'How about fixing yourself some caffeine and then poking at the bug list?',
             ))
-            txt = "%s %s! There are currently %d RC bugs in wheezy. %s Try !random." % \
+            txt = "%s %s! There are currently %d RC bugs in stretch. %s Try !random." % \
                 (prefix, msg.nick, num_bugs, advice)
         else:
             txt = "%s %s!" % (prefix, msg.name)
@@ -207,7 +207,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         num_bugs = len(TestingRCBugs().get_bugs())
         if type(num_bugs) is int:
             irc.reply("There are %d release-critical bugs in the testing distribution. " \
-                "See https://udd.debian.org/bugs.cgi?release=wheezy&notmain=ign&merged=ign&rc=1" % num_bugs)
+                "See https://udd.debian.org/bugs.cgi?release=stretch&notmain=ign&merged=ign&rc=1" % num_bugs)
         else:
             irc.reply("No data at this time.")
     rc = wrap(rc)
