@@ -2,6 +2,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2015 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -19,18 +20,14 @@
 import re
 import threading
 import urllib2
-
-from BeautifulSoup import BeautifulSoup
-
-import socket
-socket.setdefaulttimeout(30)
+import json
 
 from DebianDevelChangesBot import Datasource
 
 class TestingRCBugs(Datasource):
     _shared_state = {}
 
-    URL = 'http://udd.debian.org/bugs.cgi?release=stretch&notmain=ign&merged=ign&rc=1'
+    URL = 'http://udd.debian.org/bugs.cgi?release=stretch&notmain=ign&merged=ign&rc=1&format=json'
     INTERVAL = 60 * 20
     RE_PATTERN = re.compile('^http://bugs.debian.org/\d+$')
 
@@ -44,14 +41,12 @@ class TestingRCBugs(Datasource):
         if fileobj is None:
             fileobj = urllib2.urlopen(self.URL)
 
-        soup = BeautifulSoup(fileobj)
-
+        data = json.load(fileobj)
         bugs = set()
-
-        for link in soup('a', {'href': self.RE_PATTERN}):
+        for bug in data:
             try:
-                bugs.add(int(link.contents[0][1:]))
-            except ValueError:
+                bugs.add(bug['id'])
+            except KeyError:
                 pass
 
         if bugs:
