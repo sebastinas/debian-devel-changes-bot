@@ -48,7 +48,11 @@ class Maintainer(Datasource):
 
         base = soup.find('span', {'class': 'name', 'title': 'maintainer'})
 
-        return {
-            'name': base.string,
-            'email': base.parent['href'].split('=', 1)[1],
-        }
+        try:
+            return {
+                'name': base.string,
+                'email': base.parent['href'].split('=', 1)[1],
+            }
+        except AttributeError:
+            raise Datasource.DataError(
+                'Unable to get maintainer for %s.' % package)
