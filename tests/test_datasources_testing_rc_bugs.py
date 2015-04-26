@@ -29,7 +29,7 @@ class TestDatasourceTestingRCBugs(unittest.TestCase):
 
     def setUp(self):
         self.fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)), \
-            'fixtures', 'testing_rc_bugs.html')
+            'fixtures', 'testing_rc_bugs.json')
 
         self.datasource = TestingRCBugs()
 
@@ -53,7 +53,7 @@ class TestDatasourceTestingRCBugs(unittest.TestCase):
         val = self.datasource.get_bugs()
 
         self.assert_(type(val) is set)
-        self.assertEqual(len(val), 818)
+        self.assertEqual(len(val), 66)
 
     def testParseEmpty(self):
         fileobj = open('/dev/null')
