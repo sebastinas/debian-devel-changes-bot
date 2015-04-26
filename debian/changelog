@@ -1,3 +1,10 @@
+debian-devel-changes-bot (20150426) unstable; urgency=medium
+
+  * Fetch RC bugs for stretch.
+  * Use UDD's JSON interface to fetch RC bugs.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 26 Apr 2015 14:30:54 +0200
+
 debian-devel-changes-bot (20150418) unstable; urgency=medium
 
   * Add #debian-perl as requested by dam.
