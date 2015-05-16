@@ -32,7 +32,7 @@ class AcceptedUploadMessage(Message):
 
         msg += "[version]%s[reset] uploaded " % self.version
 
-        if self.distribution != 'unstable':
+        if self.distribution not in ('unstable', 'sid'):
             msg += "to [distribution]%s[reset] " % self.distribution
 
         if self.urgency == 'high':
