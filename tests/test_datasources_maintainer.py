@@ -17,6 +17,7 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import unicode_literals
 import unittest
 
 import os, sys
@@ -25,7 +26,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from DebianDevelChangesBot import Datasource
 from DebianDevelChangesBot.datasources import Maintainer
 
-class TestDatasourceTestingNewQueue(unittest.TestCase):
+class TestDatasourceMaintainer(unittest.TestCase):
 
     def setUp(self):
         self.fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)), \
@@ -34,9 +35,10 @@ class TestDatasourceTestingNewQueue(unittest.TestCase):
         self.datasource = Maintainer()
 
     def testInfo(self):
-        info = self.datasource.get_maintainer('swi-prolog', fileobj=open(self.fixture))
-        self.assertEqual(info['email'], 'lamby@debian.org')
-        self.assertEqual(info['name'], 'Chris Lamb')
+        with open(self.fixture) as fileobj:
+            info = self.datasource.get_maintainer('vlc', fileobj=fileobj)
+        self.assertEqual(info['email'], 'pkg-multimedia-maintainers@lists.alioth.debian.org')
+        self.assertEqual(info['name'], 'Debian Multimedia Maintainers')
 
 if __name__ == "__main__":
     unittest.main()
