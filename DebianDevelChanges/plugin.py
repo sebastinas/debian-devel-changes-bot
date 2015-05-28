@@ -49,6 +49,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         fr.start(self._email_callback, fifo_loc)
 
         self.requests_session = Session()
+        self.requests_session.verify = True
+
         self.queued_topics = {}
         self.last_n_messages = []
 
