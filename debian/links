@@ -1,1 +1,1 @@
-var/lib/debian-devel-changes-bot/bot-config/oftc-stunnel.conf /etc/stunnel4
+var/lib/debian-devel-changes-bot/bot-config/oftc-stunnel.conf /etc/stunnel/oftc.conf
