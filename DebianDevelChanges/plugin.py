@@ -247,8 +247,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             irc.reply("You are not authorised to run this command.")
             return
 
-        for obj, interval, name in get_datasources():
-            obj.update()
+        for klass, interval, name in get_datasources():
+            klass().update()
             irc.reply("Updated %s." % name)
         for source in self.data_sources:
             source.update()
