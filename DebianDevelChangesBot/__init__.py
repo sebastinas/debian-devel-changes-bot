@@ -102,8 +102,3 @@ import utils
 import messages
 import datasources
 import mailparsers
-
-reload(utils)
-reload(messages)
-reload(datasources)
-reload(mailparsers)

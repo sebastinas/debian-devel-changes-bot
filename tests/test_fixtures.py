@@ -18,9 +18,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import unittest
-
-import os, sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import os
 
 from DebianDevelChangesBot.messages import *
 from DebianDevelChangesBot.mailparsers import *
@@ -44,8 +42,10 @@ def add_tests(testdir, parser, expected_type, test=lambda x: bool(x)):
                 print "Exception when parsing %s" % filename
                 raise
 
-            self.assertEqual(type(msg), expected_type,
-                "%s did not match with its parser" % filename)
+            self.assertTrue(
+                isinstance(msg, expected_type),
+                "%s did not match with its parser: expected %s, got %s" %
+                    (filename, expected_type, type(msg)))
             self.assert_(test(msg), "%s did not pass test" % filename)
 
             if msg:
