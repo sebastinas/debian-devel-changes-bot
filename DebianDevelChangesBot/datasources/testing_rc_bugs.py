@@ -20,6 +20,7 @@
 import threading
 import urllib2
 import json
+import requests
 
 from DebianDevelChangesBot import Datasource
 
@@ -61,3 +62,32 @@ class TestingRCBugs(Datasource):
     def get_bugs(self):
         with self.lock:
             return self.bugs
+
+class StableRCBugs(object):
+    URL = 'http://udd.debian.org/bugs.cgi?release=wheezy&notmain=ign&merged=ign&rc=1&format=json'
+    INTERVAL = 60 * 20
+
+    def __init__(self):
+        self.bugs = None
+
+    def update(self):
+        response = requests.get(self.URL)
+        try:
+            data = response.json()
+        except ValueError:
+            raise Datasource.DataError()
+
+        bugs = set()
+        for bug in data:
+            try:
+                bugs.add(bug['id'])
+            except KeyError:
+                pass
+
+        if bugs:
+            self.bugs = bugs
+        else:
+            raise Datasource.DataError()
+
+    def get_bugs(self):
+        return self.bugs

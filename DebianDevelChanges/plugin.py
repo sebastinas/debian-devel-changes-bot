@@ -28,8 +28,9 @@ from supybot.commands import wrap, many
 from supybot import ircdb, log, schedule
 
 from DebianDevelChangesBot.mailparsers import get_message
-from DebianDevelChangesBot.datasources import get_datasources, TestingRCBugs, \
-    NewQueue, RmQueue, Maintainer
+from DebianDevelChangesBot.datasources import (get_datasources, TestingRCBugs,
+                                               NewQueue, RmQueue, Maintainer,
+                                               StableRCBugs)
 from DebianDevelChangesBot.utils import parse_mail, FifoReader, colourise, \
     rewrite_topic, madison, format_email_address, popcon
 
@@ -47,6 +48,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
         self.queued_topics = {}
         self.last_n_messages = []
+        self.stable_rc_bugs = StableRCBugs()
 
         # Schedule datasource updates
         for klass, interval, name in get_datasources():
@@ -62,6 +64,15 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             schedule.addPeriodicEvent(wrapper, interval, name, now=False)
             schedule.addEvent(wrapper, time.time() + 1)
 
+        def stable_rc_bugs_wrapper():
+            self.stable_rc_bugs.update()
+            self._topic_callback()
+
+        schedule.addPeriodicEvent(stable_rc_bugs_wrapper, StableRCBugs.INTERVAL,
+                                  StableRCBugs.__name__, now=False)
+        schedule.addEvent(stable_rc_bugs_wrapper, time.time() + 1)
+
+
     def die(self):
         FifoReader().stop()
         for _, _, name in get_datasources():
@@ -70,6 +81,10 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             except KeyError:
                 # A newly added event may not exist, ignore exception.
                 pass
+        try:
+            schedule.removePeriodicEvent(StableRCBugs.__name__)
+        except KeyError:
+            pass
 
     def _email_callback(self, fileobj):
         try:
@@ -133,6 +148,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     def _topic_callback(self):
         sections = {
             lambda: len(TestingRCBugs().get_bugs()): 'RC bug count:',
+            lambda: len(self.stable_rc_bugs.get_bugs()): 'Stable RC bug count:',
             NewQueue().get_size: 'NEW queue:',
             RmQueue().get_size: 'RM queue:',
         }
@@ -218,9 +234,11 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             irc.reply("You are not authorised to run this command.")
             return
 
-        for klass, interval, name in get_datasources():
-            klass().update()
+        for obj, interval, name in get_datasources():
+            obj.update()
             irc.reply("Updated %s." % name)
+        self.stable_rc_bugs.update()
+        irc.reply("Updated %s." % StableRCBugs.__name__)
         self._topic_callback()
     update = wrap(update)
 
