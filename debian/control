@@ -11,7 +11,8 @@ Build-Depends:
  python-beautifulsoup,
  python-twisted,
  python-setuptools,
- python-requests
+ python-requests,
+ python-requests-mock
 Standards-Version: 3.9.6
 Homepage: https://github.com/sebastinas/debian-devel-changes-bot
 Vcs-Git: git://github.com/sebastinas/debian-devel-changes-bot.git
