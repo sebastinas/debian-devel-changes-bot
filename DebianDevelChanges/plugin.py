@@ -80,7 +80,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
         for source in self.data_sources:
             schedule.addPeriodicEvent(wrapper(source), source.INTERVAL,
-                                      source.__name__, now=False)
+                                      source.NAME, now=False)
             schedule.addEvent(wrapper(source), time.time() + 1)
 
 
@@ -95,7 +95,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
         for source in self.data_sources:
             try:
-                schedule.removePeriodicEvent(source.__name__)
+                schedule.removePeriodicEvent(source.NAME)
             except KeyError:
                 pass
 
@@ -250,8 +250,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         for obj, interval, name in get_datasources():
             obj.update()
             irc.reply("Updated %s." % name)
-        self.stable_rc_bugs.update()
-        irc.reply("Updated %s." % StableRCBugs.__name__)
+        for source in self.data_sources:
+            source.update()
+            irc.reply("Updated %s." % source.NAME)
         self._topic_callback()
     update = wrap(update)
 

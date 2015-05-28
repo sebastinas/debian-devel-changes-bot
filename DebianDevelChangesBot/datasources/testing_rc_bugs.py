@@ -72,10 +72,14 @@ class RCBugs(NewDataSource):
 
 
 class TestingRCBugs(RCBugs):
+    NAME = 'Testing RC Bugs'
+
     def __init__(self, session=None):
         super(TestingRCBugs, self).__init__('stretch', session)
 
 
 class StableRCBugs(RCBugs):
+    NAME = 'Stable RC Bugs'
+
     def __init__(self, session=None):
         super(StableRCBugs, self).__init__('jessie', session)
