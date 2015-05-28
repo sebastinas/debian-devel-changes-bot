@@ -22,8 +22,7 @@ import os
 import requests
 import requests_mock
 
-from DebianDevelChangesBot import Datasource
-from DebianDevelChangesBot.datasources import TestingRCBugs
+from DebianDevelChangesBot.datasources import TestingRCBugs, StableRCBugs
 
 class BaseTest(object):
     def setUp(self):
@@ -66,6 +65,10 @@ class BaseTest(object):
 
 class TestDatasourceTestingRCBugs(BaseTest, unittest.TestCase):
     klass = TestingRCBugs
+
+
+class TestDatasourceStableRCBugs(BaseTest, unittest.TestCase):
+    klass = StableRCBugs
 
 
 if __name__ == "__main__":
