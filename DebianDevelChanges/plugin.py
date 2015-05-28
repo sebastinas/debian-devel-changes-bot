@@ -325,7 +325,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _buggraph(self, irc, msg, args, items):
         for package in items:
-            msg = "[desc]Bug graph for[reset] [package]%s[reset]: [url]http://people.debian.org/~glandium/bts/%s/%s.png[/url]" % \
+            msg = "[desc]Bug graph for[reset] [package]%s[reset]: [url]https://qa.debian.org/data/bts/graphs/%s/%s.png[/url]" % \
                 (package, package[0], package)
             irc.reply(colourise(msg), prefixNick=False)
     buggraph = wrap(_buggraph, [many('anything')])
