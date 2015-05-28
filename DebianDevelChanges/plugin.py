@@ -48,7 +48,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         fifo_loc = '/var/run/debian-devel-changes-bot/fifo'
         fr.start(self._email_callback, fifo_loc)
 
-        self.requests_session = Session()
+        self.requests_session = requests.Session()
         self.requests_session.verify = True
 
         self.queued_topics = {}
