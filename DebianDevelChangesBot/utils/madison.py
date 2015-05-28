@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 #   Debian Changes Bot
-#   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2015 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -16,19 +16,16 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import socket
-import urllib
-import urllib2
+import requests
 
-socket.setdefaulttimeout(10)
-
-def madison(package, suites=()):
-    data = urllib.urlencode({
+def madison(package, suites=None):
+    payload = {
         'package': package,
-        's': ','.join(suites),
-        'text': 'on',
-    })
+        'text': 'on'
+    }
+    if suites is not None:
+        payload['s'] = ','.join(suites)
 
-    fileobj = urllib2.urlopen('https://qa.debian.org/madison.php?%s' % data)
-
-    return fileobj.readlines()
+    response = requests.get('https://qa.debian.org/madison.php', params=payload)
+    response.raise_for_status()
+    return response.text.encode('utf-8')
