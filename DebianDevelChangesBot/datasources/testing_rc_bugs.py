@@ -27,7 +27,7 @@ from DebianDevelChangesBot import NewDataSource
 
 class RCBugs(NewDataSource):
     INTERVAL = 60 * 20
-    URL = 'http://udd.debian.org/bugs.cgi'
+    URL = 'https://udd.debian.org/bugs.cgi'
 
     def __init__(self, suite, session=None):
         super(RCBugs, self).__init__(session)
