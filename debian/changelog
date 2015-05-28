@@ -1,3 +1,15 @@
+debian-devel-changes-bot (20150528.3) unstable; urgency=medium
+
+  * Give RC bug sources a name.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Thu, 28 May 2015 23:23:38 +0200
+
+debian-devel-changes-bot (20150528.2) unstable; urgency=medium
+
+  * Fix requests Session creation.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Thu, 28 May 2015 23:11:26 +0200
+
 debian-devel-changes-bot (20150528.1) unstable; urgency=medium
 
   * Switch Testing RC bug source to requests.
