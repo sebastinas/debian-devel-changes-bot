@@ -17,9 +17,8 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import urllib2
+import requests
 
-import socket
-socket.setdefaulttimeout(10)
 
 # curl -qs https://bugs.debian.org/pseudopackages/pseudo-packages.description | sed -e 's@\([^\t ]*\)[\t ]*\(.*\)@    '\''\1'\'': "\2"\,@g'
 pseudo_packages = {
@@ -70,8 +69,15 @@ class Datasource(object):
         fileobj = urllib2.urlopen(self.URL)
         return self.parse(fileobj)
 
+
+class NewDataSource(object):
+    def __init__(self, session):
+        self.session = session if session is not None else requests.Session()
+
+
 class MailParser(object):
     pass
+
 
 class Message(object):
     def __init__(self):

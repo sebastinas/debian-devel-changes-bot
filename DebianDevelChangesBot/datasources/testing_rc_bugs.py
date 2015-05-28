@@ -22,56 +22,28 @@ import urllib2
 import json
 import requests
 
-from DebianDevelChangesBot import Datasource
+from DebianDevelChangesBot import NewDataSource
 
-class TestingRCBugs(Datasource):
-    _shared_state = {}
 
-    URL = 'http://udd.debian.org/bugs.cgi?release=stretch&notmain=ign&merged=ign&rc=1&format=json'
+class RCBugs(NewDataSource):
     INTERVAL = 60 * 20
+    URL = 'http://udd.debian.org/bugs.cgi'
 
-    lock = threading.Lock()
-    bugs = None
-
-    def __init__(self):
-        self.__dict__ = self._shared_state
-
-    def update(self, fileobj=None):
-        if fileobj is None:
-            fileobj = urllib2.urlopen(self.URL)
-
-        try:
-            data = json.load(fileobj)
-        except ValueError:
-            raise Datasource.DataError()
-
-        bugs = set()
-        for bug in data:
-            try:
-                bugs.add(bug['id'])
-            except KeyError:
-                pass
-
-        if bugs:
-            with self.lock:
-                self.bugs = bugs
-        else:
-            # Zarro bugs found; probably an error.
-            raise Datasource.DataError()
-
-    def get_bugs(self):
-        with self.lock:
-            return self.bugs
-
-class StableRCBugs(object):
-    URL = 'http://udd.debian.org/bugs.cgi?release=wheezy&notmain=ign&merged=ign&rc=1&format=json'
-    INTERVAL = 60 * 20
-
-    def __init__(self):
+    def __init__(self, suite, session=None):
+        super(RCBugs, self).__init__(session)
+        self.suite = suite
         self.bugs = None
 
     def update(self):
-        response = requests.get(self.URL)
+        payload = {
+            'release': self.suite,
+            'notmain': 'ign',
+            'merged': 'ign',
+            'rc': 1,
+            'format': 'json'
+        }
+
+        response = self.session.get(self.URL, params=payload)
         try:
             data = response.json()
         except ValueError:
@@ -91,3 +63,19 @@ class StableRCBugs(object):
 
     def get_bugs(self):
         return self.bugs
+
+    def get_number_bugs(self):
+        if self.bugs is not None:
+            return len(self.bugs)
+        else:
+            return None
+
+
+class TestingRCBugs(RCBugs):
+    def __init__(self, session=None):
+        super(TestingRCBugs, self).__init__('stretch', session)
+
+
+class StableRCBugs(RCBugs):
+    def __init__(self, session=None):
+        super(StableRCBugs, self).__init__('jessie', session)

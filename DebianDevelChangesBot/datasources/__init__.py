@@ -21,9 +21,6 @@ import new_queue
 import rm_queue
 import maintainer
 
-state = testing_rc_bugs.TestingRCBugs._shared_state
-testing_rc_bugs.TestingRCBugs._shared_state = state
-
 state = new_queue.NewQueue._shared_state
 new_queue.NewQueue._shared_state = state
 
@@ -37,5 +34,5 @@ from rm_queue import RmQueue
 from maintainer import Maintainer
 
 def get_datasources():
-    for klass in TestingRCBugs, NewQueue, RmQueue:
+    for klass in NewQueue, RmQueue:
         yield klass, klass.INTERVAL, klass.__name__

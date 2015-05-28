@@ -23,6 +23,7 @@ import random
 import urllib
 import supybot
 import threading
+import requests
 
 from supybot.commands import wrap, many
 from supybot import ircdb, log, schedule
@@ -33,6 +34,7 @@ from DebianDevelChangesBot.datasources import (get_datasources, TestingRCBugs,
                                                StableRCBugs)
 from DebianDevelChangesBot.utils import parse_mail, FifoReader, colourise, \
     rewrite_topic, madison, format_email_address, popcon
+
 
 class DebianDevelChanges(supybot.callbacks.Plugin):
     threaded = True
@@ -46,9 +48,13 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         fifo_loc = '/var/run/debian-devel-changes-bot/fifo'
         fr.start(self._email_callback, fifo_loc)
 
+        self.requests_session = Session()
         self.queued_topics = {}
         self.last_n_messages = []
-        self.stable_rc_bugs = StableRCBugs()
+
+        self.stable_rc_bugs = StableRCBugs(self.requests_session)
+        self.testing_rc_bugs = TestingRCBugs(self.requests_session)
+        self.data_sources = (self.stable_rc_bugs, self.testing_rc_bugs)
 
         # Schedule datasource updates
         for klass, interval, name in get_datasources():
@@ -64,13 +70,16 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             schedule.addPeriodicEvent(wrapper, interval, name, now=False)
             schedule.addEvent(wrapper, time.time() + 1)
 
-        def stable_rc_bugs_wrapper():
-            self.stable_rc_bugs.update()
-            self._topic_callback()
+        def wrapper(source):
+            def implementation():
+                source.update()
+                self._topic_callback()
+            return implementation
 
-        schedule.addPeriodicEvent(stable_rc_bugs_wrapper, StableRCBugs.INTERVAL,
-                                  StableRCBugs.__name__, now=False)
-        schedule.addEvent(stable_rc_bugs_wrapper, time.time() + 1)
+        for source in self.data_sources:
+            schedule.addPeriodicEvent(wrapper(source), source.INTERVAL,
+                                      source.__name__, now=False)
+            schedule.addEvent(wrapper(source), time.time() + 1)
 
 
     def die(self):
@@ -81,10 +90,12 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             except KeyError:
                 # A newly added event may not exist, ignore exception.
                 pass
-        try:
-            schedule.removePeriodicEvent(StableRCBugs.__name__)
-        except KeyError:
-            pass
+
+        for source in self.data_sources:
+            try:
+                schedule.removePeriodicEvent(source.__name__)
+            except KeyError:
+                pass
 
     def _email_callback(self, fileobj):
         try:
@@ -147,8 +158,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _topic_callback(self):
         sections = {
-            lambda: len(TestingRCBugs().get_bugs()): 'RC bug count:',
-            lambda: len(self.stable_rc_bugs.get_bugs()): 'Stable RC bug count:',
+            self.testing_rc_bugs.get_number_bugs: 'RC bug count:',
+            self.stable_rc_bugs.get_number_bugs: 'Stable RC bug count:',
             NewQueue().get_size: 'NEW queue:',
             RmQueue().get_size: 'RM queue:',
         }
@@ -187,7 +198,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 pass
 
     def greeting(self, prefix, irc, msg, args):
-        num_bugs = len(TestingRCBugs().get_bugs())
+        num_bugs = self.testing_rc_bugs.get_number_bugs()
         if type(num_bugs) is int:
             advice = random.choice((
                 'Why not go and fix one?',
@@ -196,7 +207,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 'You realise they don\'t fix themselves, right?',
                 'How about fixing yourself some caffeine and then poking at the bug list?',
             ))
-            txt = "%s %s! There are currently %d RC bugs in stretch. %s Try !random." % \
+            txt = "%s %s! There are currently %d RC bugs in stretch. %s" % \
                 (prefix, msg.nick, num_bugs, advice)
         else:
             txt = "%s %s!" % (prefix, msg.name)
@@ -220,7 +231,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     lo = wrap(sup)
 
     def rc(self, irc, msg, args):
-        num_bugs = len(TestingRCBugs().get_bugs())
+        num_bugs = self.testing_rc_bugs.get_number_bugs()
         if type(num_bugs) is int:
             irc.reply("There are %d release-critical bugs in the testing distribution. " \
                 "See https://udd.debian.org/bugs.cgi?release=stretch&notmain=ign&merged=ign&rc=1" % num_bugs)
