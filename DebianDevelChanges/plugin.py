@@ -56,7 +56,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
         self.stable_rc_bugs = StableRCBugs(self.requests_session)
         self.testing_rc_bugs = TestingRCBugs(self.requests_session)
-        self.data_sources = (self.stable_rc_bugs, self.testing_rc_bugs)
+        self.new_queue = NewQueue(self.requests_session)
+        self.data_sources = (self.stable_rc_bugs, self.testing_rc_bugs,
+                             self.new_queue)
 
         # Schedule datasource updates
         for klass, interval, name in get_datasources():
@@ -162,7 +164,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         sections = {
             self.testing_rc_bugs.get_number_bugs: 'RC bug count:',
             self.stable_rc_bugs.get_number_bugs: 'Stable RC bug count:',
-            NewQueue().get_size: 'NEW queue:',
+            self.new_queue.get_size: 'NEW queue:',
             RmQueue().get_size: 'RM queue:',
         }
 
@@ -380,7 +382,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _new(self, irc, msg, args):
         line = "[desc]NEW queue is[reset]: [url]%s[/url]. [desc]Current size is:[reset] %d" % \
-            ("https://ftp-master.debian.org/new.html", NewQueue().get_size())
+            ("https://ftp-master.debian.org/new.html", self.new_queue.get_size())
         irc.reply(colourise(line))
     new = wrap(_new)
     new_queue = wrap(_new)

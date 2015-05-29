@@ -21,8 +21,6 @@ import new_queue
 import rm_queue
 import maintainer
 
-state = new_queue.NewQueue._shared_state
-new_queue.NewQueue._shared_state = state
 
 state = rm_queue.RmQueue._shared_state
 rm_queue.RmQueue._shared_state = state
@@ -34,5 +32,5 @@ from rm_queue import RmQueue
 from maintainer import Maintainer
 
 def get_datasources():
-    for klass in NewQueue, RmQueue:
+    for klass in (RmQueue, ):
         yield klass, klass.INTERVAL, klass.__name__
