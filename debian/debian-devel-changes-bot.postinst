@@ -1,0 +1,66 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+USRBASE="/usr/share/debian-devel-changes-bot"
+BASE="/var/lib/debian-devel-changes-bot"
+USER="ddc-bot"
+GROUP="${USER}"
+CONFIGFILE="/etc/debian-devel-changes-bot.config"
+
+if [ "$1" = "configure" ]
+then
+  if ! getent group "${GROUP}" > /dev/null
+  then
+    addgroup --system "${GROUP}" --quiet
+  fi
+
+  if ! getent passwd "${USER}" > /dev/null
+  then
+    adduser \
+      --system \
+      --disabled-login \
+      --ingroup "${GROUP}" \
+      --home "${BASE}" \
+      --gecos "${USER} server" \
+      --shell /bin/false \
+      "${USER}" >/dev/null
+  fi
+
+  mkdir -p "${BASE}/bot-config/conf"
+  chmod o-rwx "${BASE}/bot-config"
+  ln -sf "${USRBASE}/bot-config/forward" "${BASE}/.forward"
+
+  if [ ! -d /var/log/debian-devel-changes-bot ]
+  then
+    mkdir /var/log/debian-devel-changes-bot
+    chown -R "${USER}:adm" /var/log/debian-devel-changes-bot
+  fi
+
+  db_get BTS/nickserv-password
+  NICKSERV_PASSWORD="$RET"
+  db_get BTS/admin-user
+  ADMIN_USER="$RET"
+  db_get BTS/admin-password
+  ADMIN_PASSWORD="$RET"
+
+  echo "NICKSERV_PASSWORD=\"$NICKSERV_PASSWORD\"" > $CONFIGFILE
+  echo "ADMIN_USER=\"ADMIN_USER\"" >> $CONFIGFILE
+  echo "ADMIN_PASSWORD=\"$ADMIN_PASSWORD\"" >> $CONFIGFILE
+
+  if [ -n "$ADMIN_USER" ] && [ -n "$ADMIN_PASSWORD" ]
+  then
+    supybot-adduser -u "$ADMIN_USER" -p "$ADMIN_PASSWORD" \
+      -c owner "${BASE}/bot-config/conf/users.conf"
+  fi
+
+  sed "s,@NICKSERV_PASSWORD@,$NICKSERV_PASSWORD," \
+    "${USRBASE}/bot-config/BTS.conf.in" > "${BASE}/bot-config/BTS.conf"
+
+  chown -R "${USER}:${GROUP}" "${BASE}"
+fi
+
+#DEBHELPER#
+
+exit 0

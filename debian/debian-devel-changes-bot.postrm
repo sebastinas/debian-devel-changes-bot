@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "purge" ]
+then
+  if [ -e /usr/share/debconf/confmodule ]
+  then
+     . /usr/share/debconf/confmodule
+     db_purge
+  fi
+
+  rm -rf /var/lib/debian-devel-changes-bot
+  rm -rf /var/log/debian-devel-changes-bot
+  rm -f /etc/debian-devel-changes-bot.config
+  userdel ddc-bot
+fi
+
+#DEBHELPER#

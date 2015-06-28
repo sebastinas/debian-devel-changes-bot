@@ -1,0 +1,11 @@
+Template: BTS/admin-user
+Type: string
+Description: Name of the admin user:
+
+Template: BTS/admin-password
+Type: password
+Description: Password of the admin user:
+
+Template: BTS/nickserv-password
+Type: password
+Description: NickServ password of the bot:

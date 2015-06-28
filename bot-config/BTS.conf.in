@@ -47,7 +47,7 @@ supybot.networks: oftc
 #
 # Default value: 
 ###
-supybot.networks.oftc.password: lamby++bts
+supybot.networks.oftc.password: @NICKSERV_PASSWORD@
 
 ###
 # Determines what servers the bot will connect to for oftc. Each will be
