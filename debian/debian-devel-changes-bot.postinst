@@ -30,7 +30,6 @@ then
 
   mkdir -p "${BASE}/bot-config/conf"
   chmod o-rwx "${BASE}/bot-config"
-  ln -sf "${USRBASE}/bot-config/forward" "${BASE}/.forward"
 
   if [ ! -d /var/log/debian-devel-changes-bot ]
   then
@@ -51,14 +50,19 @@ then
   echo "ADMIN_USER=\"$ADMIN_USER\"" >> $CONFIGFILE
   echo "ADMIN_PASSWORD=\"$ADMIN_PASSWORD\"" >> $CONFIGFILE
 
+  # Create admin user.
   if [ -n "$ADMIN_USER" ] && [ -n "$ADMIN_PASSWORD" ]
   then
     supybot-adduser -u "$ADMIN_USER" -p "$ADMIN_PASSWORD" \
       -c owner "${BASE}/bot-config/conf/users.conf"
   fi
 
+  # Set NickSErv password.
   sed "s,@NICKSERV_PASSWORD@,$NICKSERV_PASSWORD," \
     "${USRBASE}/bot-config/BTS.conf.in" > "${BASE}/bot-config/BTS.conf"
+
+  # Copy forward file.
+  cp "${USRBASE}/bot-config/forward" "${BASE}/.forward"
 
   chown -R "${USER}:${GROUP}" "${BASE}"
 fi
