@@ -1,3 +1,11 @@
+debian-devel-changes-bot (20150628) unstable; urgency=medium
+
+  * No longer store passwords in the package. Use debconf to fetch the from
+    the user.
+  * Use requests to fetch data for NEW queue.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 28 Jun 2015 17:51:47 +0200
+
 debian-devel-changes-bot (20150528.3) unstable; urgency=medium
 
   * Give RC bug sources a name.
