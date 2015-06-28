@@ -45,7 +45,9 @@ then
   db_get BTS/admin-password
   ADMIN_PASSWORD="$RET"
 
-  echo "NICKSERV_PASSWORD=\"$NICKSERV_PASSWORD\"" > $CONFIGFILE
+  echo "# Settings for debian-devel-changes-bot" > $CONFIGFILE
+  chmod o-rwx "$CONFIGFILE"
+  echo "NICKSERV_PASSWORD=\"$NICKSERV_PASSWORD\"" >> $CONFIGFILE
   echo "ADMIN_USER=\"$ADMIN_USER\"" >> $CONFIGFILE
   echo "ADMIN_PASSWORD=\"$ADMIN_PASSWORD\"" >> $CONFIGFILE
 
