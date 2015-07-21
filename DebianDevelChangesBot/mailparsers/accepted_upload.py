@@ -20,15 +20,19 @@ from DebianDevelChangesBot import MailParser
 from DebianDevelChangesBot.utils import quoted_printable, format_email_address
 from DebianDevelChangesBot.messages import AcceptedUploadMessage
 
+
+lists = (
+    '<debian-devel-changes.lists.debian.org>',
+    '<debian-backports-changes.lists.debian.org>'
+)
+
+
 class AcceptedUploadParser(MailParser):
 
     @staticmethod
-    def parse(headers, body):
-        if headers.get('List-Id', '') not in ('<debian-devel-changes.lists.debian.org>',
-            '<debian-backports-changes.lists.debian.org>'):
+    def parse(headers, body, **kwargs):
+        if headers.get('List-Id', '') not in lists:
             return
-
-        msg = AcceptedUploadMessage()
 
         mapping = {
             'Source': 'package',
@@ -40,6 +44,7 @@ class AcceptedUploadParser(MailParser):
             'Maintainer': 'maintainer'
         }
 
+        msg = AcceptedUploadMessage()
         for line in body:
             for field, target in mapping.iteritems():
                 if line.startswith('%s: ' % field):
@@ -66,5 +71,9 @@ class AcceptedUploadParser(MailParser):
 
         if msg.maintainer:
             msg.maintainer = format_email_address(quoted_printable(msg.by))
+
+        if 'new_queue' in kwargs:
+            new_queue = kwargs['new_queue']
+            msg.new_upload = new_queue.is_new(msg.package, msg.version)
 
         return msg

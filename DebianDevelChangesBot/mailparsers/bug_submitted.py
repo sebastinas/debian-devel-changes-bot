@@ -29,7 +29,7 @@ SEVERITY = re.compile(r'(?i)^Severity:? (critical|grave|serious|important|normal
 class BugSubmittedParser(MailParser):
 
     @staticmethod
-    def parse(headers, body):
+    def parse(headers, body, **kwargs):
         if headers.get('List-Id', '') != '<debian-bugs-dist.lists.debian.org>':
             return
 

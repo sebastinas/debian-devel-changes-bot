@@ -21,13 +21,15 @@ from DebianDevelChangesBot.messages import SecurityAnnounceMessage
 
 import re
 
+
 SUBJECT = re.compile(r'^\[SECURITY\] \[DSA[-\s]([\d]+)-([\d+])\] (?:[Nn]ew )?(.+) package?s? (.*)$')
 DATE = re.compile(r'(20\d\d)')
+
 
 class SecurityAnnounceParser(MailParser):
 
     @staticmethod
-    def parse(headers, body):
+    def parse(headers, body, **kwargs):
         if headers.get('List-Id', '') != '<debian-security-announce.lists.debian.org>':
             return
 

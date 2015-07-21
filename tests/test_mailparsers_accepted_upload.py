@@ -19,6 +19,7 @@
 
 import unittest
 
+from glob import glob
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -86,17 +87,13 @@ class TestMailParserAcceptedUpload(unittest.TestCase):
         self.assertEqual(msg.urgency, 'high')
 
     def testFixtures(self):
-        from glob import glob
-
         dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fixtures', 'accepted_upload', '*')
         for filename in glob(dir):
-            try:
-                mail = parse_mail(file(filename))
-                msg = p.parse(*mail)
-                self.assert_(msg)
-            except Exception:
-                print "Exception when parsing %s" % filename
-                raise
+            with open(filename, 'r') as f:
+                mail = parse_mail(f)
+            msg = p.parse(*mail)
+            self.assert_(msg)
+
 
 if __name__ == "__main__":
     unittest.main()

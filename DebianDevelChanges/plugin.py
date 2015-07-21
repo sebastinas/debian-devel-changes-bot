@@ -103,7 +103,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _email_callback(self, fileobj):
         try:
-            email = parse_mail(fileobj)
+            email = parse_mail(fileobj, new_queue=self.new_queue)
             msg = get_message(email)
 
             if not msg:

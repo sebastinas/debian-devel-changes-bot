@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20150721) unstable; urgency=medium
+
+  * Fix handling of NEW uploads.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Tue, 21 Jul 2015 21:04:42 +0200
+
 debian-devel-changes-bot (20150628) unstable; urgency=medium
 
   * No longer store passwords in the package. Use debconf to fetch the from

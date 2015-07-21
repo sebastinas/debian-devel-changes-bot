@@ -2,6 +2,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2015 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -17,17 +18,17 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from DebianDevelChangesBot import Message
-from DebianDevelChangesBot.datasources import NewQueue
+
 
 class AcceptedUploadMessage(Message):
     FIELDS = ('package', 'version', 'distribution', 'urgency', 'by',
               'maintainer')
-    OPTIONAL = ('closes',)
+    OPTIONAL = ('closes', 'new_upload')
 
     def format(self):
         msg = "%s " % self.package_name()
 
-        if NewQueue().is_new(self.package, self.version):
+        if self.new_upload:
             msg += "[new](NEW)[reset] "
 
         msg += "[version]%s[reset] uploaded " % self.version
