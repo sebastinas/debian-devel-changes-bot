@@ -53,8 +53,11 @@ then
   # Create admin user.
   if [ -n "$ADMIN_USER" ] && [ -n "$ADMIN_PASSWORD" ]
   then
-    supybot-adduser -u "$ADMIN_USER" -p "$ADMIN_PASSWORD" \
-      -c owner "${BASE}/bot-config/conf/users.conf"
+    if ! grep -q " name: $ADMIN_USER\$" "${BASE}/bot-config/conf/users.conf"
+    then
+      supybot-adduser -u "$ADMIN_USER" -p "$ADMIN_PASSWORD" \
+        -c owner "${BASE}/bot-config/conf/users.conf"
+    fi
   fi
 
   # Set NickSErv password.
