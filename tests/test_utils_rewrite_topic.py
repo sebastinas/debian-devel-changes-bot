@@ -29,10 +29,18 @@ class TestRewriteTopic(unittest.TestCase):
         self.assertEqual(rewrite_topic("", "", 0), "")
 
     def testSimple(self):
-        self.assertEqual(rewrite_topic("RC bug count: 1", "RC bug count:", 2), "RC bug count: 2")
+        self.assertEqual(rewrite_topic("RC bug count: 1", "RC bug count", 2), "RC bug count: 2")
 
     def testEmbedded(self):
-        self.assertEqual(rewrite_topic("pre RC bug count: 1 post", "RC bug count:", 2), "pre RC bug count: 2 post")
+        self.assertEqual(rewrite_topic("pre | RC bug count: 1 | post",
+                                       "RC bug count", 2),
+                         "pre | RC bug count: 2 | post")
+
+    def testEmbedded2(self):
+        self.assertEqual(rewrite_topic("pre RC bug count: 1 post",
+                                       "RC bug count", 2),
+                         "pre RC bug count: 1 post")
+
 
 if __name__ == "__main__":
     unittest.main()

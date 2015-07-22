@@ -162,10 +162,10 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _topic_callback(self):
         sections = {
-            self.testing_rc_bugs.get_number_bugs: 'RC bug count:',
-            self.stable_rc_bugs.get_number_bugs: 'Stable RC bug count:',
-            self.new_queue.get_size: 'NEW queue:',
-            RmQueue().get_size: 'RM queue:',
+            self.testing_rc_bugs.get_number_bugs: 'RC bug count',
+            self.stable_rc_bugs.get_number_bugs: 'Stable RC bug count',
+            self.new_queue.get_size: 'NEW queue',
+            RmQueue().get_size: 'RM queue',
         }
 
         with self.topic_lock:

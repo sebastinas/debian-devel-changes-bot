@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 #   Debian Changes Bot
-#   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2015 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -16,7 +16,17 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 import re
 
+
 def rewrite_topic(topic, prefix, num):
-    return re.sub(r'%s \d+' % prefix, '%s %d' % (prefix, num), topic)
+    if not len(prefix):
+        return topic
+
+    regex = re.compile(r'{}: \d+'.format(prefix))
+    def update(p):
+        if regex.match(p) is not None:
+            return '{}: {}'.format(prefix, num)
+        return p
+    return ' | '.join(update(p) for p in topic.split(' | '))
