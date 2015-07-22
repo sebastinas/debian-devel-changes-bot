@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20150722) unstable; urgency=medium
+
+  * Fix topic rewriting.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Wed, 22 Jul 2015 19:18:54 +0200
+
 debian-devel-changes-bot (20150721) unstable; urgency=medium
 
   * Fix handling of NEW uploads.
