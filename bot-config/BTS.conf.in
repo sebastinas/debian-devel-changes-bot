@@ -804,6 +804,10 @@ supybot.plugins.DebianDevelChanges.package_regex.#debian-perl: /^(perl|perl-(bas
 ###
 supybot.plugins.DebianDevelChanges.maintainer_regex: 
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-perl: /^pkg-perl-maintainers@lists\.alioth\.debian\.org$/
+# Approved by fsateler
+supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-multimedia: /^pkg-multimedia-maintainers@lists\.alioth\.debian\.org$/
+# Approved by Sledge
+supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-cd: /^debian-cd@lists\.debian\.org$/
 
 ###
 # Determines which distribution announcements should be printed to the
