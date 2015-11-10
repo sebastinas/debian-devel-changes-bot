@@ -63,7 +63,7 @@ supybot.networks.oftc.servers: 127.0.0.1:6999
 #
 # Default value:  
 ###
-supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia
+supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia #debian-gis
 
 ###
 # Determines what key (if any) will be used to join the channel.
@@ -808,6 +808,8 @@ supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-perl: /^pkg-perl-mai
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-multimedia: /^pkg-multimedia-maintainers@lists\.alioth\.debian\.org$/
 # Approved by Sledge
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-cd: /^debian-cd@lists\.debian\.org$/
+# Approved by sebastic
+supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-gis: /^pkg-grass-devel@lists\.alioth\.debian\.org$/
 
 ###
 # Determines which distribution announcements should be printed to the
