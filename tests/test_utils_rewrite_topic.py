@@ -24,6 +24,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from DebianDevelChangesBot.utils import rewrite_topic
 
+
 class TestRewriteTopic(unittest.TestCase):
     def testEmpty(self):
         self.assertEqual(rewrite_topic("", "", 0), "")

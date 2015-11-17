@@ -24,10 +24,12 @@ import urllib
 import supybot
 import threading
 import requests
+import email.utils
 
 from supybot.commands import wrap, many
 from supybot import ircdb, log, schedule
 
+from DebianDevelChangesBot import Datasource
 from DebianDevelChangesBot.mailparsers import get_message
 from DebianDevelChangesBot.datasources import (get_datasources, TestingRCBugs,
                                                NewQueue, RmQueue, Maintainer,
@@ -103,8 +105,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _email_callback(self, fileobj):
         try:
-            email = parse_mail(fileobj)
-            msg = get_message(email, new_queue=self.new_queue)
+            emailmsg = parse_mail(fileobj)
+            msg = get_message(emailmsg, new_queue=self.new_queue)
 
             if not msg:
                 return
@@ -130,8 +132,19 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                     'maintainer_regex',
                     channel)
                 if maintainer_regex:
-                    info = Maintainer().get_maintainer(msg.package)
-                    if info:
+                    info = None
+                    if hasattr(msg, 'maintainer'):
+                        paddr = email.utils.parseaddr(msg.maintainer)
+                        if paddr[1]:
+                            info = paddr[1]
+                    else:
+                        try:
+                            info = Maintainer().get_maintainer(msg.package)
+                        except Datasource.DataError as e:
+                            log.exception(
+                                'Failed to obtain maintainer for %s: %s ' % (
+                                    msg.package, e))
+                    if info is not None:
                         maintainer_match = re.search(maintainer_regex, info['email'])
 
                 if not package_match and not maintainer_match:

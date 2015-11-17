@@ -69,9 +69,6 @@ class AcceptedUploadParser(MailParser):
         if msg.urgency:
             msg.urgency = msg.urgency.lower()
 
-        if msg.maintainer:
-            msg.maintainer = format_email_address(quoted_printable(msg.by))
-
         if 'new_queue' in kwargs:
             new_queue = kwargs['new_queue']
             msg.new_upload = new_queue.is_new(msg.package, msg.version)
