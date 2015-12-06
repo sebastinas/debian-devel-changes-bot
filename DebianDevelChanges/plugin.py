@@ -136,7 +136,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                     if hasattr(msg, 'maintainer'):
                         paddr = email.utils.parseaddr(msg.maintainer)
                         if paddr[1]:
-                            info = paddr[1]
+                            info = {'email': paddr[1]}
                     else:
                         try:
                             info = Maintainer().get_maintainer(msg.package)
