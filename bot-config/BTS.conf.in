@@ -63,7 +63,7 @@ supybot.networks.oftc.servers: 127.0.0.1:6999
 #
 # Default value:  
 ###
-supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia #debian-gis
+supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia #debian-gis #debian-django
 
 ###
 # Determines what key (if any) will be used to join the channel.
@@ -795,6 +795,8 @@ supybot.plugins.DebianDevelChanges.package_regex.#debian-backports: /.*/
 supybot.plugins.DebianDevelChanges.package_regex.#devscripts: /^devscripts$/
 # Requested by dam
 supybot.plugins.DebianDevelChanges.package_regex.#debian-perl: /^(perl|perl-(base|debug|doc|modules)|libperl(-dev|5\.20))$/
+# Reuested by lamby
+supybot.plugins.DebianDevelChanges.package_regex.#debian-django: /.*django.*/
 
 #
 # Determines which maintainer announcements should be printed to the
