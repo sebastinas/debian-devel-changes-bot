@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20151206) unstable; urgency=medium
+
+  * Join #debian-django.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 06 Dec 2015 18:24:43 +0100
+
 debian-devel-changes-bot (20151117) unstable; urgency=medium
 
   * Use maintainer information from ACCEPT mails
