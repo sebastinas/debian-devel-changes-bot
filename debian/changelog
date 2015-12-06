@@ -1,3 +1,10 @@
+debian-devel-changes-bot (20151117) unstable; urgency=medium
+
+  * Use maintainer information from ACCEPT mails
+  * Do not abort to handle message if obtaining maintainer information fails.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Tue, 17 Nov 2015 11:33:21 +0100
+
 debian-devel-changes-bot (20151111) unstable; urgency=medium
 
   [ Paul Wise ]
@@ -24,7 +31,7 @@ debian-devel-changes-bot (20150722) unstable; urgency=medium
 debian-devel-changes-bot (20150721) unstable; urgency=medium
 
   * Fix handling of NEW uploads.
-  * Fix postinst for exisiting supybot users.
+  * Fix postinst for existing supybot users.
 
  -- Sebastian Ramacher <sramacher@debian.org>  Tue, 21 Jul 2015 21:45:10 +0200
 
