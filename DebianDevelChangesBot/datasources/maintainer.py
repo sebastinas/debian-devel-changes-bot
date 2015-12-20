@@ -32,6 +32,9 @@ class Maintainer(NewDataSource):
 
     @classmethod
     def get_pool_url(cls, package):
+        if package.startswith('src:'):
+            package = package[4:]
+
         if package.startswith('lib'):
             urls = (package[:4], package)
         else:
