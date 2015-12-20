@@ -2,6 +2,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2015 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -16,36 +17,36 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import socket
-import urllib2
+import requests
 
 from BeautifulSoup import BeautifulSoup
 
-socket.setdefaulttimeout(10)
+from DebianDevelChangesBot import NewDataSource
 
-from DebianDevelChangesBot import Datasource
 
-class Maintainer(Datasource):
-    def get_maintainer(self, package, fileobj=None):
-        if fileobj is None:
-            def get_pool_url(package):
-                if package.startswith('lib'):
-                    return (package[:4], package)
-                return (package[:1], package)
+class Maintainer(NewDataSource):
+    URL = 'http://packages.qa.debian.org/%s/%s.html'
 
-            try:
-                fileobj = urllib2.urlopen(
-                    'http://packages.qa.debian.org/%s/%s.html' % \
-                        get_pool_url(package),
-                )
-            except urllib2.HTTPError, e:
-                if e.code == 404:
-                    # Package does not exist
-                    return None
-                raise
+    def __init__(self, session=None):
+        super(Maintainer, self).__init__(session)
 
-        soup = BeautifulSoup(fileobj)
+    @classmethod
+    def get_pool_url(cls, package):
+        if package.startswith('lib'):
+            urls = (package[:4], package)
+        else:
+            urls = (package[:1], package)
+        return cls.URL % urls
 
+    def get_maintainer(self, package):
+        response = self.session.get(self.get_pool_url(package))
+        if response.status_code == requests.codes.NOT_FOUND:
+            # Package does not exist
+            return None
+
+        response.raise_for_status()
+
+        soup = BeautifulSoup(response.text)
         base = soup.find('span', {'class': 'name', 'title': 'maintainer'})
 
         try:

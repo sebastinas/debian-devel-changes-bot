@@ -18,27 +18,41 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import unicode_literals
+import io
 import unittest
+import requests
+import requests_mock
 
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from DebianDevelChangesBot import Datasource
 from DebianDevelChangesBot.datasources import Maintainer
 
+
 class TestDatasourceMaintainer(unittest.TestCase):
-
     def setUp(self):
-        self.fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)), \
-            'fixtures', 'qa_page.html')
+        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               'fixtures', 'qa_page.html')
+        with io.open(fixture, encoding='utf-8') as f:
+            data = f.read()
 
-        self.datasource = Maintainer()
+        self.mocker = requests_mock.Mocker()
+        self.mocker.start()
+        self.mocker.register_uri('GET', Maintainer.get_pool_url('vlc'), text=data)
+
+        session = requests.Session()
+        self.datasource = Maintainer(session)
+
+
+    def tearDown(self):
+        self.mocker.stop()
+
 
     def testInfo(self):
-        with open(self.fixture) as fileobj:
-            info = self.datasource.get_maintainer('vlc', fileobj=fileobj)
+        info = self.datasource.get_maintainer('vlc')
         self.assertEqual(info['email'], 'pkg-multimedia-maintainers@lists.alioth.debian.org')
         self.assertEqual(info['name'], 'Debian Multimedia Maintainers')
+
 
 if __name__ == "__main__":
     unittest.main()
