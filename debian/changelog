@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20151223) unstable; urgency=medium
+
+  * Send NOTICE per default and only send PRIVMSG to selected channels.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Wed, 23 Dec 2015 17:03:59 +0100
+
 debian-devel-changes-bot (20151220) unstable; urgency=medium
 
   * Fix Maintainer look up for source packages.
