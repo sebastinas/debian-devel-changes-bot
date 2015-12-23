@@ -823,6 +823,14 @@ supybot.plugins.DebianDevelChanges.distribution_regex:
 supybot.plugins.DebianDevelChanges.distribution_regex.#debian-backports: /-backports/
 
 ###
+# Determines if PRIVMSG or NOTICE should be sent on the channel
+#
+# Defalt value: False
+###
+supybot.plugins.DebianDevelChanges.send_privmsg: False
+supybot.plugins.DebianDevelChanges.send_privmsg.#debian-devel-changes: True
+
+###
 # Determines whether this plugin is loaded by default.
 ###
 supybot.plugins.Misc: True

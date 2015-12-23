@@ -2,6 +2,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2015 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -167,7 +168,14 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                         # message.
                         continue
 
-                ircmsg = supybot.ircmsgs.privmsg(channel, txt)
+                send_privmsg = self.registry('send_privmsg', channel)
+                # Send NOTICE per default and if 'send_privmsg' is set for the
+                # channel, send PRIVMSG instead.
+                if send_privmsg:
+                    ircmsg = supybot.ircmsgs.privmsg(channel, txt)
+                else:
+                    ircmsg = supybot.ircmsgs.notice(channel, txt)
+
                 self.irc.queueMsg(ircmsg)
 
         except Exception as e:

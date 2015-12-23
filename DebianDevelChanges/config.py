@@ -20,11 +20,6 @@ import supybot.conf as conf
 import supybot.registry as registry
 
 def configure(advanced):
-    # This will be called by supybot to configure this module.  advanced is
-    # a bool that specifies whether the user identified himself as an advanced
-    # user or not.  You should effect your configuration by manipulating the
-    # registry as appropriate.
-    from supybot.questions import expect, anything, something, yn
     conf.registerPlugin('DebianDevelChanges', True)
 
 DebianDevelChanges = conf.registerPlugin('DebianDevelChanges')
@@ -40,3 +35,9 @@ conf.registerChannelValue(DebianDevelChanges, 'maintainer_regex', registry.Regex
 conf.registerChannelValue(DebianDevelChanges, 'distribution_regex', registry.Regexp(
     '', "Determines which distribution announcements should be printed to the channel",
 ))
+
+config.registerChannelValue(
+  DebianDevelChanges, 'send_privmsg',
+  registry.Boolean(False, "Determines if PRIVMSG or NOTICE should be sent on "
+                   "the channel")
+)
