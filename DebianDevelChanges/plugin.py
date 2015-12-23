@@ -32,11 +32,23 @@ from supybot import ircdb, log, schedule
 
 from DebianDevelChangesBot import Datasource
 from DebianDevelChangesBot.mailparsers import get_message
-from DebianDevelChangesBot.datasources import (get_datasources, TestingRCBugs,
-                                               NewQueue, RmQueue, Maintainer,
-                                               StableRCBugs)
-from DebianDevelChangesBot.utils import parse_mail, FifoReader, colourise, \
-    rewrite_topic, madison, format_email_address, popcon
+from DebianDevelChangesBot.datasources import (
+    get_datasources,
+    TestingRCBugs,
+    NewQueue,
+    RmQueue,
+    Maintainer,
+    StableRCBugs
+)
+from DebianDevelChangesBot.utils import (
+    parse_mail,
+    FifoReader,
+    colourise,
+    rewrite_topic,
+    madison,
+    format_email_address,
+    popcon
+)
 
 
 class DebianDevelChanges(supybot.callbacks.Plugin):
@@ -88,7 +100,6 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                                       source.NAME, now=False)
             schedule.addEvent(wrapper(source), time.time() + 1)
 
-
     def die(self):
         FifoReader().stop()
         for _, _, name in get_datasources():
@@ -124,7 +135,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 package_regex = self.registryValue(
                     'package_regex',
                     channel,
-                ) or 'a^' # match nothing by default
+                ) or 'a^'  # match nothing by default
 
                 package_match = re.search(package_regex, msg.package)
 
@@ -210,8 +221,12 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                         schedule.removeEvent(event_name)
                     except KeyError:
                         pass
-                    schedule.addEvent(lambda channel=channel: self._update_topic(channel),
-                        time.time() + 60, event_name)
+
+                    def update_topic(channel=channel):
+                        self._update_topic(channel)
+
+                    schedule.addEvent(update_topic, time.time() + 60,
+                                      event_name)
 
     def _update_topic(self, channel):
         with self.topic_lock:
@@ -245,7 +260,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     wakeywakey = wrap(morning)
 
     def night(self, *args):
-        self.greeting( 'Good night,', *args)
+        self.greeting('Good night,', *args)
     night = wrap(night)
     nn = wrap(night)
     goodnight = wrap(night)
@@ -258,8 +273,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     def rc(self, irc, msg, args):
         num_bugs = self.testing_rc_bugs.get_number_bugs()
         if type(num_bugs) is int:
-            irc.reply("There are %d release-critical bugs in the testing distribution. " \
-                "See https://udd.debian.org/bugs.cgi?release=stretch&notmain=ign&merged=ign&rc=1" % num_bugs)
+            irc.reply(
+              "There are %d release-critical bugs in the testing distribution. "
+              "See https://udd.debian.org/bugs.cgi?release=stretch&notmain=ign&merged=ign&rc=1" % num_bugs)
         else:
             irc.reply("No data at this time.")
     rc = wrap(rc)
