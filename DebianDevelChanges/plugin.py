@@ -38,7 +38,8 @@ from DebianDevelChangesBot.datasources import (
     NewQueue,
     RmQueue,
     Maintainer,
-    StableRCBugs
+    StableRCBugs,
+    Dinstall
 )
 from DebianDevelChangesBot.utils import (
     parse_mail,
@@ -72,6 +73,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.stable_rc_bugs = StableRCBugs(self.requests_session)
         self.testing_rc_bugs = TestingRCBugs(self.requests_session)
         self.new_queue = NewQueue(self.requests_session)
+        self.dinstall = Dinstall(self.requests_session)
         self.data_sources = (self.stable_rc_bugs, self.testing_rc_bugs,
                              self.new_queue)
 
@@ -198,19 +200,21 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             self.stable_rc_bugs.get_number_bugs: 'Stable RC bug count',
             self.new_queue.get_size: 'NEW queue',
             RmQueue().get_size: 'RM queue',
+            self.dinstall.get_status: 'dinstall'
         }
 
         with self.topic_lock:
             values = {}
             for callback, prefix in sections.iteritems():
-                values[callback] = callback()
+                values[prefix] = callback()
 
             for channel in self.irc.state.channels:
                 new_topic = topic = self.irc.state.getTopic(channel)
 
                 for callback, prefix in sections.iteritems():
-                    if values[callback]:
-                        new_topic = rewrite_topic(new_topic, prefix, values[callback])
+                    if values[prefix]:
+                        new_topic = rewrite_topic(new_topic, prefix,
+                                                  values[prefix])
 
                 if topic != new_topic:
                     log.info("Queueing change of topic in #%s to '%s'" % (channel, new_topic))
