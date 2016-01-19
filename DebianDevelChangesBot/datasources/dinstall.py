@@ -16,6 +16,7 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import unicode_literals
 from DebianDevelChangesBot import NewDataSource
 
 
@@ -37,9 +38,10 @@ class Dinstall(NewDataSource):
             if not line.startswith('Current action'):
                 continue
 
-            _, status = line.split(': ')
-            if status != 'all done':
+            if line != 'Current action: all done':
                 self.status = 'running'
+
+            break
 
     def get_status(self):
         return self.status
