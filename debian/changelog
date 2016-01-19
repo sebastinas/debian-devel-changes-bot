@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20160119) unstable; urgency=medium
+
+  * Report dinstall status.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Tue, 19 Jan 2016 17:02:21 +0100
+
 debian-devel-changes-bot (20151223) unstable; urgency=medium
 
   * Send NOTICE per default and only send PRIVMSG to selected channels.
