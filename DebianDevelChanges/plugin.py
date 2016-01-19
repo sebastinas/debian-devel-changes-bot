@@ -181,7 +181,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                         # message.
                         continue
 
-                send_privmsg = self.registry('send_privmsg', channel)
+                send_privmsg = self.registryValue('send_privmsg', channel)
                 # Send NOTICE per default and if 'send_privmsg' is set for the
                 # channel, send PRIVMSG instead.
                 if send_privmsg:
