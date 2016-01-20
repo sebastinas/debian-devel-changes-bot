@@ -1,3 +1,10 @@
+debian-devel-changes-bot (20160120) unstable; urgency=medium
+
+  * Fix NameErrors.
+  * Fix topic rewrite.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Wed, 20 Jan 2016 14:53:29 +0100
+
 debian-devel-changes-bot (20160119) unstable; urgency=medium
 
   * Report dinstall status.
