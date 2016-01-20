@@ -20,7 +20,7 @@
 import json
 import requests
 
-from DebianDevelChangesBot import NewDataSource
+from DebianDevelChangesBot import NewDataSource, Datasource
 
 
 class RCBugs(NewDataSource):

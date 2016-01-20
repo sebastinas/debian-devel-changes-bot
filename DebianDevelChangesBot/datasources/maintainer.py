@@ -21,7 +21,7 @@ import requests
 
 from BeautifulSoup import BeautifulSoup
 
-from DebianDevelChangesBot import NewDataSource
+from DebianDevelChangesBot import NewDataSource, Datasource
 
 
 class Maintainer(NewDataSource):
