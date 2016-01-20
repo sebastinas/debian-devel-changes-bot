@@ -20,13 +20,16 @@
 import re
 
 
-def rewrite_topic(topic, prefix, num):
+def rewrite_topic(topic, prefix, value):
     if not len(prefix):
         return topic
 
-    regex = re.compile(r'{}: \d+'.format(prefix))
+    if prefix == 'dinstall':
+        regex = re.compile(r'dinstall: (running|not running)')
+    else:
+        regex = re.compile(r'{}: \d+'.format(prefix))
     def update(p):
         if regex.match(p) is not None:
-            return '{}: {}'.format(prefix, num)
+            return '{}: {}'.format(prefix, value)
         return p
     return ' | '.join(update(p) for p in topic.split(' | '))
