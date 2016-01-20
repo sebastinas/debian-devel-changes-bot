@@ -75,7 +75,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.new_queue = NewQueue(self.requests_session)
         self.dinstall = Dinstall(self.requests_session)
         self.data_sources = (self.stable_rc_bugs, self.testing_rc_bugs,
-                             self.new_queue)
+                             self.new_queue, self.dinstall)
 
         # Schedule datasource updates
         for klass, interval, name in get_datasources():
