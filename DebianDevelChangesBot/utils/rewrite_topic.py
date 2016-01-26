@@ -25,7 +25,7 @@ def rewrite_topic(topic, prefix, value):
         return topic
 
     if prefix == 'dinstall':
-        regex = re.compile(r'dinstall: (running|not running)')
+        regex = re.compile(r'dinstall: [^|]*')
     else:
         regex = re.compile(r'{}: \d+'.format(prefix))
     def update(p):
