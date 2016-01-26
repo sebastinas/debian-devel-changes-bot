@@ -39,7 +39,7 @@ class Dinstall(NewDataSource):
                 continue
 
             if line != 'Current action: all done':
-                self.status = 'running'
+                self.status = line[len('Current action: '):]
 
             break
 

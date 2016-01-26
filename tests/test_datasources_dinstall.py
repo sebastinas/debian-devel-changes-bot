@@ -59,7 +59,7 @@ class TestDatasourceDinstall(unittest.TestCase):
     def testRunning(self):
         self.mocker.register_uri('GET', Dinstall.URL, text=self.data_running)
         self.datasource.update()
-        self.assertEqual(self.datasource.get_status(), 'running')
+        self.assertEqual(self.datasource.get_status(), 'packages/contents')
 
 
 if __name__ == "__main__":
