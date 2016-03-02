@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20160302) unstable; urgency=medium
+
+  * Join #debian-reproducible.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Wed, 02 Mar 2016 21:32:04 +0100
+
 debian-devel-changes-bot (20160126) unstable; urgency=medium
 
   * More verbose dinstall status.
