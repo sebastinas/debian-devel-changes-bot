@@ -1,3 +1,15 @@
+debian-devel-changes-bot (20160501) unstable; urgency=medium
+
+  [ Paul Wise ]
+  * buildd.debian-ports.org is gone, remove reference to it
+
+  [ Mattia Rizzolo ]
+  * Join #pbuilder, announce changes for pbuilder, cowdancer
+
+  [ Sebastian Ramacher ]
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 01 May 2016 18:31:28 +0200
+
 debian-devel-changes-bot (20160302) unstable; urgency=medium
 
   * Join #debian-reproducible.
