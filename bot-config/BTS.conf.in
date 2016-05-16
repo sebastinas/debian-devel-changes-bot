@@ -800,7 +800,7 @@ supybot.plugins.DebianDevelChanges.package_regex.#debian-django: /.*django.*/
 # Requested by lamby
 supybot.plugins.DebianDevelChanges.package_regex.#debian-reproducible: /^(diffoscope|strip-nondeterminism)$/
 # Requested by mapreri
-supybot.plugins.DebianDevelChanges.package_regex.#pbuilder: /^(pbuilder|cowdancer)$/
+supybot.plugins.DebianDevelChanges.package_regex.#pbuilder: /^(pbuilder|cowbuilder|qemubuilder|cowdancer)$/
 
 #
 # Determines which maintainer announcements should be printed to the
