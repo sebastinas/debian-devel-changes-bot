@@ -1,3 +1,14 @@
+debian-devel-changes-bot (20160516) unstable; urgency=medium
+
+  [ Mattia Rizzolo ]
+  * also announce for qemubuilder and cowbuilder in #pbuilder.
+
+  [ Sebastian Ramacher ]
+  * Better handle missing maintainer info.
+  * Replace package regex with maintainer regex for #pbuilder.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Mon, 16 May 2016 13:06:06 +0200
+
 debian-devel-changes-bot (20160501) unstable; urgency=medium
 
   [ Paul Wise ]
