@@ -155,9 +155,10 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                         try:
                             info = Maintainer().get_maintainer(msg.package)
                         except Datasource.DataError as e:
-                            log.exception(
-                                'Failed to obtain maintainer for %s: %s ' % (
-                                    msg.package, e))
+                            log.info(
+                                "Failed to query maintainer for {}.".format(
+                                    msg.package)
+                            info = {'email': ''}
                     if info is not None:
                         maintainer_match = re.search(maintainer_regex, info['email'])
 
