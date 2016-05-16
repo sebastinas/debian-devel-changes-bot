@@ -799,8 +799,6 @@ supybot.plugins.DebianDevelChanges.package_regex.#debian-perl: /^(perl|perl-(bas
 supybot.plugins.DebianDevelChanges.package_regex.#debian-django: /.*django.*/
 # Requested by lamby
 supybot.plugins.DebianDevelChanges.package_regex.#debian-reproducible: /^(diffoscope|strip-nondeterminism)$/
-# Requested by mapreri
-supybot.plugins.DebianDevelChanges.package_regex.#pbuilder: /^(pbuilder|cowbuilder|qemubuilder|cowdancer)$/
 
 #
 # Determines which maintainer announcements should be printed to the
@@ -816,6 +814,8 @@ supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-multimedia: /^pkg-mu
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-cd: /^debian-cd@lists\.debian\.org$/
 # Approved by sebastic
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-gis: /^pkg-grass-devel@lists\.alioth\.debian\.org$/
+# Approved by mapreri
+supybot.plugins.DebianDevelChanges.maintainer_regex.#pbuilder: /^pbuilder-maint@lists\.alioth\.debian\.org$/
 
 ###
 # Determines which distribution announcements should be printed to the
