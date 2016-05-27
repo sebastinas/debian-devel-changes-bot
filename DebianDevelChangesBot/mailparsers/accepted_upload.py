@@ -23,7 +23,9 @@ from DebianDevelChangesBot.messages import AcceptedUploadMessage
 
 lists = (
     '<debian-devel-changes.lists.debian.org>',
-    '<debian-backports-changes.lists.debian.org>'
+    '<debian-backports-changes.lists.debian.org>',
+    '<debian-lts-changes.lists.debian.org>',
+    '<debian-changes.lists.debian.org>'
 )
 
 
