@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20160527) unstable; urgency=medium
+
+  * Handle messages to debian-changes@l.d.o and debian-lts-changes@l.d.o.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Fri, 27 May 2016 21:25:50 +0200
+
 debian-devel-changes-bot (20160516) unstable; urgency=medium
 
   [ Mattia Rizzolo ]
