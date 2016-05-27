@@ -1,1 +1,7 @@
-|/usr/lib/debian-devel-changes-bot/inject
+# Exim filter
+if $h_From: contains "-request@lists.debian.org"
+then
+        deliver root
+        finish
+endif
+pipe /usr/lib/debian-devel-changes-bot/inject
