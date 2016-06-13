@@ -2,7 +2,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
-#   Copyright (C) 2015 Sebastian Ramacher <sramacher@debian.org>
+#   Copyright (C) 2015-2016 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -21,7 +21,7 @@ import os
 import re
 import time
 import random
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import supybot
 import threading
 import requests
@@ -398,7 +398,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     def _dehs(self, irc, msg, args, items):
         for package in items:
             msg = "[desc]Debian External Health Status for[reset] [package]%s[reset]: [url]https://dehs.alioth.debian.org/report.php?package=%s[/url]" % \
-                (package, urllib.quote(package))
+                (package, urllib.parse.quote(package))
             irc.reply(colourise(msg), prefixNick=False)
     dehs = wrap(_dehs, [many('anything')])
     health = wrap(_dehs, [many('anything')])
