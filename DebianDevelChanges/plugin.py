@@ -365,7 +365,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _popcon(self, irc, msg, args, package):
         try:
-            msg = popcon(package)
+            msg = popcon(package, self.requests_session)
             if msg:
                 irc.reply(colourise(msg.for_irc()), prefixNick=False)
         except Exception as e:
