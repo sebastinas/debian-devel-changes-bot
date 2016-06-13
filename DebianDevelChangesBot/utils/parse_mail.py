@@ -17,6 +17,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import email
+import email.iterators
 
 from DebianDevelChangesBot.utils import quoted_printable
 
@@ -27,7 +28,7 @@ def parse_mail(fileobj):
     for k, v in msg.items():
         headers[k] = quoted_printable(v).replace('\n', '').replace('\t', ' ').strip()
 
-    for line in email.Iterators.body_line_iterator(msg):
+    for line in email.iterators.body_line_iterator(msg):
         line = unicode(line, 'utf-8', 'replace').replace('\n', '')
         body.append(line)
 
