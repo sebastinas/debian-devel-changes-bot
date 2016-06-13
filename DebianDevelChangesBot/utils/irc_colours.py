@@ -67,7 +67,7 @@ def colourise(s):
     })
 
     s = s + '[reset]'
-    for k, v in tags.iteritems():
+    for k, v in tags.items():
         s = s.replace('[%s]' % k, v)
 
     return s

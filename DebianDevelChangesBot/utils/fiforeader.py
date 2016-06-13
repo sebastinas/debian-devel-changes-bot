@@ -23,7 +23,8 @@ import errno
 import select
 import threading
 import traceback
-from cStringIO import StringIO
+from io import StringIO
+
 
 class FifoReader(object):
     __shared_state = {}

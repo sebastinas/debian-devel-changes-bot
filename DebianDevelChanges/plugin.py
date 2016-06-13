@@ -187,13 +187,13 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
         with self.topic_lock:
             values = {}
-            for callback, prefix in sections.iteritems():
+            for callback, prefix in sections.items():
                 values[prefix] = callback()
 
             for channel in self.irc.state.channels:
                 new_topic = topic = self.irc.state.getTopic(channel)
 
-                for callback, prefix in sections.iteritems():
+                for callback, prefix in sections.items():
                     if values[prefix]:
                         new_topic = rewrite_topic(new_topic, prefix,
                                                   values[prefix])
