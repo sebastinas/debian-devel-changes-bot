@@ -17,6 +17,8 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import os
 import sys
 import commands
@@ -26,10 +28,10 @@ MODULE = 'DebianDevelChangesBot'
 def coverage(cmd, show=False):
     status, output = commands.getstatusoutput('python-coverage %s ' % cmd)
     if status != 0:
-        print >>sys.stderr, output
+        print(output, file=sys.stderr)
         sys.exit(-1)
     elif show:
-        print output
+        print(output)
 
 def module_files():
     for dir, _, files in os.walk(MODULE):

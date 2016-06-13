@@ -16,6 +16,8 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import os
 import errno
 import select
@@ -46,8 +48,8 @@ class FifoReader(object):
                 try:
                     try:
                         self.callback(fileobj)
-                    except Exception, exc:
-                        print "Uncaught exception caught inside fiforeader"
+                    except Exception as exc:
+                        print("Uncaught exception caught inside fiforeader")
                         traceback.print_exc()
                 finally:
                     fileobj.close()
@@ -82,7 +84,7 @@ class FifoReader(object):
                         if not data:
                             break
                         output.write(data)
-                    except OSError, exc:
+                    except OSError as exc:
                         if exc.errno == errno.EAGAIN:
                             select.select([fifo], [], [], 1)
                         else:

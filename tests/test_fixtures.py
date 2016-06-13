@@ -17,6 +17,8 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import print_function
+
 import unittest
 import os
 
@@ -39,7 +41,7 @@ def add_tests(testdir, parser, expected_type, test=lambda x: bool(x)):
                 headers, body = parse_mail(file(filename))
                 msg = parser.parse(headers, body)
             except Exception:
-                print "Exception when parsing %s" % filename
+                print("Exception when parsing %s" % filename)
                 raise
 
             self.assertTrue(
