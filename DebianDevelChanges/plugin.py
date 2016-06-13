@@ -292,7 +292,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 for style, data in zip(field_styles, fields):
                     out.append('[%s]%s' % (style, data))
                 irc.reply(colourise('[reset]|'.join(out)), prefixNick=False)
-        except Exception, e:
+        except Exception as e:
             irc.reply("Error: %s" % e.message)
     madison = wrap(madison, ['text'])
 
@@ -368,7 +368,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             msg = popcon(package)
             if msg:
                 irc.reply(colourise(msg.for_irc()), prefixNick=False)
-        except Exception, e:
+        except Exception as e:
             irc.reply("Error: unable to obtain popcon data for %s" % package)
     popcon = wrap(_popcon, ['text'])
 
