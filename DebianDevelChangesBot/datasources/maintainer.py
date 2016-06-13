@@ -19,7 +19,7 @@
 
 import requests
 
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 from DebianDevelChangesBot import NewDataSource
 
@@ -49,7 +49,7 @@ class Maintainer(NewDataSource):
 
         response.raise_for_status()
 
-        soup = BeautifulSoup(response.text)
+        soup = BeautifulSoup(response.text, "html.parser")
         base = soup.find('span', {'class': 'name', 'title': 'maintainer'})
 
         try:

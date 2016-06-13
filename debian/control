@@ -8,7 +8,7 @@ Build-Depends:
  dh-python,
  dh-systemd,
  python-debian,
- python-beautifulsoup,
+ python-bs4,
  python-twisted,
  python-setuptools,
  python-requests,

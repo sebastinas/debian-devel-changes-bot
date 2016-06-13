@@ -21,7 +21,7 @@ import socket
 import urllib
 import urllib2
 
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
 from DebianDevelChangesBot.messages import Popcon
 
@@ -34,7 +34,7 @@ def popcon(package, fileobj=None):
             urllib.urlencode({'package': package})
         )
 
-    soup = BeautifulSoup(fileobj)
+    soup = BeautifulSoup(fileobj, "html.parser")
     rows = [x.string for x in soup('td')[1:]]
 
     msg = Popcon()
