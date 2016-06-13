@@ -33,7 +33,6 @@ from supybot import ircdb, log, schedule
 from DebianDevelChangesBot import Datasource
 from DebianDevelChangesBot.mailparsers import get_message
 from DebianDevelChangesBot.datasources import (
-    get_datasources,
     TestingRCBugs,
     NewQueue,
     RmQueue,
@@ -74,23 +73,11 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.testing_rc_bugs = TestingRCBugs(self.requests_session)
         self.new_queue = NewQueue(self.requests_session)
         self.dinstall = Dinstall(self.requests_session)
+        self.rm_queue = RmQueue(self.requests_session)
         self.data_sources = (self.stable_rc_bugs, self.testing_rc_bugs,
-                             self.new_queue, self.dinstall)
+                             self.new_queue, self.dinstall, self.rm_queue)
 
         # Schedule datasource updates
-        for klass, interval, name in get_datasources():
-            try:
-                schedule.removePeriodicEvent(name)
-            except KeyError:
-                pass
-
-            def wrapper(klass=klass):
-                klass().update()
-                self._topic_callback()
-
-            schedule.addPeriodicEvent(wrapper, interval, name, now=False)
-            schedule.addEvent(wrapper, time.time() + 1)
-
         def wrapper(source):
             def implementation():
                 source.update()
@@ -104,12 +91,6 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def die(self):
         FifoReader().stop()
-        for _, _, name in get_datasources():
-            try:
-                schedule.removePeriodicEvent(name)
-            except KeyError:
-                # A newly added event may not exist, ignore exception.
-                pass
 
         for source in self.data_sources:
             try:
@@ -291,9 +272,6 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             irc.reply("You are not authorised to run this command.")
             return
 
-        for klass, interval, name in get_datasources():
-            klass().update()
-            irc.reply("Updated %s." % name)
         for source in self.data_sources:
             source.update()
             irc.reply("Updated %s." % source.NAME)

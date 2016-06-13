@@ -21,7 +21,7 @@ import requests
 
 from BeautifulSoup import BeautifulSoup
 
-from DebianDevelChangesBot import NewDataSource, Datasource
+from DebianDevelChangesBot import NewDataSource
 
 
 class Maintainer(NewDataSource):
@@ -58,5 +58,5 @@ class Maintainer(NewDataSource):
                 'email': base.parent['href'].split('=', 1)[1],
             }
         except AttributeError:
-            raise Datasource.DataError(
+            raise NewDataSource.DataError(
                 'Unable to get maintainer for %s.' % package)
