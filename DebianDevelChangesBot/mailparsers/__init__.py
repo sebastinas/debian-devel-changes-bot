@@ -17,10 +17,10 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from accepted_upload import AcceptedUploadParser
-from bug_closed import BugClosedParser
-from bug_submitted import BugSubmittedParser
-from security_announce import SecurityAnnounceParser
+from .accepted_upload import AcceptedUploadParser
+from .bug_closed import BugClosedParser
+from .bug_submitted import BugSubmittedParser
+from .security_announce import SecurityAnnounceParser
 
 
 def get_message(email, **kwargs):

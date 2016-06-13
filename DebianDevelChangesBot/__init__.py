@@ -98,7 +98,7 @@ class Message(object):
         else:
             return '[package]%s[reset]' % self.package
 
-import utils
-import messages
-import datasources
-import mailparsers
+from . import utils
+from . import messages
+from . import datasources
+from . import mailparsers
