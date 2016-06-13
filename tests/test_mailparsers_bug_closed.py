@@ -42,7 +42,7 @@ class TestMailParserBugClosed(unittest.TestCase):
         })
 
         msg = p.parse(self.headers, self.body)
-        self.assert_(msg)
+        self.assertTrue(msg)
         self.assertEqual(msg.bug_number, 123456)
         self.assertEqual(msg.package, 'binary-package')
         self.assertEqual(msg.by, u'somewhere@email.com')
@@ -55,7 +55,7 @@ class TestMailParserBugClosed(unittest.TestCase):
         })
 
         msg = p.parse(self.headers, self.body)
-        self.assert_(msg)
+        self.assertTrue(msg)
         self.assertEqual(msg.bug_number, 123456)
         self.assertEqual(msg.package, 'binary-package')
         self.assertEqual(msg.by, u'From <from@email.com>')
@@ -67,7 +67,7 @@ class TestMailParserBugClosed(unittest.TestCase):
             'To': u'123456-done@bugs.debian.org',
         })
         msg = p.parse(self.headers, self.body)
-        self.assert_(msg)
+        self.assertTrue(msg)
         self.assertEqual(msg.by, u'From <from@email.com>')
 
 if __name__ == "__main__":

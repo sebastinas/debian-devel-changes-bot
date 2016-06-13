@@ -48,7 +48,7 @@ def add_tests(testdir, parser, expected_type, test=lambda x: bool(x)):
                 isinstance(msg, expected_type),
                 "%s did not match with its parser: expected %s, got %s" %
                     (filename, expected_type, type(msg)))
-            self.assert_(test(msg), "%s did not pass test" % filename)
+            self.assertTrue(test(msg), "%s did not pass test" % filename)
 
             if msg:
                 txt = msg.format()

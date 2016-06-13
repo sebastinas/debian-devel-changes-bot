@@ -57,7 +57,7 @@ class TestMailParserAcceptedUpload(unittest.TestCase):
     def testSimple(self):
         msg = p.parse(self.headers, self.body)
 
-        self.assert_(msg)
+        self.assertTrue(msg)
         self.assertEqual(msg.package, 'haskell-irc')
         self.assertEqual(msg.version, '0.4.2-1')
         self.assertEqual(msg.distribution, 'unstable')
@@ -69,21 +69,21 @@ class TestMailParserAcceptedUpload(unittest.TestCase):
         self.body.append('Closes: 123456 456123')
         msg = p.parse(self.headers, self.body)
 
-        self.assert_(msg)
+        self.assertTrue(msg)
         self.assertEqual(msg.closes, [123456, 456123])
 
     def testQuotedPrintableChangedBy(self):
         self.body[12] = u'Changed-By: Gon=C3=A9ri Le Bouder <a@b.com>'
 
         msg = p.parse(self.headers, self.body)
-        self.assert_(msg)
+        self.assertTrue(msg)
         self.assertEqual(msg.by, u'Gonéri Le Bouder <a@b.com>')
 
     def testUrgencyCase(self):
         self.body[10] = u'Urgency: HIGH'
 
         msg = p.parse(self.headers, self.body)
-        self.assert_(msg)
+        self.assertTrue(msg)
         self.assertEqual(msg.urgency, 'high')
 
     def testFixtures(self):
@@ -92,7 +92,7 @@ class TestMailParserAcceptedUpload(unittest.TestCase):
             with open(filename, 'r') as f:
                 mail = parse_mail(f)
             msg = p.parse(*mail)
-            self.assert_(msg)
+            self.assertTrue(msg)
 
 
 if __name__ == "__main__":

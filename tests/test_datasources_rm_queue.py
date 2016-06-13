@@ -47,14 +47,14 @@ class TestDatasourceTestingRmQueue(unittest.TestCase):
         """
         Check we have a sane URL.
         """
-        self.assert_(len(self.datasource.URL) > 5)
-        self.assert_(self.datasource.URL.startswith('http'))
+        self.assertTrue(len(self.datasource.URL) > 5)
+        self.assertTrue(self.datasource.URL.startswith('http'))
 
     def testInterval(self):
         """
         Check we have a sane update interval.
         """
-        self.assert_(self.datasource.INTERVAL > 60)
+        self.assertTrue(self.datasource.INTERVAL > 60)
 
     def testSize(self):
         self.datasource.update()
@@ -62,11 +62,11 @@ class TestDatasourceTestingRmQueue(unittest.TestCase):
 
     def testTop(self):
         self.datasource.update()
-        self.assert_(self.datasource.is_rm('libgocr'))
+        self.assertTrue(self.datasource.is_rm('libgocr'))
 
     def testBottom(self):
         self.datasource.update()
-        self.assert_(self.datasource.is_rm('sablevm-classlib'))
+        self.assertTrue(self.datasource.is_rm('sablevm-classlib'))
 
 
 if __name__ == "__main__":

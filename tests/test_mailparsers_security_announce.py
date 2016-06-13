@@ -46,7 +46,7 @@ class TestMailParserSecurityAnnounce(unittest.TestCase):
     def testSimple(self):
         msg = p.parse(self.headers, [])
 
-        self.assert_(msg)
+        self.assertTrue(msg)
         self.assertEqual(msg.dsa_number, 1234)
         self.assertEqual(msg.dsa_revision, 5)
         self.assertEqual(msg.package, 'pinafore')
@@ -55,19 +55,19 @@ class TestMailParserSecurityAnnounce(unittest.TestCase):
 
     def testNoDate(self):
         del self.headers['Date']
-        self.failIf(p.parse(self.headers, []))
+        self.assertFalse(p.parse(self.headers, []))
 
     def testNoSubject(self):
         del self.headers['Subject']
-        self.failIf(p.parse(self.headers, []))
+        self.assertFalse(p.parse(self.headers, []))
 
     def testNoListId(self):
         del self.headers['List-Id']
-        self.failIf(p.parse(self.headers, []))
+        self.assertFalse(p.parse(self.headers, []))
 
     def testWrongListId(self):
         self.headers['List-Id'] = '<debian-ponies-announce.lists.debian.org>'
-        self.failIf(p.parse(self.headers, []))
+        self.assertFalse(p.parse(self.headers, []))
 
     def test1(self):
         self.assertEqual(parse(1), {

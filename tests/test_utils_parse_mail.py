@@ -19,9 +19,9 @@
 
 import unittest
 
-
 from io import StringIO
 from DebianDevelChangesBot.utils import parse_mail
+
 
 class TestUtilsParseMail(unittest.TestCase):
 
@@ -178,7 +178,7 @@ orkuFNMGzF2Qx9fiQRLWemE=
 """[1:])
 
         headers, body = parse_mail(f)
-        self.assert_(u"Acknowledged." in body)
+        self.assertTrue(u"Acknowledged." in body)
 
 if __name__ == "__main__":
     unittest.main()

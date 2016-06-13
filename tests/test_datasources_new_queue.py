@@ -72,13 +72,13 @@ class TestDatasourceTestingNewQueue(unittest.TestCase):
         self.assertTrue(self.is_new('libgcal', '0.8.1-2'))
 
     def testInvalidVersion(self):
-        self.failIf(self.is_new('rcpp', '0.5.2.invalid'))
+        self.assertFalse(self.is_new('rcpp', '0.5.2.invalid'))
 
     def testNotInQueue(self):
-        self.failIf(self.is_new('package-not-in-new-queue', 'version-foo'))
+        self.assertFalse(self.is_new('package-not-in-new-queue', 'version-foo'))
 
     def testByhand(self):
-        self.failIf(self.is_new('loadlin', '1.6c.really1.6c.nobin-2'))
+        self.assertFalse(self.is_new('loadlin', '1.6c.really1.6c.nobin-2'))
 
     def testExperimental(self):
         self.assertTrue(self.is_new('ooo-build', '3.0.0.9+r14588-1'))

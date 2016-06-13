@@ -45,7 +45,7 @@ class TestMailParserBugSubmitted(unittest.TestCase):
     def testSimple(self):
         msg = p.parse(self.headers, self.body)
 
-        self.assert_(msg)
+        self.assertTrue(msg)
         self.assertEqual(msg.package, 'package-name')
         self.assertEqual(msg.version, 'version-here')
         self.assertEqual(msg.by, 'Submitter Name <name@t.com>')
@@ -54,13 +54,13 @@ class TestMailParserBugSubmitted(unittest.TestCase):
         self.body[1] = "Version: version with spaces"
         msg = p.parse(self.headers, self.body)
 
-        self.failIf(msg.version)
+        self.assertFalse(msg.version)
 
     def testAlternateEmailFormatting(self):
         self.headers['From'] = u"name@t.com (Submitter Name)"
 
         msg = p.parse(self.headers, self.body)
-        self.assert_(msg)
+        self.assertTrue(msg)
         self.assertEqual(msg.by, 'Submitter Name <name@t.com>')
 
 if __name__ == "__main__":

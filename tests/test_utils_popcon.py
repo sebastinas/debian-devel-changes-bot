@@ -49,7 +49,7 @@ class TestPopcon(unittest.TestCase):
         return popcon(package, self.session)
 
     def testRun(self):
-        self.assert_(self._test())
+        self.assertTrue(self._test())
 
     def testPackage(self):
         self.assertEqual(self._test().package, 'haskell-devscripts')

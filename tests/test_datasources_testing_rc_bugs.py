@@ -59,7 +59,7 @@ class BaseTest(object):
         self.datasource.update()
         val = self.datasource.get_bugs()
 
-        self.assert_(type(val) is set)
+        self.assertTrue(type(val) is set)
         self.assertEqual(len(val), 66)
 
 
