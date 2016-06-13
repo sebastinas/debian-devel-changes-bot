@@ -31,8 +31,8 @@ if basedir not in sys.path:
 import DebianDevelChangesBot
 reload(DebianDevelChangesBot)
 
-import config
-import plugin
+from . import config
+from . import plugin
 reload(plugin)
 
 Class = plugin.Class
