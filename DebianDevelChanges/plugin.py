@@ -30,6 +30,8 @@ import email.utils
 from supybot.commands import wrap, many
 from supybot import ircdb, log, schedule
 
+from pydbus import SystemBus
+
 from DebianDevelChangesBot import Datasource
 from DebianDevelChangesBot.mailparsers import get_message
 from DebianDevelChangesBot.datasources import (
@@ -43,13 +45,14 @@ from DebianDevelChangesBot.datasources import (
 )
 from DebianDevelChangesBot.utils import (
     parse_mail,
-    FifoReader,
     colourise,
     rewrite_topic,
     madison,
     format_email_address,
     popcon
 )
+from DebianDevelChangesBot.utils.dbus import BTSDBusService
+from gi.repository import GObject
 
 
 class DebianDevelChanges(supybot.callbacks.Plugin):
@@ -60,9 +63,19 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.irc = irc
         self.topic_lock = threading.Lock()
 
-        fr = FifoReader()
-        fifo_loc = '/var/run/debian-devel-changes-bot/fifo'
-        fr.start(self._email_callback, fifo_loc)
+        self.dbus_service = BTSDBusService(self._email_callback)
+        self.dbus_service.start()
+
+        self.dbus_bus = SystemBus()
+        self.dbus_bus.publish(self.dbus_service.interface_name,
+                              self.dbus_service)
+
+        self.mainloop = None
+        mainloop = GObject.MainLoop()
+        if not mainloop.is_running():
+            mainloop_thread = threading.Thread(mainloop.run)
+            mainloop_thread.start()
+            self.mainloop = mainloop
 
         self.requests_session = requests.Session()
         self.requests_session.verify = True
@@ -103,7 +116,10 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             schedule.addEvent(wrapper(source), time.time() + 1)
 
     def die(self):
-        FifoReader().stop()
+        self.dbus_service.stop()
+        if self.mainloop is not None:
+            self.mainloop.quit()
+
         for _, _, name in get_datasources():
             try:
                 schedule.removePeriodicEvent(name)

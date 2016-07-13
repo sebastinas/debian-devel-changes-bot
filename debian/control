@@ -24,7 +24,6 @@ Depends:
  ${python:Depends},
  ${misc:Depends},
  adduser,
- lockfile-progs,
  supybot,
  stunnel4
 Description: IRC bot that announces Debian package and bug activity

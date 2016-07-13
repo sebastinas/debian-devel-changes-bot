@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/usr/bin/python
 #
 #   Debian Changes Bot
-#   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2016 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -16,72 +16,24 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-set -eu
+import io
+import sys
 
-RUN_DIR="/var/run/debian-devel-changes-bot"
-FIFO="${RUN_DIR}/fifo"
+from DebianDevelChangesBot.utils import dbus
 
-Get_lock () {
-	trap "lockfile-remove ${RUN_DIR}/lockfile" EXIT
-	lockfile-create "${RUN_DIR}/lockfile"
-}
 
-Check_fifo () {
-	if [ ! -p "${FIFO}" ]
-	then
-		mkfifo --mode=666 "${FIFO}"
-	fi
-}
+def main():
+    with io.open('/dev/stdin', mode='rb') as stdin
+        mail = stdin.read()
 
-Check_interactive () {
-	if test -t 0
-	then
-		echo "${0}: running on an interactive terminal, exiting.."
-		exit 1
-	fi
-}
+    try:
+        ret = dbus.inject(mail)
+    except Exception:
+        ret = -1
 
-Save_to_temp () {
-	# Use a temporary file, so we have the option of saving messages
-	TEMP=$(mktemp /tmp/ddc.XXXXXXXX)
-	cat - > ${TEMP}
-}
+    if ret != 0:
+        ret = 75
+    return ret
 
-Send_to_fifo () {
-	# Send contents of tempfile to FIFO
-	( cat ${TEMP} > ${FIFO} ) &
-	PID=${!}
-
-	# Wait until we have finished writing or timeout
-	( sleep 3; kill ${PID} > /dev/null 2>&1; ) &
-	wait ${PID}
-
-	RET=${?}
-}
-
-Cleanup () {
-	chmod 666 ${TEMP}
-	rm -f ${TEMP}
-}
-
-Exit () {
-	if [ ${RET} -ne 0 ]
-	then
-		# We timed-out, or there was some other error; return
-		# "defer" status so we don't lose mail.
-
-		# Postfix's "defer" error code is 75, but Exim's default
-		# "defer" codes are 73 and 75, but are configurable with
-		# `temp_errors`.
-
-		exit 75
-	fi
-}
-
-Get_lock
-Check_fifo
-Check_interactive
-Save_to_temp
-Send_to_fifo
-Cleanup
-Exit
+if __name__ == '__main__':
+    sys.exit(main())

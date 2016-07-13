@@ -1,2 +1,1 @@
 d /var/run/debian-devel-changes-bot 0770 ddc-bot ddc-bot
-p /var/run/debian-devel-changes-bot/fifo 660 ddc-bot ddc-bot

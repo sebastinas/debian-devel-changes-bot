@@ -21,7 +21,6 @@ from parse_mail import parse_mail
 from format_email_address import format_email_address
 from tidy_bug_title import tidy_bug_title
 from irc_colours import colourise
-from fiforeader import FifoReader
 from rewrite_topic import rewrite_topic
 from madison import madison
 from popcon import popcon
@@ -51,7 +50,6 @@ from parse_mail import parse_mail
 from format_email_address import format_email_address
 from tidy_bug_title import tidy_bug_title
 from irc_colours import colourise
-from fiforeader import FifoReader
 from rewrite_topic import rewrite_topic
 from madison import madison
 from popcon import popcon
