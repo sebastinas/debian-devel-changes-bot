@@ -16,7 +16,6 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import urllib2
 import requests
 
 
@@ -61,16 +60,11 @@ pseudo_packages = {
     'summit.debconf.org': 'Problems and requests related to the DebConf Summit instance',
 }
 
-class Datasource(object):
+
+class NewDataSource(object):
     class DataError(Exception):
         pass
 
-    def update(self):
-        fileobj = urllib2.urlopen(self.URL)
-        return self.parse(fileobj)
-
-
-class NewDataSource(object):
     def __init__(self, session):
         self.session = session if session is not None else requests.Session()
 

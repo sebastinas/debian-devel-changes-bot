@@ -3,6 +3,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2016 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -18,16 +19,34 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import unittest
-
-import os, sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import os
+import requests
+import requests_mock
+import io
 
 from DebianDevelChangesBot.utils import popcon
 
+
 class TestPopcon(unittest.TestCase):
+    def setUp(self):
+        self.mocker = requests_mock.Mocker()
+        self.mocker.start()
+
+        self.session = requests.Session()
+
+    def tearDown(self):
+        self.mocker.stop()
+
     def _test(self, package='haskell-devscripts'):
-        return popcon(package, open(os.path.join(os.path.dirname(os.path.abspath(__file__)), \
-            'fixtures', 'popcon', package)))
+        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               'fixtures', 'popcon', package)
+        with io.open(fixture, encoding='utf-8') as f:
+            data = f.read()
+
+        self.mocker.register_uri('GET', 'https://qa.debian.org/popcon.php',
+                                 text=data)
+
+        return popcon(package, self.session)
 
     def testRun(self):
         self.assert_(self._test())

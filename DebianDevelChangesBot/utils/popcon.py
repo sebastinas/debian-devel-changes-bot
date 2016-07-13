@@ -2,6 +2,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2016 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -16,25 +17,21 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import re
-import socket
-import urllib
-import urllib2
+import requests
 
-from BeautifulSoup import BeautifulSoup
-
+from bs4 import BeautifulSoup
 from DebianDevelChangesBot.messages import Popcon
 
-socket.setdefaulttimeout(10)
 
-def popcon(package, fileobj=None):
-    if fileobj is None:
-        fileobj = urllib2.urlopen(
-            "https://qa.debian.org/popcon.php",
-            urllib.urlencode({'package': package})
-        )
+def popcon(package, session=None):
+    if session is None:
+        session = requests.Session()
 
-    soup = BeautifulSoup(fileobj)
+    params = {'package': package}
+    response = session.get("https://qa.debian.org/popcon.php", data=package)
+    response.raise_for_status()
+
+    soup = BeautifulSoup(response.text, "html.parser")
     rows = [x.string for x in soup('td')[1:]]
 
     msg = Popcon()

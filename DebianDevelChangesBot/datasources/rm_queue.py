@@ -2,6 +2,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2016 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -18,32 +19,24 @@
 
 import re
 import threading
-import urllib2
 
-import socket
-socket.setdefaulttimeout(10)
+from DebianDevelChangesBot import NewDataSource
 
-from DebianDevelChangesBot import Datasource
 
-MATCHER = re.compile(r'<div class="subject">([^:]+): ')
-
-class RmQueue(Datasource):
-    _shared_state = {}
-
-    URL = 'http://ftp-master.debian.org/removals.html'
+class RmQueue(NewDataSource):
+    MATCHER = re.compile(r'<div class="subject">([^:]+): ')
+    URL = 'https://ftp-master.debian.org/removals.html'
     INTERVAL = 60 * 30
 
     packages = set()
     lock = threading.Lock()
 
-    def __init__(self):
-        self.__dict__ = self._shared_state
+    def update(self):
+        response = self.session.get(self.URL)
+        response.raise_for_status()
 
-    def update(self, fileobj=None):
-        if fileobj is None:
-            fileobj = urllib2.urlopen(self.URL)
-
-        packages = MATCHER.findall(fileobj.read())
+        data = response.text
+        packages = self.MATCHER.findall(data)
 
         with self.lock:
             self.packages = packages

@@ -57,7 +57,7 @@ class BugSubmittedParser(MailParser):
         }
 
         for line in body[:10]:
-            for pattern, target in mapping.iteritems():
+            for pattern, target in mapping.items():
                 m = pattern.match(line)
                 if m:
                     val = m.group(1).lower()

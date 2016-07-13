@@ -20,7 +20,7 @@
 import json
 import requests
 
-from DebianDevelChangesBot import NewDataSource, Datasource
+from DebianDevelChangesBot import NewDataSource
 
 
 class RCBugs(NewDataSource):
@@ -57,7 +57,7 @@ class RCBugs(NewDataSource):
         if bugs:
             self.bugs = bugs
         else:
-            raise Datasource.DataError()
+            raise NewDataSource.DataError()
 
     def get_bugs(self):
         return self.bugs

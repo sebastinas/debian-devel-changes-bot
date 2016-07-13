@@ -31,8 +31,9 @@ class Dinstall(NewDataSource):
 
     def update(self):
         response = self.session.get(self.URL)
-        data = response.text
+        response.raise_for_status()
 
+        data = response.text
         self.status = 'not running'
         for line in data.split('\n'):
             if not line.startswith('Current action'):

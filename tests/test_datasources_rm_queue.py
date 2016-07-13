@@ -18,21 +18,30 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import unittest
+import os
+import requests
+import requests_mock
+import io
 
-import os, sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from DebianDevelChangesBot import Datasource
 from DebianDevelChangesBot.datasources import RmQueue
 
+
 class TestDatasourceTestingRmQueue(unittest.TestCase):
-
     def setUp(self):
-        self.datasource = RmQueue()
+        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               'fixtures', 'rm_queue.html')
+        with io.open(fixture, encoding='utf-8') as f:
+            data = f.read()
 
-        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)), \
-            'fixtures', 'rm_queue.html')
-        self.datasource.update(open(fixture))
+        self.mocker = requests_mock.Mocker()
+        self.mocker.start()
+        self.mocker.register_uri('GET', RmQueue.URL, text=data)
+
+        session = requests.Session()
+        self.datasource = RmQueue(session)
+
+    def tearDown(self):
+        self.mocker.stop()
 
     def testURL(self):
         """
@@ -48,13 +57,17 @@ class TestDatasourceTestingRmQueue(unittest.TestCase):
         self.assert_(self.datasource.INTERVAL > 60)
 
     def testSize(self):
+        self.datasource.update()
         self.assertEqual(self.datasource.get_size(), 10)
 
     def testTop(self):
+        self.datasource.update()
         self.assert_(self.datasource.is_rm('libgocr'))
 
     def testBottom(self):
+        self.datasource.update()
         self.assert_(self.datasource.is_rm('sablevm-classlib'))
+
 
 if __name__ == "__main__":
     unittest.main()

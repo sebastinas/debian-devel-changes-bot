@@ -35,7 +35,6 @@ from pydbus import SystemBus
 from DebianDevelChangesBot import Datasource
 from DebianDevelChangesBot.mailparsers import get_message
 from DebianDevelChangesBot.datasources import (
-    get_datasources,
     TestingRCBugs,
     NewQueue,
     RmQueue,
@@ -87,23 +86,11 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.testing_rc_bugs = TestingRCBugs(self.requests_session)
         self.new_queue = NewQueue(self.requests_session)
         self.dinstall = Dinstall(self.requests_session)
+        self.rm_queue = RmQueue(self.requests_session)
         self.data_sources = (self.stable_rc_bugs, self.testing_rc_bugs,
-                             self.new_queue, self.dinstall)
+                             self.new_queue, self.dinstall, self.rm_queue)
 
         # Schedule datasource updates
-        for klass, interval, name in get_datasources():
-            try:
-                schedule.removePeriodicEvent(name)
-            except KeyError:
-                pass
-
-            def wrapper(klass=klass):
-                klass().update()
-                self._topic_callback()
-
-            schedule.addPeriodicEvent(wrapper, interval, name, now=False)
-            schedule.addEvent(wrapper, time.time() + 1)
-
         def wrapper(source):
             def implementation():
                 source.update()
@@ -119,13 +106,6 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.dbus_service.stop()
         if self.mainloop is not None:
             self.mainloop.quit()
-
-        for _, _, name in get_datasources():
-            try:
-                schedule.removePeriodicEvent(name)
-            except KeyError:
-                # A newly added event may not exist, ignore exception.
-                pass
 
         for source in self.data_sources:
             try:
@@ -222,13 +202,13 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
         with self.topic_lock:
             values = {}
-            for callback, prefix in sections.iteritems():
+            for callback, prefix in sections.items():
                 values[prefix] = callback()
 
             for channel in self.irc.state.channels:
                 new_topic = topic = self.irc.state.getTopic(channel)
 
-                for callback, prefix in sections.iteritems():
+                for callback, prefix in sections.items():
                     if values[prefix]:
                         new_topic = rewrite_topic(new_topic, prefix,
                                                   values[prefix])
@@ -307,9 +287,6 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             irc.reply("You are not authorised to run this command.")
             return
 
-        for klass, interval, name in get_datasources():
-            klass().update()
-            irc.reply("Updated %s." % name)
         for source in self.data_sources:
             source.update()
             irc.reply("Updated %s." % source.NAME)
@@ -330,7 +307,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 for style, data in zip(field_styles, fields):
                     out.append('[%s]%s' % (style, data))
                 irc.reply(colourise('[reset]|'.join(out)), prefixNick=False)
-        except Exception, e:
+        except Exception as e:
             irc.reply("Error: %s" % e.message)
     madison = wrap(madison, ['text'])
 
@@ -403,10 +380,10 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _popcon(self, irc, msg, args, package):
         try:
-            msg = popcon(package)
+            msg = popcon(package, self.requests_session)
             if msg:
                 irc.reply(colourise(msg.for_irc()), prefixNick=False)
-        except Exception, e:
+        except Exception as e:
             irc.reply("Error: unable to obtain popcon data for %s" % package)
     popcon = wrap(_popcon, ['text'])
 

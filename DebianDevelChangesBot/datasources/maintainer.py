@@ -19,9 +19,9 @@
 
 import requests
 
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
 
-from DebianDevelChangesBot import NewDataSource, Datasource
+from DebianDevelChangesBot import NewDataSource
 
 
 class Maintainer(NewDataSource):
@@ -49,7 +49,7 @@ class Maintainer(NewDataSource):
 
         response.raise_for_status()
 
-        soup = BeautifulSoup(response.text)
+        soup = BeautifulSoup(response.text, "html.parser")
         base = soup.find('span', {'class': 'name', 'title': 'maintainer'})
 
         try:
@@ -58,5 +58,5 @@ class Maintainer(NewDataSource):
                 'email': base.parent['href'].split('=', 1)[1],
             }
         except AttributeError:
-            raise Datasource.DataError(
+            raise NewDataSource.DataError(
                 'Unable to get maintainer for %s.' % package)

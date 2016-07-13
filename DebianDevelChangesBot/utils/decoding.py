@@ -49,7 +49,7 @@ def quoted_printable(val):
         else:
             return unicode(email.quopriMIME.header_decode(str(val)), 'utf-8', 'replace')
 
-    except Exception, e:
+    except Exception as e:
         # We ignore errors here. Most of these originate from a spam
         # report adding a synopsis of a message with broken encodings.
         pass

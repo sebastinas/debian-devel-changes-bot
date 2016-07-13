@@ -32,6 +32,7 @@ class NewQueue(NewDataSource):
 
     def update(self):
         response = self.session.get(self.URL)
+        response.raise_for_status()
         data = response.text
 
         packages = {}
