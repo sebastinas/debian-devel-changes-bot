@@ -63,11 +63,6 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.topic_lock = threading.Lock()
 
         self.dbus_service = BTSDBusService(self._email_callback)
-        self.dbus_service.start()
-
-        self.dbus_bus = SystemBus()
-        self.dbus_bus.publish(self.dbus_service.interface_name,
-                              self.dbus_service)
 
         self.mainloop = None
         mainloop = GObject.MainLoop()
@@ -75,6 +70,11 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             mainloop_thread = threading.Thread(mainloop.run)
             mainloop_thread.start()
             self.mainloop = mainloop
+
+        self.dbus_bus = SystemBus()
+        self.dbus_bus.publish(self.dbus_service.interface_name,
+                              self.dbus_service)
+        self.dbus_service.start()
 
         self.requests_session = requests.Session()
         self.requests_session.verify = True
