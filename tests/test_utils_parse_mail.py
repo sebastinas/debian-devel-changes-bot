@@ -19,7 +19,7 @@
 
 import unittest
 
-from io import StringIO
+from io import BytesIO as StringIO
 from DebianDevelChangesBot.utils import parse_mail
 
 
