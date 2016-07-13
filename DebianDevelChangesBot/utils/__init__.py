@@ -30,7 +30,6 @@ import parse_mail
 import format_email_address
 import tidy_bug_title
 import irc_colours
-import fiforeader
 import rewrite_topic
 import madison
 import popcon
@@ -40,7 +39,6 @@ reload(parse_mail)
 reload(format_email_address)
 reload(tidy_bug_title)
 reload(irc_colours)
-reload(fiforeader)
 reload(rewrite_topic)
 reload(madison)
 reload(popcon)
