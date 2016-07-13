@@ -3,10 +3,9 @@ Section: misc
 Priority: optional
 Maintainer: Sebastian Ramacher <sramacher@debian.org>
 Build-Depends:
- debhelper (>= 9),
+ debhelper (>= 9.20160709),
  python,
  dh-python,
- dh-systemd,
  python-debian,
  python-beautifulsoup,
  python-twisted,
