@@ -389,7 +389,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _testing(self, irc, msg, args, items):
         for package in items:
-            msg = "[desc]Testing migration status for[reset] [package]%s[reset]: [url]https://release.debian.org/migration/testing.pl?package=%s[/url]" % \
+            msg = "[desc]Testing migration status for[reset] [package]%s[reset]: [url]https://qa.debian.org/excuses.php?package=%s[/url]" % \
                 (package, package)
             irc.reply(colourise(msg), prefixNick=False)
     testing = wrap(_testing, [many('anything')])
