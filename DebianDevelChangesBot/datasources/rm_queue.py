@@ -27,6 +27,7 @@ class RmQueue(NewDataSource):
     MATCHER = re.compile(r'<div class="subject">([^:]+): ')
     URL = 'https://ftp-master.debian.org/removals.html'
     INTERVAL = 60 * 30
+    NAME = 'RM queue'
 
     packages = set()
     lock = threading.Lock()
