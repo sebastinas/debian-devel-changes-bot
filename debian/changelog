@@ -1,3 +1,18 @@
+debian-devel-changes-bot (20160717) unstable; urgency=medium
+
+  [ Sebastian Ramacher ]
+  * Port RM queue and popcon data source to requests.
+  * Port bs4
+  * Replace FIFO reader with D-Bus system service.
+
+  [ Mattia Rizzolo ]
+  * Replace package regex with maintainer regex for #debian-reproducible
+
+  [ Paul Wise ]
+  * testing.pl is gone, update links to it to qa.d.o/excuses.php
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 17 Jul 2016 23:44:40 +0200
+
 debian-devel-changes-bot (20160527) unstable; urgency=medium
 
   * Handle messages to debian-changes@l.d.o and debian-lts-changes@l.d.o.
