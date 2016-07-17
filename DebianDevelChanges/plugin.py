@@ -67,7 +67,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.mainloop = None
         mainloop = GObject.MainLoop()
         if not mainloop.is_running():
-            mainloop_thread = threading.Thread(mainloop.run)
+            mainloop_thread = threading.Thread(target=mainloop.run)
             mainloop_thread.start()
             self.mainloop = mainloop
 
