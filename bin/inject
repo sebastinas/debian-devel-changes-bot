@@ -23,7 +23,7 @@ from DebianDevelChangesBot.utils import dbus
 
 
 def main():
-    with io.open('/dev/stdin', mode='rb') as stdin
+    with io.open('/dev/stdin', mode='rb') as stdin:
         mail = stdin.read()
 
     try:
