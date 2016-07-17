@@ -45,7 +45,7 @@ class RCBugs(NewDataSource):
         try:
             data = response.json()
         except ValueError:
-            raise Datasource.DataError()
+            raise NewDataSource.DataError()
 
         bugs = set()
         for bug in data:

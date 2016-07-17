@@ -32,7 +32,7 @@ from supybot import ircdb, log, schedule
 
 from pydbus import SystemBus
 
-from DebianDevelChangesBot import Datasource
+from DebianDevelChangesBot import NewDataSource
 from DebianDevelChangesBot.mailparsers import get_message
 from DebianDevelChangesBot.datasources import (
     TestingRCBugs,
@@ -150,7 +150,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                     else:
                         try:
                             info = Maintainer().get_maintainer(msg.package)
-                        except Datasource.DataError as e:
+                        except NewDataSource.DataError as e:
                             log.info(
                                 "Failed to query maintainer for {}.".format(
                                     msg.package))
