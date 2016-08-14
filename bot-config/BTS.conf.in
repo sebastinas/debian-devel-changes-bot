@@ -63,7 +63,7 @@ supybot.networks.oftc.servers: 127.0.0.1:6999
 #
 # Default value:  
 ###
-supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia #debian-gis #debian-django #debian-reproducible #pbuilder
+supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia #debian-gis #debian-django #debian-reproducible #pbuilder #debian-python-changes
 
 ###
 # Determines what key (if any) will be used to join the channel.
@@ -816,6 +816,8 @@ supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-gis: /^pkg-grass-dev
 supybot.plugins.DebianDevelChanges.maintainer_regex.#pbuilder: /^pbuilder-maint@lists\.alioth\.debian\.org$/
 # Requested by mapreri
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-reproducible: /^reproducible-builds@lists\.alioth\.debian\.org$/
+# Requested by onovy
+supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-python-changes: /^python-(modules-team|apps-team)@lists\.alioth\.debian\.org$/
 
 ###
 # Determines which distribution announcements should be printed to the
