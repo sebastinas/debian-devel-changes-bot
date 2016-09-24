@@ -5,6 +5,21 @@ debian-devel-changes-bot (20160914~py3+1) UNRELEASED; urgency=medium
 
  -- Sebastian Ramacher <sramacher@debian.org>  Sat, 24 Sep 2016 12:33:07 +0200
 
+debian-devel-changes-bot (20160818) unstable; urgency=medium
+
+  [ Sebastian Ramacher ]
+  * Fix datsource names
+  * Fix Thread instantiation
+  * Fix typo
+  * Fix RM queue breakage
+  * Join #debian-dpkg
+
+  [ Ondřej Nový ]
+  * Join #debian-python-changes, announce changes for DPMT + PAPT
+  * Join #debian-openstack-commits, announce changes for PKG OpenStack
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Thu, 18 Aug 2016 00:31:51 +0200
+
 debian-devel-changes-bot (20160717) unstable; urgency=medium
 
   [ Sebastian Ramacher ]
