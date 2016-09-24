@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20160914~py3+7) unstable; urgency=medium
+
+  * More logging to debug inject issues.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sat, 24 Sep 2016 13:52:28 +0200
+
 debian-devel-changes-bot (20160914~py3+6) unstable; urgency=medium
 
   * Encode for glib.
