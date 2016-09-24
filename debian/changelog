@@ -1,9 +1,12 @@
-debian-devel-changes-bot (20160914~py3+1) UNRELEASED; urgency=medium
+debian-devel-changes-bot (20160914~py3+1) unstable; urgency=medium
 
   [ Andreas Stührk ]
   * Port to Python 3.
 
- -- Sebastian Ramacher <sramacher@debian.org>  Sat, 24 Sep 2016 12:33:07 +0200
+  [ Sebastian Ramacher ]
+  * Change Build-Depends and Depends after port to Python 3.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sat, 24 Sep 2016 12:44:11 +0200
 
 debian-devel-changes-bot (20160818) unstable; urgency=medium
 
