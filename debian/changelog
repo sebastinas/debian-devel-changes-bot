@@ -1,3 +1,10 @@
+debian-devel-changes-bot (20160914~py3+1) UNRELEASED; urgency=medium
+
+  [ Andreas Stührk ]
+  * Port to Python 3.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sat, 24 Sep 2016 12:33:07 +0200
+
 debian-devel-changes-bot (20160717) unstable; urgency=medium
 
   [ Sebastian Ramacher ]

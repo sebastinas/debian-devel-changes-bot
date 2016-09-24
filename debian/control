@@ -4,15 +4,14 @@ Priority: optional
 Maintainer: Sebastian Ramacher <sramacher@debian.org>
 Build-Depends:
  debhelper (>= 9.20160709),
- python,
+ python3,
  dh-python,
- python-debian,
- python-bs4,
- python-twisted,
- python-setuptools,
- python-requests,
- python-requests-mock
-Standards-Version: 3.9.6
+ python3-debian,
+ python3-bs4,
+ python3-setuptools,
+ python3-requests,
+ python3-requests-mock
+Standards-Version: 3.9.8
 Homepage: https://github.com/sebastinas/debian-devel-changes-bot
 Vcs-Git: git://github.com/sebastinas/debian-devel-changes-bot.git
 Vcs-Browser: https://github.com/sebastinas/debian-devel-changes-bot
@@ -23,7 +22,7 @@ Depends:
  ${python:Depends},
  ${misc:Depends},
  adduser,
- supybot,
+ limnoria,
  stunnel4
 Description: IRC bot that announces Debian package and bug activity
  The #debian-devel-changes IRC bot is a Supybot-based bot that lives on the
