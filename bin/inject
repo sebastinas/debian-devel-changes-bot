@@ -25,18 +25,18 @@ from DebianDevelChangesBot.utils import dbus
 
 
 def main():
+    syslog.openlog('ddc-bot-inject')
     with io.open('/dev/stdin', mode='rb') as stdin:
         mail = stdin.read()
 
     try:
         ret = dbus.inject(mail)
     except Exception:
-        syslog.openlog('ddc-bot-inject')
         syslog.syslog(traceback.format_exc())
-        syslog.closelog()
         ret = -1
 
     if ret != 0:
+        syslog.syslog('ret was {}'.format(ret))
         ret = 75
     return ret
 
