@@ -605,7 +605,7 @@ supybot.drivers.poll: 1.0
 #
 # Default value: default
 ###
-supybot.drivers.module: Twisted
+supybot.drivers.module: default
 
 ###
 # Determines the maximum time the bot will wait before attempting to
