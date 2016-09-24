@@ -18,6 +18,8 @@
 
 import io
 import sys
+import syslog
+import traceback
 
 from DebianDevelChangesBot.utils import dbus
 
@@ -29,6 +31,9 @@ def main():
     try:
         ret = dbus.inject(mail)
     except Exception:
+        syslog.openlog('ddc-bot-inject')
+        syslog.syslog(traceback.format_exc())
+        syslog.closelog()
         ret = -1
 
     if ret != 0:
