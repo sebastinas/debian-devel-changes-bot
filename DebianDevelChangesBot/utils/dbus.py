@@ -23,6 +23,7 @@ from collections import deque
 from io import StringIO
 from pydbus import SystemBus
 from gi.repository import GLib
+from supybot import log
 
 
 class BTSDBusService(object):
@@ -55,6 +56,7 @@ class BTSDBusService(object):
         self.thread.start()
 
     def process_mails(self):
+        log.debug("Mail processing thread started")
         while not self.quit:
             with self.cv:
                 while not self.quit and len(self.messages) == 0:
@@ -65,6 +67,7 @@ class BTSDBusService(object):
                     return
 
                 mail = self.messages.popleft()
+                log.debug("Got mail")
 
             mail = base64.b64decode(mail.encode('ascii'))
             self.callback(StringIO(mail))
