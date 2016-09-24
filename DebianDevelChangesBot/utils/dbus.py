@@ -20,7 +20,7 @@ import threading
 import base64
 
 from collections import deque
-from io import StringIO
+from io import BytesIO
 from pydbus import SystemBus
 from gi.repository import GLib
 from supybot import log
@@ -70,7 +70,7 @@ class BTSDBusService(object):
                 log.debug("Got mail")
 
             mail = base64.b64decode(mail.encode('ascii'))
-            self.callback(StringIO(mail))
+            self.callback(BytesIO(mail))
 
         self.thread = None
 
