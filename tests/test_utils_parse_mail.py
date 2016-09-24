@@ -19,14 +19,14 @@
 
 import unittest
 
-from io import BytesIO as StringIO
+from io import BytesIO
 from DebianDevelChangesBot.utils import parse_mail
 
 
 class TestUtilsParseMail(unittest.TestCase):
 
     def testSimple(self):
-        f = StringIO(b"""\
+        f = BytesIO(b"""\
 From: Chris Lamb <chris@chris-lamb.co.uk>
 Subject: This is the subject
 
@@ -45,7 +45,7 @@ Simple message body""")
 
 
     def testLongSubject(self):
-        f = StringIO(b"""\
+        f = BytesIO(b"""\
 From: Chris Lamb <chris@chris-lamb.co.uk>
 Subject: Bug#123456: marked as done (pinafore: Inertial couplings may
  exceed tolerance when docking)
@@ -58,7 +58,7 @@ Simple message body""")
             "(pinafore: Inertial couplings may exceed tolerance when docking)")
 
     def testLongLine(self):
-        f = StringIO(b"""\
+        f = BytesIO(b"""\
 Subject: Subject
 
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
@@ -70,7 +70,7 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
         self.assertEqual(body[0], ('A' * 73) + ('B' * 73) + ('C' * 73))
 
     def testNotLongLine(self):
-        f = StringIO(b"""\
+        f = BytesIO(b"""\
 Subject: Subject
 
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
@@ -82,7 +82,7 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
         self.assertNotEqual(body, [('A' * 73) + ('B' * 73) + ('C' * 73)])
 
     def testSpaceAtEndOfLine(self):
-        f = StringIO(b"""\
+        f = BytesIO(b"""\
 Subject: Subject
 
 Description:=20
@@ -92,7 +92,7 @@ Description:=20
         self.assertEqual(body, ['Description: '])
 
     def testUnicodeHeader(self):
-        f = StringIO(b"""\
+        f = BytesIO(b"""\
 From: Gon=C3=A9ri Le Bouder
 
 Message body
@@ -103,7 +103,7 @@ Message body
         self.assertEqual(body, ['Message body'])
 
     def testUnicodeBody(self):
-        f = StringIO(b"""\
+        f = BytesIO(b"""\
 Subject: Subject line
 
 Gon=C3=A9ri Le Bouder
@@ -113,7 +113,7 @@ Gon=C3=A9ri Le Bouder
         self.assertEqual(body, ["Gon=C3=A9ri Le Bouder"])
 
     def testUtf8Header(self):
-        f = StringIO(b"""\
+        f = BytesIO(b"""\
 From: Sebastian =?UTF-8?Q?Dr=C3=B6ge?=
 
 Message body""")
@@ -123,7 +123,7 @@ Message body""")
         self.assertEqual(body, ['Message body'])
 
     def testUtf8Header2(self):
-        f = StringIO(b"""\
+        f = BytesIO(b"""\
 From: marc.poulhies@imag.fr (Marc =?ISO-8859-1?Q?Poulhi=E8s?=)
 
 Message body""")
@@ -132,7 +132,7 @@ Message body""")
         self.assertEqual(body, ['Message body'])
 
     def testMultipart(self):
-        f = StringIO(b"""\
+        f = BytesIO(b"""\
 From: Mohammed Sameer <msameer@foolab.org>
 To: Cristian Greco <cgreco@cs.unibo.it>
 Cc: 402462@bugs.debian.org
