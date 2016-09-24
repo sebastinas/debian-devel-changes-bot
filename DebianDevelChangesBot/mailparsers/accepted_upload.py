@@ -48,7 +48,7 @@ class AcceptedUploadParser(MailParser):
 
         msg = AcceptedUploadMessage()
         for line in body:
-            for field, target in list(mapping.items()):
+            for field, target in mapping.items():
                 if line.startswith('%s: ' % field):
                     val = line[len(field) + 2:]
                     setattr(msg, target, val)

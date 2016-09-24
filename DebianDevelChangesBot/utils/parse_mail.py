@@ -25,7 +25,7 @@ def parse_mail(fileobj):
     headers, body = {}, []
     msg = email.message_from_binary_file(fileobj)
 
-    for k, v in list(msg.items()):
+    for k, v in msg.items():
         headers[k] = quoted_printable(v).replace('\n', '').replace('\t', ' ').strip()
 
     for line in email.iterators.body_line_iterator(msg):

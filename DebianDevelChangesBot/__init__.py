@@ -93,7 +93,7 @@ class Message(object):
         return self.format()
 
     def package_name(self):
-        if self.package in list(pseudo_packages.keys()):
+        if self.package in pseudo_packages.keys():
             return '[pseudo-package]%s[reset]' % self.package
         else:
             return '[package]%s[reset]' % self.package
