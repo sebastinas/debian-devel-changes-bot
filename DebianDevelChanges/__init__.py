@@ -29,11 +29,9 @@ if basedir not in sys.path:
     sys.path.append(basedir)
 
 import DebianDevelChangesBot
-reload(DebianDevelChangesBot)
 
 from . import config
 from . import plugin
-reload(plugin)
 
 Class = plugin.Class
 configure = config.configure
