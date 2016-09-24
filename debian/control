@@ -20,7 +20,7 @@ Vcs-Browser: https://github.com/sebastinas/debian-devel-changes-bot
 Package: debian-devel-changes-bot
 Architecture: all
 Depends:
- ${python:Depends},
+ ${python3:Depends},
  ${misc:Depends},
  adduser,
  limnoria,
