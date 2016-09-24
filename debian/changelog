@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20160914~py3+2) unstable; urgency=medium
+
+  * Fix supybot config.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sat, 24 Sep 2016 13:08:52 +0200
+
 debian-devel-changes-bot (20160914~py3+1) unstable; urgency=medium
 
   [ Andreas Stührk ]
