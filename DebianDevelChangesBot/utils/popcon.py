@@ -28,7 +28,7 @@ def popcon(package, session=None):
         session = requests.Session()
 
     params = {'package': package}
-    response = session.get("https://qa.debian.org/popcon.php", data=package)
+    response = session.get("https://qa.debian.org/popcon.php", data=params)
     response.raise_for_status()
 
     soup = BeautifulSoup(response.text, "html.parser")
