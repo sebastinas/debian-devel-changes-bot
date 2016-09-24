@@ -90,7 +90,7 @@ class Message(object):
         return True
 
     def for_irc(self):
-        return self.format().encode('utf-8')
+        return self.format()
 
     def package_name(self):
         if self.package in list(pseudo_packages.keys()):
