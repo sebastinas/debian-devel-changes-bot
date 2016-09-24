@@ -17,6 +17,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import threading
+import base64
 
 from io import StringIO
 from pydbus import SystemBus
@@ -65,7 +66,7 @@ class BTSDBusService(object):
                 mail = self.messages[0]
                 self.messages = self.messages[1:]
 
-            mail = mail.decode('base64')
+            mail = base64.b64decode(mail)
             self.callback(StringIO(mail))
 
         self.thread = None
@@ -100,7 +101,7 @@ def inject(mail, bus=None):
     if bus is None:
         bus = SystemBus()
 
-    mail = mail.encode('base64')
+    mail = base64.b64encode(mail)
     try:
         bts = bus.get(BTSDBusService.interface_name)
         return bts.Inject(mail)
