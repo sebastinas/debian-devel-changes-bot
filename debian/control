@@ -8,6 +8,7 @@ Build-Depends:
  dh-python,
  python3-debian,
  python3-bs4,
+ python3-pydbus,
  python3-setuptools,
  python3-requests,
  python3-requests-mock
