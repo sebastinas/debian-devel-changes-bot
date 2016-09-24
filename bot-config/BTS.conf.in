@@ -56,7 +56,9 @@ supybot.networks.oftc.password: @NICKSERV_PASSWORD@
 #
 # Default value: 
 ###
-supybot.networks.oftc.servers: 127.0.0.1:6999
+supybot.networks.oftc.servers: irc.oftc.net/6697
+
+supybot.networks.oftc.ssl: on
 
 ###
 # Determines what channels the bot will join only on oftc.
