@@ -238,40 +238,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             except KeyError:
                 pass
 
-    def greeting(self, prefix, irc, msg, args):
-        num_bugs = self.testing_rc_bugs.get_number_bugs()
-        if type(num_bugs) is int:
-            advice = random.choice((
-                'Why not go and fix one?',
-                'Why not peek at the list and find one?',
-                'Stop IRCing and fix one! :]',
-                'You realise they don\'t fix themselves, right?',
-                'How about fixing yourself some caffeine and then poking at the bug list?',
-            ))
-            txt = "%s %s! There are currently %d RC bugs in stretch. %s" % \
-                (prefix, msg.nick, num_bugs, advice)
-        else:
-            txt = "%s %s!" % (prefix, msg.name)
-        irc.reply(txt, prefixNick=False)
-
-    def morning(self, *args):
-        self.greeting('Good morning,', *args)
-    morning = wrap(morning)
-    yawn = wrap(morning)
-    wakeywakey = wrap(morning)
-
-    def night(self, *args):
-        self.greeting('Good night,', *args)
-    night = wrap(night)
-    nn = wrap(night)
-    goodnight = wrap(night)
-
-    def sup(self, *args):
-        self.greeting("'sup", *args)
-    sup = wrap(sup)
-    lo = wrap(sup)
-
     def rc(self, irc, msg, args):
+        """Link to UDD RC bug overview."""
         num_bugs = self.testing_rc_bugs.get_number_bugs()
         if type(num_bugs) is int:
             irc.reply(
@@ -283,6 +251,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     bugs = wrap(rc)
 
     def update(self, irc, msg, args):
+        """Trigger an update."""
         if not ircdb.checkCapability(msg.prefix, 'owner'):
             irc.reply("You are not authorised to run this command.")
             return
@@ -294,6 +263,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     update = wrap(update)
 
     def madison(self, irc, msg, args, package):
+        """List packages."""
         try:
             lines = madison(package)
             if not lines:
@@ -318,6 +288,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             return (package[:1], package)
 
     def _maintainer(self, irc, msg, args, items):
+        """Get maintainer for package."""
         for package in items:
             info = Maintainer().get_maintainer(package)
             if info:
@@ -338,6 +309,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     who_maintains = wrap(_maintainer, [many('anything')])
 
     def _qa(self, irc, msg, args, items):
+        """Get link to QA page."""
         for package in items:
             url = "https://packages.qa.debian.org/%s/%s.html" % self.get_pool_url(package)
             msg = "[desc]QA page for[reset] [package]%s[reset]: [url]%s[/url]" % (package, url)
@@ -349,6 +321,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     srcpkg = wrap(_qa, [many('anything')])
 
     def _changelog(self, irc, msg, args, items):
+        """Get link to changelog."""
         for package in items:
             url = "https://packages.debian.org/changelogs/pool/main/%s/%s/current/changelog" % self.get_pool_url(package)
             msg = "[desc]debian/changelog for[reset] [package]%s[reset]: [url]%s[/url]" % (package, url)
@@ -357,6 +330,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     changes = wrap(_changelog, [many('anything')])
 
     def _copyright(self, irc, msg, args, items):
+        """Link to copyright files."""
         for package in items:
             url = "https://packages.debian.org/changelogs/pool/main/%s/%s/current/copyright" % self.get_pool_url(package)
             msg = "[desc]debian/copyright for[reset] [package]%s[reset]: [url]%s[/url]" % (package, url)
@@ -364,6 +338,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     copyright = wrap(_copyright, [many('anything')])
 
     def _buggraph(self, irc, msg, args, items):
+        """Link to bug graph."""
         for package in items:
             msg = "[desc]Bug graph for[reset] [package]%s[reset]: [url]https://qa.debian.org/data/bts/graphs/%s/%s.png[/url]" % \
                 (package, package[0], package)
@@ -372,6 +347,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     bug_graph = wrap(_buggraph, [many('anything')])
 
     def _buildd(self, irc, msg, args, items):
+        """Link to buildd page."""
         for package in items:
             msg = "[desc]buildd status for[reset] [package]%s[reset]: [url]https://buildd.debian.org/pkg.cgi?pkg=%s[/url]" % \
                 (package, package)
@@ -379,6 +355,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     buildd = wrap(_buildd, [many('anything')])
 
     def _popcon(self, irc, msg, args, package):
+        """Get popcon data."""
         try:
             msg = popcon(package, self.requests_session)
             if msg:
@@ -388,6 +365,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     popcon = wrap(_popcon, ['text'])
 
     def _testing(self, irc, msg, args, items):
+        """Check testing migration status."""
         for package in items:
             msg = "[desc]Testing migration status for[reset] [package]%s[reset]: [url]https://qa.debian.org/excuses.php?package=%s[/url]" % \
                 (package, package)
@@ -396,6 +374,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     migration = wrap(_testing, [many('anything')])
 
     def _dehs(self, irc, msg, args, items):
+        """Link to DEHS."""
         for package in items:
             msg = "[desc]Debian External Health Status for[reset] [package]%s[reset]: [url]https://dehs.alioth.debian.org/report.php?package=%s[/url]" % \
                 (package, urllib.parse.quote(package))
@@ -403,19 +382,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     dehs = wrap(_dehs, [many('anything')])
     health = wrap(_dehs, [many('anything')])
 
-    def _swirl(self, irc, msg, args):
-        swirl = [
-            "  [brightred] ,''`.[reset]",
-            "  [brightred]: :' :[reset]           [b]Debian GNU/Linux[/b]",
-            "  [brightred]`. `' [reset]           [url]https://www.debian.org/[/url]",
-            "  [brightred]  `-  [reset]",
-        ]
-        for line in swirl:
-            irc.reply(colourise(line), prefixNick=False)
-    swirl = wrap(_swirl)
-    debian = wrap(_swirl)
-
     def _new(self, irc, msg, args):
+        """Link to NEW queue."""
         line = "[desc]NEW queue is[reset]: [url]%s[/url]. [desc]Current size is:[reset] %d" % \
             ("https://ftp-master.debian.org/new.html", self.new_queue.get_size())
         irc.reply(colourise(line))
