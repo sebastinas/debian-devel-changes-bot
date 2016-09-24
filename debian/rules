@@ -1,9 +1,9 @@
 #!/usr/bin/make -f
 
 %:
-	dh $@ --with python2,systemd --buildsystem=pybuild
+	dh $@ --with python3,systemd --buildsystem=pybuild
 
 override_dh_auto_test:
 ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
-	tests/test_all.py
+	python3 tests/test_all.py
 endif
