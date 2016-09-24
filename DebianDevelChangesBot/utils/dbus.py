@@ -66,7 +66,7 @@ class BTSDBusService(object):
                 mail = self.messages[0]
                 self.messages = self.messages[1:]
 
-            mail = base64.b64decode(mail)
+            mail = base64.b64decode(mail.encode('ascii'))
             self.callback(StringIO(mail))
 
         self.thread = None
@@ -101,7 +101,7 @@ def inject(mail, bus=None):
     if bus is None:
         bus = SystemBus()
 
-    mail = base64.b64encode(mail)
+    mail = base64.b64encode(mail).decode('ascii')
     try:
         bts = bus.get(BTSDBusService.interface_name)
         return bts.Inject(mail)
