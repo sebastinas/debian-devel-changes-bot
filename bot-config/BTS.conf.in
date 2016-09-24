@@ -56,9 +56,7 @@ supybot.networks.oftc.password: @NICKSERV_PASSWORD@
 #
 # Default value: 
 ###
-supybot.networks.oftc.servers: irc.oftc.net/6697
-
-supybot.networks.oftc.ssl: on
+supybot.networks.oftc.servers: irc.oftc.net:6697
 
 ###
 # Determines what channels the bot will join only on oftc.
@@ -80,7 +78,7 @@ supybot.networks.oftc.channels.key:
 #
 # Default value: False
 ###
-supybot.networks.oftc.ssl: False
+supybot.networks.oftc.ssl: True
 
 ###
 # Determines how timestamps printed for human reading should be
