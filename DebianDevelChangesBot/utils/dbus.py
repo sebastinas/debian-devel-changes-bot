@@ -19,6 +19,7 @@
 import threading
 import base64
 
+from collections import deque
 from io import StringIO
 from pydbus import SystemBus
 from gi.repository import GLib
@@ -45,7 +46,7 @@ class BTSDBusService(object):
         self.callback = callback
         self.cv = threading.Condition()
         self.thread = None
-        self.messages = []
+        self.messages = deque()
         self.max_messages = 10
 
     def start(self):
@@ -63,8 +64,7 @@ class BTSDBusService(object):
                     self.thread = None
                     return
 
-                mail = self.messages[0]
-                self.messages = self.messages[1:]
+                mail = self.messages.popleft()
 
             mail = base64.b64decode(mail.encode('ascii'))
             self.callback(StringIO(mail))
