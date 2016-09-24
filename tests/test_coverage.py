@@ -17,16 +17,16 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import print_function
+
 
 import os
 import sys
-import commands
+import subprocess
 
 MODULE = 'DebianDevelChangesBot'
 
 def coverage(cmd, show=False):
-    status, output = commands.getstatusoutput('python-coverage %s ' % cmd)
+    status, output = subprocess.getstatusoutput('python-coverage %s ' % cmd)
     if status != 0:
         print(output, file=sys.stderr)
         sys.exit(-1)

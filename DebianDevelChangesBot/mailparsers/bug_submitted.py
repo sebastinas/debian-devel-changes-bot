@@ -57,7 +57,7 @@ class BugSubmittedParser(MailParser):
         }
 
         for line in body[:10]:
-            for pattern, target in mapping.items():
+            for pattern, target in list(mapping.items()):
                 m = pattern.match(line)
                 if m:
                     val = m.group(1).lower()
@@ -65,7 +65,7 @@ class BugSubmittedParser(MailParser):
                     del mapping[pattern]
                     break
 
-            if len(mapping.keys()) == 0:
+            if len(list(mapping.keys())) == 0:
                 break
 
         if type(msg.version) is str and msg.version.find('GnuPG') != -1:

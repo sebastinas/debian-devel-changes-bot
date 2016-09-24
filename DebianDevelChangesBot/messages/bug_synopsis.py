@@ -27,7 +27,7 @@ class BugSynopsis(Message):
         if self.status == 'done':
             msg += " (fixed)"
 
-        msg += u": %s: «[title]%s[reset]» " % \
+        msg += ": %s: «[title]%s[reset]» " % \
             (self.package_name(), self.title)
 
         if self.severity != 'normal':
@@ -36,6 +36,6 @@ class BugSynopsis(Message):
             else:
                 msg += "(%s) " % self.severity
 
-        msg += u"[url]https://bugs.debian.org/%d[/url]" % self.bug_number
+        msg += "[url]https://bugs.debian.org/%d[/url]" % self.bug_number
 
         return msg

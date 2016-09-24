@@ -73,14 +73,14 @@ class TestMailParserAcceptedUpload(unittest.TestCase):
         self.assertEqual(msg.closes, [123456, 456123])
 
     def testQuotedPrintableChangedBy(self):
-        self.body[12] = u'Changed-By: Gon=C3=A9ri Le Bouder <a@b.com>'
+        self.body[12] = 'Changed-By: Gon=C3=A9ri Le Bouder <a@b.com>'
 
         msg = p.parse(self.headers, self.body)
         self.assertTrue(msg)
-        self.assertEqual(msg.by, u'Gonéri Le Bouder <a@b.com>')
+        self.assertEqual(msg.by, 'Gonéri Le Bouder <a@b.com>')
 
     def testUrgencyCase(self):
-        self.body[10] = u'Urgency: HIGH'
+        self.body[10] = 'Urgency: HIGH'
 
         msg = p.parse(self.headers, self.body)
         self.assertTrue(msg)
@@ -89,7 +89,7 @@ class TestMailParserAcceptedUpload(unittest.TestCase):
     def testFixtures(self):
         dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fixtures', 'accepted_upload', '*')
         for filename in glob(dir):
-            with open(filename, 'r') as f:
+            with open(filename, 'rb') as f:
                 mail = parse_mail(f)
             msg = p.parse(*mail)
             self.assertTrue(msg)

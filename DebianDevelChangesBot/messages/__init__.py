@@ -17,14 +17,14 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import accepted_upload
-import bug_closed
-import bug_submitted
-import security_announce
-import popcon
+from . import accepted_upload
+from . import bug_closed
+from . import bug_submitted
+from . import security_announce
+from . import popcon
 
-from accepted_upload import AcceptedUploadMessage
-from bug_closed import BugClosedMessage
-from bug_submitted import BugSubmittedMessage
-from security_announce import SecurityAnnounceMessage
-from popcon import Popcon
+from .accepted_upload import AcceptedUploadMessage
+from .bug_closed import BugClosedMessage
+from .bug_submitted import BugSubmittedMessage
+from .security_announce import SecurityAnnounceMessage
+from .popcon import Popcon

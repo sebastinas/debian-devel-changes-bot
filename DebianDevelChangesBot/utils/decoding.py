@@ -19,8 +19,8 @@
 import re
 
 # Import these directly due to funkiness in Python 2.4's email library
-import email.Header
-import email.quopriMIME
+import email.header
+import email.quoprimime
 
 def header_decode(s):
     def unquote_match(match):
@@ -30,28 +30,35 @@ def header_decode(s):
     s = s.replace('_', ' ')
     return re.sub(r'=\w{2}', unquote_match, s)
 
+def _decode_chunk(chunk, encoding):
+    if encoding is None:
+        if isinstance(chunk, bytes):
+            return chunk.decode("ascii")
+        else:
+            return chunk
+    else:
+        return chunk.decode(encoding)
+
 def quoted_printable(val):
     try:
         if type(val) is str:
             save = header_decode(val)
 
-            # Hack around possible bug in email.Header.decode_header
-            val = val.replace('?=)', '?= )')
-
-            val = ' '.join([chunk.decode(encoding or 'ascii', 'replace') for chunk, encoding in
-                email.Header.decode_header(val)])
+            val = ''.join([_decode_chunk(chunk, encoding)
+                           for chunk, encoding in email.header.decode_header(val)])
 
             val = val.replace(' )', ')')
 
             if len(val) > len(save):
-                val = unicode(save, 'utf-8', 'replace')
+                val = save.encode("latin1").decode("utf-8", "replace")
 
         else:
-            return unicode(email.quopriMIME.header_decode(str(val)), 'utf-8', 'replace')
+            return email.quoprimime.header_decode(str(val))
 
     except Exception as e:
         # We ignore errors here. Most of these originate from a spam
         # report adding a synopsis of a message with broken encodings.
-        pass
+        if not isinstance(e, ValueError) or "invalid literal" not in str(e):
+            raise
 
     return val

@@ -26,113 +26,113 @@ from DebianDevelChangesBot.utils import parse_mail
 class TestUtilsParseMail(unittest.TestCase):
 
     def testSimple(self):
-        f = StringIO("""
+        f = StringIO(b"""\
 From: Chris Lamb <chris@chris-lamb.co.uk>
 Subject: This is the subject
 
-Simple message body"""[1:])
+Simple message body""")
 
         headers, body = parse_mail(f)
 
-        self.assertEqual(headers['From'], u"Chris Lamb <chris@chris-lamb.co.uk>")
-        self.assertEqual(headers['Subject'], u"This is the subject")
+        self.assertEqual(headers['From'], "Chris Lamb <chris@chris-lamb.co.uk>")
+        self.assertEqual(headers['Subject'], "This is the subject")
         self.assertEqual(len(body), 1)
-        self.assertEqual(body[0], u"Simple message body")
+        self.assertEqual(body[0], "Simple message body")
 
-        self.assertEqual(type(headers['From']), unicode)
-        self.assertEqual(type(headers['Subject']), unicode)
-        self.assertEqual(type(body[0]), unicode)
+        self.assertEqual(type(headers['From']), str)
+        self.assertEqual(type(headers['Subject']), str)
+        self.assertEqual(type(body[0]), str)
 
 
     def testLongSubject(self):
-        f = StringIO("""
+        f = StringIO(b"""\
 From: Chris Lamb <chris@chris-lamb.co.uk>
 Subject: Bug#123456: marked as done (pinafore: Inertial couplings may
  exceed tolerance when docking)
 
-Simple message body"""[1:])
+Simple message body""")
 
         headers, body = parse_mail(f)
 
-        self.assertEqual(headers['Subject'], u"Bug#123456: marked as done " \
+        self.assertEqual(headers['Subject'], "Bug#123456: marked as done " \
             "(pinafore: Inertial couplings may exceed tolerance when docking)")
 
     def testLongLine(self):
-        f = StringIO("""
+        f = StringIO(b"""\
 Subject: Subject
 
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-"""[1:])
+""")
 
         headers, body = parse_mail(f)
         self.assertEqual(body[0], ('A' * 73) + ('B' * 73) + ('C' * 73))
 
     def testNotLongLine(self):
-        f = StringIO("""
+        f = StringIO(b"""\
 Subject: Subject
 
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-"""[1:])
+""")
 
         headers, body = parse_mail(f)
         self.assertNotEqual(body, [('A' * 73) + ('B' * 73) + ('C' * 73)])
 
     def testSpaceAtEndOfLine(self):
-        f = StringIO("""
+        f = StringIO(b"""\
 Subject: Subject
 
 Description:=20
-"""[1:])
+""")
 
         headers, body = parse_mail(f)
         self.assertEqual(body, ['Description: '])
 
     def testUnicodeHeader(self):
-        f = StringIO("""
+        f = StringIO(b"""\
 From: Gon=C3=A9ri Le Bouder
 
 Message body
-"""[1:])
+""")
 
         headers, body = parse_mail(f)
-        self.assertEqual(headers['From'], u"Gonéri Le Bouder")
+        self.assertEqual(headers['From'], "Gonéri Le Bouder")
         self.assertEqual(body, ['Message body'])
 
     def testUnicodeBody(self):
-        f = StringIO("""
+        f = StringIO(b"""\
 Subject: Subject line
 
 Gon=C3=A9ri Le Bouder
-"""[1:])
+""")
         headers, body = parse_mail(f)
         self.assertEqual(headers['Subject'], 'Subject line')
-        self.assertEqual(body, [u"Gon=C3=A9ri Le Bouder"])
+        self.assertEqual(body, ["Gon=C3=A9ri Le Bouder"])
 
     def testUtf8Header(self):
-        f = StringIO("""
+        f = StringIO(b"""\
 From: Sebastian =?UTF-8?Q?Dr=C3=B6ge?=
 
-Message body"""[1:])
+Message body""")
 
         headers, body = parse_mail(f)
-        self.assertEqual(headers['From'], u"Sebastian Dröge")
+        self.assertEqual(headers['From'], "Sebastian Dröge")
         self.assertEqual(body, ['Message body'])
 
     def testUtf8Header2(self):
-        f = StringIO("""
+        f = StringIO(b"""\
 From: marc.poulhies@imag.fr (Marc =?ISO-8859-1?Q?Poulhi=E8s?=)
 
-Message body"""[1:])
+Message body""")
         headers, body = parse_mail(f)
-        self.assertEqual(headers['From'], u"marc.poulhies@imag.fr (Marc Poulhiès)")
+        self.assertEqual(headers['From'], "marc.poulhies@imag.fr (Marc Poulhiès)")
         self.assertEqual(body, ['Message body'])
 
     def testMultipart(self):
-        f = StringIO("""
+        f = StringIO(b"""\
 From: Mohammed Sameer <msameer@foolab.org>
 To: Cristian Greco <cgreco@cs.unibo.it>
 Cc: 402462@bugs.debian.org
@@ -175,10 +175,10 @@ orkuFNMGzF2Qx9fiQRLWemE=
 -----END PGP SIGNATURE-----
 
 --JlJsEFsx9RQyiX4C--
-"""[1:])
+""")
 
         headers, body = parse_mail(f)
-        self.assertTrue(u"Acknowledged." in body)
+        self.assertTrue("Acknowledged." in body)
 
 if __name__ == "__main__":
     unittest.main()

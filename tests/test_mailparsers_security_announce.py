@@ -28,10 +28,11 @@ from DebianDevelChangesBot.utils import parse_mail
 def parse(number):
     filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), \
         'fixtures', 'security_announce', '%d.txt' % number)
-    mail = parse_mail(file(filename))
-    msg = p.parse(*mail)
-    assert msg
-    return msg.__dict__
+    with open(filename, "rb") as infile:
+        mail = parse_mail(infile)
+        msg = p.parse(*mail)
+        assert msg
+        return msg.__dict__
 
 class TestMailParserSecurityAnnounce(unittest.TestCase):
 

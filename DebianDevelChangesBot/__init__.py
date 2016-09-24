@@ -82,7 +82,7 @@ class Message(object):
             for field in self.OPTIONAL:
                 setattr(self, field, None)
 
-    def __nonzero__(self):
+    def __bool__(self):
         if hasattr(self, 'FIELDS'):
             for field in self.FIELDS:
                 if getattr(self, field) is None:
@@ -93,12 +93,12 @@ class Message(object):
         return self.format().encode('utf-8')
 
     def package_name(self):
-        if self.package in pseudo_packages.keys():
+        if self.package in list(pseudo_packages.keys()):
             return '[pseudo-package]%s[reset]' % self.package
         else:
             return '[package]%s[reset]' % self.package
 
-import utils
-import messages
-import datasources
-import mailparsers
+from . import utils
+from . import messages
+from . import datasources
+from . import mailparsers

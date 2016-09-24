@@ -21,7 +21,7 @@ import os
 import re
 import time
 import random
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import supybot
 import threading
 import requests
@@ -202,13 +202,13 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
         with self.topic_lock:
             values = {}
-            for callback, prefix in sections.items():
+            for callback, prefix in list(sections.items()):
                 values[prefix] = callback()
 
             for channel in self.irc.state.channels:
                 new_topic = topic = self.irc.state.getTopic(channel)
 
-                for callback, prefix in sections.items():
+                for callback, prefix in list(sections.items()):
                     if values[prefix]:
                         new_topic = rewrite_topic(new_topic, prefix,
                                                   values[prefix])
@@ -398,7 +398,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     def _dehs(self, irc, msg, args, items):
         for package in items:
             msg = "[desc]Debian External Health Status for[reset] [package]%s[reset]: [url]https://dehs.alioth.debian.org/report.php?package=%s[/url]" % \
-                (package, urllib.quote(package))
+                (package, urllib.parse.quote(package))
             irc.reply(colourise(msg), prefixNick=False)
     dehs = wrap(_dehs, [many('anything')])
     health = wrap(_dehs, [many('anything')])

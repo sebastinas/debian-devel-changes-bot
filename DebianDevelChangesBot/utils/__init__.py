@@ -16,38 +16,29 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from decoding import header_decode, quoted_printable
-from parse_mail import parse_mail
-from format_email_address import format_email_address
-from tidy_bug_title import tidy_bug_title
-from irc_colours import colourise
-from rewrite_topic import rewrite_topic
-from madison import madison
-from popcon import popcon
+from .decoding import header_decode, quoted_printable
+from .parse_mail import parse_mail
+from .format_email_address import format_email_address
+from .tidy_bug_title import tidy_bug_title
+from .irc_colours import colourise
+from .rewrite_topic import rewrite_topic
+from .madison import madison
+from .popcon import popcon
 
-import decoding
-import parse_mail
-import format_email_address
-import tidy_bug_title
-import irc_colours
-import rewrite_topic
-import madison
-import popcon
+from . import decoding
+from . import parse_mail
+from . import format_email_address
+from . import tidy_bug_title
+from . import irc_colours
+from . import rewrite_topic
+from . import madison
+from . import popcon
 
-reload(decoding)
-reload(parse_mail)
-reload(format_email_address)
-reload(tidy_bug_title)
-reload(irc_colours)
-reload(rewrite_topic)
-reload(madison)
-reload(popcon)
-
-from decoding import header_decode, quoted_printable
-from parse_mail import parse_mail
-from format_email_address import format_email_address
-from tidy_bug_title import tidy_bug_title
-from irc_colours import colourise
-from rewrite_topic import rewrite_topic
-from madison import madison
-from popcon import popcon
+from .decoding import header_decode, quoted_printable
+from .parse_mail import parse_mail
+from .format_email_address import format_email_address
+from .tidy_bug_title import tidy_bug_title
+from .irc_colours import colourise
+from .rewrite_topic import rewrite_topic
+from .madison import madison
+from .popcon import popcon

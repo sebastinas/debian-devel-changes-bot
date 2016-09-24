@@ -17,19 +17,19 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import email
+import email.iterators
 
 from DebianDevelChangesBot.utils import quoted_printable
 
 def parse_mail(fileobj):
     headers, body = {}, []
-    msg = email.message_from_file(fileobj)
+    msg = email.message_from_binary_file(fileobj)
 
-    for k, v in msg.items():
+    for k, v in list(msg.items()):
         headers[k] = quoted_printable(v).replace('\n', '').replace('\t', ' ').strip()
 
-    for line in email.Iterators.body_line_iterator(msg):
-        line = unicode(line, 'utf-8', 'replace').replace('\n', '')
-        body.append(line)
+    for line in email.iterators.body_line_iterator(msg):
+        body.append(line.replace("\n", ""))
 
     # Merge lines joined with "=\n"
     i = len(body) - 1

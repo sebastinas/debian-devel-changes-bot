@@ -45,7 +45,7 @@ class TestMailParserBugClosed(unittest.TestCase):
         self.assertTrue(msg)
         self.assertEqual(msg.bug_number, 123456)
         self.assertEqual(msg.package, 'binary-package')
-        self.assertEqual(msg.by, u'somewhere@email.com')
+        self.assertEqual(msg.by, 'somewhere@email.com')
         self.assertEqual(msg.title, 'description here')
 
     def testTwoEntriesInTo(self):
@@ -58,17 +58,17 @@ class TestMailParserBugClosed(unittest.TestCase):
         self.assertTrue(msg)
         self.assertEqual(msg.bug_number, 123456)
         self.assertEqual(msg.package, 'binary-package')
-        self.assertEqual(msg.by, u'From <from@email.com>')
+        self.assertEqual(msg.by, 'From <from@email.com>')
         self.assertEqual(msg.title, 'description here')
 
     def testDone(self):
         self.headers.update({
-            'From': u'From <from@email.com>',
-            'To': u'123456-done@bugs.debian.org',
+            'From': 'From <from@email.com>',
+            'To': '123456-done@bugs.debian.org',
         })
         msg = p.parse(self.headers, self.body)
         self.assertTrue(msg)
-        self.assertEqual(msg.by, u'From <from@email.com>')
+        self.assertEqual(msg.by, 'From <from@email.com>')
 
 if __name__ == "__main__":
     unittest.main()

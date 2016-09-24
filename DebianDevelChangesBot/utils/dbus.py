@@ -18,7 +18,7 @@
 
 import threading
 
-from cStringIO import StringIO
+from io import StringIO
 from pydbus import SystemBus
 from gi.repository import GLib
 
