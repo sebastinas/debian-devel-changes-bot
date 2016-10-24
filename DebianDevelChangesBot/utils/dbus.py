@@ -56,21 +56,26 @@ class BTSDBusService(object):
         self.thread.start()
 
     def process_mails(self):
-        log.debug("Mail processing thread started")
+        log.debug("Mail processing thread started.")
         while not self.quit:
             with self.cv:
                 while not self.quit and len(self.messages) == 0:
+                    log.debug("Waiting for new mail.")
                     self.cv.wait()
 
                 if self.quit:
+                    log.debug("Stopping.")
                     self.thread = None
                     return
 
                 mail = self.messages.popleft()
-                log.debug("Got mail")
+                log.debug("Got mail.")
 
             mail = base64.b64decode(mail.encode('ascii'))
-            self.callback(BytesIO(mail))
+            try:
+                self.callback(BytesIO(mail))
+            except Exception as e:
+                log.exception('Uncaught exception: {}'.format(e))
 
         self.thread = None
 
