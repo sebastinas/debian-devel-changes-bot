@@ -48,7 +48,7 @@ class AptArchive(NewDataSource):
         self.source_list = apt_pkg.SourceList()
         self.source_list.read_main_list()
 
-    def update(self, ignore_errors=False):
+    def update_index(self, ignore_errors=False):
         import apt.progress.base
 
         lists = apt_pkg.config.find_dir("Dir::State::Lists")
@@ -58,8 +58,11 @@ class AptArchive(NewDataSource):
             except apt_pkg.Error as e:
                 if not ignore_errors:
                     raise NewDataSourc.DataError('Failed to update cache: {}'.format(e))
-            self.cache = apt_pkg.Cache(None)
-            self.depcache = apt_pkg.DepCache(self.cache)
+
+
+    def update(self):
+        self.cache = apt_pkg.Cache(None)
+        self.depcache = apt_pkg.DepCache(self.cache)
 
     def get_maintainer(self, package):
         if package in self.cache:

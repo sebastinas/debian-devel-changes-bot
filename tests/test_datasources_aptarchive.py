@@ -36,7 +36,8 @@ class TestDatasourceAptArchive(unittest.TestCase):
         cls.statedir = tempfile.mkdtemp()
 
         cls.apt_archive = AptArchive(apt_config, cls.statedir)
-        cls.apt_archive.update(True)
+        cls.apt_archive.update_index(True)
+        cls.apt_archive.update()
 
     @classmethod
     def tearDownClass(cls):
