@@ -1,0 +1,11 @@
+[Unit]
+Description=#debian-devel-changes IRC bot - apt update
+RefuseManualStart=no
+RefuseManualStop=no
+ 
+[Timer]
+Persistent=false
+OnCalendar=hourly
+ 
+[Install]
+WantedBy=timers.target

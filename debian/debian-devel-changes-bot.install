@@ -2,3 +2,4 @@ bin/* usr/lib/debian-devel-changes-bot
 bot-config usr/share/debian-devel-changes-bot/
 debian/logrotate.d/debian-devel-changes-bot etc/logrotate.d
 dbus/org.debian.BTS.conf etc/dbus-1/system.d
+debian/debian-devel-changes-bot-apt-update.* lib/systemd/system

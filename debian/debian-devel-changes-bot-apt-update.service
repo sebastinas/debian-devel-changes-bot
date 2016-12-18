@@ -1,0 +1,14 @@
+[Unit]
+Description=#debian-devel-changes IRC bot - apt update
+RefuseManualStart=no
+RefuseManualStop=yes
+
+[Service]
+Type=oneshot
+WorkingDirectory=/var/lib/debian-devel-changes-bot
+ExecStart=/usr/lib/debian-devel-changes-bot/update-apt-cache
+User=ddc-bot
+Group=ddc-bot
+
+[Install]
+WantedBy=multi-user.target
