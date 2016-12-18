@@ -1,0 +1,411 @@
+From bounce-debian-bugs-closed=sramacher=debian.org@lists.debian.org Mon Dec 12 23:12:14 2016
+Return-path: <bounce-debian-bugs-closed=sramacher=debian.org@lists.debian.org>
+Envelope-to: sebastian+debian@ramacher.at
+Delivery-date: Mon, 12 Dec 2016 23:12:14 +0100
+Received: from bendel.debian.org ([2001:41b8:202:deb:216:36ff:fe40:4002])
+	by alphacentauri.ramacher.at with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.84_2)
+	(envelope-from <bounce-debian-bugs-closed=sramacher=debian.org@lists.debian.org>)
+	id 1cGYpO-0004O2-To
+	for sebastian+debian@ramacher.at; Mon, 12 Dec 2016 23:12:14 +0100
+Received: from localhost (localhost [127.0.0.1])
+	by bendel.debian.org (Postfix) with QMQP
+	id 6937D155; Mon, 12 Dec 2016 22:12:10 +0000 (UTC)
+X-Mailbox-Line: From debian-bugs-closed-request@lists.debian.org  Mon Dec 12 22:12:10 2016
+Old-Return-Path: <debbugs@buxtehude.debian.org>
+X-Original-To: lists-debian-bugs-closed@bendel.debian.org
+Delivered-To: lists-debian-bugs-closed@bendel.debian.org
+Received: from localhost (localhost [127.0.0.1])
+	by bendel.debian.org (Postfix) with ESMTP id 59B38D4
+	for <lists-debian-bugs-closed@bendel.debian.org>; Mon, 12 Dec 2016 22:12:10 +0000 (UTC)
+X-Virus-Scanned: at lists.debian.org with policy bank bug
+X-Spam-Flag: NO
+X-Spam-Score: -2.211
+X-Spam-Level:
+X-Spam-Status: No, score=-2.211 tagged_above=-10000 required=5.3
+	tests=[BAYES_00=-1.9, RP_MATCHES_RCVD=-0.311]
+	autolearn=ham autolearn_force=no
+Received: from bendel.debian.org ([127.0.0.1])
+	by localhost (lists.debian.org [127.0.0.1]) (amavisd-new, port 2525)
+	with ESMTP id 0mTkGiSO3XQn
+	for <lists-debian-bugs-closed@bendel.debian.org>;
+	Mon, 12 Dec 2016 22:12:08 +0000 (UTC)
+Received: from buxtehude.debian.org (buxtehude.debian.org [IPv6:2607:f8f0:614:1::1274:39])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(Client CN "buxtehude.debian.org", Issuer "Debian SMTP CA" (not verified))
+	by bendel.debian.org (Postfix) with ESMTPS id D0135C8;
+	Mon, 12 Dec 2016 22:12:07 +0000 (UTC)
+Received: from debbugs by buxtehude.debian.org with local (Exim 4.84_2)
+	(envelope-from <debbugs@buxtehude.debian.org>)
+	id 1cGYpI-00084l-NY; Mon, 12 Dec 2016 22:12:04 +0000
+MIME-Version: 1.0
+X-Mailer: MIME-tools 5.505 (Entity 5.505)
+X-Loop: owner@bugs.debian.org
+From: owner@bugs.debian.org (Debian Bug Tracking System)
+To: md@Linux.IT (Marco d'Itri)
+Subject: Bug#847991: marked as done (initramfs-tools: upgrade to stretch
+ in kvm image fails when trying to copy 70-persistent-net.rules)
+Message-ID: <handler.847991.D847991.148158054130090.ackdone@bugs.debian.org>
+References: <20161212220852.eanimjob2rrwi5ja@bongo.bofh.it>
+ <20161212214234.797.94144.reportbug@jessie.vagrantup.com>
+X-Debian-PR-Message: closed 847991
+X-Debian-PR-Package: udev
+X-Debian-PR-Source: systemd, udev
+Date: Mon, 12 Dec 2016 22:12:04 +0000
+Content-Type: multipart/mixed; boundary="----------=_1481580724-31042-0"
+X-Debian-Message: from BTS
+Resent-Message-ID: <qeCewNXn4NN.A._3E.6CyTYB@bendel>
+Resent-From: debian-bugs-closed@lists.debian.org
+X-Mailing-List: <debian-bugs-closed@lists.debian.org> archive/latest/506786
+X-Loop: debian-bugs-closed@lists.debian.org
+List-Id: <debian-bugs-closed.lists.debian.org>
+List-URL: <https://lists.debian.org/debian-bugs-closed/>
+List-Post: <mailto:debian-bugs-closed@lists.debian.org>
+List-Help: <mailto:debian-bugs-closed-request@lists.debian.org?subject=help>
+List-Subscribe: <mailto:debian-bugs-closed-request@lists.debian.org?subject=subscribe>
+List-Unsubscribe: <mailto:debian-bugs-closed-request@lists.debian.org?subject=unsubscribe>
+Precedence: list
+Resent-Sender: debian-bugs-closed-request@lists.debian.org
+Resent-Date: Mon, 12 Dec 2016 22:12:10 +0000 (UTC)
+X-Spam-score: -4.9
+X-Spam-score_int: -48
+X-Spam-bar: ----
+
+This is a multi-part message in MIME format...
+
+------------=_1481580724-31042-0
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+
+Your message dated Mon, 12 Dec 2016 23:08:52 +0100
+with message-id <20161212220852.eanimjob2rrwi5ja@bongo.bofh.it>
+and subject line Re: Bug#847991: initramfs-tools: upgrade to stretch in kvm=
+ image fails when trying to copy 70-persistent-net.rules
+has caused the Debian Bug report #847991,
+regarding initramfs-tools: upgrade to stretch in kvm image fails when tryin=
+g to copy 70-persistent-net.rules
+to be marked as done.
+
+This means that you claim that the problem has been dealt with.
+If this is not the case it is now your responsibility to reopen the
+Bug report if necessary, and/or fix the problem forthwith.
+
+(NB: If you are a system administrator and have no idea what this
+message is talking about, this may indicate a serious mail system
+misconfiguration somewhere. Please contact owner@bugs.debian.org
+immediately.)
+
+
+--=20
+847991: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D847991
+Debian Bug Tracking System
+Contact owner@bugs.debian.org with problems
+
+------------=_1481580724-31042-0
+Content-Type: message/rfc822
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+
+Received: (at submit) by bugs.debian.org; 12 Dec 2016 21:49:25 +0000
+X-Spam-Checker-Version: SpamAssassin 3.4.0-bugs.debian.org_2005_01_02
+	(2014-02-07) on buxtehude.debian.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-13.9 required=4.0 tests=BAYES_00,FOURLA,HAS_PACKAGE,
+	RP_MATCHES_RCVD,SPF_PASS,WORD_WITHOUT_VOWELS,XMAILER_REPORTBUG autolearn=ham
+	autolearn_force=no version=3.4.0-bugs.debian.org_2005_01_02
+X-Spam-Bayes: score:0.0000 Tokens: new, 12; hammy, 150; neutral, 360; spammy,
+	0. spammytokens: hammytokens:0.000-+--H*x:6.6.3, 0.000-+--H*UA:6.6.3,
+	0.000-+--31604amd64, 0.000-+--3.16.0-4-amd64, 0.000-+--H*M:reportbug
+Return-path: <gabster@lelutin.ca>
+Received: from mail.lelutin.ca ([209.44.99.194])
+	by buxtehude.debian.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.84_2)
+	(envelope-from <gabster@lelutin.ca>)
+	id 1cGYTN-0005tR-NJ
+	for submit@bugs.debian.org; Mon, 12 Dec 2016 21:49:25 +0000
+Received: from jessie.vagrantup.com (modemcable004.230-80-70.mc.videotron.ca [70.80.230.4])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mail.lelutin.ca (Postfix) with ESMTPSA id A362320068;
+	Mon, 12 Dec 2016 16:42:47 -0500 (EST)
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
+From: Gabriel Filion <gabster@lelutin.ca>
+To: Debian Bug Tracking System <submit@bugs.debian.org>
+Subject: initramfs-tools: upgrade to stretch in kvm image fails when trying to copy
+ 70-persistent-net.rules
+Message-ID: <20161212214234.797.94144.reportbug@jessie.vagrantup.com>
+X-Mailer: reportbug 6.6.3
+Date: Mon, 12 Dec 2016 21:42:34 +0000
+X-Virus-Scanned: clamav-milter 0.99.2 at pshum
+X-Virus-Status: Clean
+X-Greylist: delayed 396 seconds by postgrey-1.35 at buxtehude; Mon, 12 Dec 2016 21:49:25 UTC
+Delivered-To: submit@bugs.debian.org
+
+Package: initramfs-tools
+Version: 0.120+deb8u2
+Severity: important
+
+Hi there,
+
+I've tried upgrading a VM from jessie to stretch and I'm having an issue with
+initramfs-tools.
+
+The upgrade is from 0.120+deb8u2 to 0.125. The system is a KVM image of debian
+jessie (vanilla debian install with only mysql-server installed on top)
+
+During the upgrade I got the following error message:
+
+update-initramfs: deferring update (trigger activated)
+Processing triggers for initramfs-tools (0.120+deb8u2) ...
+update-initramfs: Generating /boot/initrd.img-3.16.0-4-amd64
+cp: omitting directory ‘/etc/udev/rules.d/70-persistent-net.rules’
+E: /usr/share/initramfs-tools/hooks/udev failed with return 1.
+update-initramfs: failed for /boot/initrd.img-3.16.0-4-amd64 with 1.
+dpkg: error processing package initramfs-tools (--configure):
+ subprocess installed post-installation script returned error exit status 1
+Errors were encountered while processing:
+ initramfs-tools
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+
+after that, I've tried running apt -f install and got:
+
+Processing triggers for initramfs-tools (0.120+deb8u2) ...
+update-initramfs: Generating /boot/initrd.img-3.16.0-4-amd64
+cp: cannot stat ‘/etc/modprobe.d/*’: No such file or directory
+cp: omitting directory ‘/etc/udev/rules.d/70-persistent-net.rules’
+E: /usr/share/initramfs-tools/hooks/udev failed with return 1.
+update-initramfs: failed for /boot/initrd.img-3.16.0-4-amd64 with 1.
+dpkg: error processing package initramfs-tools (--configure):
+ subprocess installed post-installation script returned error exit status 1
+Processing triggers for libc-bin (2.24-7) ...
+Errors were encountered while processing:
+ initramfs-tools
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+
+which seems to be blocking on the same error, just with one more warning.
+
+FWIW, 70-persistent-net.rules is a directory but is emtpy.
+
+
+I've set priority to "important" since it seems to be blocking upgrade, but I
+don't know if this applies to more architectures.
+
+-- Package-specific info:
+-- initramfs sizes
+-rw-r--r-- 1 root root 16M Dec 12 21:01 /boot/initrd.img-3.16.0-4-amd64
+-- /proc/cmdline
+BOOT_IMAGE=/vmlinuz-3.16.0-4-amd64 root=/dev/mapper/jessie--vg-root ro debian-installer=en_US quiet
+
+-- resume
+RESUME=/dev/mapper/jessie--vg-swap_1
+-- /proc/filesystems
+	ext3
+	ext2
+	ext4
+
+-- lsmod
+Module                  Size  Used by
+nfsv3                  37551  1 
+nfsd                  262938  2 
+auth_rpcgss            51209  1 nfsd
+oid_registry           12419  1 auth_rpcgss
+nfs_acl                12511  2 nfsd,nfsv3
+nfs                   192232  4 nfsv3
+lockd                  83389  3 nfs,nfsd,nfsv3
+fscache                45542  1 nfs
+sunrpc                237364  24 nfs,nfsd,auth_rpcgss,lockd,nfsv3,nfs_acl
+crc32_pclmul           12915  0 
+ppdev                  16782  0 
+aesni_intel           151423  0 
+aes_x86_64             16719  1 aesni_intel
+lrw                    12757  1 aesni_intel
+gf128mul               12970  1 lrw
+glue_helper            12695  1 aesni_intel
+ablk_helper            12572  1 aesni_intel
+cryptd                 14516  2 aesni_intel,ablk_helper
+evdev                  17445  3 
+pcspkr                 12595  0 
+serio_raw              12849  0 
+virtio_balloon         13047  0 
+ttm                    77862  0 
+parport_pc             26300  0 
+drm_kms_helper         49210  0 
+parport                35749  2 ppdev,parport_pc
+drm                   249998  2 ttm,drm_kms_helper
+i2c_piix4              20864  0 
+i2c_core               46012  3 drm,i2c_piix4,drm_kms_helper
+processor              28221  0 
+thermal_sys            27642  1 processor
+button                 12944  0 
+autofs4                35529  2 
+ext4                  477942  2 
+crc16                  12343  1 ext4
+mbcache                17171  1 ext4
+jbd2                   82514  1 ext4
+dm_mod                 89405  6 
+ata_generic            12490  0 
+virtio_blk             17345  3 
+virtio_net             26553  0 
+crct10dif_pclmul       13387  0 
+crct10dif_common       12356  1 crct10dif_pclmul
+crc32c_intel           21809  0 
+psmouse                99249  0 
+ata_piix               33592  0 
+floppy                 65068  0 
+uhci_hcd               43499  0 
+ehci_hcd               69837  0 
+virtio_pci             17389  0 
+virtio_ring            17513  4 virtio_blk,virtio_net,virtio_pci,virtio_balloon
+virtio                 13058  4 virtio_blk,virtio_net,virtio_pci,virtio_balloon
+usbcore               195468  2 uhci_hcd,ehci_hcd
+usb_common             12440  1 usbcore
+libata                177508  2 ata_generic,ata_piix
+scsi_mod              191405  1 libata
+
+-- /etc/initramfs-tools/modules
+
+-- /etc/kernel-img.conf
+# Kernel image management overrides
+# See kernel-img.conf(5) for details
+do_symlinks = yes
+do_bootloader = no
+do_initrd = yes
+link_in_boot = no
+
+-- /etc/initramfs-tools/initramfs.conf
+MODULES=most
+BUSYBOX=y
+KEYMAP=n
+COMPRESS=gzip
+DEVICE=
+NFSROOT=auto
+
+-- /etc/initramfs-tools/update-initramfs.conf
+update_initramfs=yes
+backup_initramfs=no
+
+-- mkinitramfs hooks
+/etc/initramfs-tools/hooks/:
+
+/usr/share/initramfs-tools/hooks:
+busybox
+dmsetup
+fsck
+keymap
+klibc-utils
+klibc^i-t
+kmod
+lvm2
+resume
+thermal
+udev
+zz-busybox
+
+
+-- System Information:
+Debian Release: stretch/sid
+  APT prefers testing-updates
+  APT policy: (500, 'testing-updates'), (500, 'testing')
+Architecture: amd64 (x86_64)
+
+Kernel: Linux 3.16.0-4-amd64 (SMP w/1 CPU core)
+Locale: LANG=en_CA.utf8, LC_CTYPE=en_CA.utf8 (charmap=UTF-8) (ignored: LC_ALL set to en_CA.utf8)
+Shell: /bin/sh linked to /bin/dash
+Init: systemd (via /run/systemd/system)
+
+Versions of packages initramfs-tools depends on:
+ii  busybox      1:1.22.0-9+deb8u1
+ii  cpio         2.11+dfsg-4.1+deb8u1
+ii  klibc-utils  2.0.4-9
+ii  kmod         18-3
+ii  udev         232-7
+
+Versions of packages initramfs-tools recommends:
+ii  busybox  1:1.22.0-9+deb8u1
+
+Versions of packages initramfs-tools suggests:
+ii  bash-completion  1:2.1-4.3
+
+-- no debconf information
+
+------------=_1481580724-31042-0
+Content-Type: message/rfc822
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
+
+Received: (at 847991-done) by bugs.debian.org; 12 Dec 2016 22:09:01 +0000
+X-Spam-Checker-Version: SpamAssassin 3.4.0-bugs.debian.org_2005_01_02
+	(2014-02-07) on buxtehude.debian.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-10.5 required=4.0 tests=BAYES_00,HAS_BUG_NUMBER,
+	PGPSIGNATURE,RCVD_IN_DNSWL_NONE,URIBL_CNKR autolearn=ham autolearn_force=no
+	version=3.4.0-bugs.debian.org_2005_01_02
+X-Spam-Bayes: score:0.0000 Tokens: new, 6; hammy, 93; neutral, 18; spammy, 0.
+	spammytokens: hammytokens:0.000-+--H*c:pgp-sha256, 0.000-+--H*u:NeoMutt,
+	0.000-+--H*UA:NeoMutt, 0.000-+--H*UA:1.7.1, 0.000-+--H*u:1.7.1
+Return-path: <md@Linux.IT>
+Received: from attila.bofh.it ([85.94.204.146] ident=postfix)
+	by buxtehude.debian.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.84_2)
+	(envelope-from <md@Linux.IT>)
+	id 1cGYmL-0007ov-8c
+	for 847991-done@bugs.debian.org; Mon, 12 Dec 2016 22:09:01 +0000
+Received: by attila.bofh.it (Postfix, from userid 10)
+	id 13BB41207BE; Mon, 12 Dec 2016 23:08:58 +0100 (CET)
+Received: by bongo.bofh.it (Postfix, from userid 1000)
+	id 50C252C064F; Mon, 12 Dec 2016 23:08:52 +0100 (CET)
+Date: Mon, 12 Dec 2016 23:08:52 +0100
+To: Gabriel Filion <gabster@lelutin.ca>, 847991-done@bugs.debian.org
+Subject: Re: Bug#847991: initramfs-tools: upgrade to stretch in kvm image
+ fails when trying to copy 70-persistent-net.rules
+Message-ID: <20161212220852.eanimjob2rrwi5ja@bongo.bofh.it>
+References: <20161212214234.797.94144.reportbug@jessie.vagrantup.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="62ezioz5j373ejgd"
+Content-Disposition: inline
+In-Reply-To: <20161212214234.797.94144.reportbug@jessie.vagrantup.com>
+User-Agent: NeoMutt/20161126 (1.7.1)
+From: md@Linux.IT (Marco d'Itri)
+
+
+--62ezioz5j373ejgd
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Dec 12, Gabriel Filion <gabster@lelutin.ca> wrote:
+
+> cp: omitting directory =E2=80=98/etc/udev/rules.d/70-persistent-net.rules=
+=E2=80=99
+If /etc/udev/rules.d/70-persistent-net.rules is a directory then your=20
+system is broken. Please remove the directory.
+
+--=20
+ciao,
+Marco
+
+--62ezioz5j373ejgd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCAAdFiEEGBsIcS5ipP0URKfyK/WlwSLE96QFAlhPH/QACgkQK/WlwSLE
+96TnuwwAntk22M9yx4Uw0bDtfoSiJ6c0hcKzLzOGODESF7Z+NJk4eGl+o+WXIqCB
+GVillPSljnThb2GXtHblL8PzcCTj6nezK9ooLJzFQ1kgQL1I3cMqoJkMWFb+M+7i
+cjpcEZJWHVndV8MwwJ8koMd6VDNoNT8KHhTSLcyf7oZ0cERbmgCsJAsfJf05tKgq
+fqKmtc5xZ41E598pDbXomndtqdY13f3H/fyJd9nYvCa/yWOCPnHQ6kvDomgaCWzS
+W9Vd53huHWlie/lbG+qYzCRtSDUgUcPJ5j8iFh71oczhN/Xi4TzRMoHHdAg11PxT
+eCGZ3zwvAXrgnR39L0mDFAQZmTT9mP9nDE/cJCcMy3J/4f1xRnr0AAXQ+aNJ6ymT
+HArqtlMqLZZQRA456v2m7Rh7f5DhjUDVMNWdi1ahCgaaSJwHuBBLnaOT+1sXxiTg
+GQM4Su1X5IvvmBKj0eOROSuGHRSmiXjWX9eh1/Ip7JStoNB7JJ9kmiPzlK3a7fJM
+CW6zq9ix
+=B38/
+-----END PGP SIGNATURE-----
+
+--62ezioz5j373ejgd--
+------------=_1481580724-31042-0--
+
