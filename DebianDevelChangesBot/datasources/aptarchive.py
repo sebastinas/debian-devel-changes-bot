@@ -82,6 +82,6 @@ class AptArchive(NewDataSource):
                     version = records.version
                     maintainer = records.maintainer
 
-            return split_address(records.maintainer)
+            return split_address(maintainer)
 
         raise NewDataSource.DataError('Unable to get maintainer for {}.'.format(package))
