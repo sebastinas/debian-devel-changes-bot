@@ -97,7 +97,10 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         # Schedule datasource updates
         def wrapper(source):
             def implementation():
-                source.update()
+                try:
+                    source.update()
+                except Exception as e:
+                    log.exception('Failed to update {}: {}'.format(source.NAME, e))
                 self._topic_callback()
             return implementation
 

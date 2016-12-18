@@ -58,7 +58,7 @@ class AptArchive(NewDataSource):
                 self.cache.update(apt.progress.base.AcquireProgress(), self.source_list)
             except apt_pkg.Error as e:
                 if not ignore_errors:
-                    raise e
+                    raise NewDataSourc.DataError('Failed to update cache: {}'.format(e))
             self.cache = apt_pkg.Cache(None)
             self.depcache = apt_pkg.DepCache(self.cache)
 
