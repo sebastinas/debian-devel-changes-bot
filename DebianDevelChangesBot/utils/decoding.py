@@ -2,6 +2,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2016 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -18,9 +19,9 @@
 
 import re
 
-# Import these directly due to funkiness in Python 2.4's email library
 import email.header
 import email.quoprimime
+import email.utils
 
 def header_decode(s):
     def unquote_match(match):
@@ -62,3 +63,10 @@ def quoted_printable(val):
             raise
 
     return val
+
+def split_address(addr):
+    name, addr = email.utils.parseaddr(addr)
+    return {
+        'name': name,
+        'email': addr
+    }
