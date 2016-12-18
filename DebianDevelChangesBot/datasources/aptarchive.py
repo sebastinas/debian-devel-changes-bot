@@ -34,9 +34,11 @@ class AptArchive(NewDataSource):
         config = apt_pkg.config
         config['Dir::Etc'] = os.path.realpath(config_dir)
         config['Dir::State'] = os.path.realpath(state_dir)
-        apt_pkg.read_config_dir(config, os.path.join(config_dir, 'apt.conf.d'))
         apt_pkg.init_config()
         apt_pkg.init_system()
+
+        lists = apt_pkg.config.find_dir("Dir::State::Lists")
+        os.makedirs(lists, exist_ok=True)
 
         # We cannot import apt.progress.base globally as it would cause
         # apt_pkg.init_config to be run.
@@ -45,9 +47,6 @@ class AptArchive(NewDataSource):
         self.depcache = apt_pkg.DepCache(self.cache)
         self.source_list = apt_pkg.SourceList()
         self.source_list.read_main_list()
-
-        lists = apt_pkg.config.find_dir("Dir::State::Lists")
-        os.makedirs(lists, exist_ok=True)
 
     def update(self, ignore_errors=False):
         import apt.progress.base
