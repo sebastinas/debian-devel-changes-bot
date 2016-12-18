@@ -3,6 +3,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2015 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -17,14 +18,11 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 import io
-import unittest
+import os
 import requests
 import requests_mock
-
-import os, sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import unittest
 
 from DebianDevelChangesBot.datasources import Maintainer
 
