@@ -50,6 +50,7 @@ from DebianDevelChangesBot.utils import (
     format_email_address,
     popcon
 )
+from DebianDevelChangesBot.utils.decoding import split_address
 from DebianDevelChangesBot.utils.dbus import BTSDBusService
 from gi.repository import GObject
 
@@ -137,6 +138,15 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             self.last_n_messages.insert(0, txt)
             self.last_n_messages = self.last_n_messages[:20]
 
+            maintainer_info = None
+            if hasattr(msg, 'maintainer'):
+                maintainer_info = split_address(msg.maintainer)
+            else:
+                try:
+                    maintainer_info = self.apt_archive.get_maintainer(msg.package)
+                except NewDataSource.DataError as e:
+                    log.info("Failed to query maintainer for {}.".format(msg.package))
+
             for channel in self.irc.state.channels:
                 package_regex = self.registryValue(
                     'package_regex',
@@ -149,21 +159,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 maintainer_regex = self.registryValue(
                     'maintainer_regex',
                     channel)
-                if maintainer_regex:
-                    info = None
-                    if hasattr(msg, 'maintainer'):
-                        paddr = email.utils.parseaddr(msg.maintainer)
-                        if paddr[1]:
-                            info = {'email': paddr[1]}
-                    else:
-                        try:
-                            info = self.apt_archive.get_maintainer(msg.package)
-                        except NewDataSource.DataError as e:
-                            log.info(
-                                "Failed to query maintainer for {}.".format(
-                                    msg.package))
-                    if info is not None:
-                        maintainer_match = re.search(maintainer_regex, info['email'])
+                if maintainer_regex and maintainer_info:
+                    maintainer_match = re.search(maintainer_regex,
+                                                maintainer_info['email'])
 
                 if not package_match and not maintainer_match:
                     continue
