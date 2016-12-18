@@ -3,6 +3,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2016 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -19,10 +20,8 @@
 
 import unittest
 
-import os, sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from DebianDevelChangesBot.mailparsers import BugClosedParser as p
+
 
 class TestMailParserBugClosed(unittest.TestCase):
     def setUp(self):
@@ -69,6 +68,19 @@ class TestMailParserBugClosed(unittest.TestCase):
         msg = p.parse(self.headers, self.body)
         self.assertTrue(msg)
         self.assertEqual(msg.by, 'From <from@email.com>')
+
+    def testMultiPackages(self):
+        self.headers.update({
+            'From': 'From <from@email.com>',
+            'To': '123456-done@bugs.debian.org',
+            'X-Debian-PR-Source': 'source-package, source-package2',
+        })
+
+        msg = p.parse(self.headers, self.body)
+        self.assertTrue(msg)
+        self.assertEqual(msg.bug_number, 123456)
+        self.assertEqual(msg.package, 'binary-package')
+
 
 if __name__ == "__main__":
     unittest.main()
