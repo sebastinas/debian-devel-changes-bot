@@ -48,7 +48,7 @@ class BTSDBusService(object):
         self.cv = threading.Condition()
         self.thread = None
         self.messages = deque()
-        self.max_messages = 10
+        self.max_messages = 100
 
     def start(self):
         self.quit = False
