@@ -20,6 +20,5 @@
 from .testing_rc_bugs import TestingRCBugs, StableRCBugs
 from .new_queue import NewQueue
 from .rm_queue import RmQueue
-from .maintainer import Maintainer
 from .dinstall import Dinstall
 from .aptarchive import AptArchive
