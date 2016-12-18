@@ -25,7 +25,7 @@ from DebianDevelChangesBot import NewDataSource
 
 
 class Maintainer(NewDataSource):
-    URL = 'http://packages.qa.debian.org/%s/%s.html'
+    URL = 'https://packages.qa.debian.org/%s/%s.html'
 
     def __init__(self, session=None):
         super().__init__(session)
