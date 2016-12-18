@@ -27,7 +27,7 @@ class NewQueue(NewDataSource):
     INTERVAL = 60 * 30
 
     def __init__(self, session=None):
-        super(NewQueue, self).__init__(session)
+        super().__init__(session)
         self.packages = {}
 
     def update(self):

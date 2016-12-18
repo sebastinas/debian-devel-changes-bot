@@ -28,7 +28,7 @@ class RCBugs(NewDataSource):
     URL = 'https://udd.debian.org/bugs.cgi'
 
     def __init__(self, suite, session=None):
-        super(RCBugs, self).__init__(session)
+        super().__init__(session)
         self.suite = suite
         self.bugs = None
 
@@ -73,11 +73,11 @@ class TestingRCBugs(RCBugs):
     NAME = 'Testing RC Bugs'
 
     def __init__(self, session=None):
-        super(TestingRCBugs, self).__init__('stretch', session)
+        super().__init__('stretch', session)
 
 
 class StableRCBugs(RCBugs):
     NAME = 'Stable RC Bugs'
 
     def __init__(self, session=None):
-        super(StableRCBugs, self).__init__('jessie', session)
+        super().__init__('jessie', session)

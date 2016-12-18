@@ -26,7 +26,7 @@ class Dinstall(NewDataSource):
     INTERVAL = 60 * 5
 
     def __init__(self, session=None):
-        super(Dinstall, self).__init__(session)
+        super().__init__(session)
         self.status = 'not running'
 
     def update(self):

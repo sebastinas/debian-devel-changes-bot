@@ -28,7 +28,7 @@ class Maintainer(NewDataSource):
     URL = 'http://packages.qa.debian.org/%s/%s.html'
 
     def __init__(self, session=None):
-        super(Maintainer, self).__init__(session)
+        super().__init__(session)
 
     @classmethod
     def get_pool_url(cls, package):
