@@ -33,12 +33,16 @@ class AptArchive(NewDataSource):
 
         config = apt_pkg.config
         config['Dir::Etc'] = os.path.realpath(config_dir)
-        config['Dir::State'] = os.path.realpath(state_dir)
+        config['Dir::State'] = os.path.join(os.path.realpath(state_dir),
+                                            'state')
+        config['Dir::Cache'] = os.path.join(os.path.realpath(state_dir),
+                                            'cache')
         apt_pkg.init_config()
         apt_pkg.init_system()
 
         lists = apt_pkg.config.find_dir("Dir::State::Lists")
         os.makedirs(lists, exist_ok=True)
+        os.makedirs(config['Dir::Cache'], exist_ok=True)
 
         # We cannot import apt.progress.base globally as it would cause
         # apt_pkg.init_config to be run.
