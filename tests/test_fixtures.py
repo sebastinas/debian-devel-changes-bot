@@ -3,6 +3,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2016 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -17,19 +18,24 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-
 import unittest
 import os
+from glob import glob
 
-from DebianDevelChangesBot.messages import *
-from DebianDevelChangesBot.mailparsers import *
+from DebianDevelChangesBot.messages import (AcceptedUploadMessage,
+                                            BugClosedMessage,
+                                            BugSubmittedMessage,
+                                            SecurityAnnounceMessage)
+from DebianDevelChangesBot.mailparsers import (AcceptedUploadParser,
+                                               BugClosedParser,
+                                               BugSubmittedParser,
+                                               SecurityAnnounceParser)
 from DebianDevelChangesBot.utils import parse_mail, colourise
 
-from glob import glob
 
 class TestFixtures(unittest.TestCase):
     count = 0
+
 
 def add_tests(testdir, parser, expected_type, test=lambda x: bool(x)):
     testdir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -57,6 +63,7 @@ def add_tests(testdir, parser, expected_type, test=lambda x: bool(x)):
 
         TestFixtures.count += 1
         setattr(TestFixtures, 'test%d' % TestFixtures.count, testFunc)
+
 
 add_tests('accepted_upload', AcceptedUploadParser, AcceptedUploadMessage)
 add_tests('bug_closed', BugClosedParser, BugClosedMessage)
