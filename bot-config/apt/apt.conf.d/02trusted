@@ -1,0 +1,1 @@
+Dir::Etc::trustedparts "/etc/apt/trusted.gpg.d";

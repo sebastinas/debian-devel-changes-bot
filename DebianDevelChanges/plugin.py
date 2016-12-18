@@ -38,9 +38,9 @@ from DebianDevelChangesBot.datasources import (
     TestingRCBugs,
     NewQueue,
     RmQueue,
-    Maintainer,
     StableRCBugs,
-    Dinstall
+    Dinstall,
+    AptArchive
 )
 from DebianDevelChangesBot.utils import (
     parse_mail,
@@ -87,8 +87,12 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.new_queue = NewQueue(self.requests_session)
         self.dinstall = Dinstall(self.requests_session)
         self.rm_queue = RmQueue(self.requests_session)
+        self.apt_archive = AptArchive(
+            self.registryValue('apt_configuration_directory'),
+            self.registryValue('apt_cache_directory'))
         self.data_sources = (self.stable_rc_bugs, self.testing_rc_bugs,
-                             self.new_queue, self.dinstall, self.rm_queue)
+                             self.new_queue, self.dinstall, self.rm_queue,
+                             self.apt_archive)
 
         # Schedule datasource updates
         def wrapper(source):
@@ -149,12 +153,11 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                             info = {'email': paddr[1]}
                     else:
                         try:
-                            info = Maintainer().get_maintainer(msg.package)
+                            info = self.apt_archive.get_maintainer(msg.package)
                         except NewDataSource.DataError as e:
                             log.info(
                                 "Failed to query maintainer for {}.".format(
                                     msg.package))
-                            info = {'email': ''}
                     if info is not None:
                         maintainer_match = re.search(maintainer_regex, info['email'])
 
@@ -290,7 +293,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     def _maintainer(self, irc, msg, args, items):
         """Get maintainer for package."""
         for package in items:
-            info = Maintainer().get_maintainer(package)
+            info = self.apt_archive.get_maintainer(package)
             if info:
                 display_name = format_email_address("%s <%s>" % (info['name'], info['email']), max_domain=18)
 

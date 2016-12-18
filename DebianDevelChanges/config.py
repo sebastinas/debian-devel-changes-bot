@@ -2,6 +2,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2016 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -43,3 +44,9 @@ conf.registerChannelValue(
   registry.Boolean(False, "Determines if PRIVMSG or NOTICE should be sent on "
                    "the channel")
 )
+
+conf.registerGlobalValue(DebianDevelChanges, 'apt_configuration_directory',
+                         registry.String('', 'Determines path to apt config'))
+
+conf.registerGlobalValue(DebianDevelChanges, 'apt_cache_directory',
+                         registry.String('', 'Determines path to apt cache'))

@@ -1,0 +1,16 @@
+APT::Architecture "amd64";
+APT::Architectures "";
+APT::Architectures:: "amd64";
+APT::Architectures:: "arm64";
+APT::Architectures:: "armel";
+APT::Architectures:: "armhf";
+APT::Architectures:: "hurd-i386";
+APT::Architectures:: "i386";
+APT::Architectures:: "kfreebsd-amd64";
+APT::Architectures:: "kfreebsd-i386";
+APT::Architectures:: "mips";
+APT::Architectures:: "mips64el";
+APT::Architectures:: "mipsel";
+APT::Architectures:: "powerpc";
+APT::Architectures:: "ppc64el";
+APT::Architectures:: "s390x";

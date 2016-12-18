@@ -798,7 +798,7 @@ supybot.plugins.DebianDevelChanges.package_regex.#debian-perl: /^(perl|perl-(bas
 # Requested by lamby
 supybot.plugins.DebianDevelChanges.package_regex.#debian-django: /.*django.*/
 
-#
+###
 # Determines which maintainer announcements should be printed to the
 # channel
 #
@@ -841,6 +841,20 @@ supybot.plugins.DebianDevelChanges.distribution_regex.#debian-backports: /-backp
 ###
 supybot.plugins.DebianDevelChanges.send_privmsg: False
 supybot.plugins.DebianDevelChanges.send_privmsg.#debian-devel-changes: True
+
+###
+# Determines path to apt config
+#
+# Default value: 
+###
+supybot.plugins.DebianDevelChanges.apt_configuration_directory: /usr/share/debian-devel-changes-bot/bot-config/apt
+
+###
+# Determines path to apt cache
+#
+# Default value: 
+###
+supybot.plugins.DebianDevelChanges.apt_cache_directory: /var/lib/debian-devel-changes-bot/apt
 
 ###
 # Determines whether this plugin is loaded by default.
