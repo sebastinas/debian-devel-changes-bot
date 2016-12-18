@@ -26,6 +26,7 @@ SUBJECT = re.compile(r'^Bug#(\d+): (.+)$')
 VERSION = re.compile(r'(?i)^Version:? ([^\s]{1,20})$')
 SEVERITY = re.compile(r'(?i)^Severity:? (critical|grave|serious|important|normal|minor|wishlist)$')
 
+
 class BugSubmittedParser(MailParser):
 
     @staticmethod

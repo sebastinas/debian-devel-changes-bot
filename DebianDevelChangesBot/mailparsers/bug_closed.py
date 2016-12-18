@@ -22,7 +22,9 @@ from DebianDevelChangesBot.utils import tidy_bug_title, format_email_address
 
 import re
 
+
 SUBJECT = re.compile(r'^Bug#(\d+): marked as done \((.+)\)$')
+
 
 class BugClosedParser(MailParser):
 

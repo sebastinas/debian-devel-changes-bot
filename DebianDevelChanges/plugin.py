@@ -391,4 +391,5 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     new_queue = wrap(_new)
     newqueue = wrap(_new)
 
+
 Class = DebianDevelChanges
