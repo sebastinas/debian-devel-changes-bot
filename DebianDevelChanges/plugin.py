@@ -107,7 +107,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         for source in self.data_sources:
             schedule.addPeriodicEvent(wrapper(source), source.INTERVAL,
                                       source.NAME, now=False)
-            schedule.addEvent(wrapper(source), time.time() + 1)
+            if source.NAME != AptArchive.NAME:
+                schedule.addEvent(wrapper(source), time.time() + 1)
 
     def die(self):
         self.dbus_service.stop()
