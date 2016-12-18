@@ -1,3 +1,10 @@
+debian-devel-changes-bot (20161218) unstable; urgency=medium
+
+  * Switch to python3-apt based data source for maintainer informations instead
+    of fetching data from the QA page.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 18 Dec 2016 18:02:53 +0100
+
 debian-devel-changes-bot (20161025) unstable; urgency=medium
 
   * More logging.
