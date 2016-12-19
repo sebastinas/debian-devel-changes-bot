@@ -53,12 +53,14 @@ class TestDatasourceAptArchive(unittest.TestCase):
         self.assertEqual(info['email'], 'pkg-multimedia-maintainers@lists.alioth.debian.org')
         self.assertEqual(info['name'], 'Debian Multimedia Maintainers')
 
-
     def testUdev(self):
         info = self.apt_archive.get_maintainer('udev')
         self.assertEqual(info['email'], 'pkg-systemd-maintainers@lists.alioth.debian.org')
         self.assertEqual(info['name'], 'Debian systemd Maintainers')
 
+    def testPseudoPackage(self):
+        info = self.apt_archive.get_maintainer('wnpp')
+        self.assertEqual(info['email'], 'wnpp@debian.org')
 
 
 if __name__ == "__main__":
