@@ -45,10 +45,7 @@ class AptArchive(NewDataSource):
         os.makedirs(lists, exist_ok=True)
         os.makedirs(config['Dir::Cache'], exist_ok=True)
 
-        # We cannot import apt.progress.base globally as it would cause
-        # apt_pkg.init_config to be run.
-        import apt.progress.base
-        self.cache = apt_pkg.Cache(apt.progress.base.OpProgress())
+        self.cache = apt_pkg.Cache(None)
         self.depcache = apt_pkg.DepCache(self.cache)
         self.source_list = apt_pkg.SourceList()
         self.source_list.read_main_list()
