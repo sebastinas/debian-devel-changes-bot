@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20161219) unstable; urgency=medium
+
+  * Handle pseudo apckages in apt datasoure.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Mon, 19 Dec 2016 18:27:59 +0100
+
 debian-devel-changes-bot (20161218.1) unstable; urgency=medium
 
   * Various fixes to the APT data source.
