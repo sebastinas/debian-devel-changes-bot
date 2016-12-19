@@ -77,6 +77,9 @@ class AptArchive(NewDataSource):
                 if records.lookup(candidate.file_list[0]):
                     return split_address(records.maintainer)
 
+                # delate record iterator
+                del records
+
         if package.startswith('src:'):
             package = package[4:]
 
