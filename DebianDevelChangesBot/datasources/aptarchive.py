@@ -19,6 +19,7 @@
 import os
 import apt_pkg
 
+from DebianDevelChangesBot import pseudo_package_maintainers
 from DebianDevelChangesBot import NewDataSource
 from DebianDevelChangesBot.utils.decoding import split_address
 
@@ -69,6 +70,9 @@ class AptArchive(NewDataSource):
         self.depcache = apt_pkg.DepCache(self.cache)
 
     def get_maintainer(self, package):
+        if package in pseudo_package_maintainers:
+            return split_address(pseudo_package_maintainers[package])
+
         if package in self.cache:
             candidate = self.depcache.get_candidate_ver(self.cache[package])
             if candidate is not None:
