@@ -25,8 +25,8 @@ from DebianDevelChangesBot.utils.decoding import split_address
 
 
 class AptArchive(NewDataSource):
-    # update every hour
-    INTERVAL = 60 * 60
+    # re-open cache every 30 min
+    INTERVAL = 30 * 60
     NAME = 'APT archive'
 
     def __init__(self, config_dir, state_dir):
