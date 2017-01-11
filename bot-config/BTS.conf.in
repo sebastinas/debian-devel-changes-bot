@@ -63,7 +63,7 @@ supybot.networks.oftc.servers: irc.oftc.net:6697
 #
 # Default value:  
 ###
-supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia #debian-gis #debian-django #debian-reproducible #pbuilder #debian-python-changes #debian-openstack-commits #debian-dpkg #debian-systemd
+supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia #debian-gis #debian-django #debian-reproducible #pbuilder #debian-python-changes #debian-openstack-commits #debian-dpkg #debian-systemd #debian-apt
 
 ###
 # Determines what key (if any) will be used to join the channel.
@@ -824,6 +824,8 @@ supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-openstack-commits: /
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-dpkg: /^debian-dpkg@lists\.debian\.org$/
 # Requested by fsateler
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-systemd: /^pkg-systemd-maintainers@lists\.alioth\.debian\.org$/
+# Requested by juliank
+supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-apt: /^(deity@lists\.debian\.org|aptitude-devel@lists\.alioth\.debian\.org)$/
 
 ###
 # Determines which distribution announcements should be printed to the
