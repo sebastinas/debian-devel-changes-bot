@@ -1,3 +1,10 @@
+debian-devel-changes-bot (20170504) unstable; urgency=medium
+
+  * Fix parsing of RM queue.
+  * Various smaller fixes.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Thu, 04 May 2017 21:31:29 +0200
+
 debian-devel-changes-bot (20161219) unstable; urgency=medium
 
   * Handle pseudo apckages in apt datasoure.
