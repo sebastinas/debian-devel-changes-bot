@@ -21,7 +21,7 @@
 		    }
 	    }
 	    function togglePkg(o, hidingClass){
-		    var children = o.getElementsByTagName("*");
+		    var children = o.parentNode.getElementsByTagName("*");
 		    for (var i = 0; i < children.length; i++) {
 			    if(! children[i].hasAttribute("class"))
 				    continue;
@@ -96,7 +96,8 @@
 			<p>
 			Removals in Debian are only performed after the submission of a
 			bugreport filed against the (pseudo)-package ftp.debian.org.
-            To make life easier for the ftp-team please use the following format:
+            To make life easier for the ftp-team please use the following format
+            (<em>reportbug ftp.debian.org</em> will guide you through it and automatically follow this format):
 			</p>
 			<p>
 			The subject of the bug should be of the format <br />
@@ -147,387 +148,687 @@
 		 </div>
 			
 <div class="inverse"><p id="toggle-info" onclick='togglePkg(document, "canHide")'>Inverse display AKA toggle visible bugs (tagged moreinfo / not tagged)</p></div><div id="content">
-<div class="package even " onclick='togglePkg(this, "canHide", "block")'>
+<div class="package even startHidden">
 <div class="infobox">
-<div class="origin canHide">Removal requested from Raphael Geissert &lt;atomo64@gmail.com&gt;</div>
-<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/488899">Bug #488899</a></span><span class="pts"><a href="http://packages.qa.debian.org/libgocr">PTS page</a></span></div>
+<div class="origin canHide"style="display: none">Removal requested from Paul Wise &lt;pabs@debian.org&gt;</div>
+<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/831553">Bug #831553 (moreinfo)</a></span><span class="pts"><a href="http://tracker.debian.org/mtasc">PTS page</a></span></div>
 </div>
-<div class="subject">libgocr: RoQA; dead upstream</div>
-<div class="canHide"><table class="pkgs">
-<tr>
-   <td class="pkg-name">libgocr0</td>
-   <td class="pkg-ver">0.7.2-7</td>
-   <td class="pkg-arches">armel, hppa, i386, mips, alpha, arm, m68k, mipsel, s390, ia64, powerpc, amd64, sparc, hurd-i386</td>
-</tr>
-<tr>
-   <td class="pkg-name">libgocr-dev</td>
-   <td class="pkg-ver">0.7.2-7</td>
-   <td class="pkg-arches">armel, hppa, i386, mips, alpha, arm, m68k, mipsel, s390, ia64, powerpc, amd64, sparc, hurd-i386</td>
-</tr>
-<tr>
-   <td class="pkg-name">libgocr</td>
-   <td class="pkg-ver">0.7.2-7</td>
-   <td class="pkg-arches">source</td>
-</tr>
-<tr>
-   <td class="pkg-name">libgocr-doc</td>
-   <td class="pkg-ver">0.7.2-7</td>
-   <td class="pkg-arches">all</td>
-</tr>
- </table>
-</div>
- <div class="dak-command canHide">dak rm -p -d 488899 -R -C package -m "RoQA; dead upstream" libgocr</div>
-<div class="uploader canHide">Last upload: 31.7.2005 with maintainer set to Cosimo Alfarano &lt;kalfa@debian.org&gt;</div>
- </div>
-<div class="package odd " onclick='togglePkg(this, "canHide", "block")'>
-<div class="infobox">
-<div class="origin canHide">Removal requested from Andreas Metzler &lt;ametzler@downhill.at.eu.org&gt;</div>
-<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/490628">Bug #490628</a></span><span class="pts"><a href="http://packages.qa.debian.org/gnutls13">PTS page</a></span></div>
-</div>
-<div class="subject">gnutls13: ROM; obsolete library version</div>
-<div class="canHide"><table class="pkgs">
-<tr>
-   <td class="pkg-name">gnutls13</td>
-   <td class="pkg-ver">2.0.4-4</td>
-   <td class="pkg-arches">source</td>
-</tr>
-<tr>
-   <td class="pkg-name">libgnutlsxx13</td>
-   <td class="pkg-ver">2.0.4-4</td>
-   <td class="pkg-arches">i386, alpha, amd64, armel, hppa, ia64, mips, mipsel, powerpc, s390, sparc, arm, hurd-i386, m68k</td>
-</tr>
-<tr>
-   <td class="pkg-name">libgnutls13-dbg</td>
-   <td class="pkg-ver">2.0.4-4</td>
-   <td class="pkg-arches">i386, alpha, amd64, armel, hppa, ia64, mips, mipsel, powerpc, s390, sparc, arm, hurd-i386, m68k</td>
-</tr>
-<tr>
-   <td class="pkg-name">libgnutls13</td>
-   <td class="pkg-ver">2.0.4-4</td>
-   <td class="pkg-arches">i386, alpha, amd64, armel, hppa, ia64, mips, mipsel, powerpc, s390, sparc, arm, hurd-i386, m68k</td>
-</tr>
- </table>
-</div>
- <div class="dak-command canHide">dak rm -p -d 490628 -R -C package -m "ROM; obsolete library version" gnutls13</div>
-<div class="uploader canHide">Last upload: 22.5.2008 with maintainer set to Debian GnuTLS Maintainers &lt;pkg-gnutls-maint@lists.alioth.debian.org&gt;</div>
- </div>
-<div class="package even " onclick='togglePkg(this, "canHide", "block")'>
-<div class="infobox">
-<div class="notes canHide">Partial Removal: arm,armel,ia64</div>
-<div class="origin canHide">Removal requested from &quot;Kurt B. Kaiser&quot; &lt;kbk@shore.net&gt;</div>
-<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/491189">Bug #491189</a></span><span class="pts"><a href="http://packages.qa.debian.org/gambc">PTS page</a></span></div>
-</div>
-<div class="subject">gambc: ROM; ANAIS; bootstrapped compiler fails to run</div>
-<div class="canHide"><table class="pkgs">
-<tr>
-   <td class="pkg-name">libgambc4-dev</td>
-   <td class="pkg-ver">4.2.8-1</td>
-   <td class="pkg-arches">hppa, m68k, sparc, alpha, i386, amd64, mips, mipsel, powerpc, s390</td>
-</tr>
-<tr>
-   <td class="pkg-name">libgambc4-dev</td>
-   <td class="pkg-ver">4.0~b20-1</td>
-   <td class="pkg-arches">armel, arm, ia64</td>
-</tr>
-<tr>
-   <td class="pkg-name">libgambc4</td>
-   <td class="pkg-ver">4.2.8-1</td>
-   <td class="pkg-arches">hppa, m68k, sparc, alpha, i386, amd64, mips, mipsel, powerpc, s390</td>
-</tr>
-<tr>
-   <td class="pkg-name">libgambc4</td>
-   <td class="pkg-ver">4.0~b20-1</td>
-   <td class="pkg-arches">armel, arm, ia64</td>
-</tr>
-<tr>
-   <td class="pkg-name">gambc-doc</td>
-   <td class="pkg-ver">4.2.8-1</td>
-   <td class="pkg-arches">all</td>
-</tr>
-<tr>
-   <td class="pkg-name">gambc</td>
-   <td class="pkg-ver">4.2.8-1</td>
-   <td class="pkg-arches">source, hppa, m68k, sparc, alpha, i386, amd64, mips, mipsel, powerpc, s390</td>
-</tr>
-<tr>
-   <td class="pkg-name">gambc</td>
-   <td class="pkg-ver">4.0~b20-1</td>
-   <td class="pkg-arches">armel, arm, ia64</td>
-</tr>
- </table>
-</div>
- <div class="dak-command canHide">dak rm -p -d 491189 -R -C package -m "ROM; ANAIS; bootstrapped compiler fails to run" -b -a arm,armel,ia64 libgambc4-dev libgambc4 gambc-doc gambc</div>
-<div class="uploader canHide">Last upload: 8.7.2008 with maintainer set to Kurt B. Kaiser &lt;kbk@shore.net&gt;</div>
- </div>
-<div class="package odd startHidden" onclick='togglePkg(this, "canHide", "none")'>
-<div class="infobox">
-<div class="origin canHide"style="display: none">Removal requested from Lior Kaplan &lt;kaplan@debian.org&gt;</div>
-<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/487703">Bug #487703 (moreinfo)</a></span><span class="pts"><a href="http://packages.qa.debian.org/mrd6">PTS page</a></span></div>
-</div>
-<div class="subject">mrd6: ROM; long standing FTBFS bug</div>
+<div class="subject" onclick='togglePkg(this, "canHide", "none")'>mtasc: ROM; obsoleted by newer standard web technologies</div>
 <div class="canHide"style="display: none"><table class="pkgs">
 <tr>
-   <td class="pkg-name">mrd6</td>
-   <td class="pkg-ver">0.9.6-1.1</td>
-   <td class="pkg-arches">source, m68k, arm, ia64, mipsel, sparc, hppa, i386, alpha, amd64, armel, mips, powerpc</td>
-</tr>
-<tr>
-   <td class="pkg-name">mrd6</td>
-   <td class="pkg-ver">0.9.5-rev3.dfsg-0.2</td>
-   <td class="pkg-arches">s390</td>
-</tr>
- </table>
-</div>
- <div class="dak-command canHide"style="display: none">dak rm -p -d 487703 -R -C package -m "ROM; long standing FTBFS bug" mrd6</div>
-<div class="uploader canHide"style="display: none">Last upload: 9.2.2008 with maintainer set to Hugo Santos &lt;hugo@fivebits.net&gt;</div>
- </div>
-<div class="package even " onclick='togglePkg(this, "canHide", "block")'>
-<div class="infobox">
-<div class="notes canHide">Partial Removal: ia64</div>
-<div class="origin canHide">Removal requested from martin f krafft &lt;madduck@debian.org&gt;</div>
-<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/490972">Bug #490972</a></span><span class="pts"><a href="http://packages.qa.debian.org/jppy">PTS page</a></span></div>
-</div>
-<div class="subject">jppy: NVIU; ia64 build screws up, thus preventing testing migration</div>
-<div class="canHide"><table class="pkgs">
-<tr>
-   <td class="pkg-name">python-jppy</td>
-   <td class="pkg-ver">0.0.45-1</td>
-   <td class="pkg-arches">amd64, armel, arm, i386, mips, mipsel, powerpc, hppa, sparc, s390, alpha, m68k</td>
-</tr>
-<tr>
-   <td class="pkg-name">python-jppy</td>
-   <td class="pkg-ver">0.0.43-1+b1</td>
-   <td class="pkg-arches">ia64</td>
-</tr>
-<tr>
-   <td class="pkg-name">jppy-jpilot-plugins</td>
-   <td class="pkg-ver">0.0.45-1</td>
-   <td class="pkg-arches">amd64, armel, arm, i386, mips, mipsel, powerpc, hppa, sparc, s390, alpha, m68k</td>
-</tr>
-<tr>
-   <td class="pkg-name">jppy-jpilot-plugins</td>
-   <td class="pkg-ver">0.0.43-1+b1</td>
-   <td class="pkg-arches">ia64</td>
-</tr>
-<tr>
-   <td class="pkg-name">jppy-doc</td>
-   <td class="pkg-ver">0.0.45-1</td>
-   <td class="pkg-arches">all</td>
-</tr>
-<tr>
-   <td class="pkg-name">jppy</td>
-   <td class="pkg-ver">0.0.45-1</td>
-   <td class="pkg-arches">source, all</td>
-</tr>
-<tr>
-   <td class="pkg-name">jppy-lbdb-module</td>
-   <td class="pkg-ver">0.0.45-1</td>
-   <td class="pkg-arches">all</td>
-</tr>
- </table>
-</div>
- <div class="dak-command canHide">dak rm -p -d 490972 -R -C package -m "NVIU; ia64 build screws up, thus preventing testing migration" -b -a ia64 python-jppy jppy-jpilot-plugins jppy-doc jppy jppy-lbdb-module</div>
-<div class="uploader canHide">Last upload: 28.6.2008 with maintainer set to jppy development team &lt;jppy-devel@zanu.org.uk&gt;</div>
- </div>
-<div class="package odd " onclick='togglePkg(this, "canHide", "block")'>
-<div class="infobox">
-<div class="origin canHide">Removal requested from Antonin Kral &lt;A.Kral@bobek.cz&gt;</div>
-<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/490982">Bug #490982</a></span><span class="pts"><a href="http://packages.qa.debian.org/ftpmirror">PTS page</a></span></div>
-</div>
-<div class="subject">ftpmirror: RoM; RC-buggy, abandoned upstream</div>
-<div class="canHide"><table class="pkgs">
-<tr>
-   <td class="pkg-name">ftpmirror</td>
-   <td class="pkg-ver">1.96+dfsg-6</td>
-   <td class="pkg-arches">source, i386, alpha, amd64, arm, armel, hppa, ia64, mipsel, s390, sparc, mips, powerpc, hurd-i386</td>
-</tr>
-<tr>
-   <td class="pkg-name">ftpmirror</td>
-   <td class="pkg-ver">1.96+dfsg-5</td>
-   <td class="pkg-arches">m68k</td>
-</tr>
- </table>
-</div>
- <div class="dak-command canHide">dak rm -p -d 490982 -R -C package -m "RoM; RC-buggy, abandoned upstream" ftpmirror</div>
-<div class="uploader canHide">Last upload: 4.7.2008 with maintainer set to Dario Minnucci (midget) &lt;debian@midworld.net&gt;</div>
- </div>
-<div class="package even " onclick='togglePkg(this, "canHide", "block")'>
-<div class="infobox">
-<div class="origin canHide">Removal requested from Andreas Metzler &lt;ametzler@downhill.at.eu.org&gt;</div>
-<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/490631">Bug #490631</a></span><span class="pts"><a href="http://packages.qa.debian.org/opencdk10">PTS page</a></span></div>
-</div>
-<div class="subject">opencdk10: ROM; stale package</div>
-<div class="canHide"><table class="pkgs">
-<tr>
-   <td class="pkg-name">libopencdk10-dbg</td>
-   <td class="pkg-ver">0.6.6-1</td>
-   <td class="pkg-arches">hppa, ia64, m68k, i386, alpha, amd64, arm, mips, mipsel, powerpc, s390, sparc, hurd-i386, armel</td>
-</tr>
-<tr>
-   <td class="pkg-name">libopencdk10-dev</td>
-   <td class="pkg-ver">0.6.6-1</td>
-   <td class="pkg-arches">hppa, ia64, m68k, i386, alpha, amd64, arm, mips, mipsel, powerpc, s390, sparc, hurd-i386, armel</td>
-</tr>
-<tr>
-   <td class="pkg-name">opencdk10</td>
-   <td class="pkg-ver">0.6.6-1</td>
+   <td class="pkg-name">mtasc</td>
+   <td class="pkg-ver">1.14-3</td>
    <td class="pkg-arches">source</td>
 </tr>
 <tr>
-   <td class="pkg-name">libopencdk10</td>
-   <td class="pkg-ver">0.6.6-1</td>
-   <td class="pkg-arches">hppa, ia64, m68k, i386, alpha, amd64, arm, mips, mipsel, powerpc, s390, sparc, hurd-i386, armel</td>
+   <td class="pkg-name">mtasc</td>
+   <td class="pkg-ver">1.14-3+b1</td>
+   <td class="pkg-arches">hurd-i386, kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">mtasc</td>
+   <td class="pkg-ver">1.14-3+b3</td>
+   <td class="pkg-arches">i386, mips, mipsel, powerpc, amd64, armel, kfreebsd-i386, armhf, s390x, arm64, ppc64el, mips64el</td>
 </tr>
  </table>
 </div>
- <div class="dak-command canHide">dak rm -p -d 490631 -R -C package -m "ROM; stale package" opencdk10</div>
-<div class="uploader canHide">Last upload: 1.12.2007 with maintainer set to Debian GnuTLS Maintainers &lt;pkg-gnutls-maint@lists.alioth.debian.org&gt;</div>
+ <div class="dak-command canHide"style="display: none">dak rm -D -p -d 831553 -R -C package -m "ROM; obsoleted by newer standard web technologies" mtasc</div>
+<div class="uploader canHide"style="display: none">Last upload: 2013-06-11 00:00:00+00 with maintainer set to Paul Wise &lt;pabs@debian.org&gt;</div>
  </div>
-<div class="package odd " onclick='togglePkg(this, "canHide", "block")'>
+<div class="package odd startHidden">
 <div class="infobox">
-<div class="notes canHide">Partial Removal: alpha,hppa</div>
-<div class="origin canHide">Removal requested from Wouter Verhelst &lt;wouter@debian.org&gt;</div>
-<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/490974">Bug #490974</a></span><span class="pts"><a href="http://packages.qa.debian.org/belpic">PTS page</a></span></div>
+<div class="origin canHide"style="display: none">Removal requested from Sylvestre Ledru &lt;sylvestre@debian.org&gt;</div>
+<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/836602">Bug #836602 (moreinfo)</a></span><span class="pts"><a href="http://tracker.debian.org/llvm-toolchain-3.7">PTS page</a></span></div>
 </div>
-<div class="subject">belpic: ROM; doesn't build due to missing java</div>
-<div class="canHide"><table class="pkgs">
-<tr>
-   <td class="pkg-name">libbeidlibopensc2-dbg</td>
-   <td class="pkg-ver">2.6.0-5</td>
-   <td class="pkg-arches">m68k, powerpc, i386, mips, mipsel, s390, amd64, armel, sparc, ia64</td>
-</tr>
-<tr>
-   <td class="pkg-name">libbeidlibopensc2-dbg</td>
-   <td class="pkg-ver">2.6.0-3.1</td>
-   <td class="pkg-arches">alpha, hppa</td>
-</tr>
-<tr>
-   <td class="pkg-name">beidgui</td>
-   <td class="pkg-ver">2.6.0-5</td>
-   <td class="pkg-arches">m68k, powerpc, i386, mips, mipsel, s390, amd64, armel, sparc, ia64</td>
-</tr>
-<tr>
-   <td class="pkg-name">beidgui</td>
-   <td class="pkg-ver">2.6.0-3.1</td>
-   <td class="pkg-arches">alpha, hppa</td>
-</tr>
-<tr>
-   <td class="pkg-name">libbeidlibopensc2-dev</td>
-   <td class="pkg-ver">2.6.0-5</td>
-   <td class="pkg-arches">m68k, powerpc, i386, mips, mipsel, s390, amd64, armel, sparc, ia64</td>
-</tr>
-<tr>
-   <td class="pkg-name">libbeidlibopensc2-dev</td>
-   <td class="pkg-ver">2.6.0-3.1</td>
-   <td class="pkg-arches">alpha, hppa</td>
-</tr>
-<tr>
-   <td class="pkg-name">belpic</td>
-   <td class="pkg-ver">2.6.0-5</td>
-   <td class="pkg-arches">source</td>
-</tr>
-<tr>
-   <td class="pkg-name">libbeidlibopensc2</td>
-   <td class="pkg-ver">2.6.0-5</td>
-   <td class="pkg-arches">m68k, powerpc, i386, mips, mipsel, s390, amd64, armel, sparc, ia64</td>
-</tr>
-<tr>
-   <td class="pkg-name">libbeidlibopensc2</td>
-   <td class="pkg-ver">2.6.0-3.1</td>
-   <td class="pkg-arches">alpha, hppa</td>
-</tr>
-<tr>
-   <td class="pkg-name">libbeid2-dbg</td>
-   <td class="pkg-ver">2.6.0-5</td>
-   <td class="pkg-arches">m68k, powerpc, i386, mips, mipsel, s390, amd64, armel, sparc, ia64</td>
-</tr>
-<tr>
-   <td class="pkg-name">libbeid2-dbg</td>
-   <td class="pkg-ver">2.6.0-3.1</td>
-   <td class="pkg-arches">alpha, hppa</td>
-</tr>
-<tr>
-   <td class="pkg-name">libbeid2-dev</td>
-   <td class="pkg-ver">2.6.0-5</td>
-   <td class="pkg-arches">m68k, powerpc, i386, mips, mipsel, s390, amd64, armel, sparc, ia64</td>
-</tr>
-<tr>
-   <td class="pkg-name">libbeid2-dev</td>
-   <td class="pkg-ver">2.6.0-3.1</td>
-   <td class="pkg-arches">alpha, hppa</td>
-</tr>
-<tr>
-   <td class="pkg-name">beid-tools</td>
-   <td class="pkg-ver">2.6.0-5</td>
-   <td class="pkg-arches">m68k, powerpc, i386, mips, mipsel, s390, amd64, armel, sparc, ia64</td>
-</tr>
-<tr>
-   <td class="pkg-name">beid-tools</td>
-   <td class="pkg-ver">2.6.0-3.1</td>
-   <td class="pkg-arches">alpha, hppa</td>
-</tr>
-<tr>
-   <td class="pkg-name">libbeid2</td>
-   <td class="pkg-ver">2.6.0-5</td>
-   <td class="pkg-arches">m68k, powerpc, i386, mips, mipsel, s390, amd64, armel, sparc, ia64</td>
-</tr>
-<tr>
-   <td class="pkg-name">libbeid2</td>
-   <td class="pkg-ver">2.6.0-3.1</td>
-   <td class="pkg-arches">alpha, hppa</td>
-</tr>
- </table>
-</div>
- <div class="dak-command canHide">dak rm -p -d 490974 -R -C package -m "ROM; doesn't build due to missing java" -b -a alpha,hppa libbeidlibopensc2-dbg beidgui libbeidlibopensc2-dev belpic libbeidlibopensc2 libbeid2-dbg libbeid2-dev beid-tools libbeid2</div>
-<div class="uploader canHide">Last upload: 4.7.2008 with maintainer set to Wouter Verhelst &lt;wouter@debian.org&gt;</div>
- </div>
-<div class="package even startHidden" onclick='togglePkg(this, "canHide", "none")'>
-<div class="infobox">
-<div class="origin canHide"style="display: none">Removal requested from daniel@debian.org</div>
-<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/461308">Bug #461308 (moreinfo)</a></span><span class="pts"><a href="http://packages.qa.debian.org/ttf-bitstream-vera">PTS page</a></span></div>
-</div>
-<div class="subject">ttf-bitstream-vera: RoM; superseeded by ttf-dejavu</div>
+<div class="subject" onclick='togglePkg(this, "canHide", "none")'>llvm-toolchain-3.7: ROM; We should ship only 3.8, 3.9 and maybe 4.0 in the next stable</div>
 <div class="canHide"style="display: none"><table class="pkgs">
 <tr>
-   <td class="pkg-name">ttf-bitstream-vera</td>
-   <td class="pkg-ver">1.10-7</td>
-   <td class="pkg-arches">source, all</td>
-</tr>
- </table>
-</div>
- <div class="dak-command canHide"style="display: none">dak rm -p -d 461308 -R -C package -m "RoM; superseeded by ttf-dejavu" ttf-bitstream-vera</div>
-<div class="uploader canHide"style="display: none">Last upload: 19.7.2006 with maintainer set to Daniel Baumann &lt;daniel@debian.org&gt;</div>
- </div>
-<div class="package odd startHidden" onclick='togglePkg(this, "canHide", "none")'>
-<div class="infobox">
-<div class="origin canHide"style="display: none">Removal requested from &quot;Gregory B. Prokopski&quot; &lt;gadek@debian.org&gt;</div>
-<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/473289">Bug #473289 (moreinfo)</a></span><span class="pts"><a href="http://packages.qa.debian.org/sablevm-classlib">PTS page</a></span></div>
-</div>
-<div class="subject">sablevm-classlib: RoQA: obsoleted by sablevm using classpath</div>
-<div class="canHide"style="display: none"><table class="pkgs">
-<tr>
-   <td class="pkg-name">libsablevm-native1</td>
-   <td class="pkg-ver">1.13-2.1</td>
-   <td class="pkg-arches">i386, alpha, amd64, mips, mipsel, powerpc, arm, armel, hurd-i386, ia64, s390, hppa, sparc, m68k</td>
-</tr>
-<tr>
-   <td class="pkg-name">sablevm-classlib</td>
-   <td class="pkg-ver">1.13-2.1</td>
+   <td class="pkg-name">llvm-toolchain-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
    <td class="pkg-arches">source</td>
 </tr>
 <tr>
-   <td class="pkg-name">libsablevm-classlib1-java</td>
-   <td class="pkg-ver">1.13-2.1</td>
+   <td class="pkg-name">llvm-toolchain-3.7</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">source</td>
+</tr>
+<tr>
+   <td class="pkg-name">python-clang-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">python-clang-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">cpp11-migrate-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">cpp11-migrate-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">lldb-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">lldb-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm-3.7-ocaml-dev</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm-3.7-ocaml-dev</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm-3.7-ocaml-dev</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-modernize-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-modernize-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">python-lldb-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">python-lldb-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang1-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang1-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-tidy-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-tidy-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-examples</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
    <td class="pkg-arches">all</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-examples</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">all</td>
+</tr>
+<tr>
+   <td class="pkg-name">liblldb-3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">liblldb-3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-runtime</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-runtime</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-runtime</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang-common-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang-common-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">liblldb-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">liblldb-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">liblldb-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">liblldb-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-doc</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">all</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-doc</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">all</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-tools</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-tools</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-tools</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-format-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-format-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-3.7-examples</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-3.7-examples</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm3.7</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang1-3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang1-3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
 </tr>
  </table>
 </div>
- <div class="dak-command canHide"style="display: none">dak rm -p -d 473289 -R -C package -m "RoQA: obsoleted by sablevm using classpath" sablevm-classlib</div>
-<div class="uploader canHide"style="display: none">Last upload: 27.5.2008 with maintainer set to Grzegorz B. Prokopski &lt;gadek@debian.org&gt;</div>
+ <div class="dak-command canHide"style="display: none">dak rm -D -p -d 836602 -R -C package -m "ROM; We should ship only 3.8, 3.9 and maybe 4.0 in the next stable" llvm-toolchain-3.7</div>
+<div class="uploader canHide"style="display: none">Last upload: 2016-10-07 19:03:33.37407+00 with maintainer set to LLVM Packaging Team &lt;pkg-llvm-team@lists.alioth.debian.org&gt;Last upload: 2017-04-16 09:48:41.738991+00 with maintainer set to LLVM Packaging Team &lt;pkg-llvm-team@lists.alioth.debian.org&gt;</div>
+ </div>
+<div class="package even startHidden">
+<div class="infobox">
+<div class="origin canHide"style="display: none">Removal requested from Matthias Klose &lt;doko@debian.org&gt;</div>
+<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/852235">Bug #852235 (moreinfo)</a></span><span class="pts"><a href="http://tracker.debian.org/autoconf2.59- not used">PTS page</a></span></div>
+</div>
+<div class="subject" onclick='togglePkg(this, "canHide", "none")'>autoconf2.59- not used: anymore</div>
+<div class="canHide"style="display: none"><table class="pkgs">
+
+ </table>
+</div>
+ <div class="dak-command canHide"style="display: none">dak rm -D -p -d 852235 -R -C package -m "anymore" autoconf2.59- not used</div>
+<div class="uploader canHide"style="display: none"></div>
+ </div>
+<div class="package odd ">
+<div class="infobox">
+<div class="notes canHide">Partial Removal: kfreebsd-amd64,hurd-i386,kfreebsd-i386,powerpc</div>
+<div class="origin canHide">Removal requested from Andreas Beckmann &lt;anbe@debian.org&gt;</div>
+<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/861647">Bug #861647</a></span><span class="pts"><a href="http://tracker.debian.org/llvm-toolchain-3.7">PTS page</a></span></div>
+</div>
+<div class="subject" onclick='togglePkg(this, "canHide", "block")'>llvm-toolchain-3.7: ANAIS; RoQA; only built for arm64 armel armhf</div>
+<div class="canHide"><table class="pkgs">
+<tr>
+   <td class="pkg-name">llvm-toolchain-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">source</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-toolchain-3.7</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">source</td>
+</tr>
+<tr>
+   <td class="pkg-name">python-clang-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">python-clang-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">cpp11-migrate-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">cpp11-migrate-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">lldb-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">lldb-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm-3.7-ocaml-dev</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm-3.7-ocaml-dev</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm-3.7-ocaml-dev</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-modernize-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-modernize-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">python-lldb-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">python-lldb-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang1-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang1-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-tidy-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-tidy-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-examples</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">all</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-examples</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">all</td>
+</tr>
+<tr>
+   <td class="pkg-name">liblldb-3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">liblldb-3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-runtime</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-runtime</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-runtime</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang-common-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang-common-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">liblldb-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">liblldb-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">liblldb-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">liblldb-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-doc</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">all</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-doc</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">all</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-tools</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-tools</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">llvm-3.7-tools</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang-3.7-dev</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-format-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-format-3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-3.7-examples</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">clang-3.7-examples</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm3.7</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm3.7</td>
+   <td class="pkg-ver">1:3.7.1-5</td>
+   <td class="pkg-arches">armel, armhf, arm64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libllvm3.7</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang1-3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-3+b2</td>
+   <td class="pkg-arches">hurd-i386, powerpc, kfreebsd-i386</td>
+</tr>
+<tr>
+   <td class="pkg-name">libclang1-3.7-dbg</td>
+   <td class="pkg-ver">1:3.7.1-3</td>
+   <td class="pkg-arches">kfreebsd-amd64</td>
+</tr>
+ </table>
+</div>
+ <div class="dak-command canHide">dak rm -p -d 861647 -R -C package -m "ANAIS; RoQA; only built for arm64 armel armhf" -b -a kfreebsd-amd64,hurd-i386,kfreebsd-i386,powerpc llvm-toolchain-3.7 python-clang-3.7 llvm-3.7 cpp11-migrate-3.7 lldb-3.7 libllvm-3.7-ocaml-dev clang-modernize-3.7 python-lldb-3.7 libclang1-3.7 clang-tidy-3.7 llvm-3.7-examples liblldb-3.7-dbg llvm-3.7-dev llvm-3.7-runtime libclang-common-3.7-dev liblldb-3.7 liblldb-3.7-dev llvm-3.7-doc clang-3.7 llvm-3.7-tools libclang-3.7-dev clang-format-3.7 clang-3.7-examples libllvm3.7-dbg libllvm3.7 libclang1-3.7-dbg</div>
+<div class="uploader canHide">Last upload: 2016-10-07 19:03:33.37407+00 with maintainer set to LLVM Packaging Team &lt;pkg-llvm-team@lists.alioth.debian.org&gt;Last upload: 2017-04-16 09:48:41.738991+00 with maintainer set to LLVM Packaging Team &lt;pkg-llvm-team@lists.alioth.debian.org&gt;</div>
+ </div>
+<div class="package even ">
+<div class="infobox">
+<div class="notes canHide">Partial Removal: armel</div>
+<div class="origin canHide">Removal requested from Andreas Tille &lt;tille@debian.org&gt;</div>
+<div class="infolinks"><span class="bts"><a href="http://bugs.debian.org/861794">Bug #861794</a></span><span class="pts"><a href="http://tracker.debian.org/rnahybrid">PTS page</a></span></div>
+</div>
+<div class="subject" onclick='togglePkg(this, "canHide", "block")'>rnahybrid: ROM; Does not build on armel</div>
+<div class="canHide"><table class="pkgs">
+<tr>
+   <td class="pkg-name">rnahybrid</td>
+   <td class="pkg-ver">2.1.2-1</td>
+   <td class="pkg-arches">source, hurd-i386, armel</td>
+</tr>
+<tr>
+   <td class="pkg-name">rnahybrid</td>
+   <td class="pkg-ver">2.1.2-1+b1</td>
+   <td class="pkg-arches">i386, mips, mipsel, powerpc, amd64, kfreebsd-i386, kfreebsd-amd64, armhf, s390x, arm64, ppc64el, mips64el</td>
+</tr>
+ </table>
+</div>
+ <div class="dak-command canHide">dak rm -p -d 861794 -R -C package -m "ROM; Does not build on armel" -b -a armel rnahybrid</div>
+<div class="uploader canHide">Last upload: 2015-12-11 15:54:45.490183+00 with maintainer set to Debian Med Packaging Team &lt;debian-med-packaging@lists.alioth.debian.org&gt;</div>
  </div>
 </div>
     <div>
-    <p>Last updated: Thu Jul 17 16:44:07 2008</p>
+    <p>Last updated: Thu May  4 18:44:23 2017</p>
     <p class="logo">
       <a href="http://validator.w3.org/check?uri=referer">
        <img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>

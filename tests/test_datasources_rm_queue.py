@@ -58,15 +58,15 @@ class TestDatasourceTestingRmQueue(unittest.TestCase):
 
     def testSize(self):
         self.datasource.update()
-        self.assertEqual(self.datasource.get_size(), 10)
+        self.assertEqual(self.datasource.get_size(), 5)
 
     def testTop(self):
         self.datasource.update()
-        self.assertTrue(self.datasource.is_rm('libgocr'))
+        self.assertTrue(self.datasource.is_rm('mtasc'))
 
     def testBottom(self):
         self.datasource.update()
-        self.assertTrue(self.datasource.is_rm('sablevm-classlib'))
+        self.assertTrue(self.datasource.is_rm('rnahybrid'))
 
 
 if __name__ == "__main__":
