@@ -2,7 +2,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
-#   Copyright (C) 2016 Sebastian Ramacher <sramacher@debian.org>
+#   Copyright (C) 2016-2017 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -20,11 +20,12 @@
 import re
 import threading
 
+from bs4 import BeautifulSoup
 from DebianDevelChangesBot import NewDataSource
 
 
 class RmQueue(NewDataSource):
-    MATCHER = re.compile(r'<div class="subject">([^:]+): ')
+    MATCHER = re.compile(r'([^:]+): ')
     URL = 'https://ftp-master.debian.org/removals.html'
     INTERVAL = 60 * 30
     NAME = 'RM queue'
@@ -36,8 +37,11 @@ class RmQueue(NewDataSource):
         response = self.session.get(self.URL)
         response.raise_for_status()
 
-        data = response.text
-        packages = self.MATCHER.findall(data)
+        soup = BeautifulSoup(response.text, "html.parser")
+        packages = []
+        for div in soup.find_all('div', class_='subject'):
+            package = self.MATCHER.findall(div.contents[0])
+            packages.extend(package)
 
         with self.lock:
             self.packages = packages
