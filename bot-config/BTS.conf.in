@@ -63,7 +63,7 @@ supybot.networks.oftc.servers: irc.oftc.net:6697
 #
 # Default value:  
 ###
-supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia #debian-gis #debian-django #debian-reproducible #pbuilder #debian-python-changes #debian-openstack-commits #debian-dpkg #debian-systemd #debian-apt
+supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia #debian-gis #debian-django #debian-reproducible #pbuilder #debian-python-changes #debian-openstack-commits #debian-dpkg #debian-systemd #debian-apt #debian-clojure
 
 ###
 # Determines what key (if any) will be used to join the channel.
@@ -797,6 +797,8 @@ supybot.plugins.DebianDevelChanges.package_regex.#devscripts: /^devscripts$/
 supybot.plugins.DebianDevelChanges.package_regex.#debian-perl: /^(perl|perl-(base|debug|doc|modules)|libperl(-dev|5\.20))$/
 # Requested by lamby
 supybot.plugins.DebianDevelChanges.package_regex.#debian-django: /.*django.*/
+# Requested by Clint
+supybot.plugins.DebianDevelChanges.package_regex.#debian-clojure: /.*clojure.*/
 
 ###
 # Determines which maintainer announcements should be printed to the
@@ -826,6 +828,8 @@ supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-dpkg: /^debian-dpkg@
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-systemd: /^pkg-systemd-maintainers@lists\.alioth\.debian\.org$/
 # Requested by juliank
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-apt: /^(deity@lists\.debian\.org|aptitude-devel@lists\.alioth\.debian\.org)$/
+# Requested by Clint
+supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-clojure: /^pkg-clojure-maintainers@lists\.alioth\.debian\.org$/
 
 ###
 # Determines which distribution announcements should be printed to the
