@@ -26,7 +26,7 @@ from gi.repository import GLib
 from supybot import log
 
 
-class BTSDBusService(object):
+class BTSDBusService:
     """
         <node>
             <interface name='org.debian.BTS'>
