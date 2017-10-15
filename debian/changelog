@@ -1,3 +1,11 @@
+debian-devel-changes-bot (20171015) unstable; urgency=medium
+
+  * Rely on systemd for logging.
+  * Initial support for bugs against multiple packages.
+  * Update list of pseudo-packages.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 15 Oct 2017 16:53:56 +0200
+
 debian-devel-changes-bot (20170617) unstable; urgency=medium
 
   * stretch is now stable, buster is the new testing.
