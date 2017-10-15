@@ -1,3 +1,15 @@
+debian-devel-changes-bot (20171015.3) unstable; urgency=medium
+
+  * Small fixes.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 15 Oct 2017 17:48:57 +0200
+
+debian-devel-changes-bot (20171015.2) unstable; urgency=medium
+
+  * Revert systemd service changes.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 15 Oct 2017 17:14:24 +0200
+
 debian-devel-changes-bot (20171015.1) unstable; urgency=medium
 
   * Small fixes.
