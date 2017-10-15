@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 #   Debian Changes Bot
-#   Copyright (C) 2016 Sebastian Ramacher <sramacher@debian.org>
+#   Copyright (C) 2016-2017 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -51,12 +51,14 @@ class BTSDBusService(object):
         self.max_messages = 100
 
     def start(self):
+        log.info("Starting mail processing thread.")
+
         self.quit = False
         self.thread = threading.Thread(target=self.process_mails)
         self.thread.start()
 
     def process_mails(self):
-        log.debug("Mail processing thread started.")
+        log.info("Mail processing thread started.")
         while not self.quit:
             with self.cv:
                 while not self.quit and len(self.messages) == 0:
@@ -64,7 +66,7 @@ class BTSDBusService(object):
                     self.cv.wait()
 
                 if self.quit:
-                    log.debug("Stopping.")
+                    log.info("Mail processing thread stopeed.")
                     self.thread = None
                     return
 
@@ -99,6 +101,7 @@ class BTSDBusService(object):
 
     def Quit(self):
         with self.cv:
+            log.info("Setting quit flag on mail processing thread.")
             self.quit = True
             self.cv.notify()
 
