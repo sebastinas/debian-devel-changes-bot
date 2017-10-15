@@ -1198,7 +1198,7 @@ supybot.protocols.irc.vhost:
 #
 # Default value: 1000
 ###
-supybot.protocols.irc.maxHistoryLength: 1000
+supybot.protocols.irc.maxHistoryLength: 10
 
 ###
 # A floating point number of seconds to throttle queued messages -- that
@@ -1237,7 +1237,7 @@ supybot.protocols.irc.ping.interval: 120
 #
 # Default value: False
 ###
-supybot.protocols.irc.queuing.duplicates: False
+supybot.protocols.irc.queuing.duplicates: True
 
 ###
 # Determines how many seconds must elapse between JOINs sent to the
@@ -1245,7 +1245,7 @@ supybot.protocols.irc.queuing.duplicates: False
 #
 # Default value: 0.0
 ###
-supybot.protocols.irc.queuing.rateLimit.join: 0.0
+supybot.protocols.irc.queuing.rateLimit.join: 1.0
 
 ###
 # Determines how many bytes the bot will 'peek' at when looking through
