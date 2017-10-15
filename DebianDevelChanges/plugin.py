@@ -139,12 +139,15 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
             maintainer_info = None
             if hasattr(msg, 'maintainer'):
-                maintainer_info = split_address(msg.maintainer)
+                maintainer_info = (split_address(msg.maintainer), )
             else:
-                try:
-                    maintainer_info = self.apt_archive.get_maintainer(msg.package)
-                except NewDataSource.DataError as e:
-                    log.info("Failed to query maintainer for {}.".format(msg.package))
+                maintainer_info = []
+                for package in msg.package.split(',')
+                    package = package.strip()
+                    try:
+                        maintainer_info.append(self.apt_archive.get_maintainer(package))
+                    except NewDataSource.DataError as e:
+                        log.info("Failed to query maintainer for {}.".format(package))
 
             for channel in self.irc.state.channels:
                 package_regex = self.registryValue(
@@ -158,9 +161,12 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 maintainer_regex = self.registryValue(
                     'maintainer_regex',
                     channel)
-                if maintainer_regex and maintainer_info is not None and 'email' in maintainer_info:
-                    maintainer_match = re.search(maintainer_regex,
-                                                 maintainer_info['email'])
+                if maintainer_regex and maintainer_info is not None and len(maintainer_info) >= 0:
+                    for mi in maintainer_info:
+                        maintainer_match = re.search(maintainer_regex,
+                                                     maintainer_info['email'])
+                        if maintainer_match:
+                            break
 
                 if not package_match and not maintainer_match:
                     continue
