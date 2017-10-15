@@ -82,6 +82,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.queued_topics = {}
         self.last_n_messages = []
 
+        # data sources
         self.stable_rc_bugs = StableRCBugs(self.requests_session)
         self.testing_rc_bugs = TestingRCBugs(self.requests_session)
         self.new_queue = NewQueue(self.requests_session)
@@ -105,8 +106,10 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             return implementation
 
         for source in self.data_sources:
+            # schedule periodic events
             schedule.addPeriodicEvent(wrapper(source), source.INTERVAL,
                                       source.NAME, now=False)
+            # and run them now once
             schedule.addEvent(wrapper(source), time.time() + 1)
 
     def die(self):
