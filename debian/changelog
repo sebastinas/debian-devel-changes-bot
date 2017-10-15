@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20171015.4) unstable; urgency=medium
+
+  * Update thread handling.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 15 Oct 2017 19:30:01 +0200
+
 debian-devel-changes-bot (20171015.3) unstable; urgency=medium
 
   * Small fixes.
