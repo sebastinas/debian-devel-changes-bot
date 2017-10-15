@@ -21,12 +21,12 @@ import requests
 
 # curl -qs https://bugs.debian.org/pseudopackages/pseudo-packages.description | sed -e 's@\([^\t ]*\)[\t ]*\(.*\)@    '\''\1'\'': "\2"\,@g'
 pseudo_packages = {
-    'base': "Base system general bugs",
+    'base': "(Deprecated; do not assign bugs) Base system general bugs",
     'cdrom': "Installation system",
     'spam': "Spam (reassign spam to here so we can complain about it)",
     'press': "Press release issues",
     'project': "Problems related to project administration",
-    'general': 'General problems (e.g. "many manpages are mode 755")',
+    'general': "General problems (e.g. \"many manpages are mode 755\")",
     'nm.debian.org': "New Member process and nm.debian.org webpages",
     'qa.debian.org': "The Quality Assurance group",
     'ftp.debian.org': "Problems with the FTP site",
@@ -59,6 +59,8 @@ pseudo_packages = {
     'd-i.debian.org': "Issues regarding the d-i.debian.org service and general Debian Installer tasks",
     'summit.debconf.org': "Problems and requests related to the DebConf Summit instance",
     'rtc.debian.org': "Issues in the operation of the Debian RTC services which are not package-specific bugs",
+    'jenkins.debian.org': "Issues with the jenkins.debian.org service",
+    'manpages.debian.org': "Issues with the Debian Manpages Website and coordination of maintenance",
 }
 
 # curl -qs https://bugs.debian.org/pseudopackages/pseudo-packages.maintainers | sed -e 's@\([^\t ]*\)[\t ]*\(.*\)@    '\''\1'\'': "\2"\,@g'
@@ -101,6 +103,8 @@ pseudo_package_maintainers = {
     'd-i.debian.org': "Debian Installer <debian-boot@lists.debian.org>",
     'summit.debconf.org': "Debconf Infrastructure Team <debconf-infra@lists.debian.org>",
     'rtc.debian.org': "Debian RTC Team <debian-rtc-admin@lists.alioth.debian.org>",
+    'jenkins.debian.org': "Debian Jenkins Team <qa-jenkins-dev@lists.alioth.debian.org>",
+    'manpages.debian.org': "Manpages Website Maintainers <debian-doc@lists.debian.org>",
 }
 
 class NewDataSource(object):
