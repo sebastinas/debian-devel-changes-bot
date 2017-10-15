@@ -204,6 +204,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             self.dinstall.get_status: 'dinstall'
         }
 
+        queue = {}
         with self.topic_lock:
             values = {}
             for callback, prefix in sections.items():
@@ -221,16 +222,16 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                     log.info("Queueing change of topic in #%s to '%s'" % (channel, new_topic))
                     self.queued_topics[channel] = new_topic
 
-                    event_name = '%s_topic' % channel
-                    try:
-                        schedule.removeEvent(event_name)
-                    except KeyError:
-                        pass
+                    event_name = '{}_topic'.format(channel)
+                    queue[event_name] = lambda: self._update_topic(channel)
 
-                    def update_topic(channel=channel):
-                        self._update_topic(channel)
+        for event_name, update_topic for queue.items():
+            try:
+                schedule.removeEvent(event_name)
+            except KeyError:
+                pass
 
-                    schedule.addEvent(update_topic, time.time() + 60,
+            schedule.addEvent(update_topic, time.time() + 60,
                                       event_name)
 
     def _update_topic(self, channel):
