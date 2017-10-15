@@ -121,6 +121,12 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         if self.mainloop is not None:
             log.info('Stopping Glib main loop')
             self.mainloop.quit()
+            self.mainloop_thread.join(timeout=1.0)
+            if self.mainloop_thread.is_alive():
+                log.warn('Glib main loop thread is still alive.')
+
+            self.mainloop = None
+            self.mainloop_thread = None
 
         for source in self.data_sources:
             try:
