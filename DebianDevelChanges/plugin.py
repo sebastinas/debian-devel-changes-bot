@@ -231,7 +231,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                     event_name = '{}_topic'.format(channel)
                     queue[event_name] = lambda: self._update_topic(channel)
 
-        for event_name, update_topic for queue.items():
+        for event_name, update_topic in queue.items():
             try:
                 schedule.removeEvent(event_name)
             except KeyError:
