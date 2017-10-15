@@ -62,15 +62,18 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.irc = irc
         self.topic_lock = threading.Lock()
 
-        self.dbus_service = BTSDBusService(self._email_callback)
-
         self.mainloop = None
+        self.mainloop_thread = None
         mainloop = GObject.MainLoop()
         if not mainloop.is_running():
+            log.info('Starting Glib main loop')
             mainloop_thread = threading.Thread(target=mainloop.run)
             mainloop_thread.start()
+            self.mainloop_thread = mainloop_thread
             self.mainloop = mainloop
 
+        log.info('Starting D-Bus service')
+        self.dbus_service = BTSDBusService(self._email_callback)
         self.dbus_bus = SystemBus()
         self.dbus_bus.publish(self.dbus_service.interface_name,
                               self.dbus_service)
@@ -113,8 +116,10 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             schedule.addEvent(wrapper(source), time.time() + 1)
 
     def die(self):
+        log.info('Stopping D-Bus service')
         self.dbus_service.stop()
         if self.mainloop is not None:
+            log.info('Stopping Glib main loop')
             self.mainloop.quit()
 
         for source in self.data_sources:
