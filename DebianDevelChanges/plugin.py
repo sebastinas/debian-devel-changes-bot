@@ -2,7 +2,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
-#   Copyright (C) 2015 Sebastian Ramacher <sramacher@debian.org>
+#   Copyright (C) 2015-2017 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
