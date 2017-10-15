@@ -1352,7 +1352,7 @@ supybot.log.timestampFormat: %Y-%m-%dT%H:%M:%S
 #
 # Default value: True
 ###
-supybot.log.stdout: False
+supybot.log.stdout: True
 
 ###
 # Determines whether the bot's logs to stdout (if enabled) will be
@@ -1368,7 +1368,7 @@ supybot.log.stdout.colorized: False
 #
 # Default value: True
 ###
-supybot.log.stdout.wrap: True
+supybot.log.stdout.wrap: False
 
 ###
 # Determines what the bot's logging format will be. The relevant
