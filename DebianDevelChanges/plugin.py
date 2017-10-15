@@ -158,9 +158,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 maintainer_regex = self.registryValue(
                     'maintainer_regex',
                     channel)
-                if maintainer_regex and maintainer_info:
+                if maintainer_regex and maintainer_info is not None and 'email' in maintainer_info:
                     maintainer_match = re.search(maintainer_regex,
-                                                maintainer_info['email'])
+                                                 maintainer_info['email'])
 
                 if not package_match and not maintainer_match:
                     continue
