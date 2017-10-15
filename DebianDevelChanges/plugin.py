@@ -21,16 +21,16 @@ import os
 import re
 import time
 import random
-import urllib.request, urllib.parse, urllib.error
+import urllib.parse
 import supybot
 import threading
 import requests
 import email.utils
 
-from supybot.commands import wrap, many
-from supybot import ircdb, log, schedule
-
+from gi.repository import GObject
 from pydbus import SystemBus
+from supybot import ircdb, log, schedule
+from supybot.commands import wrap, many
 
 from DebianDevelChangesBot import NewDataSource
 from DebianDevelChangesBot.mailparsers import get_message
@@ -52,7 +52,6 @@ from DebianDevelChangesBot.utils import (
 )
 from DebianDevelChangesBot.utils.decoding import split_address
 from DebianDevelChangesBot.utils.dbus import BTSDBusService
-from gi.repository import GObject
 
 
 class DebianDevelChanges(supybot.callbacks.Plugin):
