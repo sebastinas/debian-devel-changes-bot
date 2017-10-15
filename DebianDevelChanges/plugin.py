@@ -163,8 +163,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                     channel)
                 if maintainer_regex and maintainer_info is not None and len(maintainer_info) >= 0:
                     for mi in maintainer_info:
-                        maintainer_match = re.search(maintainer_regex,
-                                                     maintainer_info['email'])
+                        maintainer_match = re.search(maintainer_regex, mi['email'])
                         if maintainer_match:
                             break
 
