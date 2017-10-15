@@ -128,6 +128,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             except KeyError:
                 pass
 
+        super().die()
+
     def _email_callback(self, fileobj):
         try:
             emailmsg = parse_mail(fileobj)
