@@ -67,7 +67,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         mainloop = GObject.MainLoop()
         if not mainloop.is_running():
             log.info('Starting Glib main loop')
-            mainloop_thread = threading.Thread(target=mainloop.run)
+            mainloop_thread = threading.Thread(target=mainloop.run, name='Glib maing loop')
             mainloop_thread.start()
             self.mainloop_thread = mainloop_thread
             self.mainloop = mainloop

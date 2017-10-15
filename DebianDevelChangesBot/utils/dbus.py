@@ -54,7 +54,7 @@ class BTSDBusService:
         log.info("Starting mail processing thread.")
 
         self.quit = False
-        self.thread = threading.Thread(target=self.process_mails)
+        self.thread = threading.Thread(target=self.process_mails, name='mail processing')
         self.thread.start()
 
     def process_mails(self):
