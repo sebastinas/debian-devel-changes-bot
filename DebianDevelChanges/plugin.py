@@ -142,7 +142,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 maintainer_info = (split_address(msg.maintainer), )
             else:
                 maintainer_info = []
-                for package in msg.package.split(',')
+                for package in msg.package.split(','):
                     package = package.strip()
                     try:
                         maintainer_info.append(self.apt_archive.get_maintainer(package))
