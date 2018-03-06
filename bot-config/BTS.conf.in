@@ -812,6 +812,8 @@ supybot.plugins.DebianDevelChanges.maintainer_regex:
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-perl: /^pkg-perl-maintainers@lists\.alioth\.debian\.org$/
 # Approved by fsateler
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-multimedia: /^pkg-multimedia-maintainers@lists\.alioth\.debian\.org$/
+# Requested by mapreri
+supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-multimedia: /^debian-multimedia@lists\.debian\.org$/
 # Approved by Sledge
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-cd: /^debian-cd@lists\.debian\.org$/
 # Approved by sebastic
