@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20180315) unstable; urgency=medium
+
+  * Update multimedia team maintainer address.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Thu, 15 Mar 2018 21:30:55 +0100
+
 debian-devel-changes-bot (20171015.4) unstable; urgency=medium
 
   * Update thread handling.
