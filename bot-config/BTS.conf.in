@@ -817,7 +817,7 @@ supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-cd: /^debian-cd@list
 # Approved by sebastic
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-gis: /^pkg-grass-devel@lists\.alioth\.debian\.org$/
 # Approved by mapreri
-supybot.plugins.DebianDevelChanges.maintainer_regex.#pbuilder: /^pbuilder-maint@lists\.alioth\.debian\.org$/
+supybot.plugins.DebianDevelChanges.maintainer_regex.#pbuilder: /^team\+pbuilder@tracker\.debian\.org$/
 # Requested by mapreri
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-reproducible: /^reproducible-builds@lists\.alioth\.debian\.org$/
 # Requested by onovy
