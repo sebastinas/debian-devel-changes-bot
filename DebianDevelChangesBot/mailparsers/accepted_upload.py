@@ -73,6 +73,6 @@ class AcceptedUploadParser(MailParser):
 
         if 'new_queue' in kwargs:
             new_queue = kwargs['new_queue']
-            msg.new_upload = new_queue.is_new(msg.package, msg.version)
+            msg.new_upload = new_queue.is_new(msg.package, msg.version) or new_queue.is_backports_new(msg.package, msg.version)
 
         return msg
