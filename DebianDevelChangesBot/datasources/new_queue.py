@@ -29,6 +29,7 @@ class NewQueue(NewDataSource):
     def __init__(self, session=None):
         super().__init__(session)
         self.packages = {}
+        self.backports_packages = {}
 
     def update(self):
         response = self.session.get(self.URL)
@@ -36,19 +37,37 @@ class NewQueue(NewDataSource):
         data = response.text
 
         packages = {}
+        backports_packages = {}
+
         for para in Deb822.iter_paragraphs(data):
             pkg = para['Source']
-            if para['Queue'] == 'new':
+            queue = para['Queue']
+            if queue == 'new':
                 packages[pkg] = para['Version'].split(' ')
+            if queue == 'backports-new':
+                backports_packages[pkg] = para['Version'].split(' ')
 
         self.packages = packages
+        self.backports_packages = backports_packages
+
+    def check_version(self, packages, package, version):
+        versions = packages.get(package, [])
+        return version in versions
 
     def is_new(self, package, version):
-        versions = self.packages.get(package, [])
-        return version in versions
+        return self.check_version(self.packages, package, version)
+
+    def is_backports_new(self, package, version):
+        return self.check_version(self.backports_packages, package, version)
 
     def get_size(self):
         size = len(self.packages)
+        if size > 0:
+            return size
+        return None
+
+    def get_backports_size(self):
+        size = len(self.backports_packages)
         if size > 0:
             return size
         return None
