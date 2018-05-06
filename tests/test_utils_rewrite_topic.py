@@ -3,6 +3,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2018 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -38,9 +39,9 @@ class TestRewriteTopic(unittest.TestCase):
                          "pre | RC bug count: 2 | post")
 
     def testEmbedded2(self):
-        self.assertEqual(rewrite_topic("pre RC bug count: 1 post",
+        self.assertEqual(rewrite_topic("pre | RC bug count: 1 | Stable RC bug count: 3 | post",
                                        "RC bug count", 2),
-                         "pre RC bug count: 1 post")
+                         "pre | RC bug count: 2 | Stable RC bug count: 3 | post")
 
 
 if __name__ == "__main__":
