@@ -45,12 +45,12 @@ class TestDatasourceAptArchive(unittest.TestCase):
 
     def testVLC(self):
         info = self.apt_archive.get_maintainer('vlc')
-        self.assertEqual(info['email'], 'pkg-multimedia-maintainers@lists.alioth.debian.org')
+        self.assertEqual(info['email'], 'debian-multimedia@lists.debian.org')
         self.assertEqual(info['name'], 'Debian Multimedia Maintainers')
 
     def testSourceVLC(self):
         info = self.apt_archive.get_maintainer('src:vlc')
-        self.assertEqual(info['email'], 'pkg-multimedia-maintainers@lists.alioth.debian.org')
+        self.assertEqual(info['email'], 'debian-multimedia@lists.debian.org')
         self.assertEqual(info['name'], 'Debian Multimedia Maintainers')
 
     def testUdev(self):
