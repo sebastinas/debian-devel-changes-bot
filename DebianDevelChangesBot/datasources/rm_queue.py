@@ -30,8 +30,11 @@ class RmQueue(NewDataSource):
     INTERVAL = 60 * 30
     NAME = 'RM queue'
 
-    packages = set()
-    lock = threading.Lock()
+    def __init__(self, session=None):
+        super().__init__(session)
+        self.packages = {}
+        self.fetched = False
+        self.lock = threading.Lock()
 
     def update(self):
         response = self.session.get(self.URL)
@@ -45,13 +48,13 @@ class RmQueue(NewDataSource):
 
         with self.lock:
             self.packages = packages
+            self.fetched = True
 
     def get_size(self):
         with self.lock:
-            size = len(self.packages)
-            if size > 0:
-                return size
-            return None
+            if not self.fetched:
+                return None
+            return len(self.packages)
 
     def is_rm(self, pkg):
         with self.lock:

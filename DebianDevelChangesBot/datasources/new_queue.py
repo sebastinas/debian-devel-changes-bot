@@ -30,6 +30,7 @@ class NewQueue(NewDataSource):
         super().__init__(session)
         self.packages = {}
         self.backports_packages = {}
+        self.fetched = False
 
     def update(self):
         response = self.session.get(self.URL)
@@ -49,6 +50,7 @@ class NewQueue(NewDataSource):
 
         self.packages = packages
         self.backports_packages = backports_packages
+        self.fetched = True
 
     def check_version(self, packages, package, version):
         versions = packages.get(package, [])
@@ -61,13 +63,11 @@ class NewQueue(NewDataSource):
         return self.check_version(self.backports_packages, package, version)
 
     def get_size(self):
-        size = len(self.packages)
-        if size > 0:
-            return size
-        return None
+        if not self.fetched:
+            return None
+        return len(self.packages)
 
     def get_backports_size(self):
-        size = len(self.backports_packages)
-        if size > 0:
-            return size
-        return None
+        if not self.fetched:
+            return None
+        return len(self.backports_packages)

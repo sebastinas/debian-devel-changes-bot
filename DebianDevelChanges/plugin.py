@@ -229,15 +229,15 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         with self.topic_lock:
             values = {}
             for callback, prefix in sections.items():
-                values[prefix] = callback()
+                new_value = callback()
+                if new_value is not None:
+                    values[prefix] = new_value
 
             for channel in self.irc.state.channels:
                 new_topic = topic = self.irc.state.getTopic(channel)
 
-                for callback, prefix in sections.items():
-                    if values[prefix]:
-                        new_topic = rewrite_topic(new_topic, prefix,
-                                                  values[prefix])
+                for prefix, value in values.items():
+                    new_topic = rewrite_topic(new_topic, prefix, value)
 
                 if topic != new_topic:
                     self.queued_topics[channel] = new_topic
