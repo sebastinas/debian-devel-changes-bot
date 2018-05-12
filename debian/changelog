@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20180512) unstable; urgency=medium
+
+  * Improve topic re-writing.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sat, 12 May 2018 14:54:06 +0200
+
 debian-devel-changes-bot (20180420) unstable; urgency=medium
 
   * Handle backports-NEW.
