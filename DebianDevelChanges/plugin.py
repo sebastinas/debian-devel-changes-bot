@@ -403,15 +403,6 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     testing = wrap(_testing, [many('anything')])
     migration = wrap(_testing, [many('anything')])
 
-    def _dehs(self, irc, msg, args, items):
-        """Link to DEHS."""
-        for package in items:
-            msg = "[desc]Debian External Health Status for[reset] [package]%s[reset]: [url]https://dehs.alioth.debian.org/report.php?package=%s[/url]" % \
-                (package, urllib.parse.quote(package))
-            irc.reply(colourise(msg), prefixNick=False)
-    dehs = wrap(_dehs, [many('anything')])
-    health = wrap(_dehs, [many('anything')])
-
     def _new(self, irc, msg, args):
         """Link to NEW queue."""
         line = "[desc]NEW queue is[reset]: [url]%s[/url]. [desc]Current size is:[reset] %d" % \
