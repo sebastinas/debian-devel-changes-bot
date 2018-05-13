@@ -40,7 +40,8 @@ from DebianDevelChangesBot.datasources import (
     RmQueue,
     StableRCBugs,
     Dinstall,
-    AptArchive
+    AptArchive,
+    PseudoPackages
 )
 from DebianDevelChangesBot.utils import (
     parse_mail,
@@ -86,6 +87,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.last_n_messages = []
 
         # data sources
+        DebianDevelChangesBot.pseudo_packages.pp = PseudoPackages(self.requests_session)
+        self.pseudo_packages = DebianDevelChangesBot.pseudo_packages.pp
         self.stable_rc_bugs = StableRCBugs(self.requests_session)
         self.testing_rc_bugs = TestingRCBugs(self.requests_session)
         self.new_queue = NewQueue(self.requests_session)
@@ -94,9 +97,15 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.apt_archive = AptArchive(
             self.registryValue('apt_configuration_directory'),
             self.registryValue('apt_cache_directory'))
-        self.data_sources = (self.stable_rc_bugs, self.testing_rc_bugs,
-                             self.new_queue, self.dinstall, self.rm_queue,
-                             self.apt_archive)
+        self.data_sources = (
+            self.pseudo_package,
+            self.stable_rc_bugs,
+            self.testing_rc_bugs,
+            self.new_queue,
+            self.dinstall,
+            self.rm_queue,
+            self.apt_archive
+        )
 
         # Schedule datasource updates
         def wrapper(source):

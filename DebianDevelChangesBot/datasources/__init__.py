@@ -22,3 +22,4 @@ from .new_queue import NewQueue
 from .rm_queue import RmQueue
 from .dinstall import Dinstall
 from .aptarchive import AptArchive
+from .pseudo_packages import PseudoPackages

@@ -25,6 +25,7 @@ import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from DebianDevelChangesBot.datasources import AptArchive
+from DebianDevelChangesBot import pseudo_packages
 
 
 class TestDatasourceAptArchive(unittest.TestCase):
@@ -38,6 +39,8 @@ class TestDatasourceAptArchive(unittest.TestCase):
         cls.apt_archive = AptArchive(apt_config, cls.statedir)
         cls.apt_archive.update_index(True)
         cls.apt_archive.update()
+
+        pseudo_packages.update()
 
     @classmethod
     def tearDownClass(cls):
