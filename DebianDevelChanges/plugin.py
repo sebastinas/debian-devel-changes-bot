@@ -218,7 +218,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     def _topic_callback(self):
         sections = {
             self.testing_rc_bugs.get_number_bugs: 'RC bug count',
-            self.stable_rc_bugs.get_number_bugs: 'Stable RC bug count',
+            self.stable_rc_bugs.get_number_bugs: 'stable RC bug count',
             self.new_queue.get_size: 'NEW queue',
             self.new_queue.get_backports_size: 'backports NEW queue',
             self.rm_queue.get_size: 'RM queue',
