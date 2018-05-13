@@ -2,6 +2,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyright (C) 2018 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -107,7 +108,8 @@ pseudo_package_maintainers = {
     'manpages.debian.org': "Manpages Website Maintainers <debian-doc@lists.debian.org>",
 }
 
-class NewDataSource(object):
+
+class NewDataSource:
     class DataError(Exception):
         pass
 
@@ -115,11 +117,11 @@ class NewDataSource(object):
         self.session = session if session is not None else requests.Session()
 
 
-class MailParser(object):
+class MailParser:
     pass
 
 
-class Message(object):
+class Message:
     def __init__(self):
         if hasattr(self, 'FIELDS'):
             for field in self.FIELDS:
@@ -143,6 +145,7 @@ class Message(object):
             return '[pseudo-package]%s[reset]' % self.package
         else:
             return '[package]%s[reset]' % self.package
+
 
 from . import utils
 from . import messages
