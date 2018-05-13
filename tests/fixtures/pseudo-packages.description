@@ -1,0 +1,41 @@
+base			(Deprecated; do not assign bugs) Base system general bugs
+cdrom			Installation system
+spam			Spam (reassign spam to here so we can complain about it)
+press			Press release issues
+project			Problems related to project administration
+general			General problems (e.g. "many manpages are mode 755")
+nm.debian.org		New Member process and nm.debian.org webpages
+qa.debian.org		The Quality Assurance group
+ftp.debian.org		Problems with the FTP site
+www.debian.org		Problems with the WWW site
+bugs.debian.org		The bug tracking system, @bugs.debian.org
+lists.debian.org	The mailing lists, debian-*@lists.debian.org
+wnpp			Work-Needing and Prospective Packages list
+cdimage.debian.org	CD Image issues
+tech-ctte		The Debian Technical Committee (see the Constitution)
+mirrors			Problems with the official mirrors
+security.debian.org	The Debian Security Team
+installation-reports	Reports of installation problems with stable & testing
+upgrade-reports		Reports of upgrade problems for stable & testing
+release-notes		Problems with the Release Notes
+wiki.debian.org		Problems with the Debian wiki
+security-tracker	The Debian Security Bug Tracker
+release.debian.org	Requests regarding Debian releases and release team tools
+debian-i18n			Requests regarding Internationalization (i18n) of the distribution
+buildd.emdebian.org		Problems related to building packages for Emdebian
+buildd.debian.org	Problems and requests related to the Debian Buildds
+debian-maintainers	Problems and requests related to Debian Maintainers
+snapshot.debian.org	Issues with the snapshot.debian.org service 
+sponsorship-requests	Requests for package review and sponsorship
+debian-live	General problems with Debian Live systems
+pet.debian.net	The Debian Package Entropy Tracker
+cloud.debian.org	Issues involving Debian images for public/private clouds
+piuparts.debian.org	Issues with the piuparts.debian.org service
+sso.debian.org          Problems and requests related to the Debian Single Sign On system
+tracker.debian.org	Issues with the Debian Package Tracker and coordination of its maintenance
+d-i.debian.org	Issues regarding the d-i.debian.org service and general Debian Installer tasks
+summit.debconf.org	Problems and requests related to the DebConf Summit instance
+rtc.debian.org		Issues in the operation of the Debian RTC services which are not package-specific bugs
+jenkins.debian.org	Issues with the jenkins.debian.org service
+manpages.debian.org	Issues with the Debian Manpages Website and coordination of maintenance
+contributors.debian.org	Issues with the Debian Contributors Website and coordination of maintenance

@@ -17,14 +17,17 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import unittest
-import tempfile
+import io
+import requests
+import requests_mock
 import shutil
+import tempfile
+import unittest
 
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from DebianDevelChangesBot.datasources import AptArchive
+from DebianDevelChangesBot.datasources import AptArchive, PseudoPackages
 from DebianDevelChangesBot import pseudo_packages
 
 
@@ -40,11 +43,29 @@ class TestDatasourceAptArchive(unittest.TestCase):
         cls.apt_archive.update_index(True)
         cls.apt_archive.update()
 
+        cls.mocker = requests_mock.Mocker()
+        cls.mocker.start()
+
+        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               'fixtures', 'pseudo-packages.maintainers')
+        with io.open(fixture, encoding='utf-8') as f:
+            data = f.read()
+        cls.mocker.register_uri('GET', PseudoPackages.URL_M, text=data)
+
+        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               'fixtures', 'pseudo-packages.description')
+        with io.open(fixture, encoding='utf-8') as f:
+            data = f.read()
+        cls.mocker.register_uri('GET', PseudoPackages.URL_D, text=data)
+
+        session = requests.Session()
+        pseudo_packages.pp = PseudoPackages(session)
         pseudo_packages.update()
 
     @classmethod
     def tearDownClass(cls):
         shutil.rmtree(cls.statedir, True)
+        cls.mocker.stop()
 
     def testVLC(self):
         info = self.apt_archive.get_maintainer('vlc')
