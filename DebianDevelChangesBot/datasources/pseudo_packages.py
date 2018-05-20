@@ -28,7 +28,7 @@ class PseudoPackage:
 
 
 class PseudoPackages(NewDataSource):
-    NAME = 'dinstall'
+    NAME = 'pseudo packages'
     URL_D = 'https://bugs.debian.org/pseudopackages/pseudo-packages.description'
     URL_M = 'https://bugs.debian.org/pseudopackages/pseudo-packages.maintainers'
 
