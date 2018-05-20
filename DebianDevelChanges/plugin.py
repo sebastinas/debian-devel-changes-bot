@@ -32,8 +32,7 @@ from pydbus import SystemBus
 from supybot import ircdb, log, schedule
 from supybot.commands import wrap, many
 
-import DebianDevelChangesBot
-from DebianDevelChangesBot import NewDataSource
+from DebianDevelChangesBot import NewDataSource, pseudo_packages
 from DebianDevelChangesBot.mailparsers import get_message
 from DebianDevelChangesBot.datasources import (
     TestingRCBugs,
@@ -81,8 +80,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.last_n_messages = []
 
         # data sources
-        DebianDevelChangesBot.pseudo_packages.pp = PseudoPackages(self.requests_session)
-        self.pseudo_packages = DebianDevelChangesBot.pseudo_packages.pp
+        pseudo_packages.pp = PseudoPackages(self.requests_session)
+        self.pseudo_packages = pseudo_packages.pp
         self.stable_rc_bugs = StableRCBugs(self.requests_session)
         self.testing_rc_bugs = TestingRCBugs(self.requests_session)
         self.new_queue = NewQueue(self.requests_session)
@@ -124,7 +123,6 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.dbus_bus.publish(self.dbus_service.interface_name,
                               self.dbus_service)
         self.dbus_service.start()
-
 
     def die(self):
         log.info('Stopping D-Bus service')
