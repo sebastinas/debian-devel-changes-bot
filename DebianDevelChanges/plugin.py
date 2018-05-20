@@ -91,7 +91,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             self.registryValue('apt_configuration_directory'),
             self.registryValue('apt_cache_directory'))
         self.data_sources = (
-            self.pseudo_package,
+            self.pseudo_packages,
             self.stable_rc_bugs,
             self.testing_rc_bugs,
             self.new_queue,
