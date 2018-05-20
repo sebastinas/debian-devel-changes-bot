@@ -73,13 +73,6 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             self.mainloop_thread = mainloop_thread
             self.mainloop = mainloop
 
-        log.info('Starting D-Bus service')
-        self.dbus_service = BTSDBusService(self._email_callback)
-        self.dbus_bus = SystemBus()
-        self.dbus_bus.publish(self.dbus_service.interface_name,
-                              self.dbus_service)
-        self.dbus_service.start()
-
         self.requests_session = requests.Session()
         self.requests_session.verify = True
 
@@ -123,6 +116,14 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                                       source.NAME, now=False)
             # and run them now once
             schedule.addEvent(wrapper(source), time.time() + 1)
+
+        log.info('Starting D-Bus service')
+        self.dbus_service = BTSDBusService(self._email_callback)
+        self.dbus_bus = SystemBus()
+        self.dbus_bus.publish(self.dbus_service.interface_name,
+                              self.dbus_service)
+        self.dbus_service.start()
+
 
     def die(self):
         log.info('Stopping D-Bus service')
