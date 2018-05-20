@@ -1,3 +1,10 @@
+debian-devel-changes-bot (20180520) unstable; urgency=medium
+
+  * Fetch pseudo packages during runtime.
+  * Join #debian-qa.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 20 May 2018 14:36:15 +0200
+
 debian-devel-changes-bot (20180512) unstable; urgency=medium
 
   * Improve topic re-writing.
