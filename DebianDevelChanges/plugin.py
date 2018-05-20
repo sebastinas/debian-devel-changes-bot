@@ -32,6 +32,7 @@ from pydbus import SystemBus
 from supybot import ircdb, log, schedule
 from supybot.commands import wrap, many
 
+import DebianDevelChangesBot
 from DebianDevelChangesBot import NewDataSource
 from DebianDevelChangesBot.mailparsers import get_message
 from DebianDevelChangesBot.datasources import (
