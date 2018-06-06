@@ -86,6 +86,10 @@ class TestDatasourceAptArchive(unittest.TestCase):
         info = self.apt_archive.get_maintainer('wnpp')
         self.assertEqual(info['email'], 'wnpp@debian.org')
 
+    def testPseudoPackage2(self):
+        info = self.apt_archive.get_maintainer('qa.debian.org')
+        self.assertEqual(info['email'], 'debian-qa@lists.debian.org')
+
 
 if __name__ == "__main__":
     unittest.main()
