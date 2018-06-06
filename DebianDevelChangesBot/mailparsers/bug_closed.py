@@ -33,15 +33,13 @@ class BugClosedParser(MailParser):
         if headers.get('List-Id', '') != '<debian-bugs-closed.lists.debian.org>':
             return
 
-        msg = BugClosedMessage()
-
         m = SUBJECT.match(headers['Subject'])
-        if m:
-            msg.bug_number = int(m.group(1))
-            msg.title = m.group(2)
-        else:
+        if not m:
             return
 
+        msg = BugClosedMessage()
+        msg.bug_number = int(m.group(1))
+        msg.title = m.group(2)
         msg.by = headers['To']
 
         # Bug was closed via 123456-done@bugs.debian.org, so To: is wrong.
