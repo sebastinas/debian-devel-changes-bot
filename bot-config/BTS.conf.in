@@ -763,8 +763,8 @@ supybot.plugins.DebianDevelChanges.package_regex.#debian-lists: /^lists\.debian\
 supybot.plugins.DebianDevelChanges.package_regex.#debian-mirrors: /^mirrors$/
 # Approved by gregoa, ansgar
 supybot.plugins.DebianDevelChanges.package_regex.#pet-devel: /^pet\.debian\.net$/
-# Requested by mapreri
-supybot.plugins.DebianDevelChanges.package_regex.#debian-qa: /^qa\.debian\.org$/
+# Requested by mapreri (qa.debian.org) and lamby (lintian)
+supybot.plugins.DebianDevelChanges.package_regex.#debian-qa: /^(qa\.debian\.org|lintian)$/
 # Deletion of press pseudo-package suggested
 #supybot.plugins.DebianDevelChanges.package_regex.#debian-publicity: /^press$/
 #Approved by Cnote, pabs
@@ -799,8 +799,6 @@ supybot.plugins.DebianDevelChanges.package_regex.#debian-perl: /^(perl|perl-(bas
 supybot.plugins.DebianDevelChanges.package_regex.#debian-django: /.*django.*/
 # Requested by Clint
 supybot.plugins.DebianDevelChanges.package_regex.#debian-clojure: /.*clojure.*/
-# Requested by lamby
-supybot.plugins.DebianDevelChanges.package_regex.#debian-qa: /^lintian$/
 # Requested by lamby
 supybot.plugins.DebianDevelChanges.package_regex.#reproducible-builds: /^diffoscope$/
 # Requested by kpcyrd
