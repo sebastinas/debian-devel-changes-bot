@@ -825,7 +825,7 @@ supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-reproducible: /^repr
 # Requested by onovy
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-python-changes: /^python-(modules-team|apps-team)@lists\.alioth\.debian\.org$/
 # Requested by onovy
-supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-openstack-commits: /^openstack-devel@lists\.alioth\.debian\.org$/
+supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-openstack-commits: /^(openstack-devel@lists\.alioth\.debian\.org|team\+openstack@tracker\.debian\.org)$/
 # Requested by guillem
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-dpkg: /^debian-dpkg@lists\.debian\.org$/
 # Requested by fsateler
