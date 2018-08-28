@@ -1,3 +1,16 @@
+debian-devel-changes-bot (20180828) unstable; urgency=medium
+
+  * Join #debian-newmaint.
+  * Join #debian-pkg-security.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Tue, 28 Aug 2018 11:03:10 +0200
+
+debian-devel-changes-bot (20180823) unstable; urgency=medium
+
+  * Update channel regexes.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Thu, 23 Aug 2018 08:23:41 +0200
+
 debian-devel-changes-bot (20180709) unstable; urgency=medium
 
   * Join #debian-rust.
