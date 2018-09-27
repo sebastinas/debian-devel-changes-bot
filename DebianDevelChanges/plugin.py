@@ -178,11 +178,14 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                         log.info("Failed to query maintainer for {}.".format(package))
 
             for channel in self.irc.state.channels:
-                package_regex = (
-                    self.registryValue('package_regex', channel) or 'a^'
-                )  # match nothing by default
-
-                package_match = re.search(package_regex, msg.package)
+                # match package or nothing by default
+                package_regex = self.registryValue('package_regex', channel) or 'a^'
+                package_match = False
+                for package in msg.package.split(','):
+                    package = package.strip()
+                    package_match = re.search(package_regex, msg.package)
+                    if package_match:
+                        break
 
                 maintainer_match = False
                 maintainer_regex = self.registryValue('maintainer_regex', channel)
