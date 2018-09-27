@@ -29,11 +29,11 @@ from DebianDevelChangesBot.mailparsers import BugSubmittedParser as p
 class TestMailParserBugSubmitted(unittest.TestCase):
     def setUp(self):
         self.headers = {
-            'Subject': 'Bug#123456: Bug title',
-            'From': 'Submitter Name <name@t.com>',
-            'List-Id': '<debian-bugs-dist.lists.debian.org>',
-            'X-Debian-PR-Message': 'report 654321',
-            'X-Debian-PR-Package': 'package-name',
+            "Subject": "Bug#123456: Bug title",
+            "From": "Submitter Name <name@t.com>",
+            "List-Id": "<debian-bugs-dist.lists.debian.org>",
+            "X-Debian-PR-Message": "report 654321",
+            "X-Debian-PR-Package": "package-name",
         }
 
         self.body = [
@@ -47,9 +47,9 @@ class TestMailParserBugSubmitted(unittest.TestCase):
         msg = p.parse(self.headers, self.body)
 
         self.assertTrue(msg)
-        self.assertEqual(msg.package, 'package-name')
-        self.assertEqual(msg.version, 'version-here')
-        self.assertEqual(msg.by, 'Submitter Name <name@t.com>')
+        self.assertEqual(msg.package, "package-name")
+        self.assertEqual(msg.version, "version-here")
+        self.assertEqual(msg.by, "Submitter Name <name@t.com>")
 
     def testVersionWithSpaces(self):
         self.body[1] = "Version: version with spaces"
@@ -58,11 +58,11 @@ class TestMailParserBugSubmitted(unittest.TestCase):
         self.assertFalse(msg.version)
 
     def testAlternateEmailFormatting(self):
-        self.headers['From'] = "name@t.com (Submitter Name)"
+        self.headers["From"] = "name@t.com (Submitter Name)"
 
         msg = p.parse(self.headers, self.body)
         self.assertTrue(msg)
-        self.assertEqual(msg.by, 'Submitter Name <name@t.com>')
+        self.assertEqual(msg.by, "Submitter Name <name@t.com>")
 
 
 if __name__ == "__main__":

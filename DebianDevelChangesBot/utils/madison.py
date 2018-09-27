@@ -20,10 +20,10 @@ import requests
 
 
 def madison(package, suites=None):
-    payload = {'package': package, 'text': 'on'}
+    payload = {"package": package, "text": "on"}
     if suites is not None:
-        payload['s'] = ','.join(suites)
+        payload["s"] = ",".join(suites)
 
-    response = requests.get('https://qa.debian.org/madison.php', params=payload)
+    response = requests.get("https://qa.debian.org/madison.php", params=payload)
     response.raise_for_status()
-    return response.text.encode('utf-8')
+    return response.text.encode("utf-8")

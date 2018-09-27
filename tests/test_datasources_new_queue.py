@@ -30,14 +30,14 @@ from DebianDevelChangesBot.datasources import NewQueue
 class TestDatasourceTestingNewQueue(unittest.TestCase):
     def setUp(self):
         fixture = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), 'fixtures', 'new_queue.txt'
+            os.path.dirname(os.path.abspath(__file__)), "fixtures", "new_queue.txt"
         )
-        with io.open(fixture, encoding='utf-8') as f:
+        with io.open(fixture, encoding="utf-8") as f:
             data = f.read()
 
         self.mocker = requests_mock.Mocker()
         self.mocker.start()
-        self.mocker.register_uri('GET', NewQueue.URL, text=data)
+        self.mocker.register_uri("GET", NewQueue.URL, text=data)
 
         session = requests.Session()
         self.datasource = NewQueue(session)
@@ -54,7 +54,7 @@ class TestDatasourceTestingNewQueue(unittest.TestCase):
         Check we have a sane URL.
         """
         self.assertTrue(len(self.datasource.URL) > 5)
-        self.assertTrue(self.datasource.URL.startswith('http'))
+        self.assertTrue(self.datasource.URL.startswith("http"))
 
     def testInterval(self):
         """
@@ -63,26 +63,26 @@ class TestDatasourceTestingNewQueue(unittest.TestCase):
         self.assertTrue(self.datasource.INTERVAL > 60)
 
     def testTop(self):
-        self.assertTrue(self.is_new('ezmlm-idx', '6.0.1-1'))
+        self.assertTrue(self.is_new("ezmlm-idx", "6.0.1-1"))
 
     def testBottom(self):
-        self.assertTrue(self.is_new('libxml-sax-expatxs-perl', '1.31-1'))
+        self.assertTrue(self.is_new("libxml-sax-expatxs-perl", "1.31-1"))
 
     def testMultipleVersions(self):
-        self.assertTrue(self.is_new('libgcal', '0.8.1-1'))
-        self.assertTrue(self.is_new('libgcal', '0.8.1-2'))
+        self.assertTrue(self.is_new("libgcal", "0.8.1-1"))
+        self.assertTrue(self.is_new("libgcal", "0.8.1-2"))
 
     def testInvalidVersion(self):
-        self.assertFalse(self.is_new('rcpp', '0.5.2.invalid'))
+        self.assertFalse(self.is_new("rcpp", "0.5.2.invalid"))
 
     def testNotInQueue(self):
-        self.assertFalse(self.is_new('package-not-in-new-queue', 'version-foo'))
+        self.assertFalse(self.is_new("package-not-in-new-queue", "version-foo"))
 
     def testByhand(self):
-        self.assertFalse(self.is_new('loadlin', '1.6c.really1.6c.nobin-2'))
+        self.assertFalse(self.is_new("loadlin", "1.6c.really1.6c.nobin-2"))
 
     def testExperimental(self):
-        self.assertTrue(self.is_new('ooo-build', '3.0.0.9+r14588-1'))
+        self.assertTrue(self.is_new("ooo-build", "3.0.0.9+r14588-1"))
 
 
 if __name__ == "__main__":

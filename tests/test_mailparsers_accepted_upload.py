@@ -30,26 +30,26 @@ from DebianDevelChangesBot.mailparsers import AcceptedUploadParser as p
 
 class TestMailParserAcceptedUpload(unittest.TestCase):
     def setUp(self):
-        self.headers = {'List-Id': '<debian-devel-changes.lists.debian.org>'}
+        self.headers = {"List-Id": "<debian-devel-changes.lists.debian.org>"}
 
         self.body = [
-            '-----BEGIN PGP SIGNED MESSAGE-----',
-            'Hash: SHA1',
-            '',
-            'Format: 1.7',
-            'Date: Thu, 03 Apr 2008 11:45:26 +0100',
-            'Source: haskell-irc',
-            'Binary: libghc6-irc-dev libghc6-irc-doc',
-            'Architecture: source i386 all',
-            'Version: 0.4.2-1',
-            'Distribution: unstable',
-            'Urgency: low',
-            'Maintainer: Chris Lamb <maint@t.com>',
-            'Changed-By: Chris Lamb <change@t.com>',
-            'Description: ',
-            ' libghc6-irc-dev - GHC 6 libraries for the Haskell IRC library',
-            ' libghc6-irc-doc - GHC 6 libraries for the Haskell IRC library (documentation)',
-            'Changes: ',
+            "-----BEGIN PGP SIGNED MESSAGE-----",
+            "Hash: SHA1",
+            "",
+            "Format: 1.7",
+            "Date: Thu, 03 Apr 2008 11:45:26 +0100",
+            "Source: haskell-irc",
+            "Binary: libghc6-irc-dev libghc6-irc-doc",
+            "Architecture: source i386 all",
+            "Version: 0.4.2-1",
+            "Distribution: unstable",
+            "Urgency: low",
+            "Maintainer: Chris Lamb <maint@t.com>",
+            "Changed-By: Chris Lamb <change@t.com>",
+            "Description: ",
+            " libghc6-irc-dev - GHC 6 libraries for the Haskell IRC library",
+            " libghc6-irc-doc - GHC 6 libraries for the Haskell IRC library (documentation)",
+            "Changes: ",
             # etc.
         ]
 
@@ -57,43 +57,43 @@ class TestMailParserAcceptedUpload(unittest.TestCase):
         msg = p.parse(self.headers, self.body)
 
         self.assertTrue(msg)
-        self.assertEqual(msg.package, 'haskell-irc')
-        self.assertEqual(msg.version, '0.4.2-1')
-        self.assertEqual(msg.distribution, 'unstable')
-        self.assertEqual(msg.urgency, 'low')
-        self.assertEqual(msg.by, 'Chris Lamb <change@t.com>')
+        self.assertEqual(msg.package, "haskell-irc")
+        self.assertEqual(msg.version, "0.4.2-1")
+        self.assertEqual(msg.distribution, "unstable")
+        self.assertEqual(msg.urgency, "low")
+        self.assertEqual(msg.by, "Chris Lamb <change@t.com>")
         self.assertEqual(msg.closes, None)
 
     def testCloses(self):
-        self.body.append('Closes: 123456 456123')
+        self.body.append("Closes: 123456 456123")
         msg = p.parse(self.headers, self.body)
 
         self.assertTrue(msg)
         self.assertEqual(msg.closes, [123456, 456123])
 
     def testQuotedPrintableChangedBy(self):
-        self.body[12] = 'Changed-By: Gon=C3=A9ri Le Bouder <a@b.com>'
+        self.body[12] = "Changed-By: Gon=C3=A9ri Le Bouder <a@b.com>"
 
         msg = p.parse(self.headers, self.body)
         self.assertTrue(msg)
-        self.assertEqual(msg.by, 'Gonéri Le Bouder <a@b.com>')
+        self.assertEqual(msg.by, "Gonéri Le Bouder <a@b.com>")
 
     def testUrgencyCase(self):
-        self.body[10] = 'Urgency: HIGH'
+        self.body[10] = "Urgency: HIGH"
 
         msg = p.parse(self.headers, self.body)
         self.assertTrue(msg)
-        self.assertEqual(msg.urgency, 'high')
+        self.assertEqual(msg.urgency, "high")
 
     def testFixtures(self):
         dir = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
-            'fixtures',
-            'accepted_upload',
-            '*',
+            "fixtures",
+            "accepted_upload",
+            "*",
         )
         for filename in glob(dir):
-            with open(filename, 'rb') as f:
+            with open(filename, "rb") as f:
                 mail = parse_mail(f)
             msg = p.parse(*mail)
             self.assertTrue(msg)

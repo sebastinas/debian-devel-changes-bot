@@ -21,26 +21,26 @@ from DebianDevelChangesBot import NewDataSource
 
 
 class Dinstall(NewDataSource):
-    NAME = 'dinstall'
-    URL = 'https://ftp-master.debian.org/dinstall.status'
+    NAME = "dinstall"
+    URL = "https://ftp-master.debian.org/dinstall.status"
     INTERVAL = 60 * 5
 
     def __init__(self, session=None):
         super().__init__(session)
-        self.status = 'not running'
+        self.status = "not running"
 
     def update(self):
         response = self.session.get(self.URL)
         response.raise_for_status()
 
         data = response.text
-        self.status = 'not running'
-        for line in data.split('\n'):
-            if not line.startswith('Current action'):
+        self.status = "not running"
+        for line in data.split("\n"):
+            if not line.startswith("Current action"):
                 continue
 
-            if line != 'Current action: all done':
-                self.status = line[len('Current action: ') :]
+            if line != "Current action: all done":
+                self.status = line[len("Current action: ") :]
 
             break
 

@@ -34,18 +34,18 @@ class TestDatasourceDinstall(unittest.TestCase):
     def setUp(self):
         fixture = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
-            'fixtures',
-            'dinstall.status.done',
+            "fixtures",
+            "dinstall.status.done",
         )
-        with io.open(fixture, encoding='utf-8') as f:
+        with io.open(fixture, encoding="utf-8") as f:
             self.data_not_running = f.read()
 
         fixture = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
-            'fixtures',
-            'dinstall.status.running',
+            "fixtures",
+            "dinstall.status.running",
         )
-        with io.open(fixture, encoding='utf-8') as f:
+        with io.open(fixture, encoding="utf-8") as f:
             self.data_running = f.read()
 
         self.mocker = requests_mock.Mocker()
@@ -58,14 +58,14 @@ class TestDatasourceDinstall(unittest.TestCase):
         self.mocker.stop()
 
     def testNotRunning(self):
-        self.mocker.register_uri('GET', Dinstall.URL, text=self.data_not_running)
+        self.mocker.register_uri("GET", Dinstall.URL, text=self.data_not_running)
         self.datasource.update()
-        self.assertEqual(self.datasource.get_status(), 'not running')
+        self.assertEqual(self.datasource.get_status(), "not running")
 
     def testRunning(self):
-        self.mocker.register_uri('GET', Dinstall.URL, text=self.data_running)
+        self.mocker.register_uri("GET", Dinstall.URL, text=self.data_running)
         self.datasource.update()
-        self.assertEqual(self.datasource.get_status(), 'packages/contents')
+        self.assertEqual(self.datasource.get_status(), "packages/contents")
 
 
 if __name__ == "__main__":

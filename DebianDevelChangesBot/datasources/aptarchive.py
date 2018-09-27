@@ -27,21 +27,21 @@ from DebianDevelChangesBot.utils.decoding import split_address
 class AptArchive(NewDataSource):
     # re-open cache every 30 min
     INTERVAL = 30 * 60
-    NAME = 'APT archive'
+    NAME = "APT archive"
 
     def __init__(self, config_dir, state_dir):
         super().__init__(None)
 
         config = apt_pkg.config
-        config['Dir::Etc'] = os.path.realpath(config_dir)
-        config['Dir::State'] = os.path.join(os.path.realpath(state_dir), 'state')
-        config['Dir::Cache'] = os.path.join(os.path.realpath(state_dir), 'cache')
+        config["Dir::Etc"] = os.path.realpath(config_dir)
+        config["Dir::State"] = os.path.join(os.path.realpath(state_dir), "state")
+        config["Dir::Cache"] = os.path.join(os.path.realpath(state_dir), "cache")
         apt_pkg.init_config()
         apt_pkg.init_system()
 
         lists = apt_pkg.config.find_dir("Dir::State::Lists")
         os.makedirs(lists, exist_ok=True)
-        os.makedirs(config['Dir::Cache'], exist_ok=True)
+        os.makedirs(config["Dir::Cache"], exist_ok=True)
 
         self.cache = apt_pkg.Cache(None)
         self.depcache = apt_pkg.DepCache(self.cache)
@@ -57,7 +57,7 @@ class AptArchive(NewDataSource):
                 self.cache.update(apt.progress.base.AcquireProgress(), self.source_list)
             except apt_pkg.Error as e:
                 if not ignore_errors:
-                    raise NewDataSourc.DataError('Failed to update cache: {}'.format(e))
+                    raise NewDataSourc.DataError("Failed to update cache: {}".format(e))
 
     def update(self):
         self.cache = apt_pkg.Cache(None)
@@ -78,7 +78,7 @@ class AptArchive(NewDataSource):
                 # delete record iterator
                 del records
 
-        if package.startswith('src:'):
+        if package.startswith("src:"):
             package = package[4:]
 
         records = apt_pkg.SourceRecords()
@@ -93,5 +93,5 @@ class AptArchive(NewDataSource):
             return split_address(maintainer)
 
         raise NewDataSource.DataError(
-            'Unable to get maintainer for {}.'.format(package)
+            "Unable to get maintainer for {}.".format(package)
         )

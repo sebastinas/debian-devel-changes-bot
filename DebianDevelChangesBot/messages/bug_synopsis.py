@@ -20,18 +20,18 @@ from DebianDevelChangesBot import Message
 
 
 class BugSynopsis(Message):
-    FIELDS = ('bug_number', 'package', 'status', 'title', 'severity')
+    FIELDS = ("bug_number", "package", "status", "title", "severity")
 
     def format(self):
         msg = "[bug]#%d[/bug]" % self.bug_number
 
-        if self.status == 'done':
+        if self.status == "done":
             msg += " (fixed)"
 
         msg += ": %s: «[title]%s[reset]» " % (self.package_name(), self.title)
 
-        if self.severity != 'normal':
-            if self.severity in ('critical', 'grave', 'serious'):
+        if self.severity != "normal":
+            if self.severity in ("critical", "grave", "serious"):
                 msg += "([severity]%s[reset]) " % self.severity
             else:
                 msg += "(%s) " % self.severity

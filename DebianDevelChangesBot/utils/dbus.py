@@ -55,7 +55,7 @@ class BTSDBusService:
 
         self.quit = False
         self.thread = threading.Thread(
-            target=self.process_mails, name='mail processing'
+            target=self.process_mails, name="mail processing"
         )
         self.thread.start()
 
@@ -75,11 +75,11 @@ class BTSDBusService:
                 mail = self.messages.popleft()
                 log.debug("Got mail.")
 
-            mail = base64.b64decode(mail.encode('ascii'))
+            mail = base64.b64decode(mail.encode("ascii"))
             try:
                 self.callback(BytesIO(mail))
             except Exception as e:
-                log.exception('Uncaught exception: {}'.format(e))
+                log.exception("Uncaught exception: {}".format(e))
 
         self.thread = None
 
@@ -113,7 +113,7 @@ def inject(mail, bus=None):
     if bus is None:
         bus = SystemBus()
 
-    mail = base64.b64encode(mail).decode('ascii')
+    mail = base64.b64encode(mail).decode("ascii")
     try:
         bts = bus.get(BTSDBusService.interface_name)
         return bts.Inject(mail)

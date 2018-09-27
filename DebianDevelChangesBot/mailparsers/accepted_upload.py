@@ -22,33 +22,33 @@ from DebianDevelChangesBot.messages import AcceptedUploadMessage
 
 
 lists = (
-    '<debian-devel-changes.lists.debian.org>',
-    '<debian-backports-changes.lists.debian.org>',
-    '<debian-lts-changes.lists.debian.org>',
-    '<debian-changes.lists.debian.org>',
+    "<debian-devel-changes.lists.debian.org>",
+    "<debian-backports-changes.lists.debian.org>",
+    "<debian-lts-changes.lists.debian.org>",
+    "<debian-changes.lists.debian.org>",
 )
 
 
 class AcceptedUploadParser(MailParser):
     @staticmethod
     def parse(headers, body, **kwargs):
-        if headers.get('List-Id', '') not in lists:
+        if headers.get("List-Id", "") not in lists:
             return
 
         mapping = {
-            'Source': 'package',
-            'Version': 'version',
-            'Distribution': 'distribution',
-            'Urgency': 'urgency',
-            'Changed-By': 'by',
-            'Closes': 'closes',
-            'Maintainer': 'maintainer',
+            "Source": "package",
+            "Version": "version",
+            "Distribution": "distribution",
+            "Urgency": "urgency",
+            "Changed-By": "by",
+            "Closes": "closes",
+            "Maintainer": "maintainer",
         }
 
         msg = AcceptedUploadMessage()
         for line in body:
             for field, target in mapping.items():
-                if line.startswith('%s: ' % field):
+                if line.startswith("%s: " % field):
                     val = line[len(field) + 2 :]
                     setattr(msg, target, val)
                     del mapping[field]
@@ -63,15 +63,15 @@ class AcceptedUploadParser(MailParser):
 
         try:
             if msg.closes:
-                msg.closes = [int(x) for x in msg.closes.split(' ')]
+                msg.closes = [int(x) for x in msg.closes.split(" ")]
         except ValueError:
             return
 
         if msg.urgency:
             msg.urgency = msg.urgency.lower()
 
-        if 'new_queue' in kwargs:
-            new_queue = kwargs['new_queue']
+        if "new_queue" in kwargs:
+            new_queue = kwargs["new_queue"]
             msg.new_upload = new_queue.is_new(
                 msg.package, msg.version
             ) or new_queue.is_backports_new(msg.package, msg.version)

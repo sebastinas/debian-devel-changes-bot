@@ -29,8 +29,8 @@ def header_decode(s):
         s = match.group(0)
         return chr(int(s[1:3], 16))
 
-    s = s.replace('_', ' ')
-    return re.sub(r'=\w{2}', unquote_match, s)
+    s = s.replace("_", " ")
+    return re.sub(r"=\w{2}", unquote_match, s)
 
 
 def _decode_chunk(chunk, encoding):
@@ -48,14 +48,14 @@ def quoted_printable(val):
         if type(val) is str:
             save = header_decode(val)
 
-            val = ''.join(
+            val = "".join(
                 [
                     _decode_chunk(chunk, encoding)
                     for chunk, encoding in email.header.decode_header(val)
                 ]
             )
 
-            val = val.replace(' )', ')')
+            val = val.replace(" )", ")")
 
             if len(val) > len(save):
                 val = save.encode("latin1").decode("utf-8", "replace")
@@ -74,4 +74,4 @@ def quoted_printable(val):
 
 def split_address(addr):
     name, addr = email.utils.parseaddr(addr)
-    return {'name': name, 'email': addr}
+    return {"name": name, "email": addr}

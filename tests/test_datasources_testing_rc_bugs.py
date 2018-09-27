@@ -29,15 +29,15 @@ class BaseTest(object):
     def setUp(self):
         fixture = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
-            'fixtures',
-            'testing_rc_bugs.json',
+            "fixtures",
+            "testing_rc_bugs.json",
         )
         with open(fixture) as f:
             data = f.read()
 
         self.mocker = requests_mock.Mocker()
         self.mocker.start()
-        self.mocker.register_uri('GET', self.klass.URL, text=data)
+        self.mocker.register_uri("GET", self.klass.URL, text=data)
 
         session = requests.Session()
         self.datasource = self.klass(session)
@@ -50,8 +50,8 @@ class BaseTest(object):
         Check we have a sane URL.
         """
         self.assertTrue(len(self.datasource.URL) > 5)
-        self.assertTrue(self.datasource.URL.startswith('https'))
-        self.assertTrue('udd.debian.org' in self.datasource.URL)
+        self.assertTrue(self.datasource.URL.startswith("https"))
+        self.assertTrue("udd.debian.org" in self.datasource.URL)
 
     def testInterval(self):
         """

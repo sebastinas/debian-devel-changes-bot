@@ -27,12 +27,12 @@ def popcon(package, session=None):
     if session is None:
         session = requests.Session()
 
-    params = {'package': package}
+    params = {"package": package}
     response = session.get("https://qa.debian.org/popcon.php", data=params)
     response.raise_for_status()
 
     soup = BeautifulSoup(response.text, "html.parser")
-    rows = [x.string for x in soup('td')[1:]]
+    rows = [x.string for x in soup("td")[1:]]
 
     msg = Popcon()
     msg.package = package

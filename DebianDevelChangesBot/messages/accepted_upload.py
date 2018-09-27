@@ -21,8 +21,8 @@ from DebianDevelChangesBot import Message
 
 
 class AcceptedUploadMessage(Message):
-    FIELDS = ('package', 'version', 'distribution', 'urgency', 'by', 'maintainer')
-    OPTIONAL = ('closes', 'new_upload')
+    FIELDS = ("package", "version", "distribution", "urgency", "by", "maintainer")
+    OPTIONAL = ("closes", "new_upload")
 
     def format(self):
         msg = "%s " % self.package_name()
@@ -32,16 +32,16 @@ class AcceptedUploadMessage(Message):
 
         msg += "[version]%s[reset] uploaded " % self.version
 
-        if self.distribution not in ('unstable', 'sid'):
+        if self.distribution not in ("unstable", "sid"):
             msg += "to [distribution]%s[reset] " % self.distribution
 
-        if self.urgency == 'high':
+        if self.urgency == "high":
             msg += "with urgency [urgency]%s[reset] " % self.urgency
 
         msg += "by [by]%s[reset] " % self.by
 
-        if self.closes and '-backports' not in self.distribution:
-            bug_list = ', '.join(["[bug]#%s[/bug]" % x for x in self.closes])
+        if self.closes and "-backports" not in self.distribution:
+            bug_list = ", ".join(["[bug]#%s[/bug]" % x for x in self.closes])
             msg += "(Closes: %s) " % bug_list
 
         msg += "[url]https://tracker.debian.org/%s[/url]" % self.package

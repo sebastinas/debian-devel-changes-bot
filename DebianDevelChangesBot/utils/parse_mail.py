@@ -27,7 +27,7 @@ def parse_mail(fileobj):
     msg = email.message_from_binary_file(fileobj)
 
     for k, v in msg.items():
-        headers[k] = quoted_printable(v).replace('\n', '').replace('\t', ' ').strip()
+        headers[k] = quoted_printable(v).replace("\n", "").replace("\t", " ").strip()
 
     for line in email.iterators.body_line_iterator(msg):
         body.append(line.replace("\n", ""))
@@ -37,15 +37,15 @@ def parse_mail(fileobj):
     while i > 0:
         i -= 1
         prev = body[i]
-        if len(prev) == 74 and prev.endswith('='):
+        if len(prev) == 74 and prev.endswith("="):
             body[i] = body[i][:-1] + body[i + 1]
             del body[i + 1]
 
     # Remove =20 from end of lines
     i = 0
     while i < len(body):
-        if body[i].endswith('=20'):
-            body[i] = body[i][:-3] + ' '
+        if body[i].endswith("=20"):
+            body[i] = body[i][:-3] + " "
         i += 1
 
     return headers, body

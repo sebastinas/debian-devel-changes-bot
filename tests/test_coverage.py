@@ -22,11 +22,11 @@ import os
 import sys
 import subprocess
 
-MODULE = 'DebianDevelChangesBot'
+MODULE = "DebianDevelChangesBot"
 
 
 def coverage(cmd, show=False):
-    status, output = subprocess.getstatusoutput('python-coverage %s ' % cmd)
+    status, output = subprocess.getstatusoutput("python-coverage %s " % cmd)
     if status != 0:
         print(output, file=sys.stderr)
         sys.exit(-1)
@@ -37,20 +37,20 @@ def coverage(cmd, show=False):
 def module_files():
     for dir, _, files in os.walk(MODULE):
         for filename in files:
-            if filename.endswith('.py'):
+            if filename.endswith(".py"):
                 yield os.path.join(dir, filename)
 
 
 def purge():
     try:
-        os.unlink('.coverage')
+        os.unlink(".coverage")
     except OSError:
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     purge()
-    coverage('-x %s' % 'tests/test_all.py')
-    coverage(' -r -m %s' % " ".join([x for x in module_files()]), show=True)
+    coverage("-x %s" % "tests/test_all.py")
+    coverage(" -r -m %s" % " ".join([x for x in module_files()]), show=True)
     purge()

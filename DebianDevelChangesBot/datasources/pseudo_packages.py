@@ -28,16 +28,16 @@ class PseudoPackage:
 
 
 class PseudoPackages(NewDataSource):
-    NAME = 'pseudo packages'
-    URL_D = 'https://bugs.debian.org/pseudopackages/pseudo-packages.description'
-    URL_M = 'https://bugs.debian.org/pseudopackages/pseudo-packages.maintainers'
+    NAME = "pseudo packages"
+    URL_D = "https://bugs.debian.org/pseudopackages/pseudo-packages.description"
+    URL_M = "https://bugs.debian.org/pseudopackages/pseudo-packages.maintainers"
 
     INTERVAL = 60 * 5
 
     def __init__(self, session=None):
         super().__init__(session)
         self.packages = {}
-        self.regex = re.compile(r'([^\t ]*)[\t ]*(.*)')
+        self.regex = re.compile(r"([^\t ]*)[\t ]*(.*)")
 
     def update(self):
         response_d = self.session.get(self.URL_D)
@@ -48,12 +48,12 @@ class PseudoPackages(NewDataSource):
         descriptions = {}
         maintainers = {}
 
-        for line in response_d.text.split('\n'):
+        for line in response_d.text.split("\n"):
             match = self.regex.match(line)
             if match:
                 descriptions[match.group(1)] = match.group(2)
 
-        for line in response_m.text.split('\n'):
+        for line in response_m.text.split("\n"):
             match = self.regex.match(line)
             if match:
                 maintainers[match.group(1)] = match.group(2)

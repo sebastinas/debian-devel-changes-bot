@@ -43,16 +43,16 @@ class TestFormatEmail(unittest.TestCase):
         self._test("John S'mith <jsmith@debian.org>", "John S'mith (jsmith)")
 
     def testNonNormalDebianEmailOne(self):
-        self._test('John Smith <jsmith@merkel.debian.org>', 'John Smith (jsmith)')
+        self._test("John Smith <jsmith@merkel.debian.org>", "John Smith (jsmith)")
 
     def testNonNormalDebianEmailTwo(self):
-        self._test('John Smith <jsmith@master.debian.org>', 'John Smith (jsmith)')
+        self._test("John Smith <jsmith@master.debian.org>", "John Smith (jsmith)")
 
     def testUppercaseDebianEmail(self):
-        self._test('John Smith <JSMITH@DEBIAN.ORG>', "John Smith (jsmith)")
+        self._test("John Smith <JSMITH@DEBIAN.ORG>", "John Smith (jsmith)")
 
     def testUppercaseEmail(self):
-        self._test('John Smith <JSMITH@HOST.TLD>', "John Smith <jsmith@host.tld>")
+        self._test("John Smith <JSMITH@HOST.TLD>", "John Smith <jsmith@host.tld>")
 
     def testExtraSpacesOne(self):
         self._test("John  Smith <jsmith@host.tld>", "John Smith <jsmith@host.tld>")
@@ -79,7 +79,7 @@ class TestFormatEmail(unittest.TestCase):
         self._test("<jsmith@debian.org>", "(jsmith)")
 
     def testRepeatEmailAddress(self):
-        self._test('"leo@dicea.unifi.it" <leo@dicea.unifi.it>', '<leo@dicea.unifi.it>')
+        self._test('"leo@dicea.unifi.it" <leo@dicea.unifi.it>', "<leo@dicea.unifi.it>")
 
     def testReversedBracketed(self):
         self._test("<jsmith@host.tld> (John Smith)", "John Smith <jsmith@host.tld>")

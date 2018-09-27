@@ -37,14 +37,14 @@ class TestPopcon(unittest.TestCase):
     def tearDown(self):
         self.mocker.stop()
 
-    def _test(self, package='haskell-devscripts'):
+    def _test(self, package="haskell-devscripts"):
         fixture = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), 'fixtures', 'popcon', package
+            os.path.dirname(os.path.abspath(__file__)), "fixtures", "popcon", package
         )
-        with io.open(fixture, encoding='utf-8') as f:
+        with io.open(fixture, encoding="utf-8") as f:
             data = f.read()
 
-        self.mocker.register_uri('GET', 'https://qa.debian.org/popcon.php', text=data)
+        self.mocker.register_uri("GET", "https://qa.debian.org/popcon.php", text=data)
 
         return popcon(package, self.session)
 
@@ -52,7 +52,7 @@ class TestPopcon(unittest.TestCase):
         self.assertTrue(self._test())
 
     def testPackage(self):
-        self.assertEqual(self._test().package, 'haskell-devscripts')
+        self.assertEqual(self._test().package, "haskell-devscripts")
 
     def testInst(self):
         self.assertEqual(self._test().inst, 96)

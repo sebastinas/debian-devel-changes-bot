@@ -23,7 +23,7 @@ import unittest
 
 def suite():
     suite = unittest.TestSuite()
-    for _, _, files in os.walk('.'):
+    for _, _, files in os.walk("."):
         for name in filter(is_test, files):
             tests = unittest.defaultTestLoader.loadTestsFromName(name[:-3])
             suite.addTests(tests)
@@ -31,7 +31,7 @@ def suite():
 
 
 def is_test(filename):
-    return filename.startswith('test_') and filename.endswith('.py')
+    return filename.startswith("test_") and filename.endswith(".py")
 
 
 if __name__ == "__main__":

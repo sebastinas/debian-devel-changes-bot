@@ -22,8 +22,8 @@ from DebianDevelChangesBot import NewDataSource
 
 
 class NewQueue(NewDataSource):
-    NAME = 'NEW queue'
-    URL = 'https://ftp-master.debian.org/new.822'
+    NAME = "NEW queue"
+    URL = "https://ftp-master.debian.org/new.822"
     INTERVAL = 60 * 30
 
     def __init__(self, session=None):
@@ -41,12 +41,12 @@ class NewQueue(NewDataSource):
         backports_packages = {}
 
         for para in Deb822.iter_paragraphs(data):
-            pkg = para['Source']
-            queue = para['Queue']
-            if queue == 'new':
-                packages[pkg] = para['Version'].split(' ')
-            if queue == 'backports-new':
-                backports_packages[pkg] = para['Version'].split(' ')
+            pkg = para["Source"]
+            queue = para["Queue"]
+            if queue == "new":
+                packages[pkg] = para["Version"].split(" ")
+            if queue == "backports-new":
+                backports_packages[pkg] = para["Version"].split(" ")
 
         self.packages = packages
         self.backports_packages = backports_packages

@@ -67,9 +67,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.mainloop_thread = None
         mainloop = GObject.MainLoop()
         if not mainloop.is_running():
-            log.info('Starting Glib main loop')
+            log.info("Starting Glib main loop")
             mainloop_thread = threading.Thread(
-                target=mainloop.run, name='Glib maing loop'
+                target=mainloop.run, name="Glib maing loop"
             )
             mainloop_thread.start()
             self.mainloop_thread = mainloop_thread
@@ -90,8 +90,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.dinstall = Dinstall(self.requests_session)
         self.rm_queue = RmQueue(self.requests_session)
         self.apt_archive = AptArchive(
-            self.registryValue('apt_configuration_directory'),
-            self.registryValue('apt_cache_directory'),
+            self.registryValue("apt_configuration_directory"),
+            self.registryValue("apt_cache_directory"),
         )
         self.data_sources = (
             self.pseudo_packages,
@@ -109,7 +109,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 try:
                     source.update()
                 except Exception as e:
-                    log.exception('Failed to update {}: {}'.format(source.NAME, e))
+                    log.exception("Failed to update {}: {}".format(source.NAME, e))
                 self._topic_callback()
 
             return implementation
@@ -122,21 +122,21 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             # and run them now once
             schedule.addEvent(wrapper(source), time.time() + 1)
 
-        log.info('Starting D-Bus service')
+        log.info("Starting D-Bus service")
         self.dbus_service = BTSDBusService(self._email_callback)
         self.dbus_bus = SystemBus()
         self.dbus_bus.publish(self.dbus_service.interface_name, self.dbus_service)
         self.dbus_service.start()
 
     def die(self):
-        log.info('Stopping D-Bus service')
+        log.info("Stopping D-Bus service")
         self.dbus_service.stop()
         if self.mainloop is not None:
-            log.info('Stopping Glib main loop')
+            log.info("Stopping Glib main loop")
             self.mainloop.quit()
             self.mainloop_thread.join(timeout=1.0)
             if self.mainloop_thread.is_alive():
-                log.warn('Glib main loop thread is still alive.')
+                log.warn("Glib main loop thread is still alive.")
 
             self.mainloop = None
             self.mainloop_thread = None
@@ -166,11 +166,11 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             self.last_n_messages = self.last_n_messages[:20]
 
             maintainer_info = None
-            if hasattr(msg, 'maintainer'):
+            if hasattr(msg, "maintainer"):
                 maintainer_info = (split_address(msg.maintainer),)
             else:
                 maintainer_info = []
-                for package in msg.package.split(','):
+                for package in msg.package.split(","):
                     package = package.strip()
                     try:
                         maintainer_info.append(self.apt_archive.get_maintainer(package))
@@ -179,33 +179,33 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
             for channel in self.irc.state.channels:
                 # match package or nothing by default
-                package_regex = self.registryValue('package_regex', channel) or 'a^'
+                package_regex = self.registryValue("package_regex", channel) or "a^"
                 package_match = False
-                for package in msg.package.split(','):
+                for package in msg.package.split(","):
                     package = package.strip()
                     package_match = re.search(package_regex, msg.package)
                     if package_match:
                         break
 
                 maintainer_match = False
-                maintainer_regex = self.registryValue('maintainer_regex', channel)
+                maintainer_regex = self.registryValue("maintainer_regex", channel)
                 if (
                     maintainer_regex
                     and maintainer_info is not None
                     and len(maintainer_info) >= 0
                 ):
                     for mi in maintainer_info:
-                        maintainer_match = re.search(maintainer_regex, mi['email'])
+                        maintainer_match = re.search(maintainer_regex, mi["email"])
                         if maintainer_match:
                             break
 
                 if not package_match and not maintainer_match:
                     continue
 
-                distribution_regex = self.registryValue('distribution_regex', channel)
+                distribution_regex = self.registryValue("distribution_regex", channel)
 
                 if distribution_regex:
-                    if not hasattr(msg, 'distribution'):
+                    if not hasattr(msg, "distribution"):
                         # If this channel has a distribution regex, don't
                         # bother continuing unless the message actually has a
                         # distribution. This filters security messages, etc.
@@ -216,7 +216,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                         # message.
                         continue
 
-                send_privmsg = self.registryValue('send_privmsg', channel)
+                send_privmsg = self.registryValue("send_privmsg", channel)
                 # Send NOTICE per default and if 'send_privmsg' is set for the
                 # channel, send PRIVMSG instead.
                 if send_privmsg:
@@ -227,16 +227,16 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 self.irc.queueMsg(ircmsg)
 
         except Exception as e:
-            log.exception('Uncaught exception: %s ' % e)
+            log.exception("Uncaught exception: %s " % e)
 
     def _topic_callback(self):
         sections = {
-            self.testing_rc_bugs.get_number_bugs: 'RC bug count',
-            self.stable_rc_bugs.get_number_bugs: 'stable RC bug count',
-            self.new_queue.get_size: 'NEW queue',
-            self.new_queue.get_backports_size: 'backports NEW queue',
-            self.rm_queue.get_size: 'RM queue',
-            self.dinstall.get_status: 'dinstall',
+            self.testing_rc_bugs.get_number_bugs: "RC bug count",
+            self.stable_rc_bugs.get_number_bugs: "stable RC bug count",
+            self.new_queue.get_size: "NEW queue",
+            self.new_queue.get_backports_size: "backports NEW queue",
+            self.rm_queue.get_size: "RM queue",
+            self.dinstall.get_status: "dinstall",
         }
 
         channels = set()
@@ -264,7 +264,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                         channels.add(channel)
 
         for channel in channels:
-            event_name = '{}_topic'.format(channel)
+            event_name = "{}_topic".format(channel)
             try:
                 schedule.removeEvent(event_name)
             except KeyError:
@@ -301,7 +301,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def update(self, irc, msg, args):
         """Trigger an update."""
-        if not ircdb.checkCapability(msg.prefix, 'owner'):
+        if not ircdb.checkCapability(msg.prefix, "owner"):
             irc.reply("You are not authorised to run this command.")
             return
 
@@ -322,20 +322,20 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 )
                 return
 
-            field_styles = ('package', 'version', 'distribution', 'section')
+            field_styles = ("package", "version", "distribution", "section")
             for line in lines:
                 out = []
-                fields = line.strip().split('|', len(field_styles))
+                fields = line.strip().split("|", len(field_styles))
                 for style, data in zip(field_styles, fields):
-                    out.append('[%s]%s' % (style, data))
-                irc.reply(colourise('[reset]|'.join(out)), prefixNick=False)
+                    out.append("[%s]%s" % (style, data))
+                irc.reply(colourise("[reset]|".join(out)), prefixNick=False)
         except Exception as e:
             irc.reply("Error: %s" % e.message)
 
-    madison = wrap(madison, ['text'])
+    madison = wrap(madison, ["text"])
 
     def get_pool_url(self, package):
-        if package.startswith('lib'):
+        if package.startswith("lib"):
             return (package[:4], package)
         else:
             return (package[:1], package)
@@ -346,12 +346,12 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             info = self.apt_archive.get_maintainer(package)
             if info:
                 display_name = format_email_address(
-                    "%s <%s>" % (info['name'], info['email']), max_domain=18
+                    "%s <%s>" % (info["name"], info["email"]), max_domain=18
                 )
 
-                login = info['email']
-                if login.endswith('@debian.org'):
-                    login = login.replace('@debian.org', '')
+                login = info["email"]
+                if login.endswith("@debian.org"):
+                    login = login.replace("@debian.org", "")
 
                 msg = (
                     "[desc]Maintainer for[reset] [package]%s[reset] [desc]is[reset] [by]%s[reset]: "
@@ -363,9 +363,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
             irc.reply(colourise(msg), prefixNick=False)
 
-    maintainer = wrap(_maintainer, [many('anything')])
-    maint = wrap(_maintainer, [many('anything')])
-    who_maintains = wrap(_maintainer, [many('anything')])
+    maintainer = wrap(_maintainer, [many("anything")])
+    maint = wrap(_maintainer, [many("anything")])
+    who_maintains = wrap(_maintainer, [many("anything")])
 
     def _qa(self, irc, msg, args, items):
         """Get link to QA page."""
@@ -379,11 +379,11 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             )
             irc.reply(colourise(msg), prefixNick=False)
 
-    qa = wrap(_qa, [many('anything')])
-    overview = wrap(_qa, [many('anything')])
-    package = wrap(_qa, [many('anything')])
-    pkg = wrap(_qa, [many('anything')])
-    srcpkg = wrap(_qa, [many('anything')])
+    qa = wrap(_qa, [many("anything")])
+    overview = wrap(_qa, [many("anything")])
+    package = wrap(_qa, [many("anything")])
+    pkg = wrap(_qa, [many("anything")])
+    srcpkg = wrap(_qa, [many("anything")])
 
     def _changelog(self, irc, msg, args, items):
         """Get link to changelog."""
@@ -398,8 +398,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             )
             irc.reply(colourise(msg), prefixNick=False)
 
-    changelog = wrap(_changelog, [many('anything')])
-    changes = wrap(_changelog, [many('anything')])
+    changelog = wrap(_changelog, [many("anything")])
+    changes = wrap(_changelog, [many("anything")])
 
     def _copyright(self, irc, msg, args, items):
         """Link to copyright files."""
@@ -414,7 +414,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             )
             irc.reply(colourise(msg), prefixNick=False)
 
-    copyright = wrap(_copyright, [many('anything')])
+    copyright = wrap(_copyright, [many("anything")])
 
     def _buggraph(self, irc, msg, args, items):
         """Link to bug graph."""
@@ -425,8 +425,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             )
             irc.reply(colourise(msg), prefixNick=False)
 
-    buggraph = wrap(_buggraph, [many('anything')])
-    bug_graph = wrap(_buggraph, [many('anything')])
+    buggraph = wrap(_buggraph, [many("anything")])
+    bug_graph = wrap(_buggraph, [many("anything")])
 
     def _buildd(self, irc, msg, args, items):
         """Link to buildd page."""
@@ -437,7 +437,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             )
             irc.reply(colourise(msg), prefixNick=False)
 
-    buildd = wrap(_buildd, [many('anything')])
+    buildd = wrap(_buildd, [many("anything")])
 
     def _popcon(self, irc, msg, args, package):
         """Get popcon data."""
@@ -448,7 +448,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         except Exception as e:
             irc.reply("Error: unable to obtain popcon data for %s" % package)
 
-    popcon = wrap(_popcon, ['text'])
+    popcon = wrap(_popcon, ["text"])
 
     def _testing(self, irc, msg, args, items):
         """Check testing migration status."""
@@ -459,8 +459,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             )
             irc.reply(colourise(msg), prefixNick=False)
 
-    testing = wrap(_testing, [many('anything')])
-    migration = wrap(_testing, [many('anything')])
+    testing = wrap(_testing, [many("anything")])
+    migration = wrap(_testing, [many("anything")])
 
     def _new(self, irc, msg, args):
         """Link to NEW queue."""

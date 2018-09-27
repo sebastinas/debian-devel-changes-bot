@@ -24,14 +24,14 @@ def rewrite_topic(topic, prefix, value):
     if not len(prefix):
         return topic
 
-    if prefix == 'dinstall':
-        regex = re.compile(r'dinstall: [^|]*')
+    if prefix == "dinstall":
+        regex = re.compile(r"dinstall: [^|]*")
     else:
-        regex = re.compile(r'^{}: \d+$'.format(prefix))
+        regex = re.compile(r"^{}: \d+$".format(prefix))
 
     def update(p):
         if regex.match(p) is not None:
-            return '{}: {}'.format(prefix, value)
+            return "{}: {}".format(prefix, value)
         return p
 
-    return ' | '.join(update(p) for p in topic.split(' | '))
+    return " | ".join(update(p) for p in topic.split(" | "))

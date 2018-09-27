@@ -29,14 +29,14 @@ from DebianDevelChangesBot.datasources import RmQueue
 class TestDatasourceTestingRmQueue(unittest.TestCase):
     def setUp(self):
         fixture = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), 'fixtures', 'rm_queue.html'
+            os.path.dirname(os.path.abspath(__file__)), "fixtures", "rm_queue.html"
         )
-        with io.open(fixture, encoding='utf-8') as f:
+        with io.open(fixture, encoding="utf-8") as f:
             data = f.read()
 
         self.mocker = requests_mock.Mocker()
         self.mocker.start()
-        self.mocker.register_uri('GET', RmQueue.URL, text=data)
+        self.mocker.register_uri("GET", RmQueue.URL, text=data)
 
         session = requests.Session()
         self.datasource = RmQueue(session)
@@ -49,7 +49,7 @@ class TestDatasourceTestingRmQueue(unittest.TestCase):
         Check we have a sane URL.
         """
         self.assertTrue(len(self.datasource.URL) > 5)
-        self.assertTrue(self.datasource.URL.startswith('http'))
+        self.assertTrue(self.datasource.URL.startswith("http"))
 
     def testInterval(self):
         """
@@ -63,11 +63,11 @@ class TestDatasourceTestingRmQueue(unittest.TestCase):
 
     def testTop(self):
         self.datasource.update()
-        self.assertTrue(self.datasource.is_rm('mtasc'))
+        self.assertTrue(self.datasource.is_rm("mtasc"))
 
     def testBottom(self):
         self.datasource.update()
-        self.assertTrue(self.datasource.is_rm('rnahybrid'))
+        self.assertTrue(self.datasource.is_rm("rnahybrid"))
 
 
 if __name__ == "__main__":

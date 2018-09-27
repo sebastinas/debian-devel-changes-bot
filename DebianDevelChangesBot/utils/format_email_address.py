@@ -18,12 +18,12 @@
 
 import re
 
-EMAIL = re.compile(r'^(.*) ?(<.+@.+>)$')
-EMAIL_ALT = re.compile(r'^<?([^@]+@[^\s>]+)>? \((.*)\)$')
-DEBIAN_EMAIL = re.compile(r'^<([-a-z0-9]+)@(?:merkel\.|master\.)?debian.org>$')
+EMAIL = re.compile(r"^(.*) ?(<.+@.+>)$")
+EMAIL_ALT = re.compile(r"^<?([^@]+@[^\s>]+)>? \((.*)\)$")
+DEBIAN_EMAIL = re.compile(r"^<([-a-z0-9]+)@(?:merkel\.|master\.)?debian.org>$")
 
-WHITESPACE = re.compile(r'\s{2,}')
-CONTINUATION = re.compile(r'\.{3,}$')
+WHITESPACE = re.compile(r"\s{2,}")
+CONTINUATION = re.compile(r"\.{3,}$")
 
 
 def format_email_address(input, max_user=13, max_domain=10):
@@ -37,7 +37,7 @@ def format_email_address(input, max_user=13, max_domain=10):
 
     # Name
     name = m.group(1).strip()
-    name = WHITESPACE.sub(' ', name)
+    name = WHITESPACE.sub(" ", name)
 
     # Remove quotes around name
     for quote in ("'", '"'):
@@ -45,15 +45,15 @@ def format_email_address(input, max_user=13, max_domain=10):
             name = name[1:-1]
 
     # Email address
-    address = m.group(2).lower().replace(' ', '')
-    address = WHITESPACE.sub(' ', address)
+    address = m.group(2).lower().replace(" ", "")
+    address = WHITESPACE.sub(" ", address)
 
     # Fix broken '"foo@bar.com" <foo@bar.com>' mail addresses
     if input == '"%s" <%s>' % (name, name):
         return address
 
     if DEBIAN_EMAIL.match(address):
-        address = DEBIAN_EMAIL.sub(r'(\1)', address)
+        address = DEBIAN_EMAIL.sub(r"(\1)", address)
 
         # Remove duplications of Debian user suffixed to name
         if name.lower().endswith(address.lower()):
@@ -61,15 +61,15 @@ def format_email_address(input, max_user=13, max_domain=10):
 
     else:
         # Shorten email address
-        user, host = address[1:-1].split('@')
+        user, host = address[1:-1].split("@")
         if len(user) > max_user:
             user = "%s..." % user[: max(max_user - 3, 0)]
         if len(host) > max_domain:
             host = "%s..." % host[: max(max_domain - 3, 0)]
 
         # Normalise triple-dots
-        user = CONTINUATION.sub('...', user)
-        host = CONTINUATION.sub('...', host)
+        user = CONTINUATION.sub("...", user)
+        host = CONTINUATION.sub("...", host)
 
         address = "<%s@%s>" % (user, host)
 

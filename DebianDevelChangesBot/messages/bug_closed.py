@@ -20,7 +20,7 @@ from DebianDevelChangesBot import Message
 
 
 class BugClosedMessage(Message):
-    FIELDS = ('bug_number', 'package', 'by', 'title')
+    FIELDS = ("bug_number", "package", "by", "title")
 
     def format(self):
         msg = "Closed [bug]#%d[/bug] in %s " % (self.bug_number, self.package_name())

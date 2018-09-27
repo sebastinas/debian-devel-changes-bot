@@ -35,13 +35,13 @@ Simple message body"""
 
         headers, body = parse_mail(f)
 
-        self.assertEqual(headers['From'], "Chris Lamb <chris@chris-lamb.co.uk>")
-        self.assertEqual(headers['Subject'], "This is the subject")
+        self.assertEqual(headers["From"], "Chris Lamb <chris@chris-lamb.co.uk>")
+        self.assertEqual(headers["Subject"], "This is the subject")
         self.assertEqual(len(body), 1)
         self.assertEqual(body[0], "Simple message body")
 
-        self.assertEqual(type(headers['From']), str)
-        self.assertEqual(type(headers['Subject']), str)
+        self.assertEqual(type(headers["From"]), str)
+        self.assertEqual(type(headers["Subject"]), str)
         self.assertEqual(type(body[0]), str)
 
     def testLongSubject(self):
@@ -57,7 +57,7 @@ Simple message body"""
         headers, body = parse_mail(f)
 
         self.assertEqual(
-            headers['Subject'],
+            headers["Subject"],
             "Bug#123456: marked as done "
             "(pinafore: Inertial couplings may exceed tolerance when docking)",
         )
@@ -74,7 +74,7 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
         )
 
         headers, body = parse_mail(f)
-        self.assertEqual(body[0], ('A' * 73) + ('B' * 73) + ('C' * 73))
+        self.assertEqual(body[0], ("A" * 73) + ("B" * 73) + ("C" * 73))
 
     def testNotLongLine(self):
         f = BytesIO(
@@ -88,7 +88,7 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
         )
 
         headers, body = parse_mail(f)
-        self.assertNotEqual(body, [('A' * 73) + ('B' * 73) + ('C' * 73)])
+        self.assertNotEqual(body, [("A" * 73) + ("B" * 73) + ("C" * 73)])
 
     def testSpaceAtEndOfLine(self):
         f = BytesIO(
@@ -100,7 +100,7 @@ Description:=20
         )
 
         headers, body = parse_mail(f)
-        self.assertEqual(body, ['Description: '])
+        self.assertEqual(body, ["Description: "])
 
     def testUnicodeHeader(self):
         f = BytesIO(
@@ -112,8 +112,8 @@ Message body
         )
 
         headers, body = parse_mail(f)
-        self.assertEqual(headers['From'], "Gonéri Le Bouder")
-        self.assertEqual(body, ['Message body'])
+        self.assertEqual(headers["From"], "Gonéri Le Bouder")
+        self.assertEqual(body, ["Message body"])
 
     def testUnicodeBody(self):
         f = BytesIO(
@@ -124,7 +124,7 @@ Gon=C3=A9ri Le Bouder
 """
         )
         headers, body = parse_mail(f)
-        self.assertEqual(headers['Subject'], 'Subject line')
+        self.assertEqual(headers["Subject"], "Subject line")
         self.assertEqual(body, ["Gon=C3=A9ri Le Bouder"])
 
     def testUtf8Header(self):
@@ -136,8 +136,8 @@ Message body"""
         )
 
         headers, body = parse_mail(f)
-        self.assertEqual(headers['From'], "Sebastian Dröge")
-        self.assertEqual(body, ['Message body'])
+        self.assertEqual(headers["From"], "Sebastian Dröge")
+        self.assertEqual(body, ["Message body"])
 
     def testUtf8Header2(self):
         f = BytesIO(
@@ -147,8 +147,8 @@ From: marc.poulhies@imag.fr (Marc =?ISO-8859-1?Q?Poulhi=E8s?=)
 Message body"""
         )
         headers, body = parse_mail(f)
-        self.assertEqual(headers['From'], "marc.poulhies@imag.fr (Marc Poulhiès)")
-        self.assertEqual(body, ['Message body'])
+        self.assertEqual(headers["From"], "marc.poulhies@imag.fr (Marc Poulhiès)")
+        self.assertEqual(body, ["Message body"])
 
     def testMultipart(self):
         f = BytesIO(

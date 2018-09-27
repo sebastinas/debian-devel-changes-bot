@@ -20,18 +20,18 @@ from DebianDevelChangesBot import Message
 
 
 class BugSubmittedMessage(Message):
-    FIELDS = ('bug_number', 'package', 'by', 'title')
-    OPTIONAL = ('severity', 'version')
+    FIELDS = ("bug_number", "package", "by", "title")
+    OPTIONAL = ("severity", "version")
 
     def format(self):
         msg = "Opened [bug]#%d[/bug] " % self.bug_number
 
-        if self.severity in ('critical', 'grave', 'serious'):
+        if self.severity in ("critical", "grave", "serious"):
             msg += "([severity]%s[reset]) " % self.severity
 
         msg += "in %s " % self.package_name()
 
-        if self.version not in (None, 'n/a', 'any'):
+        if self.version not in (None, "n/a", "any"):
             msg += "[version]%s[reset] " % self.version
 
         msg += (

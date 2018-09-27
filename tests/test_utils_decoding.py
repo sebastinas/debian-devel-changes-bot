@@ -24,14 +24,14 @@ from DebianDevelChangesBot.utils.decoding import split_address
 
 class TestUtilsDecoding(unittest.TestCase):
     def testSplitAddress1(self):
-        addr = split_address('Sebastian Ramacher <sramacher@debian.org>')
-        self.assertEqual(addr['name'], 'Sebastian Ramacher')
-        self.assertEqual(addr['email'], 'sramacher@debian.org')
+        addr = split_address("Sebastian Ramacher <sramacher@debian.org>")
+        self.assertEqual(addr["name"], "Sebastian Ramacher")
+        self.assertEqual(addr["email"], "sramacher@debian.org")
 
     def testSplitAddress2(self):
-        addr = split_address('sramacher@debian.org')
-        self.assertEqual(addr['name'], '')
-        self.assertEqual(addr['email'], 'sramacher@debian.org')
+        addr = split_address("sramacher@debian.org")
+        self.assertEqual(addr["name"], "")
+        self.assertEqual(addr["email"], "sramacher@debian.org")
 
 
 if __name__ == "__main__":

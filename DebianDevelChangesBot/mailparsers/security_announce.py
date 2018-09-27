@@ -23,20 +23,20 @@ import re
 
 
 SUBJECT = re.compile(
-    r'^\[SECURITY\] \[DSA[-\s]([\d]+)-([\d+])\] (?:[Nn]ew )?(.+) package?s? (.*)$'
+    r"^\[SECURITY\] \[DSA[-\s]([\d]+)-([\d+])\] (?:[Nn]ew )?(.+) package?s? (.*)$"
 )
-DATE = re.compile(r'(20\d\d)')
+DATE = re.compile(r"(20\d\d)")
 
 
 class SecurityAnnounceParser(MailParser):
     @staticmethod
     def parse(headers, body, **kwargs):
-        if headers.get('List-Id', '') != '<debian-security-announce.lists.debian.org>':
+        if headers.get("List-Id", "") != "<debian-security-announce.lists.debian.org>":
             return
 
         msg = SecurityAnnounceMessage()
 
-        m = SUBJECT.match(headers.get('Subject', ''))
+        m = SUBJECT.match(headers.get("Subject", ""))
         if m:
             try:
                 msg.dsa_number = int(m.group(1))
@@ -47,7 +47,7 @@ class SecurityAnnounceParser(MailParser):
             msg.package = m.group(3)
             msg.problem = m.group(4)
 
-        m = DATE.search(headers.get('Date', ''))
+        m = DATE.search(headers.get("Date", ""))
         if m:
             try:
                 msg.year = int(m.group(1))

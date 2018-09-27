@@ -18,7 +18,7 @@
 
 import re
 
-WHITESPACE = re.compile(r'\s{2,}')
+WHITESPACE = re.compile(r"\s{2,}")
 
 
 def tidy_bug_title(title, package):
@@ -34,7 +34,7 @@ def tidy_bug_title(title, package):
 
     title = title.strip()
 
-    for prefix in ('Subject: ', '%s: ', '[%s]: ', '[%s] '):
+    for prefix in ("Subject: ", "%s: ", "[%s]: ", "[%s] "):
         try:
             prefix = prefix % package
         except:
@@ -43,6 +43,6 @@ def tidy_bug_title(title, package):
         if title.lower().startswith(prefix.lower()):
             title = title[len(prefix) :]
 
-    title = WHITESPACE.sub(' ', title)
+    title = WHITESPACE.sub(" ", title)
 
     return title.strip()

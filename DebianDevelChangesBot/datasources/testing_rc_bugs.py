@@ -25,7 +25,7 @@ from DebianDevelChangesBot import NewDataSource
 
 class RCBugs(NewDataSource):
     INTERVAL = 60 * 20
-    URL = 'https://udd.debian.org/bugs.cgi'
+    URL = "https://udd.debian.org/bugs.cgi"
 
     def __init__(self, suite, session=None):
         super().__init__(session)
@@ -34,11 +34,11 @@ class RCBugs(NewDataSource):
 
     def update(self):
         payload = {
-            'release': self.suite,
-            'notmain': 'ign',
-            'merged': 'ign',
-            'rc': 1,
-            'format': 'json',
+            "release": self.suite,
+            "notmain": "ign",
+            "merged": "ign",
+            "rc": 1,
+            "format": "json",
         }
 
         response = self.session.get(self.URL, params=payload)
@@ -50,7 +50,7 @@ class RCBugs(NewDataSource):
         bugs = set()
         for bug in data:
             try:
-                bugs.add(bug['id'])
+                bugs.add(bug["id"])
             except KeyError:
                 pass
 
@@ -70,14 +70,14 @@ class RCBugs(NewDataSource):
 
 
 class TestingRCBugs(RCBugs):
-    NAME = 'Testing RC Bugs'
+    NAME = "Testing RC Bugs"
 
     def __init__(self, session=None):
-        super().__init__('buster', session)
+        super().__init__("buster", session)
 
 
 class StableRCBugs(RCBugs):
-    NAME = 'Stable RC Bugs'
+    NAME = "Stable RC Bugs"
 
     def __init__(self, session=None):
-        super().__init__('stretch', session)
+        super().__init__("stretch", session)

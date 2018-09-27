@@ -20,7 +20,7 @@ from DebianDevelChangesBot import Message
 
 
 class SecurityAnnounceMessage(Message):
-    FIELDS = ('dsa_number', 'dsa_revision', 'package', 'problem', 'year')
+    FIELDS = ("dsa_number", "dsa_revision", "package", "problem", "year")
 
     def format(self):
         msg = "[security]Security[reset] [version]DSA-%d-%d[reset] - " % (

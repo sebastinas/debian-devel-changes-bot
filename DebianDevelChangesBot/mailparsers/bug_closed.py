@@ -23,31 +23,31 @@ from DebianDevelChangesBot.utils import tidy_bug_title, format_email_address
 import re
 
 
-SUBJECT = re.compile(r'^Bug#(\d+): marked as done \((.+)\)$')
+SUBJECT = re.compile(r"^Bug#(\d+): marked as done \((.+)\)$")
 
 
 class BugClosedParser(MailParser):
     @staticmethod
     def parse(headers, body, **kwargs):
-        if headers.get('List-Id', '') != '<debian-bugs-closed.lists.debian.org>':
+        if headers.get("List-Id", "") != "<debian-bugs-closed.lists.debian.org>":
             return
 
-        m = SUBJECT.match(headers['Subject'])
+        m = SUBJECT.match(headers["Subject"])
         if not m:
             return
 
         msg = BugClosedMessage()
         msg.bug_number = int(m.group(1))
         msg.title = m.group(2)
-        msg.by = headers['To']
+        msg.by = headers["To"]
 
         # Bug was closed via 123456-done@bugs.debian.org, so To: is wrong.
-        if '-done@bugs.debian.org' in msg.by:
-            msg.by = headers['From']
+        if "-done@bugs.debian.org" in msg.by:
+            msg.by = headers["From"]
 
         # Let binary package name override source package
-        msg.package = headers.get('X-Debian-PR-Source', None)
-        msg.package = headers.get('X-Debian-PR-Package', msg.package)
+        msg.package = headers.get("X-Debian-PR-Source", None)
+        msg.package = headers.get("X-Debian-PR-Package", msg.package)
 
         if msg.package is None:
             return

@@ -22,37 +22,37 @@ from DebianDevelChangesBot.utils import tidy_bug_title, format_email_address
 
 import re
 
-SUBJECT = re.compile(r'^Bug#(\d+): (.+)$')
-VERSION = re.compile(r'(?i)^Version:? ([^\s]{1,20})$')
+SUBJECT = re.compile(r"^Bug#(\d+): (.+)$")
+VERSION = re.compile(r"(?i)^Version:? ([^\s]{1,20})$")
 SEVERITY = re.compile(
-    r'(?i)^Severity:? (critical|grave|serious|important|normal|minor|wishlist)$'
+    r"(?i)^Severity:? (critical|grave|serious|important|normal|minor|wishlist)$"
 )
 
 
 class BugSubmittedParser(MailParser):
     @staticmethod
     def parse(headers, body, **kwargs):
-        if headers.get('List-Id', '') != '<debian-bugs-dist.lists.debian.org>':
+        if headers.get("List-Id", "") != "<debian-bugs-dist.lists.debian.org>":
             return
-        if not headers.get('X-Debian-PR-Message', '').startswith('report '):
+        if not headers.get("X-Debian-PR-Message", "").startswith("report "):
             return
 
         msg = BugSubmittedMessage()
 
-        m = SUBJECT.match(headers['Subject'])
+        m = SUBJECT.match(headers["Subject"])
         if m is None:
             return
 
         msg.bug_number = int(m.group(1))
         msg.title = m.group(2)
 
-        msg.package = headers.get('X-Debian-PR-Package', None)
+        msg.package = headers.get("X-Debian-PR-Package", None)
         if msg.package is None or len(msg.package) >= 75:
             return
 
-        msg.by = format_email_address(headers['From'])
+        msg.by = format_email_address(headers["From"])
 
-        mapping = {'version': VERSION, 'severity': SEVERITY}
+        mapping = {"version": VERSION, "severity": SEVERITY}
         for line in body[:10]:
             for target, pattern in mapping.items():
                 m = pattern.match(line)
@@ -65,7 +65,7 @@ class BugSubmittedParser(MailParser):
             if not mapping.keys():
                 break
 
-        if type(msg.version) is str and msg.version.find('GnuPG') != -1:
+        if type(msg.version) is str and msg.version.find("GnuPG") != -1:
             msg.version = None
 
         if not msg.package:

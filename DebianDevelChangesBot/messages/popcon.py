@@ -20,12 +20,12 @@ from DebianDevelChangesBot import Message
 
 
 class Popcon(Message):
-    FIELDS = ('package', 'inst', 'vote', 'old', 'recent', 'nofiles')
+    FIELDS = ("package", "inst", "vote", "old", "recent", "nofiles")
 
     def format(self):
         msg = "Popcon for [package]%s[reset] - " % self.package
 
-        for field in ('inst', 'vote', 'old', 'recent', 'nofiles'):
+        for field in ("inst", "vote", "old", "recent", "nofiles"):
             msg += "[category]%s[/category]: %d " % (field, getattr(self, field))
 
         msg += (

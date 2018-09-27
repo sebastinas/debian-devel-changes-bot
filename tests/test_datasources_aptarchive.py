@@ -37,7 +37,7 @@ class TestDatasourceAptArchive(unittest.TestCase):
     def setUpClass(cls):
         # FIXME make sure we do not have to fetch
         apt_config = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), '..', 'bot-config', 'apt'
+            os.path.dirname(os.path.abspath(__file__)), "..", "bot-config", "apt"
         )
         cls.statedir = tempfile.mkdtemp()
 
@@ -50,21 +50,21 @@ class TestDatasourceAptArchive(unittest.TestCase):
 
         fixture = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
-            'fixtures',
-            'pseudo-packages.maintainers',
+            "fixtures",
+            "pseudo-packages.maintainers",
         )
-        with io.open(fixture, encoding='utf-8') as f:
+        with io.open(fixture, encoding="utf-8") as f:
             data = f.read()
-        cls.mocker.register_uri('GET', PseudoPackages.URL_M, text=data)
+        cls.mocker.register_uri("GET", PseudoPackages.URL_M, text=data)
 
         fixture = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),
-            'fixtures',
-            'pseudo-packages.description',
+            "fixtures",
+            "pseudo-packages.description",
         )
-        with io.open(fixture, encoding='utf-8') as f:
+        with io.open(fixture, encoding="utf-8") as f:
             data = f.read()
-        cls.mocker.register_uri('GET', PseudoPackages.URL_D, text=data)
+        cls.mocker.register_uri("GET", PseudoPackages.URL_D, text=data)
 
         session = requests.Session()
         pseudo_packages.pp = PseudoPackages(session)
@@ -76,29 +76,29 @@ class TestDatasourceAptArchive(unittest.TestCase):
         cls.mocker.stop()
 
     def testVLC(self):
-        info = self.apt_archive.get_maintainer('vlc')
-        self.assertEqual(info['email'], 'debian-multimedia@lists.debian.org')
-        self.assertEqual(info['name'], 'Debian Multimedia Maintainers')
+        info = self.apt_archive.get_maintainer("vlc")
+        self.assertEqual(info["email"], "debian-multimedia@lists.debian.org")
+        self.assertEqual(info["name"], "Debian Multimedia Maintainers")
 
     def testSourceVLC(self):
-        info = self.apt_archive.get_maintainer('src:vlc')
-        self.assertEqual(info['email'], 'debian-multimedia@lists.debian.org')
-        self.assertEqual(info['name'], 'Debian Multimedia Maintainers')
+        info = self.apt_archive.get_maintainer("src:vlc")
+        self.assertEqual(info["email"], "debian-multimedia@lists.debian.org")
+        self.assertEqual(info["name"], "Debian Multimedia Maintainers")
 
     def testUdev(self):
-        info = self.apt_archive.get_maintainer('udev')
+        info = self.apt_archive.get_maintainer("udev")
         self.assertEqual(
-            info['email'], 'pkg-systemd-maintainers@lists.alioth.debian.org'
+            info["email"], "pkg-systemd-maintainers@lists.alioth.debian.org"
         )
-        self.assertEqual(info['name'], 'Debian systemd Maintainers')
+        self.assertEqual(info["name"], "Debian systemd Maintainers")
 
     def testPseudoPackage(self):
-        info = self.apt_archive.get_maintainer('wnpp')
-        self.assertEqual(info['email'], 'wnpp@debian.org')
+        info = self.apt_archive.get_maintainer("wnpp")
+        self.assertEqual(info["email"], "wnpp@debian.org")
 
     def testPseudoPackage2(self):
-        info = self.apt_archive.get_maintainer('qa.debian.org')
-        self.assertEqual(info['email'], 'debian-qa@lists.debian.org')
+        info = self.apt_archive.get_maintainer("qa.debian.org")
+        self.assertEqual(info["email"], "debian-qa@lists.debian.org")
 
 
 if __name__ == "__main__":

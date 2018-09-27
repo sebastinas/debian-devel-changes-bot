@@ -61,15 +61,15 @@ class MailParser:
 
 class Message:
     def __init__(self):
-        if hasattr(self, 'FIELDS'):
+        if hasattr(self, "FIELDS"):
             for field in self.FIELDS:
                 setattr(self, field, None)
-        if hasattr(self, 'OPTIONAL'):
+        if hasattr(self, "OPTIONAL"):
             for field in self.OPTIONAL:
                 setattr(self, field, None)
 
     def __bool__(self):
-        if hasattr(self, 'FIELDS'):
+        if hasattr(self, "FIELDS"):
             for field in self.FIELDS:
                 if getattr(self, field) is None:
                     return False
@@ -80,9 +80,9 @@ class Message:
 
     def package_name(self):
         if pseudo_packages.is_pseudo_package(self.package):
-            return '[pseudo-package]%s[reset]' % self.package
+            return "[pseudo-package]%s[reset]" % self.package
         else:
-            return '[package]%s[reset]' % self.package
+            return "[package]%s[reset]" % self.package
 
 
 from . import utils

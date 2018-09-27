@@ -25,10 +25,10 @@ from DebianDevelChangesBot import NewDataSource
 
 
 class RmQueue(NewDataSource):
-    MATCHER = re.compile(r'([^:]+): ')
-    URL = 'https://ftp-master.debian.org/removals.html'
+    MATCHER = re.compile(r"([^:]+): ")
+    URL = "https://ftp-master.debian.org/removals.html"
     INTERVAL = 60 * 30
-    NAME = 'RM queue'
+    NAME = "RM queue"
 
     def __init__(self, session=None):
         super().__init__(session)
@@ -42,7 +42,7 @@ class RmQueue(NewDataSource):
 
         soup = BeautifulSoup(response.text, "html.parser")
         packages = []
-        for div in soup.find_all('div', class_='subject'):
+        for div in soup.find_all("div", class_="subject"):
             package = self.MATCHER.findall(div.contents[0])
             packages.extend(package)
 

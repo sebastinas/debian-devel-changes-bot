@@ -43,7 +43,7 @@ class TestFixtures(unittest.TestCase):
 
 def add_tests(testdir, parser, expected_type, test=lambda x: bool(x)):
     testdir = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), 'fixtures', testdir, '*'
+        os.path.dirname(os.path.abspath(__file__)), "fixtures", testdir, "*"
     )
 
     for filename in glob(testdir):
@@ -69,13 +69,13 @@ def add_tests(testdir, parser, expected_type, test=lambda x: bool(x)):
                 txt = colourise(txt)
 
         TestFixtures.count += 1
-        setattr(TestFixtures, 'test%d' % TestFixtures.count, testFunc)
+        setattr(TestFixtures, "test%d" % TestFixtures.count, testFunc)
 
 
-add_tests('accepted_upload', AcceptedUploadParser, AcceptedUploadMessage)
-add_tests('bug_closed', BugClosedParser, BugClosedMessage)
-add_tests('bug_submitted', BugSubmittedParser, BugSubmittedMessage)
-add_tests('security_announce', SecurityAnnounceParser, SecurityAnnounceMessage)
+add_tests("accepted_upload", AcceptedUploadParser, AcceptedUploadMessage)
+add_tests("bug_closed", BugClosedParser, BugClosedMessage)
+add_tests("bug_submitted", BugSubmittedParser, BugSubmittedMessage)
+add_tests("security_announce", SecurityAnnounceParser, SecurityAnnounceMessage)
 
 for parser in (
     AcceptedUploadParser,
@@ -83,7 +83,7 @@ for parser in (
     BugSubmittedParser,
     SecurityAnnounceParser,
 ):
-    add_tests('non_messages', parser, type(None), test=lambda x: not bool(x))
+    add_tests("non_messages", parser, type(None), test=lambda x: not bool(x))
 
 if __name__ == "__main__":
     unittest.main()
