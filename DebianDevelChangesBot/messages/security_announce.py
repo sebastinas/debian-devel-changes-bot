@@ -18,17 +18,21 @@
 
 from DebianDevelChangesBot import Message
 
+
 class SecurityAnnounceMessage(Message):
     FIELDS = ('dsa_number', 'dsa_revision', 'package', 'problem', 'year')
 
     def format(self):
-        msg = "[security]Security[reset] [version]DSA-%d-%d[reset] - " % \
-            (self.dsa_number, self.dsa_revision)
+        msg = "[security]Security[reset] [version]DSA-%d-%d[reset] - " % (
+            self.dsa_number,
+            self.dsa_revision,
+        )
 
-        msg += "New %s packages %s. " % \
-            (self.package_name(), self.problem)
+        msg += "New %s packages %s. " % (self.package_name(), self.problem)
 
-        msg += "[url]https://www.debian.org/security/%s/dsa-%d[/url]" % \
-            (self.year, self.dsa_number)
+        msg += "[url]https://www.debian.org/security/%s/dsa-%d[/url]" % (
+            self.year,
+            self.dsa_number,
+        )
 
         return msg

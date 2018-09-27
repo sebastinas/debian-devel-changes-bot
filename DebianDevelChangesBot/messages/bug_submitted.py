@@ -18,6 +18,7 @@
 
 from DebianDevelChangesBot import Message
 
+
 class BugSubmittedMessage(Message):
     FIELDS = ('bug_number', 'package', 'by', 'title')
     OPTIONAL = ('severity', 'version')
@@ -33,7 +34,9 @@ class BugSubmittedMessage(Message):
         if self.version not in (None, 'n/a', 'any'):
             msg += "[version]%s[reset] " % self.version
 
-        msg += "by [by]%s[reset] «[title]%s[reset]». [url]https://bugs.debian.org/%d[/url]" % \
-            (self.by, self.title, self.bug_number)
+        msg += (
+            "by [by]%s[reset] «[title]%s[reset]». [url]https://bugs.debian.org/%d[/url]"
+            % (self.by, self.title, self.bug_number)
+        )
 
         return msg

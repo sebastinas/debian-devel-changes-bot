@@ -18,11 +18,9 @@
 
 import requests
 
+
 def madison(package, suites=None):
-    payload = {
-        'package': package,
-        'text': 'on'
-    }
+    payload = {'package': package, 'text': 'on'}
     if suites is not None:
         payload['s'] = ','.join(suites)
 

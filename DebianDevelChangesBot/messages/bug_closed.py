@@ -18,14 +18,16 @@
 
 from DebianDevelChangesBot import Message
 
+
 class BugClosedMessage(Message):
     FIELDS = ('bug_number', 'package', 'by', 'title')
 
     def format(self):
-        msg = "Closed [bug]#%d[/bug] in %s " % \
-            (self.bug_number, self.package_name())
+        msg = "Closed [bug]#%d[/bug] in %s " % (self.bug_number, self.package_name())
 
-        msg += "by [by]%s[reset] «[title]%s[reset]». [url]https://bugs.debian.org/%d[/url]" % \
-            (self.by, self.title, self.bug_number)
+        msg += (
+            "by [by]%s[reset] «[title]%s[reset]». [url]https://bugs.debian.org/%d[/url]"
+            % (self.by, self.title, self.bug_number)
+        )
 
         return msg

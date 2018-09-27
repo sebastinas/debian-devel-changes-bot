@@ -28,8 +28,9 @@ from DebianDevelChangesBot.datasources import RmQueue
 
 class TestDatasourceTestingRmQueue(unittest.TestCase):
     def setUp(self):
-        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                               'fixtures', 'rm_queue.html')
+        fixture = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), 'fixtures', 'rm_queue.html'
+        )
         with io.open(fixture, encoding='utf-8') as f:
             data = f.read()
 

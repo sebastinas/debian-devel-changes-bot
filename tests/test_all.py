@@ -20,6 +20,7 @@
 import os
 import unittest
 
+
 def suite():
     suite = unittest.TestSuite()
     for _, _, files in os.walk('.'):
@@ -28,8 +29,10 @@ def suite():
             suite.addTests(tests)
     return suite
 
+
 def is_test(filename):
     return filename.startswith('test_') and filename.endswith('.py')
+
 
 if __name__ == "__main__":
     unittest.main(defaultTest="suite")

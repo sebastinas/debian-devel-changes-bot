@@ -38,7 +38,7 @@ class RCBugs(NewDataSource):
             'notmain': 'ign',
             'merged': 'ign',
             'rc': 1,
-            'format': 'json'
+            'format': 'json',
         }
 
         response = self.session.get(self.URL, params=payload)

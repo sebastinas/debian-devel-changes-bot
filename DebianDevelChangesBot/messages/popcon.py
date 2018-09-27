@@ -18,6 +18,7 @@
 
 from DebianDevelChangesBot import Message
 
+
 class Popcon(Message):
     FIELDS = ('package', 'inst', 'vote', 'old', 'recent', 'nofiles')
 
@@ -27,6 +28,8 @@ class Popcon(Message):
         for field in ('inst', 'vote', 'old', 'recent', 'nofiles'):
             msg += "[category]%s[/category]: %d " % (field, getattr(self, field))
 
-        msg += "- [url]https://qa.debian.org/developer.php?popcon=%s[/url]" % self.package
+        msg += (
+            "- [url]https://qa.debian.org/developer.php?popcon=%s[/url]" % self.package
+        )
 
         return msg

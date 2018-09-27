@@ -34,10 +34,8 @@ class AptArchive(NewDataSource):
 
         config = apt_pkg.config
         config['Dir::Etc'] = os.path.realpath(config_dir)
-        config['Dir::State'] = os.path.join(os.path.realpath(state_dir),
-                                            'state')
-        config['Dir::Cache'] = os.path.join(os.path.realpath(state_dir),
-                                            'cache')
+        config['Dir::State'] = os.path.join(os.path.realpath(state_dir), 'state')
+        config['Dir::Cache'] = os.path.join(os.path.realpath(state_dir), 'cache')
         apt_pkg.init_config()
         apt_pkg.init_system()
 
@@ -60,7 +58,6 @@ class AptArchive(NewDataSource):
             except apt_pkg.Error as e:
                 if not ignore_errors:
                     raise NewDataSourc.DataError('Failed to update cache: {}'.format(e))
-
 
     def update(self):
         self.cache = apt_pkg.Cache(None)
@@ -95,4 +92,6 @@ class AptArchive(NewDataSource):
 
             return split_address(maintainer)
 
-        raise NewDataSource.DataError('Unable to get maintainer for {}.'.format(package))
+        raise NewDataSource.DataError(
+            'Unable to get maintainer for {}.'.format(package)
+        )

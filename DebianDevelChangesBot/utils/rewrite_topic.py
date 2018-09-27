@@ -28,8 +28,10 @@ def rewrite_topic(topic, prefix, value):
         regex = re.compile(r'dinstall: [^|]*')
     else:
         regex = re.compile(r'^{}: \d+$'.format(prefix))
+
     def update(p):
         if regex.match(p) is not None:
             return '{}: {}'.format(prefix, value)
         return p
+
     return ' | '.join(update(p) for p in topic.split(' | '))

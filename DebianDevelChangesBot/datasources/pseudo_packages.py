@@ -62,9 +62,10 @@ class PseudoPackages(NewDataSource):
 
         packages = {}
         for package in package_names:
-            packages[package] = PseudoPackage(descriptions[package], maintainers[package])
+            packages[package] = PseudoPackage(
+                descriptions[package], maintainers[package]
+            )
         self.packages = packages
-
 
     def pseudo_packages(self):
         return self.packages.keys()

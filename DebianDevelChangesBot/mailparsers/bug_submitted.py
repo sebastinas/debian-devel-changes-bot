@@ -24,11 +24,12 @@ import re
 
 SUBJECT = re.compile(r'^Bug#(\d+): (.+)$')
 VERSION = re.compile(r'(?i)^Version:? ([^\s]{1,20})$')
-SEVERITY = re.compile(r'(?i)^Severity:? (critical|grave|serious|important|normal|minor|wishlist)$')
+SEVERITY = re.compile(
+    r'(?i)^Severity:? (critical|grave|serious|important|normal|minor|wishlist)$'
+)
 
 
 class BugSubmittedParser(MailParser):
-
     @staticmethod
     def parse(headers, body, **kwargs):
         if headers.get('List-Id', '') != '<debian-bugs-dist.lists.debian.org>':
@@ -52,10 +53,7 @@ class BugSubmittedParser(MailParser):
 
         msg.by = format_email_address(headers['From'])
 
-        mapping = {
-            VERSION: 'version',
-            SEVERITY: 'severity',
-        }
+        mapping = {VERSION: 'version', SEVERITY: 'severity'}
 
         for line in body[:10]:
             for pattern, target in mapping.items():

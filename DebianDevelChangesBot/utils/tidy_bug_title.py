@@ -20,6 +20,7 @@ import re
 
 WHITESPACE = re.compile(r'\s{2,}')
 
+
 def tidy_bug_title(title, package):
     """
     Strips various package name prefixes from a bug title.
@@ -33,14 +34,14 @@ def tidy_bug_title(title, package):
 
     title = title.strip()
 
-    for prefix in ('Subject: ', '%s: ', '[%s]: ', '[%s] ', ):
+    for prefix in ('Subject: ', '%s: ', '[%s]: ', '[%s] '):
         try:
             prefix = prefix % package
         except:
             pass
 
         if title.lower().startswith(prefix.lower()):
-            title = title[len(prefix):]
+            title = title[len(prefix) :]
 
     title = WHITESPACE.sub(' ', title)
 

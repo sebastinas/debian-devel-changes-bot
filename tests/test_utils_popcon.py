@@ -38,13 +38,13 @@ class TestPopcon(unittest.TestCase):
         self.mocker.stop()
 
     def _test(self, package='haskell-devscripts'):
-        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                               'fixtures', 'popcon', package)
+        fixture = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), 'fixtures', 'popcon', package
+        )
         with io.open(fixture, encoding='utf-8') as f:
             data = f.read()
 
-        self.mocker.register_uri('GET', 'https://qa.debian.org/popcon.php',
-                                 text=data)
+        self.mocker.register_uri('GET', 'https://qa.debian.org/popcon.php', text=data)
 
         return popcon(package, self.session)
 
@@ -68,6 +68,7 @@ class TestPopcon(unittest.TestCase):
 
     def testNofiles(self):
         self.assertEqual(self._test().nofiles, 0)
+
 
 if __name__ == "__main__":
     unittest.main()

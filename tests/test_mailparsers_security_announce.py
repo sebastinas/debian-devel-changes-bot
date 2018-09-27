@@ -20,28 +20,34 @@
 import unittest
 
 import os, sys
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from DebianDevelChangesBot.mailparsers import SecurityAnnounceParser as p
 from DebianDevelChangesBot.utils import parse_mail
 
+
 def parse(number):
-    filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), \
-        'fixtures', 'security_announce', '%d.txt' % number)
+    filename = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        'fixtures',
+        'security_announce',
+        '%d.txt' % number,
+    )
     with open(filename, "rb") as infile:
         mail = parse_mail(infile)
         msg = p.parse(*mail)
         assert msg
         return msg.__dict__
 
-class TestMailParserSecurityAnnounce(unittest.TestCase):
 
+class TestMailParserSecurityAnnounce(unittest.TestCase):
     def setUp(self):
         self.headers = {
             'List-Id': '<debian-security-announce.lists.debian.org>',
             'Date': 'Sat, 19 Apr 2008 19:18:38 +0100',
-            'Subject': '[SECURITY] [DSA 1234-5] New pinafore packages ' \
-                'fix inertial dampener problem',
+            'Subject': '[SECURITY] [DSA 1234-5] New pinafore packages '
+            'fix inertial dampener problem',
         }
 
     def testSimple(self):
@@ -71,13 +77,16 @@ class TestMailParserSecurityAnnounce(unittest.TestCase):
         self.assertFalse(p.parse(self.headers, []))
 
     def test1(self):
-        self.assertEqual(parse(1), {
-            'dsa_revision': 1,
-            'problem': 'fix cross-site request forgery',
-            'year': 2008,
-            'dsa_number': 1553,
-            'package': 'ikiwiki',
-        })
+        self.assertEqual(
+            parse(1),
+            {
+                'dsa_revision': 1,
+                'problem': 'fix cross-site request forgery',
+                'year': 2008,
+                'dsa_number': 1553,
+                'package': 'ikiwiki',
+            },
+        )
 
     def subject_variation(self, subject):
         self.headers['Subject'] = "[SECURITY] [DSA 1234-5] %s" % subject
@@ -93,6 +102,7 @@ class TestMailParserSecurityAnnounce(unittest.TestCase):
 
     def testSubjectVariationLowerNew(self):
         self.subject_variation("new foo packages fix bar problem")
+
 
 if __name__ == "__main__":
     unittest.main()

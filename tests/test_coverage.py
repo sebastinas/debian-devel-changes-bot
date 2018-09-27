@@ -18,12 +18,12 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-
 import os
 import sys
 import subprocess
 
 MODULE = 'DebianDevelChangesBot'
+
 
 def coverage(cmd, show=False):
     status, output = subprocess.getstatusoutput('python-coverage %s ' % cmd)
@@ -33,17 +33,20 @@ def coverage(cmd, show=False):
     elif show:
         print(output)
 
+
 def module_files():
     for dir, _, files in os.walk(MODULE):
         for filename in files:
             if filename.endswith('.py'):
                 yield os.path.join(dir, filename)
 
+
 def purge():
     try:
         os.unlink('.coverage')
     except OSError:
         pass
+
 
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

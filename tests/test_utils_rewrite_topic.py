@@ -21,6 +21,7 @@
 import unittest
 
 import os, sys
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from DebianDevelChangesBot.utils import rewrite_topic
@@ -31,17 +32,25 @@ class TestRewriteTopic(unittest.TestCase):
         self.assertEqual(rewrite_topic("", "", 0), "")
 
     def testSimple(self):
-        self.assertEqual(rewrite_topic("RC bug count: 1", "RC bug count", 2), "RC bug count: 2")
+        self.assertEqual(
+            rewrite_topic("RC bug count: 1", "RC bug count", 2), "RC bug count: 2"
+        )
 
     def testEmbedded(self):
-        self.assertEqual(rewrite_topic("pre | RC bug count: 1 | post",
-                                       "RC bug count", 2),
-                         "pre | RC bug count: 2 | post")
+        self.assertEqual(
+            rewrite_topic("pre | RC bug count: 1 | post", "RC bug count", 2),
+            "pre | RC bug count: 2 | post",
+        )
 
     def testEmbedded2(self):
-        self.assertEqual(rewrite_topic("pre | RC bug count: 1 | Stable RC bug count: 3 | post",
-                                       "RC bug count", 2),
-                         "pre | RC bug count: 2 | Stable RC bug count: 3 | post")
+        self.assertEqual(
+            rewrite_topic(
+                "pre | RC bug count: 1 | Stable RC bug count: 3 | post",
+                "RC bug count",
+                2,
+            ),
+            "pre | RC bug count: 2 | Stable RC bug count: 3 | post",
+        )
 
 
 if __name__ == "__main__":

@@ -22,14 +22,18 @@ import unittest
 import os
 from glob import glob
 
-from DebianDevelChangesBot.messages import (AcceptedUploadMessage,
-                                            BugClosedMessage,
-                                            BugSubmittedMessage,
-                                            SecurityAnnounceMessage)
-from DebianDevelChangesBot.mailparsers import (AcceptedUploadParser,
-                                               BugClosedParser,
-                                               BugSubmittedParser,
-                                               SecurityAnnounceParser)
+from DebianDevelChangesBot.messages import (
+    AcceptedUploadMessage,
+    BugClosedMessage,
+    BugSubmittedMessage,
+    SecurityAnnounceMessage,
+)
+from DebianDevelChangesBot.mailparsers import (
+    AcceptedUploadParser,
+    BugClosedParser,
+    BugSubmittedParser,
+    SecurityAnnounceParser,
+)
 from DebianDevelChangesBot.utils import parse_mail, colourise
 
 
@@ -38,10 +42,12 @@ class TestFixtures(unittest.TestCase):
 
 
 def add_tests(testdir, parser, expected_type, test=lambda x: bool(x)):
-    testdir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-        'fixtures', testdir, '*')
+    testdir = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), 'fixtures', testdir, '*'
+    )
 
     for filename in glob(testdir):
+
         def testFunc(self, filename=filename):
             with open(filename, "rb") as infile:
                 try:
@@ -53,8 +59,9 @@ def add_tests(testdir, parser, expected_type, test=lambda x: bool(x)):
 
             self.assertTrue(
                 isinstance(msg, expected_type),
-                "%s did not match with its parser: expected %s, got %s" %
-                    (filename, expected_type, type(msg)))
+                "%s did not match with its parser: expected %s, got %s"
+                % (filename, expected_type, type(msg)),
+            )
             self.assertTrue(test(msg), "%s did not pass test" % filename)
 
             if msg:
@@ -70,7 +77,12 @@ add_tests('bug_closed', BugClosedParser, BugClosedMessage)
 add_tests('bug_submitted', BugSubmittedParser, BugSubmittedMessage)
 add_tests('security_announce', SecurityAnnounceParser, SecurityAnnounceMessage)
 
-for parser in AcceptedUploadParser, BugClosedParser, BugSubmittedParser, SecurityAnnounceParser:
+for parser in (
+    AcceptedUploadParser,
+    BugClosedParser,
+    BugSubmittedParser,
+    SecurityAnnounceParser,
+):
     add_tests('non_messages', parser, type(None), test=lambda x: not bool(x))
 
 if __name__ == "__main__":

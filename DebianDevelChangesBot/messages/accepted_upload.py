@@ -21,8 +21,7 @@ from DebianDevelChangesBot import Message
 
 
 class AcceptedUploadMessage(Message):
-    FIELDS = ('package', 'version', 'distribution', 'urgency', 'by',
-              'maintainer')
+    FIELDS = ('package', 'version', 'distribution', 'urgency', 'by', 'maintainer')
     OPTIONAL = ('closes', 'new_upload')
 
     def format(self):

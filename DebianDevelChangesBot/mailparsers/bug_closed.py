@@ -27,7 +27,6 @@ SUBJECT = re.compile(r'^Bug#(\d+): marked as done \((.+)\)$')
 
 
 class BugClosedParser(MailParser):
-
     @staticmethod
     def parse(headers, body, **kwargs):
         if headers.get('List-Id', '') != '<debian-bugs-closed.lists.debian.org>':

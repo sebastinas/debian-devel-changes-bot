@@ -25,6 +25,7 @@ import tempfile
 import unittest
 
 import os, sys
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from DebianDevelChangesBot.datasources import AptArchive, PseudoPackages
@@ -35,8 +36,9 @@ class TestDatasourceAptArchive(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # FIXME make sure we do not have to fetch
-        apt_config = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                               '..', 'bot-config', 'apt')
+        apt_config = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), '..', 'bot-config', 'apt'
+        )
         cls.statedir = tempfile.mkdtemp()
 
         cls.apt_archive = AptArchive(apt_config, cls.statedir)
@@ -46,14 +48,20 @@ class TestDatasourceAptArchive(unittest.TestCase):
         cls.mocker = requests_mock.Mocker()
         cls.mocker.start()
 
-        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                               'fixtures', 'pseudo-packages.maintainers')
+        fixture = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            'fixtures',
+            'pseudo-packages.maintainers',
+        )
         with io.open(fixture, encoding='utf-8') as f:
             data = f.read()
         cls.mocker.register_uri('GET', PseudoPackages.URL_M, text=data)
 
-        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                               'fixtures', 'pseudo-packages.description')
+        fixture = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            'fixtures',
+            'pseudo-packages.description',
+        )
         with io.open(fixture, encoding='utf-8') as f:
             data = f.read()
         cls.mocker.register_uri('GET', PseudoPackages.URL_D, text=data)
@@ -79,7 +87,9 @@ class TestDatasourceAptArchive(unittest.TestCase):
 
     def testUdev(self):
         info = self.apt_archive.get_maintainer('udev')
-        self.assertEqual(info['email'], 'pkg-systemd-maintainers@lists.alioth.debian.org')
+        self.assertEqual(
+            info['email'], 'pkg-systemd-maintainers@lists.alioth.debian.org'
+        )
         self.assertEqual(info['name'], 'Debian systemd Maintainers')
 
     def testPseudoPackage(self):

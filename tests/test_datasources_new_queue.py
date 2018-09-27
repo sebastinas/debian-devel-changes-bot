@@ -29,8 +29,9 @@ from DebianDevelChangesBot.datasources import NewQueue
 
 class TestDatasourceTestingNewQueue(unittest.TestCase):
     def setUp(self):
-        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                               'fixtures', 'new_queue.txt')
+        fixture = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), 'fixtures', 'new_queue.txt'
+        )
         with io.open(fixture, encoding='utf-8') as f:
             data = f.read()
 

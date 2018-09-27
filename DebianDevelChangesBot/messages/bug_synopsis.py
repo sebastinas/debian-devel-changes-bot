@@ -18,6 +18,7 @@
 
 from DebianDevelChangesBot import Message
 
+
 class BugSynopsis(Message):
     FIELDS = ('bug_number', 'package', 'status', 'title', 'severity')
 
@@ -27,8 +28,7 @@ class BugSynopsis(Message):
         if self.status == 'done':
             msg += " (fixed)"
 
-        msg += ": %s: «[title]%s[reset]» " % \
-            (self.package_name(), self.title)
+        msg += ": %s: «[title]%s[reset]» " % (self.package_name(), self.title)
 
         if self.severity != 'normal':
             if self.severity in ('critical', 'grave', 'serious'):

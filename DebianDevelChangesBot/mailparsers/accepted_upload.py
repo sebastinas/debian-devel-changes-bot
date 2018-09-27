@@ -25,12 +25,11 @@ lists = (
     '<debian-devel-changes.lists.debian.org>',
     '<debian-backports-changes.lists.debian.org>',
     '<debian-lts-changes.lists.debian.org>',
-    '<debian-changes.lists.debian.org>'
+    '<debian-changes.lists.debian.org>',
 )
 
 
 class AcceptedUploadParser(MailParser):
-
     @staticmethod
     def parse(headers, body, **kwargs):
         if headers.get('List-Id', '') not in lists:
@@ -43,14 +42,14 @@ class AcceptedUploadParser(MailParser):
             'Urgency': 'urgency',
             'Changed-By': 'by',
             'Closes': 'closes',
-            'Maintainer': 'maintainer'
+            'Maintainer': 'maintainer',
         }
 
         msg = AcceptedUploadMessage()
         for line in body:
             for field, target in mapping.items():
                 if line.startswith('%s: ' % field):
-                    val = line[len(field) + 2:]
+                    val = line[len(field) + 2 :]
                     setattr(msg, target, val)
                     del mapping[field]
                     break
@@ -73,6 +72,8 @@ class AcceptedUploadParser(MailParser):
 
         if 'new_queue' in kwargs:
             new_queue = kwargs['new_queue']
-            msg.new_upload = new_queue.is_new(msg.package, msg.version) or new_queue.is_backports_new(msg.package, msg.version)
+            msg.new_upload = new_queue.is_new(
+                msg.package, msg.version
+            ) or new_queue.is_backports_new(msg.package, msg.version)
 
         return msg

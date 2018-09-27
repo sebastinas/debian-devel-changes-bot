@@ -24,10 +24,14 @@ import requests_mock
 
 from DebianDevelChangesBot.datasources import TestingRCBugs, StableRCBugs
 
+
 class BaseTest(object):
     def setUp(self):
-        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                               'fixtures', 'testing_rc_bugs.json')
+        fixture = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            'fixtures',
+            'testing_rc_bugs.json',
+        )
         with open(fixture) as f:
             data = f.read()
 

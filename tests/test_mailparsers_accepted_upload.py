@@ -21,17 +21,16 @@ import unittest
 
 from glob import glob
 import os, sys
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from DebianDevelChangesBot.utils import parse_mail
 from DebianDevelChangesBot.mailparsers import AcceptedUploadParser as p
 
-class TestMailParserAcceptedUpload(unittest.TestCase):
 
+class TestMailParserAcceptedUpload(unittest.TestCase):
     def setUp(self):
-        self.headers = {
-            'List-Id': '<debian-devel-changes.lists.debian.org>'
-        }
+        self.headers = {'List-Id': '<debian-devel-changes.lists.debian.org>'}
 
         self.body = [
             '-----BEGIN PGP SIGNED MESSAGE-----',
@@ -87,7 +86,12 @@ class TestMailParserAcceptedUpload(unittest.TestCase):
         self.assertEqual(msg.urgency, 'high')
 
     def testFixtures(self):
-        dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fixtures', 'accepted_upload', '*')
+        dir = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            'fixtures',
+            'accepted_upload',
+            '*',
+        )
         for filename in glob(dir):
             with open(filename, 'rb') as f:
                 mail = parse_mail(f)

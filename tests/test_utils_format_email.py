@@ -20,9 +20,11 @@
 import unittest
 
 import os, sys
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from DebianDevelChangesBot.utils import format_email_address
+
 
 class TestFormatEmail(unittest.TestCase):
     def _test(self, val, ret):
@@ -92,12 +94,17 @@ class TestFormatEmail(unittest.TestCase):
         self._test("jsmith@debian.org (John Smith)", "John Smith (jsmith)")
 
     def testReverseDebianUtf(self):
-        self._test("jredrejo@debian.org (José L. Redrejo Rodríguez)", "José L. Redrejo Rodríguez (jredrejo)")
+        self._test(
+            "jredrejo@debian.org (José L. Redrejo Rodríguez)",
+            "José L. Redrejo Rodríguez (jredrejo)",
+        )
+
 
 class TestLongEmail(unittest.TestCase):
     def _test(self, val, ret, max_user, max_domain):
-        self.assertEqual(format_email_address(val, max_user=max_user,
-            max_domain=max_domain), ret)
+        self.assertEqual(
+            format_email_address(val, max_user=max_user, max_domain=max_domain), ret
+        )
 
     def testZeroZero(self):
         self._test("E <1234567890@123456789>", "E <...@...>", 0, 0)
@@ -135,6 +142,7 @@ class TestLongEmail(unittest.TestCase):
     def testNoExtraDotsAtEndHost(self):
         self._test("E <123456789@foo..com>", "E <...@foo...>", 0, 7)
         self._test("E <123456789@foo..com>", "E <...@foo...>", 0, 6)
+
 
 if __name__ == "__main__":
     unittest.main()

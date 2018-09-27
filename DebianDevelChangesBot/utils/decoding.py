@@ -23,6 +23,7 @@ import email.header
 import email.quoprimime
 import email.utils
 
+
 def header_decode(s):
     def unquote_match(match):
         s = match.group(0)
@@ -30,6 +31,7 @@ def header_decode(s):
 
     s = s.replace('_', ' ')
     return re.sub(r'=\w{2}', unquote_match, s)
+
 
 def _decode_chunk(chunk, encoding):
     if encoding is None:
@@ -40,13 +42,18 @@ def _decode_chunk(chunk, encoding):
     else:
         return chunk.decode(encoding)
 
+
 def quoted_printable(val):
     try:
         if type(val) is str:
             save = header_decode(val)
 
-            val = ''.join([_decode_chunk(chunk, encoding)
-                           for chunk, encoding in email.header.decode_header(val)])
+            val = ''.join(
+                [
+                    _decode_chunk(chunk, encoding)
+                    for chunk, encoding in email.header.decode_header(val)
+                ]
+            )
 
             val = val.replace(' )', ')')
 
@@ -64,9 +71,7 @@ def quoted_printable(val):
 
     return val
 
+
 def split_address(addr):
     name, addr = email.utils.parseaddr(addr)
-    return {
-        'name': name,
-        'email': addr
-    }
+    return {'name': name, 'email': addr}

@@ -35,10 +35,9 @@ class TestMailParserBugClosed(unittest.TestCase):
         self.body = []
 
     def testSimple(self):
-        self.headers.update({
-            'From': 'From <from@email.com>',
-            'To': 'somewhere@email.com',
-        })
+        self.headers.update(
+            {'From': 'From <from@email.com>', 'To': 'somewhere@email.com'}
+        )
 
         msg = p.parse(self.headers, self.body)
         self.assertTrue(msg)
@@ -48,10 +47,12 @@ class TestMailParserBugClosed(unittest.TestCase):
         self.assertEqual(msg.title, 'description here')
 
     def testTwoEntriesInTo(self):
-        self.headers.update({
-            'From': 'From <from@email.com>',
-            'To': 'To <to@email.com>, 123456-done@bugs.debian.org',
-        })
+        self.headers.update(
+            {
+                'From': 'From <from@email.com>',
+                'To': 'To <to@email.com>, 123456-done@bugs.debian.org',
+            }
+        )
 
         msg = p.parse(self.headers, self.body)
         self.assertTrue(msg)
@@ -61,20 +62,21 @@ class TestMailParserBugClosed(unittest.TestCase):
         self.assertEqual(msg.title, 'description here')
 
     def testDone(self):
-        self.headers.update({
-            'From': 'From <from@email.com>',
-            'To': '123456-done@bugs.debian.org',
-        })
+        self.headers.update(
+            {'From': 'From <from@email.com>', 'To': '123456-done@bugs.debian.org'}
+        )
         msg = p.parse(self.headers, self.body)
         self.assertTrue(msg)
         self.assertEqual(msg.by, 'From <from@email.com>')
 
     def testMultiPackages(self):
-        self.headers.update({
-            'From': 'From <from@email.com>',
-            'To': '123456-done@bugs.debian.org',
-            'X-Debian-PR-Source': 'source-package, source-package2',
-        })
+        self.headers.update(
+            {
+                'From': 'From <from@email.com>',
+                'To': '123456-done@bugs.debian.org',
+                'X-Debian-PR-Source': 'source-package, source-package2',
+            }
+        )
 
         msg = p.parse(self.headers, self.body)
         self.assertTrue(msg)

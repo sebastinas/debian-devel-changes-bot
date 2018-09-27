@@ -41,7 +41,7 @@ from DebianDevelChangesBot.datasources import (
     StableRCBugs,
     Dinstall,
     AptArchive,
-    PseudoPackages
+    PseudoPackages,
 )
 from DebianDevelChangesBot.utils import (
     parse_mail,
@@ -49,7 +49,7 @@ from DebianDevelChangesBot.utils import (
     rewrite_topic,
     madison,
     format_email_address,
-    popcon
+    popcon,
 )
 from DebianDevelChangesBot.utils.decoding import split_address
 from DebianDevelChangesBot.utils.dbus import BTSDBusService
@@ -68,7 +68,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         mainloop = GObject.MainLoop()
         if not mainloop.is_running():
             log.info('Starting Glib main loop')
-            mainloop_thread = threading.Thread(target=mainloop.run, name='Glib maing loop')
+            mainloop_thread = threading.Thread(
+                target=mainloop.run, name='Glib maing loop'
+            )
             mainloop_thread.start()
             self.mainloop_thread = mainloop_thread
             self.mainloop = mainloop
@@ -89,7 +91,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.rm_queue = RmQueue(self.requests_session)
         self.apt_archive = AptArchive(
             self.registryValue('apt_configuration_directory'),
-            self.registryValue('apt_cache_directory'))
+            self.registryValue('apt_cache_directory'),
+        )
         self.data_sources = (
             self.pseudo_packages,
             self.stable_rc_bugs,
@@ -97,7 +100,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             self.new_queue,
             self.dinstall,
             self.rm_queue,
-            self.apt_archive
+            self.apt_archive,
         )
 
         # Schedule datasource updates
@@ -108,20 +111,21 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 except Exception as e:
                     log.exception('Failed to update {}: {}'.format(source.NAME, e))
                 self._topic_callback()
+
             return implementation
 
         for source in self.data_sources:
             # schedule periodic events
-            schedule.addPeriodicEvent(wrapper(source), source.INTERVAL,
-                                      source.NAME, now=False)
+            schedule.addPeriodicEvent(
+                wrapper(source), source.INTERVAL, source.NAME, now=False
+            )
             # and run them now once
             schedule.addEvent(wrapper(source), time.time() + 1)
 
         log.info('Starting D-Bus service')
         self.dbus_service = BTSDBusService(self._email_callback)
         self.dbus_bus = SystemBus()
-        self.dbus_bus.publish(self.dbus_service.interface_name,
-                              self.dbus_service)
+        self.dbus_bus.publish(self.dbus_service.interface_name, self.dbus_service)
         self.dbus_service.start()
 
     def die(self):
@@ -163,7 +167,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
             maintainer_info = None
             if hasattr(msg, 'maintainer'):
-                maintainer_info = (split_address(msg.maintainer), )
+                maintainer_info = (split_address(msg.maintainer),)
             else:
                 maintainer_info = []
                 for package in msg.package.split(','):
@@ -174,18 +178,19 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                         log.info("Failed to query maintainer for {}.".format(package))
 
             for channel in self.irc.state.channels:
-                package_regex = self.registryValue(
-                    'package_regex',
-                    channel,
-                ) or 'a^'  # match nothing by default
+                package_regex = (
+                    self.registryValue('package_regex', channel) or 'a^'
+                )  # match nothing by default
 
                 package_match = re.search(package_regex, msg.package)
 
                 maintainer_match = False
-                maintainer_regex = self.registryValue(
-                    'maintainer_regex',
-                    channel)
-                if maintainer_regex and maintainer_info is not None and len(maintainer_info) >= 0:
+                maintainer_regex = self.registryValue('maintainer_regex', channel)
+                if (
+                    maintainer_regex
+                    and maintainer_info is not None
+                    and len(maintainer_info) >= 0
+                ):
                     for mi in maintainer_info:
                         maintainer_match = re.search(maintainer_regex, mi['email'])
                         if maintainer_match:
@@ -194,10 +199,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 if not package_match and not maintainer_match:
                     continue
 
-                distribution_regex = self.registryValue(
-                    'distribution_regex',
-                    channel,
-                )
+                distribution_regex = self.registryValue('distribution_regex', channel)
 
                 if distribution_regex:
                     if not hasattr(msg, 'distribution'):
@@ -231,7 +233,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             self.new_queue.get_size: 'NEW queue',
             self.new_queue.get_backports_size: 'backports NEW queue',
             self.rm_queue.get_size: 'RM queue',
-            self.dinstall.get_status: 'dinstall'
+            self.dinstall.get_status: 'dinstall',
         }
 
         channels = set()
@@ -252,8 +254,10 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                     self.queued_topics[channel] = new_topic
 
                     if channel not in channels:
-                        log.info("Queueing change of topic in #%s to '%s'" %
-                                 (channel, new_topic))
+                        log.info(
+                            "Queueing change of topic in #%s to '%s'"
+                            % (channel, new_topic)
+                        )
                         channels.add(channel)
 
         for channel in channels:
@@ -282,10 +286,13 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         num_bugs = self.testing_rc_bugs.get_number_bugs()
         if type(num_bugs) is int:
             irc.reply(
-              "There are %d release-critical bugs in the testing distribution. "
-              "See https://udd.debian.org/bugs.cgi?release=buster&notmain=ign&merged=ign&rc=1" % num_bugs)
+                "There are %d release-critical bugs in the testing distribution. "
+                "See https://udd.debian.org/bugs.cgi?release=buster&notmain=ign&merged=ign&rc=1"
+                % num_bugs
+            )
         else:
             irc.reply("No data at this time.")
+
     rc = wrap(rc)
     bugs = wrap(rc)
 
@@ -299,6 +306,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             source.update()
             irc.reply("Updated %s." % source.NAME)
         self._topic_callback()
+
     update = wrap(update)
 
     def madison(self, irc, msg, args, package):
@@ -306,7 +314,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         try:
             lines = madison(package)
             if not lines:
-                irc.reply('Did not get a response -- is "%s" a valid package?' % package)
+                irc.reply(
+                    'Did not get a response -- is "%s" a valid package?' % package
+                )
                 return
 
             field_styles = ('package', 'version', 'distribution', 'section')
@@ -318,6 +328,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 irc.reply(colourise('[reset]|'.join(out)), prefixNick=False)
         except Exception as e:
             irc.reply("Error: %s" % e.message)
+
     madison = wrap(madison, ['text'])
 
     def get_pool_url(self, package):
@@ -331,18 +342,24 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         for package in items:
             info = self.apt_archive.get_maintainer(package)
             if info:
-                display_name = format_email_address("%s <%s>" % (info['name'], info['email']), max_domain=18)
+                display_name = format_email_address(
+                    "%s <%s>" % (info['name'], info['email']), max_domain=18
+                )
 
                 login = info['email']
                 if login.endswith('@debian.org'):
                     login = login.replace('@debian.org', '')
 
-                msg = "[desc]Maintainer for[reset] [package]%s[reset] [desc]is[reset] [by]%s[reset]: " % (package, display_name)
+                msg = (
+                    "[desc]Maintainer for[reset] [package]%s[reset] [desc]is[reset] [by]%s[reset]: "
+                    % (package, display_name)
+                )
                 msg += "[url]https://qa.debian.org/developer.php?login=%s[/url]" % login
             else:
                 msg = 'Unknown source package "%s"' % package
 
             irc.reply(colourise(msg), prefixNick=False)
+
     maintainer = wrap(_maintainer, [many('anything')])
     maint = wrap(_maintainer, [many('anything')])
     who_maintains = wrap(_maintainer, [many('anything')])
@@ -350,9 +367,15 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     def _qa(self, irc, msg, args, items):
         """Get link to QA page."""
         for package in items:
-            url = "https://packages.qa.debian.org/%s/%s.html" % self.get_pool_url(package)
-            msg = "[desc]QA page for[reset] [package]%s[reset]: [url]%s[/url]" % (package, url)
+            url = "https://packages.qa.debian.org/%s/%s.html" % self.get_pool_url(
+                package
+            )
+            msg = "[desc]QA page for[reset] [package]%s[reset]: [url]%s[/url]" % (
+                package,
+                url,
+            )
             irc.reply(colourise(msg), prefixNick=False)
+
     qa = wrap(_qa, [many('anything')])
     overview = wrap(_qa, [many('anything')])
     package = wrap(_qa, [many('anything')])
@@ -362,35 +385,55 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     def _changelog(self, irc, msg, args, items):
         """Get link to changelog."""
         for package in items:
-            url = "https://packages.debian.org/changelogs/pool/main/%s/%s/current/changelog" % self.get_pool_url(package)
-            msg = "[desc]debian/changelog for[reset] [package]%s[reset]: [url]%s[/url]" % (package, url)
+            url = (
+                "https://packages.debian.org/changelogs/pool/main/%s/%s/current/changelog"
+                % self.get_pool_url(package)
+            )
+            msg = (
+                "[desc]debian/changelog for[reset] [package]%s[reset]: [url]%s[/url]"
+                % (package, url)
+            )
             irc.reply(colourise(msg), prefixNick=False)
+
     changelog = wrap(_changelog, [many('anything')])
     changes = wrap(_changelog, [many('anything')])
 
     def _copyright(self, irc, msg, args, items):
         """Link to copyright files."""
         for package in items:
-            url = "https://packages.debian.org/changelogs/pool/main/%s/%s/current/copyright" % self.get_pool_url(package)
-            msg = "[desc]debian/copyright for[reset] [package]%s[reset]: [url]%s[/url]" % (package, url)
+            url = (
+                "https://packages.debian.org/changelogs/pool/main/%s/%s/current/copyright"
+                % self.get_pool_url(package)
+            )
+            msg = (
+                "[desc]debian/copyright for[reset] [package]%s[reset]: [url]%s[/url]"
+                % (package, url)
+            )
             irc.reply(colourise(msg), prefixNick=False)
+
     copyright = wrap(_copyright, [many('anything')])
 
     def _buggraph(self, irc, msg, args, items):
         """Link to bug graph."""
         for package in items:
-            msg = "[desc]Bug graph for[reset] [package]%s[reset]: [url]https://qa.debian.org/data/bts/graphs/%s/%s.png[/url]" % \
-                (package, package[0], package)
+            msg = (
+                "[desc]Bug graph for[reset] [package]%s[reset]: [url]https://qa.debian.org/data/bts/graphs/%s/%s.png[/url]"
+                % (package, package[0], package)
+            )
             irc.reply(colourise(msg), prefixNick=False)
+
     buggraph = wrap(_buggraph, [many('anything')])
     bug_graph = wrap(_buggraph, [many('anything')])
 
     def _buildd(self, irc, msg, args, items):
         """Link to buildd page."""
         for package in items:
-            msg = "[desc]buildd status for[reset] [package]%s[reset]: [url]https://buildd.debian.org/pkg.cgi?pkg=%s[/url]" % \
-                (package, package)
+            msg = (
+                "[desc]buildd status for[reset] [package]%s[reset]: [url]https://buildd.debian.org/pkg.cgi?pkg=%s[/url]"
+                % (package, package)
+            )
             irc.reply(colourise(msg), prefixNick=False)
+
     buildd = wrap(_buildd, [many('anything')])
 
     def _popcon(self, irc, msg, args, package):
@@ -401,22 +444,29 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 irc.reply(colourise(msg.for_irc()), prefixNick=False)
         except Exception as e:
             irc.reply("Error: unable to obtain popcon data for %s" % package)
+
     popcon = wrap(_popcon, ['text'])
 
     def _testing(self, irc, msg, args, items):
         """Check testing migration status."""
         for package in items:
-            msg = "[desc]Testing migration status for[reset] [package]%s[reset]: [url]https://qa.debian.org/excuses.php?package=%s[/url]" % \
-                (package, package)
+            msg = (
+                "[desc]Testing migration status for[reset] [package]%s[reset]: [url]https://qa.debian.org/excuses.php?package=%s[/url]"
+                % (package, package)
+            )
             irc.reply(colourise(msg), prefixNick=False)
+
     testing = wrap(_testing, [many('anything')])
     migration = wrap(_testing, [many('anything')])
 
     def _new(self, irc, msg, args):
         """Link to NEW queue."""
-        line = "[desc]NEW queue is[reset]: [url]%s[/url]. [desc]Current size is:[reset] %d" % \
-            ("https://ftp-master.debian.org/new.html", self.new_queue.get_size())
+        line = (
+            "[desc]NEW queue is[reset]: [url]%s[/url]. [desc]Current size is:[reset] %d"
+            % ("https://ftp-master.debian.org/new.html", self.new_queue.get_size())
+        )
         irc.reply(colourise(line))
+
     new = wrap(_new)
     new_queue = wrap(_new)
     newqueue = wrap(_new)

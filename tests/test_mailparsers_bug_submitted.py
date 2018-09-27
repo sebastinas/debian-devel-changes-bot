@@ -20,12 +20,13 @@
 import unittest
 
 import os, sys
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from DebianDevelChangesBot.mailparsers import BugSubmittedParser as p
 
-class TestMailParserBugSubmitted(unittest.TestCase):
 
+class TestMailParserBugSubmitted(unittest.TestCase):
     def setUp(self):
         self.headers = {
             'Subject': 'Bug#123456: Bug title',
@@ -39,7 +40,7 @@ class TestMailParserBugSubmitted(unittest.TestCase):
             "Package: package-name",
             "Version: version-here",
             "",
-            "Description"
+            "Description",
         ]
 
     def testSimple(self):
@@ -62,6 +63,7 @@ class TestMailParserBugSubmitted(unittest.TestCase):
         msg = p.parse(self.headers, self.body)
         self.assertTrue(msg)
         self.assertEqual(msg.by, 'Submitter Name <name@t.com>')
+
 
 if __name__ == "__main__":
     unittest.main()

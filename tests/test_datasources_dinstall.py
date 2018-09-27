@@ -24,6 +24,7 @@ import requests
 import requests_mock
 
 import os, sys
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from DebianDevelChangesBot.datasources import Dinstall
@@ -31,13 +32,19 @@ from DebianDevelChangesBot.datasources import Dinstall
 
 class TestDatasourceDinstall(unittest.TestCase):
     def setUp(self):
-        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                               'fixtures', 'dinstall.status.done')
+        fixture = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            'fixtures',
+            'dinstall.status.done',
+        )
         with io.open(fixture, encoding='utf-8') as f:
             self.data_not_running = f.read()
 
-        fixture = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                               'fixtures', 'dinstall.status.running')
+        fixture = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            'fixtures',
+            'dinstall.status.running',
+        )
         with io.open(fixture, encoding='utf-8') as f:
             self.data_running = f.read()
 
@@ -51,8 +58,7 @@ class TestDatasourceDinstall(unittest.TestCase):
         self.mocker.stop()
 
     def testNotRunning(self):
-        self.mocker.register_uri('GET', Dinstall.URL,
-                                 text=self.data_not_running)
+        self.mocker.register_uri('GET', Dinstall.URL, text=self.data_not_running)
         self.datasource.update()
         self.assertEqual(self.datasource.get_status(), 'not running')
 

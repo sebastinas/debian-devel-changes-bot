@@ -54,7 +54,9 @@ class BTSDBusService:
         log.info("Starting mail processing thread.")
 
         self.quit = False
-        self.thread = threading.Thread(target=self.process_mails, name='mail processing')
+        self.thread = threading.Thread(
+            target=self.process_mails, name='mail processing'
+        )
         self.thread.start()
 
     def process_mails(self):
@@ -84,7 +86,6 @@ class BTSDBusService:
     @property
     def is_running(self):
         return self.thread is not None and not self.quit
-
 
     def Inject(self, mail):
         if self.quit:
@@ -129,4 +130,3 @@ def quit(bus=None):
         bts.Quit()
     except GLib.Error:
         return -1
-

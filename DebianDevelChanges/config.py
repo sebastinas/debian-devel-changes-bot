@@ -27,26 +27,47 @@ def configure(advanced):
 
 DebianDevelChanges = conf.registerPlugin('DebianDevelChanges')
 
-conf.registerChannelValue(DebianDevelChanges, 'package_regex', registry.Regexp(
-    '', "Determines which package announcements should be printed to the channel",
-))
-
-conf.registerChannelValue(DebianDevelChanges, 'maintainer_regex', registry.Regexp(
-    '', "Determines which maintainer announcements should be printed to the channel",
-))
-
-conf.registerChannelValue(DebianDevelChanges, 'distribution_regex', registry.Regexp(
-    '', "Determines which distribution announcements should be printed to the channel",
-))
-
 conf.registerChannelValue(
-  DebianDevelChanges, 'send_privmsg',
-  registry.Boolean(False, "Determines if PRIVMSG or NOTICE should be sent on "
-                   "the channel")
+    DebianDevelChanges,
+    'package_regex',
+    registry.Regexp(
+        '', "Determines which package announcements should be printed to the channel"
+    ),
 )
 
-conf.registerGlobalValue(DebianDevelChanges, 'apt_configuration_directory',
-                         registry.String('', 'Determines path to apt config'))
+conf.registerChannelValue(
+    DebianDevelChanges,
+    'maintainer_regex',
+    registry.Regexp(
+        '', "Determines which maintainer announcements should be printed to the channel"
+    ),
+)
 
-conf.registerGlobalValue(DebianDevelChanges, 'apt_cache_directory',
-                         registry.String('', 'Determines path to apt cache'))
+conf.registerChannelValue(
+    DebianDevelChanges,
+    'distribution_regex',
+    registry.Regexp(
+        '',
+        "Determines which distribution announcements should be printed to the channel",
+    ),
+)
+
+conf.registerChannelValue(
+    DebianDevelChanges,
+    'send_privmsg',
+    registry.Boolean(
+        False, "Determines if PRIVMSG or NOTICE should be sent on " "the channel"
+    ),
+)
+
+conf.registerGlobalValue(
+    DebianDevelChanges,
+    'apt_configuration_directory',
+    registry.String('', 'Determines path to apt config'),
+)
+
+conf.registerGlobalValue(
+    DebianDevelChanges,
+    'apt_cache_directory',
+    registry.String('', 'Determines path to apt cache'),
+)
