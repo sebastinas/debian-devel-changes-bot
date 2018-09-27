@@ -17,9 +17,9 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 __version__ = '2'
-__author__ = 'Chris Lamb <chris@chris-lamb.co.uk>'
+__author__ = "Chris Lamb and Sebastian Ramacher"
 __contributors__ = {}
-__url__ = ''
+__url__ = "https://github.com/sebastinas/debian-devel-changes-bot/"
 
 import os
 import sys
