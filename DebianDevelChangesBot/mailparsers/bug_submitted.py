@@ -47,13 +47,12 @@ class BugSubmittedParser(MailParser):
         msg.title = m.group(2)
 
         msg.package = headers.get('X-Debian-PR-Package', None)
-        if len(msg.package) >= 75:
+        if msg.package is None or len(msg.package) >= 75:
             return
 
         msg.by = format_email_address(headers['From'])
 
         mapping = {'version': VERSION, 'severity': SEVERITY}
-
         for line in body[:10]:
             for target, pattern in mapping.items():
                 m = pattern.match(line)
