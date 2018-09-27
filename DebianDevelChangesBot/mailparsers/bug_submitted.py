@@ -34,6 +34,8 @@ class BugSubmittedParser(MailParser):
     def parse(headers, body, **kwargs):
         if headers.get('List-Id', '') != '<debian-bugs-dist.lists.debian.org>':
             return
+        if not headers.get('X-Debian-PR-Message', '').startswith('report '):
+            return
 
         msg = BugSubmittedMessage()
 
@@ -44,8 +46,6 @@ class BugSubmittedParser(MailParser):
         else:
             return
 
-        if not headers.get('X-Debian-PR-Message', '').startswith('report '):
-            return
 
         msg.package = headers.get('X-Debian-PR-Package', None)
         if len(msg.package) >= 75:
