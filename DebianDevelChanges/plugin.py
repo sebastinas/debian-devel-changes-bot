@@ -165,13 +165,14 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             self.last_n_messages.insert(0, txt)
             self.last_n_messages = self.last_n_messages[:20]
 
+            packages = [package.strip() for package in msg.package.split(",")]
+
             maintainer_info = None
             if hasattr(msg, "maintainer"):
                 maintainer_info = (split_address(msg.maintainer),)
             else:
                 maintainer_info = []
-                for package in msg.package.split(","):
-                    package = package.strip()
+                for package in packages:
                     try:
                         maintainer_info.append(self.apt_archive.get_maintainer(package))
                     except NewDataSource.DataError as e:
@@ -181,9 +182,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 # match package or nothing by default
                 package_regex = self.registryValue("package_regex", channel) or "a^"
                 package_match = False
-                for package in msg.package.split(","):
-                    package = package.strip()
-                    package_match = re.search(package_regex, msg.package)
+                for package in packages:
+                    package_match = re.search(package_regex, package)
                     if package_match:
                         break
 
