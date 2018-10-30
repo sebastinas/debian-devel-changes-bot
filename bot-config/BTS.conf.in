@@ -63,7 +63,7 @@ supybot.networks.oftc.servers: irc.oftc.net:6697
 #
 # Default value:  
 ###
-supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia #debian-newmaint #debian-gis #debian-django #debian-reproducible #pbuilder #debian-python-changes #debian-openstack-commits #debian-dpkg #debian-systemd #debian-apt #debian-clojure #debian-qa #reproducible-builds #debian-til #debian-rust #debian-pkg-security
+supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia #debian-newmaint #debian-gis #debian-django #debian-reproducible #pbuilder #debian-python-changes #debian-openstack-commits #debian-dpkg #debian-systemd #debian-apt #debian-clojure #debian-qa #reproducible-builds #debian-til #debian-rust #debian-pkg-security #debian-kbsd
 
 ###
 # Determines what key (if any) will be used to join the channel.
@@ -836,6 +836,8 @@ supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-apt: /^(deity@lists\
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-clojure: /^pkg-clojure-maintainers@lists\.alioth\.debian\.org$/
 # Approved by buxy
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-pkg-security: /^(team\+pkg-security@tracker\.debian\.org|(pkg-security-team|forensics-devel)@lists\.alioth\.debian\.org)$/
+# Requested by jrtc27
+supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-kbsd: /^debian-bsd@lists\.debian\.org$/
 
 ###
 # Determines which distribution announcements should be printed to the
