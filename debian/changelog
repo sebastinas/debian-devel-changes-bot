@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20181114) unstable; urgency=medium
+
+  * Join #debian-kbsd.
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Wed, 14 Nov 2018 21:28:42 +0100
+
 debian-devel-changes-bot (20180828) unstable; urgency=medium
 
   * Join #debian-newmaint.
