@@ -63,7 +63,7 @@ supybot.networks.oftc.servers: irc.oftc.net:6697
 #
 # Default value:  
 ###
-supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia #debian-newmaint #debian-gis #debian-django #debian-reproducible #pbuilder #debian-python-changes #debian-openstack-commits #debian-dpkg #debian-systemd #debian-apt #debian-clojure #debian-qa #reproducible-builds #debian-til #debian-rust #debian-pkg-security #debian-kbsd
+supybot.networks.oftc.channels: #debbugs #debian-backports #debian-cd #debian-cloud #debian-devel-changes #debian-doc #debian-haskell #debian-i18n #debian-it #debian-lists #debian-live #debian-mirrors #debian-publicity #debian-sayhi #debian-wuglug #debian-www #devscripts #emdebian #pet-devel #debian-perl #debian-multimedia #debian-newmaint #debian-gis #debian-django #debian-reproducible #pbuilder #debian-python-changes #debian-openstack-commits #debian-dpkg #debian-systemd #debian-apt #debian-clojure #debian-qa #reproducible-builds #debian-til #debian-rust #debian-pkg-security #debian-kbsd #debian-js
 
 ###
 # Determines what key (if any) will be used to join the channel.
@@ -803,6 +803,8 @@ supybot.plugins.DebianDevelChanges.package_regex.#debian-clojure: /.*clojure.*/
 supybot.plugins.DebianDevelChanges.package_regex.#reproducible-builds: /^diffoscope$/
 # Requested by kpcyrd
 supybot.plugins.DebianDevelChanges.package_regex.#debian-rust: /^(librust-|rust-)/
+# Requested by yadd
+supybot.plugins.DebianDevelChanges.package_regex.#debian-js: /^(libjs-.*|node(js)?|node-.*|.*\.js)$/
 
 ###
 # Determines which maintainer announcements should be printed to the
@@ -838,6 +840,8 @@ supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-clojure: /^pkg-cloju
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-pkg-security: /^(team\+pkg-security@tracker\.debian\.org|(pkg-security-team|forensics-devel)@lists\.alioth\.debian\.org)$/
 # Requested by jrtc27
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-kbsd: /^debian-bsd@lists\.debian\.org$/
+# Requested by yadd
+supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-js: /^pkg-javascript-devel@lists\.alioth\.debian\.org$/
 
 ###
 # Determines which distribution announcements should be printed to the
