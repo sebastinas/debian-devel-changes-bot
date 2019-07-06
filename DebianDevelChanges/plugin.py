@@ -290,7 +290,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         if type(num_bugs) is int:
             irc.reply(
                 "There are %d release-critical bugs in the testing distribution. "
-                "See https://udd.debian.org/bugs.cgi?release=buster&notmain=ign&merged=ign&rc=1"
+                "See https://udd.debian.org/bugs.cgi?release=bullseye&notmain=ign&merged=ign&rc=1"
                 % num_bugs
             )
         else:
