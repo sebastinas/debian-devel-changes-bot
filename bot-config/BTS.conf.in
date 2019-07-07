@@ -1311,7 +1311,7 @@ supybot.defaultSocketTimeout: 10
 #
 # Default value: 
 ###
-supybot.pidFile: /var/run/debian-devel-changes-bot/debian-devel-changes-bot.pid
+supybot.pidFile: /run/debian-devel-changes-bot/debian-devel-changes-bot.pid
 
 ###
 # Determines whether the bot will automatically thread all commands.
