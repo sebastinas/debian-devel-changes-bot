@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20200802) unstable; urgency=medium
+
+  * Join #debian-swaywm
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 02 Aug 2020 16:00:40 +0200
+
 debian-devel-changes-bot (20190706) unstable; urgency=medium
 
   * buster is now stable.
