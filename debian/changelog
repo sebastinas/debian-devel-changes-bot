@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20201207) unstable; urgency=medium
+
+  * Replace dbus with a file-based periodic event
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Mon, 07 Dec 2020 18:30:17 +0100
+
 debian-devel-changes-bot (20200802) unstable; urgency=medium
 
   * Join #debian-swaywm
