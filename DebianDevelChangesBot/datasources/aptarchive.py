@@ -91,6 +91,4 @@ class AptArchive(NewDataSource):
 
             return split_address(maintainer)
 
-        raise NewDataSource.DataError(
-            f"Unable to get maintainer for {package}."
-        )
+        raise NewDataSource.DataError(f"Unable to get maintainer for {package}.")

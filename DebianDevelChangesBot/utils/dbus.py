@@ -27,15 +27,15 @@ from supybot import log
 
 class BTSDBusService:
     """
-        <node>
-            <interface name='org.debian.BTS'>
-                <method name='Inject'>
-                    <arg type='s' name='mail' direction='in' />
-                    <arg type='i' name='response' direction='out' />
-                </method>
-                <method name='Quit' />
-            </interface>
-        </node>
+    <node>
+        <interface name='org.debian.BTS'>
+            <method name='Inject'>
+                <arg type='s' name='mail' direction='in' />
+                <arg type='i' name='response' direction='out' />
+            </method>
+            <method name='Quit' />
+        </interface>
+    </node>
     """
 
     interface_name = "org.debian.BTS"
