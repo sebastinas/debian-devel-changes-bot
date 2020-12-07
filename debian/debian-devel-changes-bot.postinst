@@ -60,7 +60,7 @@ then
     fi
   fi
 
-  # Set NickSErv password.
+  # Set NickServ password.
   sed "s,@NICKSERV_PASSWORD@,$NICKSERV_PASSWORD," \
     "${USRBASE}/bot-config/BTS.conf.in" > "${BASE}/bot-config/BTS.conf"
 
