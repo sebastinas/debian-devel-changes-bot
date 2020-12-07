@@ -37,7 +37,7 @@ class TestDatasourceDinstall(unittest.TestCase):
             "fixtures",
             "dinstall.status.done",
         )
-        with io.open(fixture, encoding="utf-8") as f:
+        with open(fixture, encoding="utf-8") as f:
             self.data_not_running = f.read()
 
         fixture = os.path.join(
@@ -45,7 +45,7 @@ class TestDatasourceDinstall(unittest.TestCase):
             "fixtures",
             "dinstall.status.running",
         )
-        with io.open(fixture, encoding="utf-8") as f:
+        with open(fixture, encoding="utf-8") as f:
             self.data_running = f.read()
 
         self.mocker = requests_mock.Mocker()

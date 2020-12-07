@@ -32,7 +32,7 @@ class TestDatasourceTestingNewQueue(unittest.TestCase):
         fixture = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "fixtures", "new_queue.txt"
         )
-        with io.open(fixture, encoding="utf-8") as f:
+        with open(fixture, encoding="utf-8") as f:
             data = f.read()
 
         self.mocker = requests_mock.Mocker()

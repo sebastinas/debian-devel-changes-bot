@@ -25,7 +25,7 @@ import requests_mock
 from DebianDevelChangesBot.datasources import TestingRCBugs, StableRCBugs
 
 
-class BaseTest(object):
+class BaseTest:
     def setUp(self):
         fixture = os.path.join(
             os.path.dirname(os.path.abspath(__file__)),

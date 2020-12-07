@@ -41,7 +41,7 @@ class TestPopcon(unittest.TestCase):
         fixture = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "fixtures", "popcon", package
         )
-        with io.open(fixture, encoding="utf-8") as f:
+        with open(fixture, encoding="utf-8") as f:
             data = f.read()
 
         self.mocker.register_uri("GET", "https://qa.debian.org/popcon.php", text=data)

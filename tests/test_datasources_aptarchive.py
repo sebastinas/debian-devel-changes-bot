@@ -53,7 +53,7 @@ class TestDatasourceAptArchive(unittest.TestCase):
             "fixtures",
             "pseudo-packages.maintainers",
         )
-        with io.open(fixture, encoding="utf-8") as f:
+        with open(fixture, encoding="utf-8") as f:
             data = f.read()
         cls.mocker.register_uri("GET", PseudoPackages.URL_M, text=data)
 
@@ -62,7 +62,7 @@ class TestDatasourceAptArchive(unittest.TestCase):
             "fixtures",
             "pseudo-packages.description",
         )
-        with io.open(fixture, encoding="utf-8") as f:
+        with open(fixture, encoding="utf-8") as f:
             data = f.read()
         cls.mocker.register_uri("GET", PseudoPackages.URL_D, text=data)
 
