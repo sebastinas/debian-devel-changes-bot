@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 #
 #   Debian Changes Bot
-#   Copyright (C) 2016 Sebastian Ramacher <sramacher@debian.org>
+#   Copyright (C) 2016-2020 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -17,28 +17,42 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import io
+import os
+import os.path
+import shutil
 import sys
 import syslog
-import traceback
+import tempfile
 
-from DebianDevelChangesBot.utils import dbus
+
+TARGET_DIR = "/var/lib/debian-devel-changes-bot/inject"
 
 
 def main():
-    syslog.openlog('ddc-bot-inject')
-    with io.open('/dev/stdin', mode='rb') as stdin:
-        mail = stdin.read()
+    syslog.openlog("ddc-bot-inject")
+    if not os.path.isdir(TARGET_DIR) and not os.mkdir(TARGET_DIR):
+        syslog.syslog("Target directory does not exist")
+        return 75
 
     try:
-        ret = dbus.inject(mail)
-    except Exception:
-        syslog.syslog(traceback.format_exc())
-        ret = -1
+        with tempfile.NamedTemporaryFile(delete=False) as out:
+            out_name = out.name
+            with io.open("/dev/stdin", mode="rb") as stdin:
+                shutil.copyfileobj(stdin, out)
+    except Exception as e:
+        syslog.syslog(syslog.LOG_ERR, f"Failed to copy mail: {e}")
+        os.unlink(out_name)
+        return 75
 
-    if ret != 0:
-        syslog.syslog('ret was {}'.format(ret))
-        ret = 75
-    return ret
+    try:
+        shutil.move(out_name, TARGET_DIR)
+    except Exception as e:
+        syslog.syslog(syslog.LOG_ERR, f"Failed to move mail: {e}")
+        os.unlink(out_name)
+        return 75
 
-if __name__ == '__main__':
+    return 0
+
+
+if __name__ == "__main__":
     sys.exit(main())

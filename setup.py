@@ -9,7 +9,6 @@ setup(
         "beautifulsoup4",
         "python-debian",
         "requests",
-        "pydbus",
         "python-apt",
     ],
 )

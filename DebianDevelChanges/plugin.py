@@ -1,7 +1,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
-#   Copyright (C) 2015-2017 Sebastian Ramacher <sramacher@debian.org>
+#   Copyright (C) 2015-2020 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -17,6 +17,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+import os.path
 import re
 import time
 import random
@@ -26,8 +27,6 @@ import threading
 import requests
 import email.utils
 
-from gi.repository import GObject
-from pydbus import SystemBus
 from supybot import ircdb, log, schedule
 from supybot.commands import wrap, many
 
@@ -51,7 +50,6 @@ from DebianDevelChangesBot.utils import (
     popcon,
 )
 from DebianDevelChangesBot.utils.decoding import split_address
-from DebianDevelChangesBot.utils.dbus import BTSDBusService
 
 
 class DebianDevelChanges(supybot.callbacks.Plugin):
@@ -61,18 +59,6 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         super().__init__(irc)
         self.irc = irc
         self.topic_lock = threading.Lock()
-
-        self.mainloop = None
-        self.mainloop_thread = None
-        mainloop = GObject.MainLoop()
-        if not mainloop.is_running():
-            log.info("Starting Glib main loop")
-            mainloop_thread = threading.Thread(
-                target=mainloop.run, name="Glib maing loop"
-            )
-            mainloop_thread.start()
-            self.mainloop_thread = mainloop_thread
-            self.mainloop = mainloop
 
         self.requests_session = requests.Session()
         self.requests_session.verify = True
@@ -121,25 +107,15 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             # and run them now once
             schedule.addEvent(wrapper(source), time.time() + 1)
 
-        log.info("Starting D-Bus service")
-        self.dbus_service = BTSDBusService(self._email_callback)
-        self.dbus_bus = SystemBus()
-        self.dbus_bus.publish(self.dbus_service.interface_name, self.dbus_service)
-        self.dbus_service.start()
+        # Schedule mail update
+        self.process_mail_basedir = os.path.expanduser("~/inject")
+        if not os.path.isdir(self.process_mail_basedir):
+            os.mkdir(self.process_mail_basedir)
+
+        schedule.addPeriodicEvent(self._email_callback, 60, "process-mail", now=True)
 
     def die(self):
-        log.info("Stopping D-Bus service")
-        self.dbus_service.stop()
-        if self.mainloop is not None:
-            log.info("Stopping Glib main loop")
-            self.mainloop.quit()
-            self.mainloop_thread.join(timeout=1.0)
-            if self.mainloop_thread.is_alive():
-                log.warn("Glib main loop thread is still alive.")
-
-            self.mainloop = None
-            self.mainloop_thread = None
-
+        schedule.removePeriodicEvent("process-mail")
         for source in self.data_sources:
             try:
                 schedule.removePeriodicEvent(source.NAME)
@@ -148,7 +124,18 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
         super().die()
 
-    def _email_callback(self, fileobj):
+
+    def _email_callback(self):
+        for mail in os.listdir(self.process_mail_basedir):
+            mail = os.path.join(self.process_mail_basedir, mail)
+            if not os.path.isfile(mail):
+                continue
+
+            with open(mail, mode="rb") as fileobj:
+                self._process_mail(fileobj)
+            os.unlink(mail)
+
+    def _process_mail(self, fileobj):
         try:
             emailmsg = parse_mail(fileobj)
             msg = get_message(emailmsg, new_queue=self.new_queue)
