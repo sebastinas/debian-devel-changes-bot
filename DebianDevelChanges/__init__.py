@@ -15,13 +15,18 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-__version__ = "2"
-__author__ = "Chris Lamb and Sebastian Ramacher"
-__contributors__ = {}
-__url__ = "https://github.com/sebastinas/debian-devel-changes-bot/"
-
 import os
 import sys
+import supybot
+
+__version__ = "2"
+__author__ = supybot.Author("Sebastian Ramacher", "Sebastinas", "sramacher@debian.org")
+__contributors__ = {
+    supybot.Author("Chris Lamb", "lamby", "chris@chris-lamb.co.uk"): (
+        "Initial version",
+    )
+}
+__url__ = "https://github.com/sebastinas/debian-devel-changes-bot/"
 
 basedir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 if basedir not in sys.path:
