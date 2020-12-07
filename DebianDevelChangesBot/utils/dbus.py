@@ -79,7 +79,7 @@ class BTSDBusService:
             try:
                 self.callback(BytesIO(mail))
             except Exception as e:
-                log.exception("Uncaught exception: {}".format(e))
+                log.exception(f"Uncaught exception: {e}")
 
         self.thread = None
 

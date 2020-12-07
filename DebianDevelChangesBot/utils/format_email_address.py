@@ -29,7 +29,7 @@ CONTINUATION = re.compile(r"\.{3,}$")
 def format_email_address(input, max_user=13, max_domain=10):
     m = EMAIL_ALT.match(input)
     if m:
-        input = "%s <%s>" % (m.group(2), m.group(1))
+        input = "{} <{}>".format(m.group(2), m.group(1))
 
     m = EMAIL.match(input)
     if not m:
@@ -49,7 +49,7 @@ def format_email_address(input, max_user=13, max_domain=10):
     address = WHITESPACE.sub(" ", address)
 
     # Fix broken '"foo@bar.com" <foo@bar.com>' mail addresses
-    if input == '"%s" <%s>' % (name, name):
+    if input == f'"{name}" <{name}>':
         return address
 
     if DEBIAN_EMAIL.match(address):
@@ -71,7 +71,7 @@ def format_email_address(input, max_user=13, max_domain=10):
         user = CONTINUATION.sub("...", user)
         host = CONTINUATION.sub("...", host)
 
-        address = "<%s@%s>" % (user, host)
+        address = f"<{user}@{host}>"
 
-    ret = "%s %s" % (name, address)
+    ret = f"{name} {address}"
     return ret.strip()

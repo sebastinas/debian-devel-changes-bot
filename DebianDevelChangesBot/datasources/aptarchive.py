@@ -57,7 +57,7 @@ class AptArchive(NewDataSource):
                 self.cache.update(apt.progress.base.AcquireProgress(), self.source_list)
             except apt_pkg.Error as e:
                 if not ignore_errors:
-                    raise NewDataSource.DataError("Failed to update cache: {}".format(e))
+                    raise NewDataSource.DataError(f"Failed to update cache: {e}")
 
     def update(self):
         self.cache = apt_pkg.Cache(None)
@@ -93,5 +93,5 @@ class AptArchive(NewDataSource):
             return split_address(maintainer)
 
         raise NewDataSource.DataError(
-            "Unable to get maintainer for {}.".format(package)
+            f"Unable to get maintainer for {package}."
         )

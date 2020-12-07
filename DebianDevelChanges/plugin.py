@@ -109,7 +109,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 try:
                     source.update()
                 except Exception as e:
-                    log.exception("Failed to update {}: {}".format(source.NAME, e))
+                    log.exception(f"Failed to update {source.NAME}: {e}")
                 self._topic_callback()
 
             return implementation
@@ -176,7 +176,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                     try:
                         maintainer_info.append(self.apt_archive.get_maintainer(package))
                     except NewDataSource.DataError as e:
-                        log.info("Failed to query maintainer for {}.".format(package))
+                        log.info(f"Failed to query maintainer for {package}.")
 
             for channel in self.irc.state.channels:
                 # match package or nothing by default
@@ -264,7 +264,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                         channels.add(channel)
 
         for channel in channels:
-            event_name = "{}_topic".format(channel)
+            event_name = f"{channel}_topic"
             try:
                 schedule.removeEvent(event_name)
             except KeyError:
@@ -279,7 +279,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         with self.topic_lock:
             try:
                 new_topic = self.queued_topics[channel]
-                log.info("Changing topic in #%s to '%s'" % (channel, new_topic))
+                log.info(f"Changing topic in #{channel} to '{new_topic}'")
                 self.irc.queueMsg(supybot.ircmsgs.topic(channel, new_topic))
             except KeyError:
                 pass
@@ -327,7 +327,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 out = []
                 fields = line.strip().split("|", len(field_styles))
                 for style, data in zip(field_styles, fields):
-                    out.append("[%s]%s" % (style, data))
+                    out.append(f"[{style}]{data}")
                 irc.reply(colourise("[reset]|".join(out)), prefixNick=False)
         except Exception as e:
             irc.reply("Error: %s" % e.message)
@@ -346,7 +346,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             info = self.apt_archive.get_maintainer(package)
             if info:
                 display_name = format_email_address(
-                    "%s <%s>" % (info["name"], info["email"]), max_domain=18
+                    "{} <{}>".format(info["name"], info["email"]), max_domain=18
                 )
 
                 login = info["email"]
@@ -373,7 +373,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             url = "https://packages.qa.debian.org/%s/%s.html" % self.get_pool_url(
                 package
             )
-            msg = "[desc]QA page for[reset] [package]%s[reset]: [url]%s[/url]" % (
+            msg = "[desc]QA page for[reset] [package]{}[reset]: [url]{}[/url]".format(
                 package,
                 url,
             )

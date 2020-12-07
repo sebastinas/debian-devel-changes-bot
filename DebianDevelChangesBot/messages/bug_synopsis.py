@@ -28,7 +28,7 @@ class BugSynopsis(Message):
         if self.status == "done":
             msg += " (fixed)"
 
-        msg += ": %s: «[title]%s[reset]» " % (self.package_name(), self.title)
+        msg += f": {self.package_name()}: «[title]{self.title}[reset]» "
 
         if self.severity != "normal":
             if self.severity in ("critical", "grave", "serious"):
