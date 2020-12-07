@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 #   Debian Changes Bot
 #   Copyright (C) 2018 Sebastian Ramacher <sramacher@debian.org>
