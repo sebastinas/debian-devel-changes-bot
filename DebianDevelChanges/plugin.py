@@ -130,7 +130,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         if not os.path.isdir(self.failed_mail_basedir):
             os.mkdir(self.failed_mail_basedir)
 
-        schedule.addPeriodicEvent(self._email_callback, 60, "process-mail", now=True)
+        schedule.addPeriodicEvent(self._email_callback, 15, "process-mail", now=True)
 
         # Schedule rejoins
         schedule.addPeriodicEvent(self._rejoin_channels, 600, "rejoin", now=False)
