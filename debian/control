@@ -12,10 +12,11 @@ Build-Depends:
  python3-setuptools,
  python3-requests,
  python3-requests-mock
-Standards-Version: 4.3.0
+Standards-Version: 4.5.1
 Homepage: https://github.com/sebastinas/debian-devel-changes-bot
 Vcs-Git: git://github.com/sebastinas/debian-devel-changes-bot.git
 Vcs-Browser: https://github.com/sebastinas/debian-devel-changes-bot
+Rules-Requires-Root: no
 
 Package: debian-devel-changes-bot
 Architecture: all
