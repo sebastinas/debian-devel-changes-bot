@@ -1,3 +1,10 @@
+debian-devel-changes-bot (20201213) unstable; urgency=medium
+
+  * Rejoin channels if necessary
+  * Keep failing mails
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 13 Dec 2020 23:44:27 +0100
+
 debian-devel-changes-bot (20201207) unstable; urgency=medium
 
   * Replace dbus with a file-based periodic event
