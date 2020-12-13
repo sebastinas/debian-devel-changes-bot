@@ -59,6 +59,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         super().__init__(irc)
         self.irc = irc
         self.topic_lock = threading.Lock()
+        self.mail_lock = threading.Lock()
 
         self.requests_session = requests.Session()
         self.requests_session.verify = True
@@ -111,11 +112,17 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.process_mail_basedir = os.path.expanduser("~/inject")
         if not os.path.isdir(self.process_mail_basedir):
             os.mkdir(self.process_mail_basedir)
+        self.failed_mail_basedir = os.path.expanduser("~/failed-mails")
+        if not os.path.isdir(self.failed_mail_basedir):
+            os.mkdir(self.failed_mail_basedir)
 
         schedule.addPeriodicEvent(self._email_callback, 60, "process-mail", now=True)
 
     def die(self):
-        schedule.removePeriodicEvent("process-mail")
+        try:
+            schedule.removePeriodicEvent("process-mail")
+        except KeyError:
+            pass
         for source in self.data_sources:
             try:
                 schedule.removePeriodicEvent(source.NAME)
@@ -124,16 +131,23 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
         super().die()
 
-
     def _email_callback(self):
-        for mail in os.listdir(self.process_mail_basedir):
-            mail = os.path.join(self.process_mail_basedir, mail)
-            if not os.path.isfile(mail):
-                continue
+        # make sure that we only process from one thread
+        if self.mail_lock.locked():
+            return
 
-            with open(mail, mode="rb") as fileobj:
-                self._process_mail(fileobj)
-            os.unlink(mail)
+        with self.mail_lock:
+            for mail in os.listdir(self.process_mail_basedir):
+                mail = os.path.join(self.process_mail_basedir, mail)
+                if not os.path.isfile(mail):
+                    continue
+
+                with open(mail, mode="rb") as fileobj:
+                    if self._process_mail(fileobj):
+                        os.unlink(mail)
+                    else:
+                        # store mails that failed to be processed
+                        os.rename(mail, self.failed_mail_basedir)
 
     def _process_mail(self, fileobj):
         try:
@@ -141,13 +155,13 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             msg = get_message(emailmsg, new_queue=self.new_queue)
 
             if not msg:
-                return
+                return True
 
             txt = colourise(msg.for_irc())
 
             # Simple flood/duplicate detection
             if txt in self.last_n_messages:
-                return
+                return True
             self.last_n_messages.insert(0, txt)
             self.last_n_messages = self.last_n_messages[:20]
 
@@ -162,7 +176,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                     try:
                         maintainer_info.append(self.apt_archive.get_maintainer(package))
                     except NewDataSource.DataError as e:
-                        log.info(f"Failed to query maintainer for {package}.")
+                        log.info(f"Failed to query maintainer for {package}: {e}")
 
             for channel in self.irc.state.channels:
                 # match package or nothing by default
@@ -211,9 +225,11 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                     ircmsg = supybot.ircmsgs.notice(channel, txt)
 
                 self.irc.queueMsg(ircmsg)
-
         except Exception as e:
             log.exception("Uncaught exception: %s " % e)
+            return False
+
+        return True
 
     def _topic_callback(self):
         sections = {
