@@ -132,12 +132,24 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
         schedule.addPeriodicEvent(self._email_callback, 60, "process-mail", now=True)
 
+        # Schedule rejoins
+        schedule.addPeriodicEvent(self._rejoin_channels, 600, "rejoin", now=False)
+
     def die(self):
+        schedule_remove_periodic_event("rejoin")
         schedule_remove_periodic_event("process-mail")
         for source in self.data_sources:
             schedule_remove_periodic_event(source.NAME)
 
         super().die()
+
+    def _rejoin_channels(self):
+        for channel in supybot.conf.supybot.networks.get(self.irc.network).get("channels"):
+            if channel in self.irc.state.channels:
+                continue
+
+            log.info(f"Rejoining {channel}")
+            self.irc.queueMsg(supybot.ircmsgs.join(channel))
 
     def _email_callback(self):
         # make sure that we only process from one thread
