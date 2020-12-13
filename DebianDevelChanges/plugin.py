@@ -52,6 +52,20 @@ from DebianDevelChangesBot.utils import (
 from DebianDevelChangesBot.utils.decoding import split_address
 
 
+def schedule_remove_event(event):
+    try:
+        schedule.removeEvent(event)
+    except KeyError:
+        pass
+
+
+def schedule_remove_periodic_event(event):
+    try:
+        schedule.removePeriodicEvent(event)
+    except KeyError:
+        pass
+
+
 class DebianDevelChanges(supybot.callbacks.Plugin):
     threaded = True
 
@@ -119,15 +133,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         schedule.addPeriodicEvent(self._email_callback, 60, "process-mail", now=True)
 
     def die(self):
-        try:
-            schedule.removePeriodicEvent("process-mail")
-        except KeyError:
-            pass
+        schedule_remove_periodic_event("process-mail")
         for source in self.data_sources:
-            try:
-                schedule.removePeriodicEvent(source.NAME)
-            except KeyError:
-                pass
+            schedule_remove_periodic_event(source.NAME)
 
         super().die()
 
@@ -267,10 +275,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
         for channel in channels:
             event_name = f"{channel}_topic"
-            try:
-                schedule.removeEvent(event_name)
-            except KeyError:
-                pass
+            schedule_remove_event(event_name)
 
             def update_topic(channel=channel):
                 self._update_topic(channel)
