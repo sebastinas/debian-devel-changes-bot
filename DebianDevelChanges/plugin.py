@@ -145,6 +145,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _rejoin_channels(self):
         for channel in supybot.conf.supybot.networks.get(self.irc.network).get("channels"):
+            log.info(f"Checking if {channel} joined")
             if channel in self.irc.state.channels:
                 continue
 
@@ -162,6 +163,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 if not os.path.isfile(mail):
                     continue
 
+                log.info(f"Processing mail {mail}")
                 with open(mail, mode="rb") as fileobj:
                     if self._process_mail(fileobj):
                         os.unlink(mail)
@@ -246,7 +248,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
                 self.irc.queueMsg(ircmsg)
         except Exception as e:
-            log.exception("Uncaught exception: %s " % e)
+            log.exception(f"Uncaught exception: {e}")
             return False
 
         return True
@@ -280,8 +282,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
                     if channel not in channels:
                         log.info(
-                            "Queueing change of topic in #%s to '%s'"
-                            % (channel, new_topic)
+                            f"Queueing change of topic in {channel} to '{new_topic}'"
                         )
                         channels.add(channel)
 
@@ -298,7 +299,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         with self.topic_lock:
             try:
                 new_topic = self.queued_topics[channel]
-                log.info(f"Changing topic in #{channel} to '{new_topic}'")
+                log.info(f"Changing topic in {channel} to '{new_topic}'")
                 self.irc.queueMsg(supybot.ircmsgs.topic(channel, new_topic))
             except KeyError:
                 pass
