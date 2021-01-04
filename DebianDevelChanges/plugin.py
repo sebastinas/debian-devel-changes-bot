@@ -338,7 +338,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             lines = madison(package)
             if not lines:
                 irc.reply(
-                    'Did not get a response -- is "%s" a valid package?' % package
+                    f'Did not get a response -- is "{package}" a valid package?'
                 )
                 return
 
@@ -393,10 +393,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             url = "https://packages.qa.debian.org/%s/%s.html" % self.get_pool_url(
                 package
             )
-            msg = "[desc]QA page for[reset] [package]{}[reset]: [url]{}[/url]".format(
-                package,
-                url,
-            )
+            msg = f"[desc]QA page for[reset] [package]{package}[reset]: [url]{url}[/url]"
             irc.reply(colourise(msg), prefixNick=False)
 
     qa = wrap(_qa, [many("anything")])
@@ -413,8 +410,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 % self.get_pool_url(package)
             )
             msg = (
-                "[desc]debian/changelog for[reset] [package]%s[reset]: [url]%s[/url]"
-                % (package, url)
+                f"[desc]debian/changelog for[reset] [package]{package}[reset]: [url]{url}[/url]"
             )
             irc.reply(colourise(msg), prefixNick=False)
 
@@ -429,8 +425,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 % self.get_pool_url(package)
             )
             msg = (
-                "[desc]debian/copyright for[reset] [package]%s[reset]: [url]%s[/url]"
-                % (package, url)
+                f"[desc]debian/copyright for[reset] [package]{package}[reset]: [url]{url}[/url]"
             )
             irc.reply(colourise(msg), prefixNick=False)
 
