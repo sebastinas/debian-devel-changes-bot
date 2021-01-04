@@ -16,7 +16,7 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import io
+import datetime
 import os
 import os.path
 import shutil
@@ -35,9 +35,11 @@ def main():
         return 75
 
     try:
-        with tempfile.NamedTemporaryFile(delete=False) as out:
+        with tempfile.NamedTemporaryFile(
+            prefix="{}-".format(datetime.datetime.utcnow().isoformat()), delete=False
+        ) as out:
             out_name = out.name
-            with io.open("/dev/stdin", mode="rb") as stdin:
+            with open("/dev/stdin", mode="rb") as stdin:
                 shutil.copyfileobj(stdin, out)
     except Exception as e:
         syslog.syslog(syslog.LOG_ERR, f"Failed to copy mail: {e}")
