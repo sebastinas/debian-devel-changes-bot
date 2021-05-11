@@ -28,7 +28,7 @@ CONTINUATION = re.compile(r"\.{3,}$")
 def format_email_address(input, max_user=13, max_domain=10):
     m = EMAIL_ALT.match(input)
     if m:
-        input = "{} <{}>".format(m.group(2), m.group(1))
+        input = f"{m.group(2)} <{m.group(1)}>"
 
     m = EMAIL.match(input)
     if not m:
