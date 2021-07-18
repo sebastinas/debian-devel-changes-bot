@@ -1,3 +1,11 @@
+debian-devel-changes-bot (20201215) unstable; urgency=medium
+
+  * Keep mail order
+  * Use f-strings
+  * Also announce tracker.debian.org on #debian-qa
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 18 Jul 2021 13:47:12 +0200
+
 debian-devel-changes-bot (20201213) unstable; urgency=medium
 
   * Rejoin channels if necessary
