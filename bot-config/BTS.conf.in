@@ -763,8 +763,8 @@ supybot.plugins.DebianDevelChanges.package_regex.#debian-lists: /^lists\.debian\
 supybot.plugins.DebianDevelChanges.package_regex.#debian-mirrors: /^mirrors$/
 # Approved by gregoa, ansgar
 supybot.plugins.DebianDevelChanges.package_regex.#pet-devel: /^pet\.debian\.net$/
-# Requested by mapreri (qa.debian.org) and lamby (lintian)
-supybot.plugins.DebianDevelChanges.package_regex.#debian-qa: /^(qa\.debian\.org|lintian)$/
+# Requested by mapreri (qa.debian.org, tracker.debian.org) and lamby (lintian)
+supybot.plugins.DebianDevelChanges.package_regex.#debian-qa: /^(qa\.debian\.org|lintian|tracker\.debian\.org)$/
 # Deletion of press pseudo-package suggested
 #supybot.plugins.DebianDevelChanges.package_regex.#debian-publicity: /^press$/
 #Approved by Cnote, pabs
