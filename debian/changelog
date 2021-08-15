@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20210815) unstable; urgency=medium
+
+  * bullseye is now stable, bookworm is testing
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 15 Aug 2021 18:01:08 +0200
+
 debian-devel-changes-bot (20201215) unstable; urgency=medium
 
   * Keep mail order
