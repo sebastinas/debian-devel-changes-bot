@@ -4,13 +4,13 @@ debian-devel-changes-bot (20210815) unstable; urgency=medium
 
  -- Sebastian Ramacher <sramacher@debian.org>  Sun, 15 Aug 2021 18:01:08 +0200
 
-debian-devel-changes-bot (20201215) unstable; urgency=medium
+debian-devel-changes-bot (20210718) unstable; urgency=medium
 
   * Keep mail order
   * Use f-strings
   * Also announce tracker.debian.org on #debian-qa
 
- -- Sebastian Ramacher <sramacher@debian.org>  Sun, 18 Jul 2021 13:47:12 +0200
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 18 Jul 2021 15:23:29 +0200
 
 debian-devel-changes-bot (20201213) unstable; urgency=medium
 
