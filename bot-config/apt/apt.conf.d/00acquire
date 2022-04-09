@@ -1,2 +1,3 @@
 Acquire::PDiffs "false";
 Acquire::Languages "none";
+Acquire::AllowReleaseInfoChange "true";
