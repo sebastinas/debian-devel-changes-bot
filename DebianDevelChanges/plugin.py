@@ -144,7 +144,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         super().die()
 
     def _rejoin_channels(self):
-        for channel in supybot.conf.supybot.networks.get(self.irc.network).get("channels"):
+        for channel in supybot.conf.supybot.networks.get(self.irc.network).get(
+            "channels"
+        ):
             log.info(f"Checking if {channel} joined")
             if channel in self.irc.state.channels:
                 continue
@@ -337,9 +339,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         try:
             lines = madison(package)
             if not lines:
-                irc.reply(
-                    f'Did not get a response -- is "{package}" a valid package?'
-                )
+                irc.reply(f'Did not get a response -- is "{package}" a valid package?')
                 return
 
             field_styles = ("package", "version", "distribution", "section")
@@ -393,7 +393,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             url = "https://packages.qa.debian.org/%s/%s.html" % self.get_pool_url(
                 package
             )
-            msg = f"[desc]QA page for[reset] [package]{package}[reset]: [url]{url}[/url]"
+            msg = (
+                f"[desc]QA page for[reset] [package]{package}[reset]: [url]{url}[/url]"
+            )
             irc.reply(colourise(msg), prefixNick=False)
 
     qa = wrap(_qa, [many("anything")])
@@ -409,9 +411,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 "https://packages.debian.org/changelogs/pool/main/%s/%s/current/changelog"
                 % self.get_pool_url(package)
             )
-            msg = (
-                f"[desc]debian/changelog for[reset] [package]{package}[reset]: [url]{url}[/url]"
-            )
+            msg = f"[desc]debian/changelog for[reset] [package]{package}[reset]: [url]{url}[/url]"
             irc.reply(colourise(msg), prefixNick=False)
 
     changelog = wrap(_changelog, [many("anything")])
@@ -424,9 +424,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 "https://packages.debian.org/changelogs/pool/main/%s/%s/current/copyright"
                 % self.get_pool_url(package)
             )
-            msg = (
-                f"[desc]debian/copyright for[reset] [package]{package}[reset]: [url]{url}[/url]"
-            )
+            msg = f"[desc]debian/copyright for[reset] [package]{package}[reset]: [url]{url}[/url]"
             irc.reply(colourise(msg), prefixNick=False)
 
     copyright = wrap(_copyright, [many("anything")])
