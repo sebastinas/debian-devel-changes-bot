@@ -16,7 +16,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from DebianDevelChangesBot import NewDataSource
+from .. import NewDataSource
 
 
 class Dinstall(NewDataSource):

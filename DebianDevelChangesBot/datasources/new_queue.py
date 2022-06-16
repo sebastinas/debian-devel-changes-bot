@@ -17,7 +17,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from debian.deb822 import Deb822
-from DebianDevelChangesBot import NewDataSource
+from .. import NewDataSource
 
 
 class NewQueue(NewDataSource):

@@ -17,7 +17,7 @@
 
 import re
 
-from DebianDevelChangesBot import NewDataSource
+from .. import NewDataSource
 
 
 class PseudoPackage:

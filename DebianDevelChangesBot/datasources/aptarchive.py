@@ -18,9 +18,8 @@
 import os
 import apt_pkg
 
-from DebianDevelChangesBot import pseudo_packages
-from DebianDevelChangesBot import NewDataSource
-from DebianDevelChangesBot.utils.decoding import split_address
+from .. import pseudo_packages, NewDataSource
+from ..utils.decoding import split_address
 
 
 class AptArchive(NewDataSource):

@@ -20,7 +20,7 @@ import re
 import threading
 
 from bs4 import BeautifulSoup
-from DebianDevelChangesBot import NewDataSource
+from .. import NewDataSource
 
 
 class RmQueue(NewDataSource):
