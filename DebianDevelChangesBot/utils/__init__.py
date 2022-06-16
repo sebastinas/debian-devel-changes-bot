@@ -23,21 +23,3 @@ from .irc_colours import colourise
 from .rewrite_topic import rewrite_topic
 from .madison import madison
 from .popcon import popcon
-
-from . import decoding
-from . import parse_mail
-from . import format_email_address
-from . import tidy_bug_title
-from . import irc_colours
-from . import rewrite_topic
-from . import madison
-from . import popcon
-
-from .decoding import header_decode, quoted_printable
-from .parse_mail import parse_mail
-from .format_email_address import format_email_address
-from .tidy_bug_title import tidy_bug_title
-from .irc_colours import colourise
-from .rewrite_topic import rewrite_topic
-from .madison import madison
-from .popcon import popcon

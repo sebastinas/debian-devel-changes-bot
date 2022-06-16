@@ -15,20 +15,23 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from DebianDevelChangesBot import Message
+from .. import Message
 
 
 class Popcon(Message):
     FIELDS = ("package", "inst", "vote", "old", "recent", "nofiles")
 
+    def __init__(self, package, inst, vote, old, recent, nofiles):
+        self.package = package
+        self.inst = inst
+        self.vote = vote
+        self.old = old
+        self.recent = recent
+        self.nofiles = nofiles
+
     def format(self):
-        msg = "Popcon for [package]%s[reset] - " % self.package
-
+        msg = f"Popcon for [package]{self.package}[reset] - "
         for field in ("inst", "vote", "old", "recent", "nofiles"):
-            msg += "[category]%s[/category]: %d " % (field, getattr(self, field))
-
-        msg += (
-            "- [url]https://qa.debian.org/developer.php?popcon=%s[/url]" % self.package
-        )
-
+            msg += f"[category]{field}[/category]: {getattr(self, field)} "
+        msg += f"- [url]https://qa.debian.org/developer.php?popcon={self.package}[/url]"
         return msg

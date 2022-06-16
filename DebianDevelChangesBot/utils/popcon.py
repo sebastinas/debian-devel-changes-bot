@@ -19,26 +19,21 @@
 import requests
 
 from bs4 import BeautifulSoup
-from DebianDevelChangesBot.messages import Popcon
+from ..messages.popcon import Popcon
 
 
 def popcon(package, session=None):
     if session is None:
         session = requests.Session()
 
-    params = {"package": package}
-    response = session.get("https://qa.debian.org/popcon.php", data=params)
+    response = session.get(
+        "https://qa.debian.org/popcon.php", data={"package": package}
+    )
     response.raise_for_status()
 
     soup = BeautifulSoup(response.text, "html.parser")
     rows = [x.string for x in soup("td")[1:]]
 
-    msg = Popcon()
-    msg.package = package
-    msg.inst = int(rows[0])
-    msg.vote = int(rows[3])
-    msg.old = int(rows[6])
-    msg.recent = int(rows[9])
-    msg.nofiles = int(rows[12])
-
-    return msg
+    return Popcon(
+        package, int(rows[0]), int(rows[3]), int(rows[6]), int(rows[9]), int(rows[12])
+    )
