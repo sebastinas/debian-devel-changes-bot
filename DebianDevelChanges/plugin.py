@@ -20,12 +20,9 @@ import os
 import os.path
 import re
 import time
-import random
-import urllib.parse
 import supybot
 import threading
 import requests
-import email.utils
 
 from supybot import ircdb, log, schedule
 from supybot.commands import wrap, many
