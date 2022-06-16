@@ -34,7 +34,7 @@ class AcceptedUploadMessage(Message):
             msg += "with urgency [urgency]high[reset] "
         msg += f"by [by]{self.by}[reset] "
         if self.closes and "-backports" not in self.distribution:
-            bug_list = ", ".join(f"[bug]#{x}[/bug]" % x for x in self.closes)
+            bug_list = ", ".join(f"[bug]#{x}[/bug]" for x in self.closes)
             msg += f"(Closes: {bug_list}) "
         msg += f"[url]https://tracker.debian.org/{self.package}[/url]"
         return msg
