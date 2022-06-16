@@ -22,14 +22,13 @@ from DebianDevelChangesBot.utils import quoted_printable
 
 
 def parse_mail(fileobj):
-    headers, body = {}, []
     msg = email.message_from_binary_file(fileobj)
 
-    for k, v in msg.items():
-        headers[k] = quoted_printable(v).replace("\n", "").replace("\t", " ").strip()
-
-    for line in email.iterators.body_line_iterator(msg):
-        body.append(line.replace("\n", ""))
+    headers = {
+        k: quoted_printable(v).replace("\n", "").replace("\t", " ").strip()
+        for k, v in msg.items()
+    }
+    body = [line.replace("\n", "") for line in email.iterators.body_line_iterator(msg)]
 
     # Merge lines joined with "=\n"
     i = len(body) - 1
