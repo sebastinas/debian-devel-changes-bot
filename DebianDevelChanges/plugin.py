@@ -308,9 +308,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         num_bugs = self.testing_rc_bugs.get_number_bugs()
         if type(num_bugs) is int:
             irc.reply(
-                "There are %d release-critical bugs in the testing distribution. "
-                "See https://udd.debian.org/bugs.cgi?release=bullseye&notmain=ign&merged=ign&rc=1"
-                % num_bugs
+                f"There are {num_bugs} release-critical bugs in the testing distribution. See https://udd.debian.org/bugs.cgi?release=bullseye&notmain=ign&merged=ign&rc=1"
             )
         else:
             irc.reply("No data at this time.")
@@ -326,7 +324,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
         for source in self.data_sources:
             source.update()
-            irc.reply("Updated %s." % source.NAME)
+            irc.reply(f"Updated {source.NAME}.")
         self._topic_callback()
 
     update = wrap(update)
@@ -363,20 +361,16 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             info = self.apt_archive.get_maintainer(package)
             if info:
                 display_name = format_email_address(
-                    "{} <{}>".format(info["name"], info["email"]), max_domain=18
+                    f"{info['name']} <{info['email']}>", max_domain=18
                 )
 
                 login = info["email"]
                 if login.endswith("@debian.org"):
                     login = login.replace("@debian.org", "")
 
-                msg = (
-                    "[desc]Maintainer for[reset] [package]%s[reset] [desc]is[reset] [by]%s[reset]: "
-                    % (package, display_name)
-                )
-                msg += "[url]https://qa.debian.org/developer.php?login=%s[/url]" % login
+                msg = f"[desc]Maintainer for[reset] [package]{package}[reset] [desc]is[reset] [by]{display_name}[reset]: [url]https://qa.debian.org/developer.php?login={login}[/url]"
             else:
-                msg = 'Unknown source package "%s"' % package
+                msg = f'Unknown source package "{package}"'
 
             irc.reply(colourise(msg), prefixNick=False)
 
@@ -429,10 +423,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     def _buggraph(self, irc, msg, args, items):
         """Link to bug graph."""
         for package in items:
-            msg = (
-                "[desc]Bug graph for[reset] [package]%s[reset]: [url]https://qa.debian.org/data/bts/graphs/%s/%s.png[/url]"
-                % (package, package[0], package)
-            )
+            msg = f"[desc]Bug graph for[reset] [package]{package}[reset]: [url]https://qa.debian.org/data/bts/graphs/{package[0]}/{package}.png[/url]"
             irc.reply(colourise(msg), prefixNick=False)
 
     buggraph = wrap(_buggraph, [many("anything")])
@@ -441,10 +432,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     def _buildd(self, irc, msg, args, items):
         """Link to buildd page."""
         for package in items:
-            msg = (
-                "[desc]buildd status for[reset] [package]%s[reset]: [url]https://buildd.debian.org/pkg.cgi?pkg=%s[/url]"
-                % (package, package)
-            )
+            msg = f"[desc]buildd status for[reset] [package]{package}[reset]: [url]https://buildd.debian.org/pkg.cgi?pkg={package}[/url]"
             irc.reply(colourise(msg), prefixNick=False)
 
     buildd = wrap(_buildd, [many("anything")])
@@ -456,17 +444,14 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             if msg:
                 irc.reply(colourise(msg.for_irc()), prefixNick=False)
         except Exception as e:
-            irc.reply("Error: unable to obtain popcon data for %s" % package)
+            irc.reply(f"Error: unable to obtain popcon data for {package}")
 
     popcon = wrap(_popcon, ["text"])
 
     def _testing(self, irc, msg, args, items):
         """Check testing migration status."""
         for package in items:
-            msg = (
-                "[desc]Testing migration status for[reset] [package]%s[reset]: [url]https://qa.debian.org/excuses.php?package=%s[/url]"
-                % (package, package)
-            )
+            msg = f"[desc]Testing migration status for[reset] [package]{package}[reset]: [url]https://qa.debian.org/excuses.php?package={package}[/url]"
             irc.reply(colourise(msg), prefixNick=False)
 
     testing = wrap(_testing, [many("anything")])
@@ -474,10 +459,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
     def _new(self, irc, msg, args):
         """Link to NEW queue."""
-        line = (
-            "[desc]NEW queue is[reset]: [url]%s[/url]. [desc]Current size is:[reset] %d"
-            % ("https://ftp-master.debian.org/new.html", self.new_queue.get_size())
-        )
+        size = self.new_queue.get_size()
+        line = f"[desc]NEW queue is[reset]: [url]https://ftp-master.debian.org/new.html[/url]. [desc]Current size is:[reset] {size}"
         irc.reply(colourise(line))
 
     new = wrap(_new)

@@ -22,11 +22,4 @@ class BugClosedMessage(Message):
     FIELDS = ("bug_number", "package", "by", "title")
 
     def format(self):
-        msg = "Closed [bug]#%d[/bug] in %s " % (self.bug_number, self.package_name())
-
-        msg += (
-            "by [by]%s[reset] «[title]%s[reset]». [url]https://bugs.debian.org/%d[/url]"
-            % (self.by, self.title, self.bug_number)
-        )
-
-        return msg
+        return f"Closed [bug]#{self.bug_number}[/bug] in {self.package_name()} by [by]{self.by}[reset] «[title]{self.title}[reset]». [url]https://bugs.debian.org/{self.bug_number}[/url]"

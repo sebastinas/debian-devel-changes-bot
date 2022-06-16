@@ -24,25 +24,17 @@ class AcceptedUploadMessage(Message):
     OPTIONAL = ("closes", "new_upload")
 
     def format(self):
-        msg = "%s " % self.package_name()
-
+        msg = f"{self.package_name()} "
         if self.new_upload:
             msg += "[new](NEW)[reset] "
-
-        msg += "[version]%s[reset] uploaded " % self.version
-
+        msg += f"[version]{self.version}[reset] uploaded "
         if self.distribution not in ("unstable", "sid"):
-            msg += "to [distribution]%s[reset] " % self.distribution
-
+            msg += f"to [distribution]{self.distribution}[reset] "
         if self.urgency == "high":
-            msg += "with urgency [urgency]%s[reset] " % self.urgency
-
-        msg += "by [by]%s[reset] " % self.by
-
+            msg += "with urgency [urgency]high[reset] "
+        msg += f"by [by]{self.by}[reset] "
         if self.closes and "-backports" not in self.distribution:
-            bug_list = ", ".join(["[bug]#%s[/bug]" % x for x in self.closes])
-            msg += "(Closes: %s) " % bug_list
-
-        msg += "[url]https://tracker.debian.org/%s[/url]" % self.package
-
+            bug_list = ", ".join(f"[bug]#{x}[/bug]" % x for x in self.closes)
+            msg += f"(Closes: {bug_list}) "
+        msg += f"[url]https://tracker.debian.org/{self.package}[/url]"
         return msg

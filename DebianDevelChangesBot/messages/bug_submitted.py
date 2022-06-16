@@ -23,19 +23,11 @@ class BugSubmittedMessage(Message):
     OPTIONAL = ("severity", "version")
 
     def format(self):
-        msg = "Opened [bug]#%d[/bug] " % self.bug_number
-
+        msg = f"Opened [bug]#{self.bug_number}[/bug] "
         if self.severity in ("critical", "grave", "serious"):
-            msg += "([severity]%s[reset]) " % self.severity
-
-        msg += "in %s " % self.package_name()
-
+            msg += f"([severity]{self.severity}[reset]) "
+        msg += f"in {self.package_name()} "
         if self.version not in (None, "n/a", "any"):
-            msg += "[version]%s[reset] " % self.version
-
-        msg += (
-            "by [by]%s[reset] «[title]%s[reset]». [url]https://bugs.debian.org/%d[/url]"
-            % (self.by, self.title, self.bug_number)
-        )
-
+            msg += f"[version]{self.version}[reset] "
+        msg += f"by [by]{self.by}[reset] «[title]{self.title}[reset]». [url]https://bugs.debian.org/{self.bug_number}[/url]"
         return msg
