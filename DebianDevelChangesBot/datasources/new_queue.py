@@ -16,7 +16,7 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from debian_bundle.deb822 import Deb822
+from debian.deb822 import Deb822
 from DebianDevelChangesBot import NewDataSource
 
 
