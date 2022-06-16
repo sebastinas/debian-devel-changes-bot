@@ -15,58 +15,58 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+_TAGS = {
+    "reset": chr(15),
+    "b": chr(2),
+    "/b": chr(2),
+    "u": chr(31),
+    "/u": chr(31),
+    "black": chr(3) + "01",
+    "darkblue": chr(3) + "02",
+    "darkgreen": chr(3) + "03",
+    "brightred": chr(3) + "04",
+    "darkred": chr(3) + "05",
+    "magenta": chr(3) + "06",
+    "darkyellow": chr(3) + "07",
+    "brightyellow": chr(3) + "08",
+    "lightgreen": chr(3) + "09",
+    "darkcyan": chr(3) + "10",
+    "lightcyan": chr(3) + "11",
+    "lightblue": chr(3) + "12",
+    "pink": chr(3) + "13",
+    "grey": chr(3) + "14",
+    "white": chr(3) + "00",
+    "nostyle": "",
+}
+
+# Stylesheet
+_TAGS.update(
+    {
+        "by": _TAGS["lightcyan"],
+        "package": _TAGS["darkgreen"],
+        "pseudo-package": _TAGS["lightblue"],
+        "version": _TAGS["darkcyan"],
+        "distribution": _TAGS["lightblue"],
+        "security": _TAGS["brightred"],
+        "severity": _TAGS["brightred"],
+        "urgency": _TAGS["brightred"],
+        "new": _TAGS["brightred"],
+        "section": _TAGS["grey"],
+        "desc": _TAGS["nostyle"],
+        "url": _TAGS["nostyle"],
+        "/url": _TAGS["nostyle"],
+        "bug": _TAGS["b"],
+        "/bug": _TAGS["/b"],
+        "title": _TAGS["nostyle"],
+        "category": _TAGS["b"],
+        "/category": _TAGS["/b"],
+    }
+)
+
 
 def colourise(s):
-    tags = {
-        "reset": chr(15),
-        "b": chr(2),
-        "/b": chr(2),
-        "u": chr(31),
-        "/u": chr(31),
-        "black": chr(3) + "01",
-        "darkblue": chr(3) + "02",
-        "darkgreen": chr(3) + "03",
-        "brightred": chr(3) + "04",
-        "darkred": chr(3) + "05",
-        "magenta": chr(3) + "06",
-        "darkyellow": chr(3) + "07",
-        "brightyellow": chr(3) + "08",
-        "lightgreen": chr(3) + "09",
-        "darkcyan": chr(3) + "10",
-        "lightcyan": chr(3) + "11",
-        "lightblue": chr(3) + "12",
-        "pink": chr(3) + "13",
-        "grey": chr(3) + "14",
-        "white": chr(3) + "00",
-        "nostyle": "",
-    }
-
-    # Stylesheet
-    tags.update(
-        {
-            "by": tags["lightcyan"],
-            "package": tags["darkgreen"],
-            "pseudo-package": tags["lightblue"],
-            "version": tags["darkcyan"],
-            "distribution": tags["lightblue"],
-            "security": tags["brightred"],
-            "severity": tags["brightred"],
-            "urgency": tags["brightred"],
-            "new": tags["brightred"],
-            "section": tags["grey"],
-            "desc": tags["nostyle"],
-            "url": tags["nostyle"],
-            "/url": tags["nostyle"],
-            "bug": tags["b"],
-            "/bug": tags["/b"],
-            "title": tags["nostyle"],
-            "category": tags["b"],
-            "/category": tags["/b"],
-        }
-    )
-
     s = s + "[reset]"
-    for k, v in tags.items():
+    for k, v in _TAGS.items():
         s = s.replace("[%s]" % k, v)
 
     return s
