@@ -27,7 +27,7 @@ import requests
 from supybot import ircdb, log, schedule
 from supybot.commands import wrap, many
 
-from DebianDevelChangesBot import NewDataSource, pseudo_packages
+from DebianDevelChangesBot import DataSource, pseudo_packages
 from DebianDevelChangesBot.mailparsers import get_message
 from DebianDevelChangesBot.datasources import (
     TestingRCBugs,
@@ -196,7 +196,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 for package in packages:
                     try:
                         maintainer_info.append(self.apt_archive.get_maintainer(package))
-                    except NewDataSource.DataError as e:
+                    except DataSource.DataError as e:
                         log.info(f"Failed to query maintainer for {package}: {e}")
 
             for channel in self.irc.state.channels:

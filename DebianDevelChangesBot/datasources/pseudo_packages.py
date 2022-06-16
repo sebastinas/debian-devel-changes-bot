@@ -17,7 +17,7 @@
 
 import re
 
-from .. import NewDataSource
+from .. import DataSource
 
 
 class PseudoPackage:
@@ -26,7 +26,7 @@ class PseudoPackage:
         self.maintainer = m
 
 
-class PseudoPackages(NewDataSource):
+class PseudoPackages(DataSource):
     NAME = "pseudo packages"
     URL_D = "https://bugs.debian.org/pseudopackages/pseudo-packages.description"
     URL_M = "https://bugs.debian.org/pseudopackages/pseudo-packages.maintainers"

@@ -16,10 +16,10 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .. import NewDataSource
+from .. import DataSource
 
 
-class RCBugs(NewDataSource):
+class RCBugs(DataSource):
     INTERVAL = 60 * 20
     URL = "https://udd.debian.org/bugs.cgi"
 
@@ -41,7 +41,7 @@ class RCBugs(NewDataSource):
         try:
             data = response.json()
         except ValueError:
-            raise NewDataSource.DataError()
+            raise DataSource.DataError()
 
         bugs = set()
         for bug in data:
@@ -53,7 +53,7 @@ class RCBugs(NewDataSource):
         if bugs:
             self.bugs = bugs
         else:
-            raise NewDataSource.DataError()
+            raise DataSource.DataError()
 
     def get_bugs(self):
         return self.bugs

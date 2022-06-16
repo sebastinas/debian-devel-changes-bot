@@ -16,10 +16,10 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from .. import NewDataSource
+from .. import DataSource
 
 
-class Dinstall(NewDataSource):
+class Dinstall(DataSource):
     NAME = "dinstall"
     URL = "https://ftp-master.debian.org/dinstall.status"
     INTERVAL = 60 * 5

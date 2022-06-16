@@ -17,10 +17,10 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from debian.deb822 import Deb822
-from .. import NewDataSource
+from .. import DataSource
 
 
-class NewQueue(NewDataSource):
+class NewQueue(DataSource):
     NAME = "NEW queue"
     URL = "https://ftp-master.debian.org/new.822"
     INTERVAL = 60 * 30

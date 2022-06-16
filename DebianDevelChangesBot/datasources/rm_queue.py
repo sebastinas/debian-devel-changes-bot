@@ -20,10 +20,10 @@ import re
 import threading
 
 from bs4 import BeautifulSoup
-from .. import NewDataSource
+from .. import DataSource
 
 
-class RmQueue(NewDataSource):
+class RmQueue(DataSource):
     MATCHER = re.compile(r"([^:]+): ")
     URL = "https://ftp-master.debian.org/removals.html"
     INTERVAL = 60 * 30

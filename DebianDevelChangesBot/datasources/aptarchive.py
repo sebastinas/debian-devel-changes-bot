@@ -18,11 +18,11 @@
 import os
 import apt_pkg
 
-from .. import pseudo_packages, NewDataSource
+from .. import pseudo_packages, DataSource
 from ..utils.decoding import split_address
 
 
-class AptArchive(NewDataSource):
+class AptArchive(DataSource):
     # re-open cache every 30 min
     INTERVAL = 30 * 60
     NAME = "APT archive"
@@ -55,7 +55,7 @@ class AptArchive(NewDataSource):
                 self.cache.update(apt.progress.base.AcquireProgress(), self.source_list)
             except apt_pkg.Error as e:
                 if not ignore_errors:
-                    raise NewDataSource.DataError(f"Failed to update cache: {e}")
+                    raise DataSource.DataError(f"Failed to update cache: {e}")
 
     def update(self):
         self.cache = apt_pkg.Cache(None)
@@ -90,4 +90,4 @@ class AptArchive(NewDataSource):
 
             return split_address(maintainer)
 
-        raise NewDataSource.DataError(f"Unable to get maintainer for {package}.")
+        raise DataSource.DataError(f"Unable to get maintainer for {package}.")

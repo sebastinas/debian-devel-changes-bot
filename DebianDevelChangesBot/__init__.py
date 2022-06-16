@@ -46,7 +46,7 @@ class PPWrapper:
 pseudo_packages = PPWrapper()
 
 
-class NewDataSource:
+class DataSource:
     class DataError(Exception):
         pass
 
@@ -84,9 +84,6 @@ class Message:
             return "[package]%s[reset]" % self.package
 
 
-from . import utils
-from . import messages
 from . import datasources
-from . import mailparsers
 
 pseudo_packages.pp = datasources.PseudoPackages()
