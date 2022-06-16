@@ -22,16 +22,18 @@ from .bug_submitted import BugSubmittedParser
 from .security_announce import SecurityAnnounceParser
 
 
+_PARSERS = (
+    AcceptedUploadParser,
+    BugClosedParser,
+    BugSubmittedParser,
+    SecurityAnnounceParser,
+)
+
+
 def get_message(email, **kwargs):
-    order = (
-        AcceptedUploadParser,
-        BugClosedParser,
-        BugSubmittedParser,
-        SecurityAnnounceParser,
-    )
     headers, body = email
 
-    for parser in order:
+    for parser in _PARSERS:
         msg = parser.parse(headers, body, **kwargs)
         if msg:
             return msg
