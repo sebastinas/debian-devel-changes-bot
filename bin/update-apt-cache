@@ -16,7 +16,6 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import io
 import sys
 import syslog
 import traceback
@@ -25,13 +24,14 @@ from DebianDevelChangesBot.datasources import AptArchive
 
 
 def main():
-    syslog.openlog('ddc-bot-update-apt-cache')
+    syslog.openlog("ddc-bot-update-apt-cache")
 
     ret = 0
     try:
         apt_archive = AptArchive(
-            '/usr/share/debian-devel-changes-bot/bot-config/apt',
-            '/var/lib/debian-devel-changes-bot/apt')
+            "/usr/share/debian-devel-changes-bot/bot-config/apt",
+            "/var/lib/debian-devel-changes-bot/apt",
+        )
         apt_archive.update_index()
     except Exception:
         syslog.syslog(traceback.format_exc())
@@ -39,5 +39,6 @@ def main():
 
     return ret
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     sys.exit(main())
