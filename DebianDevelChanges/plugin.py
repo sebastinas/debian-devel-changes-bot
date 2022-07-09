@@ -23,6 +23,7 @@ import time
 import supybot
 import threading
 import requests
+from enum import Enum
 
 from supybot import ircdb, log, schedule
 from supybot.commands import wrap, many
@@ -61,6 +62,12 @@ def schedule_remove_periodic_event(event):
         schedule.removePeriodicEvent(event)
     except KeyError:
         pass
+
+
+class ProcessingResult(Enum):
+    ACTION = 2
+    NO_ACTION = 1
+    ERROR = 0
 
 
 class DebianDevelChanges(supybot.callbacks.Plugin):
@@ -126,6 +133,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.failed_mail_basedir = os.path.expanduser("~/failed-mails")
         if not os.path.isdir(self.failed_mail_basedir):
             os.mkdir(self.failed_mail_basedir)
+        self.ok_mail_basedir = os.path.expanduser("~/processed-mails")
+        if not os.path.isdir(self.ok_mail_basedir):
+            os.mkdir(self.ok_mail_basedir)
 
         schedule.addPeriodicEvent(self._email_callback, 15, "process-mail", now=True)
 
@@ -164,7 +174,12 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
 
                 log.info(f"Processing mail {mail}")
                 with open(mail, mode="rb") as fileobj:
-                    if self._process_mail(fileobj):
+                    res = self._process_mail(fileobj)
+                    if res == ProcessingResult.ACTION:
+                        # store mails that caused an action (for 7 days)
+                        os.rename(mail, self.ok_mail_basedir)
+                    elif res == ProcessingResult.NO_ACTION:
+                        # remove mails that caused no action
                         os.unlink(mail)
                     else:
                         # store mails that failed to be processed
@@ -174,15 +189,14 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         try:
             emailmsg = parse_mail(fileobj)
             msg = get_message(emailmsg, new_queue=self.new_queue)
-
             if not msg:
-                return True
+                return ProcessingResult.NO_ACTION
 
             txt = colourise(msg.for_irc())
 
             # Simple flood/duplicate detection
             if txt in self.last_n_messages:
-                return True
+                return ProcessingResult.NO_ACTION
             self.last_n_messages.insert(0, txt)
             self.last_n_messages = self.last_n_messages[:20]
 
@@ -248,9 +262,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 self.irc.queueMsg(ircmsg)
         except Exception as e:
             log.exception(f"Uncaught exception: {e}")
-            return False
+            return ProcessingResult.ERROR
 
-        return True
+        return ProcessingResult.ACTION
 
     def _topic_callback(self):
         sections = {
