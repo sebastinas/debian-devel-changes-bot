@@ -34,6 +34,7 @@ def main():
         syslog.syslog("Target directory does not exist")
         return 75
 
+    out_name = None
     try:
         with tempfile.NamedTemporaryFile(
             prefix="{}-".format(datetime.datetime.utcnow().isoformat()), delete=False
@@ -43,7 +44,8 @@ def main():
                 shutil.copyfileobj(stdin, out)
     except Exception as e:
         syslog.syslog(syslog.LOG_ERR, f"Failed to copy mail: {e}")
-        os.unlink(out_name)
+        if out_name is not None:
+            os.unlink(out_name)
         return 75
 
     try:
