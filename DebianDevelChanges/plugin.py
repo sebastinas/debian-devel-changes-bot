@@ -23,6 +23,7 @@ import time
 import supybot
 import threading
 import requests
+import shutil
 from enum import Enum
 
 from supybot import ircdb, log, schedule
@@ -175,15 +176,22 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 log.info(f"Processing mail {mail}")
                 with open(mail, mode="rb") as fileobj:
                     res = self._process_mail(fileobj)
-                    if res == ProcessingResult.ACTION:
-                        # store mails that caused an action (for 7 days)
-                        os.rename(mail, self.ok_mail_basedir)
-                    elif res == ProcessingResult.NO_ACTION:
-                        # remove mails that caused no action
-                        os.unlink(mail)
-                    else:
-                        # store mails that failed to be processed
-                        os.rename(mail, self.failed_mail_basedir)
+                if res == ProcessingResult.ACTION:
+                    # store mails that caused an action (for 7 days)
+                    log.info(
+                        f"Mail {mail} caused action, storing in {self.ok_mail_basedir}"
+                    )
+                    shutil.move(mail, self.ok_mail_basedir)
+                elif res == ProcessingResult.NO_ACTION:
+                    # remove mails that caused no action
+                    log.info(f"Mail {mail} caused no action")
+                    os.unlink(mail)
+                else:
+                    # store mails that failed to be processed
+                    log.info(
+                        f"Processing mail {mail} failed, storing in {self.failed_mail_basedir}"
+                    )
+                    shutil.move(mail, self.failed_mail_basedir)
 
     def _process_mail(self, fileobj):
         try:
