@@ -1,3 +1,11 @@
+debian-devel-changes-bot (20220709) unstable; urgency=medium
+
+  * Process mails only once per minute
+  * Keep processed mails for 7 days
+  * Remove unused parsers
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sat, 09 Jul 2022 17:54:08 +0200
+
 debian-devel-changes-bot (20210815) unstable; urgency=medium
 
   * bullseye is now stable, bookworm is testing
