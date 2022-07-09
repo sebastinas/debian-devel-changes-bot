@@ -128,17 +128,17 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             schedule.addEvent(wrapper(source), time.time() + 1)
 
         # Schedule mail update
-        self.process_mail_basedir = os.path.expanduser("~/inject")
-        if not os.path.isdir(self.process_mail_basedir):
-            os.mkdir(self.process_mail_basedir)
-        self.failed_mail_basedir = os.path.expanduser("~/failed-mails")
-        if not os.path.isdir(self.failed_mail_basedir):
-            os.mkdir(self.failed_mail_basedir)
-        self.ok_mail_basedir = os.path.expanduser("~/processed-mails")
-        if not os.path.isdir(self.ok_mail_basedir):
-            os.mkdir(self.ok_mail_basedir)
+        self._inject_maildir = os.path.expanduser("~/inject")
+        if not os.path.isdir(self._inject_maildir):
+            os.mkdir(self._inject_maildir)
+        self._failed_maildir = os.path.expanduser("~/failed-mails")
+        if not os.path.isdir(self._failed_maildir):
+            os.mkdir(self._failed_maildir)
+        self._processed_maildir = os.path.expanduser("~/processed-mails")
+        if not os.path.isdir(self._processed_maildir):
+            os.mkdir(self._processed_maildir)
 
-        schedule.addPeriodicEvent(self._email_callback, 60, "process-mail", now=True)
+        schedule.addPeriodicEvent(self._email_callback, 60, "process-mail", now=False)
 
         # Schedule rejoins
         schedule.addPeriodicEvent(self._rejoin_channels, 600, "rejoin", now=False)
@@ -168,8 +168,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             return
 
         with self.mail_lock:
-            for mail in os.listdir(self.process_mail_basedir):
-                mail = os.path.join(self.process_mail_basedir, mail)
+            for mail in os.listdir(self._inject_maildir):
+                mail = os.path.join(self._inject_maildir, mail)
                 if not os.path.isfile(mail):
                     continue
 
@@ -179,9 +179,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 if res == ProcessingResult.ACTION:
                     # store mails that caused an action (for 7 days)
                     log.info(
-                        f"Mail {mail} caused action, storing in {self.ok_mail_basedir}"
+                        f"Mail {mail} caused action, storing in {self._processed_maildir}"
                     )
-                    shutil.move(mail, self.ok_mail_basedir)
+                    shutil.move(mail, self._processed_maildir)
                 elif res == ProcessingResult.NO_ACTION:
                     # remove mails that caused no action
                     log.info(f"Mail {mail} caused no action")
@@ -189,9 +189,9 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 else:
                     # store mails that failed to be processed
                     log.info(
-                        f"Processing mail {mail} failed, storing in {self.failed_mail_basedir}"
+                        f"Processing mail {mail} failed, storing in {self._failed_maildir}"
                     )
-                    shutil.move(mail, self.failed_mail_basedir)
+                    shutil.move(mail, self._failed_maildir)
 
     def _process_mail(self, fileobj):
         try:
