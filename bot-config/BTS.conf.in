@@ -805,6 +805,8 @@ supybot.plugins.DebianDevelChanges.package_regex.#reproducible-builds: /^diffosc
 supybot.plugins.DebianDevelChanges.package_regex.#debian-rust: /^(librust-|rust-)/
 # Requested by yadd
 supybot.plugins.DebianDevelChanges.package_regex.#debian-js: /^(libjs-.*|node(js)?|node-.*|.*\.js)$/
+# Requested by Md
+supybot.plugins.DebianDevelChanges.package_regex.#debian-systemd: /^usrmerge$/
 
 ###
 # Determines which maintainer announcements should be printed to the
