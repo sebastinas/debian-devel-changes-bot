@@ -1,3 +1,10 @@
+debian-devel-changes-bot (20230610) unstable; urgency=medium
+
+  * bookworm is now stable, trixie is testing
+  * Join #debian-puppet
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sat, 10 Jun 2023 13:34:14 +0200
+
 debian-devel-changes-bot (20220709) unstable; urgency=medium
 
   * Process mails only once per minute
