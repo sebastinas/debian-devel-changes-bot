@@ -403,10 +403,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
     def _qa(self, irc, msg, args, items):
         """Get link to QA page."""
         for package in items:
-            url = "https://tracker.debian.org/pkg/" + package
-            msg = (
-                f"[desc]QA page for[reset] [package]{package}[reset]: [url]{url}[/url]"
-            )
+            msg = f"[desc]QA page for[reset] [package]{package}[reset]: [url]https://tracker.debian.org/pkg/{package}[/url]"
             irc.reply(colourise(msg), prefixNick=False)
 
     qa = wrap(_qa, [many("anything")])
