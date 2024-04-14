@@ -847,7 +847,7 @@ supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-kbsd: /^debian-bsd@l
 # Requested by yadd
 supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-js: /^pkg-javascript-devel@lists\.alioth\.debian\.org$/
 # Requested by birger
-supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-swaywm: /^team\+swaywm@tracker\.debian\.org$/
+supybot.plugins.DebianDevelChanges.maintainer_regex.#debian-swaywm: /^(team\+swaywm|team\+labwc)@tracker\.debian\.org$/
 
 ###
 # Determines which distribution announcements should be printed to the
