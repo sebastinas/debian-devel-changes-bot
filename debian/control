@@ -3,7 +3,7 @@ Section: misc
 Priority: optional
 Maintainer: Sebastian Ramacher <sramacher@debian.org>
 Build-Depends:
- debhelper-compat (= 12),
+ debhelper-compat (= 13),
  python3,
  dh-python,
  python3-apt,
