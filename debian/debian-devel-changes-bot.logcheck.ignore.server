@@ -1,0 +1,2 @@
+^\w{3} [ :[:digit:]]{11} [._[:alnum:]-]+ supybot\[[[:digit:]]+\]: (INFO|DEBUG|WARNING).*$
+^\w{3} [ :[:digit:]]{11} [._[:alnum:]-]+ update-apt-cache\[[[:digit:]]+\]: .*$
