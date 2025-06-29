@@ -1,3 +1,9 @@
+debian-devel-changes-bot (20250629.1) unstable; urgency=medium
+
+  * Fix tmpfiles
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 29 Jun 2025 21:51:32 +0200
+
 debian-devel-changes-bot (20250629) unstable; urgency=medium
 
   * Announce labwc-team uploads in #debian-swaywm
