@@ -37,7 +37,7 @@ def main():
     out_name = None
     try:
         with tempfile.NamedTemporaryFile(
-            prefix="{}-".format(datetime.datetime.utcnow().isoformat()), delete=False
+            prefix="{}-".format(datetime.datetime.now(datetime.UTC).isoformat()), delete=False
         ) as out:
             out_name = out.name
             with open("/dev/stdin", mode="rb") as stdin:
