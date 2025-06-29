@@ -1,3 +1,11 @@
+debian-devel-changes-bot (20250629) unstable; urgency=medium
+
+  * Announce labwc-team uploads in #debian-swaywm
+  * Add logcheck rules
+  * Modernize packaging
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 29 Jun 2025 21:44:07 +0200
+
 debian-devel-changes-bot (20230610) unstable; urgency=medium
 
   * bookworm is now stable, trixie is testing
