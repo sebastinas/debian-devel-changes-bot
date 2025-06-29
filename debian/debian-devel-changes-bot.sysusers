@@ -1,0 +1,2 @@
+g ddc-bot -
+u ddc-bot -:ddc-bot "debian-devel-changes bot" /var/lib/debian-devel-changes-bot /bin/false

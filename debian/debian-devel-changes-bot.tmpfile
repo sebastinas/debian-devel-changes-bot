@@ -1,3 +1,0 @@
-d /run/debian-devel-changes-bot 0770 ddc-bot ddc-bot
-d /var/lib/debian-devel-changes-bot/processed-mails 0755 ddc-bot ddc-bot 7d
-L /var/log/debian-devel-changes-bot/messages.log - - - - /dev/null

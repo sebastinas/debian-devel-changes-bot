@@ -1,0 +1,7 @@
+d /run/debian-devel-changes-bot 0770 ddc-bot ddc-bot - -
+d /var/lib/debian-devel-changes-bot 0750 ddc-bot ddc-bot - -
+d /var/lib/debian-devel-changes-bot/bot-config/conf 0750 ddc-bot ddc-bot - -
+d /var/lib/debian-devel-changes-bot/processed-mails 0755 ddc-bot ddc-bot 7d
+d /var/log/debian-devel-changes-bot ddc-bot adm - -
+L /var/lib/debian-devel-changes-bot/.forward - - - - /usr/share/log/debian-devel-changes-bot/bot-config/forward
+L /var/log/debian-devel-changes-bot/messages.log - - - - /dev/null

@@ -8,7 +8,8 @@ override_dh_installsystemd:
 	dh_installsystemd --no-enable --no-start --no-restart-after-upgrade debian-devel-changes-bot-apt-update.service
 	dh_installsystemd debian-devel-changes-bot-apt-update.timer
 
+execute_after_dh_installtmpfiles:
+	dh_installsysusers
+
 override_dh_auto_test:
-ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	python3 tests/test_all.py
-endif

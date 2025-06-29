@@ -23,7 +23,6 @@ Architecture: all
 Depends:
  ${python3:Depends},
  ${misc:Depends},
- adduser,
  limnoria,
 Description: IRC bot that announces Debian package and bug activity
  The #debian-devel-changes IRC bot is a Supybot-based bot that lives on the
