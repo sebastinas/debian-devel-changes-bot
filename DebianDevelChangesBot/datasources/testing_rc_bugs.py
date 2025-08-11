@@ -69,11 +69,11 @@ class TestingRCBugs(RCBugs):
     NAME = "Testing RC Bugs"
 
     def __init__(self, session=None):
-        super().__init__("trixie", session)
+        super().__init__("forky", session)
 
 
 class StableRCBugs(RCBugs):
     NAME = "Stable RC Bugs"
 
     def __init__(self, session=None):
-        super().__init__("bookworm", session)
+        super().__init__("trixie", session)
