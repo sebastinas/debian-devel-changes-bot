@@ -1,3 +1,13 @@
+debian-devel-changes-bot (20250817) unstable; urgency=medium
+
+  [ Jérôme Charaoui ]
+  * add notifications for #debian-java-changes
+
+  [ Sebastian Ramacher ]
+  * trixie is now stable, forky is testing
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 17 Aug 2025 18:21:35 +0200
+
 debian-devel-changes-bot (20250629.1) unstable; urgency=medium
 
   * Fix tmpfiles
