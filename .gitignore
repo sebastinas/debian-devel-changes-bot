@@ -7,3 +7,4 @@ bot-config/conf/channels.conf
 bot-config/conf/ignores.conf
 bot-config/conf/userdata.conf
 bot-config/backup
+dist/

@@ -12,4 +12,4 @@ execute_after_dh_installtmpfiles:
 	dh_installsysusers
 
 override_dh_auto_test:
-	python3 tests/test_all.py
+	PYTHONPATH=$(CURDIR) python3 tests/test_all.py

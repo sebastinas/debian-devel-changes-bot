@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools >= 43"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+target_version = ["py313"]
+include = 'bin/inject'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.eggs
+  | \.mypy_cache
+  | \.tox
+  | venv
+  | _build
+  | build
+  | dist
+  | docs
+)/
+'''
