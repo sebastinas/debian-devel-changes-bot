@@ -16,8 +16,6 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
-import os.path
 import re
 import time
 import supybot
@@ -25,6 +23,7 @@ import threading
 import requests
 import shutil
 from enum import Enum
+from pathlib import Path
 
 from supybot import ircdb, log, schedule
 from supybot.commands import wrap, many
@@ -128,15 +127,12 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             schedule.addEvent(wrapper(source), time.time() + 1)
 
         # Schedule mail update
-        self._inject_maildir = os.path.expanduser("~/inject")
-        if not os.path.isdir(self._inject_maildir):
-            os.mkdir(self._inject_maildir)
-        self._failed_maildir = os.path.expanduser("~/failed-mails")
-        if not os.path.isdir(self._failed_maildir):
-            os.mkdir(self._failed_maildir)
-        self._processed_maildir = os.path.expanduser("~/processed-mails")
-        if not os.path.isdir(self._processed_maildir):
-            os.mkdir(self._processed_maildir)
+        self._inject_maildir = Path("~/inject").expanduser()
+        self._inject_maildir.mkdir(exist_ok=True, parents=True)
+        self._failed_maildir = Path("~/failed-mails").expanduser()
+        self._failed_maildir.mkdir(exist_ok=True, parents=True)
+        self._processed_maildir = Path("~/processed-mails").expanduser()
+        self._processed_maildir.mkdir(exist_ok=True, parents=True)
 
         schedule.addPeriodicEvent(self._email_callback, 60, "process-mail", now=False)
 
@@ -168,13 +164,12 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
             return
 
         with self.mail_lock:
-            for mail in os.listdir(self._inject_maildir):
-                mail = os.path.join(self._inject_maildir, mail)
-                if not os.path.isfile(mail):
+            for mail in self._inject_maildir.iterdir():
+                if not mail.is_file():
                     continue
 
                 log.info(f"Processing mail {mail}")
-                with open(mail, mode="rb") as fileobj:
+                with mail.open(mode="rb") as fileobj:
                     res = self._process_mail(fileobj)
                 if res == ProcessingResult.ACTION:
                     # store mails that caused an action (for 7 days)
@@ -185,7 +180,7 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
                 elif res == ProcessingResult.NO_ACTION:
                     # remove mails that caused no action
                     log.info(f"Mail {mail} caused no action")
-                    os.unlink(mail)
+                    mail.unlink()
                 else:
                     # store mails that failed to be processed
                     log.info(

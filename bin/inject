@@ -17,42 +17,44 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
-import os
-import os.path
 import shutil
 import sys
 import syslog
 import tempfile
+from pathlib import Path
 
 
-TARGET_DIR = "/var/lib/debian-devel-changes-bot/inject"
+TARGET_DIR = Path("/var/lib/debian-devel-changes-bot/inject")
 
 
 def main():
     syslog.openlog("ddc-bot-inject")
-    if not os.path.isdir(TARGET_DIR) and not os.mkdir(TARGET_DIR):
-        syslog.syslog("Target directory does not exist")
+    try:
+        TARGET_DIR.mkdir(exist_ok=True)
+    except Exception as e:
+        syslog.syslog("Target directory does not exist: {e}")
         return 75
 
     out_name = None
     try:
         with tempfile.NamedTemporaryFile(
-            prefix="{}-".format(datetime.datetime.now(datetime.UTC).isoformat()), delete=False
+            prefix="{}-".format(datetime.datetime.now(datetime.UTC).isoformat()),
+            delete=False,
         ) as out:
-            out_name = out.name
+            out_name = Path(out.name)
             with open("/dev/stdin", mode="rb") as stdin:
                 shutil.copyfileobj(stdin, out)
     except Exception as e:
         syslog.syslog(syslog.LOG_ERR, f"Failed to copy mail: {e}")
         if out_name is not None:
-            os.unlink(out_name)
+            out_name.unlink()
         return 75
 
     try:
         shutil.move(out_name, TARGET_DIR)
     except Exception as e:
         syslog.syslog(syslog.LOG_ERR, f"Failed to move mail: {e}")
-        os.unlink(out_name)
+        outname.unlink()
         return 75
 
     return 0
