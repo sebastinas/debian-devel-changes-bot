@@ -94,8 +94,8 @@ class DebianDevelChanges(supybot.callbacks.Plugin):
         self.dinstall = Dinstall(self.requests_session)
         self.rm_queue = RmQueue(self.requests_session)
         self.apt_archive = AptArchive(
-            self.registryValue("apt_configuration_directory"),
-            self.registryValue("apt_cache_directory"),
+            Path(self.registryValue("apt_configuration_directory")),
+            Path(self.registryValue("apt_cache_directory")),
         )
         self.data_sources = (
             self.pseudo_packages,

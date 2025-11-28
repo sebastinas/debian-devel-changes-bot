@@ -22,8 +22,8 @@ import requests_mock
 import shutil
 import tempfile
 import unittest
-
 import os, sys
+from pathlib import Path
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -35,12 +35,12 @@ class TestDatasourceAptArchive(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # FIXME make sure we do not have to fetch
-        apt_config = os.path.join(
+        apt_config = Path(os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "..", "bot-config", "apt"
-        )
+        ))
         cls.statedir = tempfile.mkdtemp()
 
-        cls.apt_archive = AptArchive(apt_config, cls.statedir)
+        cls.apt_archive = AptArchive(apt_config, Path(cls.statedir))
         cls.apt_archive.update_index(True)
         cls.apt_archive.update()
 

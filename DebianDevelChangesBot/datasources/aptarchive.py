@@ -15,8 +15,8 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import apt_pkg
+from pathlib import Path
 
 from .. import pseudo_packages, DataSource
 from ..utils.decoding import split_address
@@ -31,15 +31,14 @@ class AptArchive(DataSource):
         super().__init__(None)
 
         config = apt_pkg.config
-        config["Dir::Etc"] = os.path.realpath(config_dir)
-        config["Dir::State"] = os.path.join(os.path.realpath(state_dir), "state")
-        config["Dir::Cache"] = os.path.join(os.path.realpath(state_dir), "cache")
+        config["Dir::Etc"] = str(config_dir.resolve())
+        config["Dir::State"] = str((state_dir / "state").resolve())
+        config["Dir::Cache"] = str((state_dir / "cache").resolve())
         apt_pkg.init_config()
         apt_pkg.init_system()
 
-        lists = apt_pkg.config.find_dir("Dir::State::Lists")
-        os.makedirs(lists, exist_ok=True)
-        os.makedirs(config["Dir::Cache"], exist_ok=True)
+        Path(apt_pkg.config.find_dir("Dir::State::Lists")).mkdir(parents=True, exist_ok=True)
+        Path(config["Dir::Cache"]).mkdir(parents=True, exist_ok=True)
 
         self.cache = apt_pkg.Cache(None)
         self.depcache = apt_pkg.DepCache(self.cache)
@@ -49,8 +48,8 @@ class AptArchive(DataSource):
     def update_index(self, ignore_errors=False):
         import apt.progress.base
 
-        lists = apt_pkg.config.find_dir("Dir::State::Lists")
-        with apt_pkg.FileLock(os.path.join(lists, "lock")):
+        lists_lock = Path(apt_pkg.config.find_dir("Dir::State::Lists")) / "lock"
+        with apt_pkg.FileLock(str(lists_lock)):
             try:
                 self.cache.update(apt.progress.base.AcquireProgress(), self.source_list)
             except apt_pkg.Error as e:
