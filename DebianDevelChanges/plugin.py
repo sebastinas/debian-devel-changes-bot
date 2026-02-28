@@ -27,6 +27,7 @@ from pathlib import Path
 
 from supybot import ircdb, log, schedule
 from supybot.commands import wrap, many
+from supybot.callbacks import Plugin
 
 from DebianDevelChangesBot import DataSource, pseudo_packages
 from DebianDevelChangesBot.mailparsers import get_message
@@ -70,7 +71,7 @@ class ProcessingResult(Enum):
     ERROR = 0
 
 
-class DebianDevelChanges(supybot.callbacks.Plugin):
+class DebianDevelChanges(Plugin):
     threaded = True
 
     def __init__(self, irc):

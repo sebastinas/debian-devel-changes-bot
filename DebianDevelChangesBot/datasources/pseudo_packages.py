@@ -16,14 +16,15 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+from dataclasses import dataclass
 
 from .. import DataSource
 
 
+@dataclass
 class PseudoPackage:
-    def __init__(self, d, m):
-        self.description = d
-        self.maintainer = m
+    description: str
+    maintainer: str
 
 
 class PseudoPackages(DataSource):
