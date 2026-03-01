@@ -19,12 +19,13 @@
 import re
 import time
 import supybot
+import supybot.conf
+import supybot.ircmsgs
 import threading
 import requests
 import shutil
 from enum import Enum
 from pathlib import Path
-
 from supybot import ircdb, log, schedule
 from supybot.commands import wrap, many
 from supybot.callbacks import Plugin
@@ -363,7 +364,7 @@ class DebianDevelChanges(Plugin):
                     out.append(f"[{style}]{data}")
                 irc.reply(colourise("[reset]|".join(out)), prefixNick=False)
         except Exception as e:
-            irc.reply("Error: %s" % e.message)
+            irc.reply("Error: {e}")
 
     madison = wrap(madison, ["text"])
 
@@ -457,7 +458,7 @@ class DebianDevelChanges(Plugin):
             if msg:
                 irc.reply(colourise(msg.for_irc()), prefixNick=False)
         except Exception as e:
-            irc.reply(f"Error: unable to obtain popcon data for {package}")
+            irc.reply(f"Error: unable to obtain popcon data for {package}: {e}")
 
     popcon = wrap(_popcon, ["text"])
 
