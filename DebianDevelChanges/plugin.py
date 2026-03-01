@@ -364,7 +364,7 @@ class DebianDevelChanges(Plugin):
                     out.append(f"[{style}]{data}")
                 irc.reply(colourise("[reset]|".join(out)), prefixNick=False)
         except Exception as e:
-            irc.reply("Error: {e}")
+            irc.reply(f"Error: {e}")
 
     madison = wrap(madison, ["text"])
 
