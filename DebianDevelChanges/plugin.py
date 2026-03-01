@@ -351,7 +351,7 @@ class DebianDevelChanges(Plugin):
     def madison(self, irc, msg, args, package):
         """List packages."""
         try:
-            lines = madison(package)
+            lines = madison(package, session=self.requests_session)
             if not lines:
                 irc.reply(f'Did not get a response -- is "{package}" a valid package?')
                 return

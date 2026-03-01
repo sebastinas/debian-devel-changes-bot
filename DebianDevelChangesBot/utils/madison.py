@@ -16,13 +16,20 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import requests
+from collections.abc import Sequence
 
 
-def madison(package, suites=None):
+def madison(
+    package,
+    suites: None | Sequence[str] = None,
+    session: None | requests.Session = None,
+):
     payload = {"package": package, "text": "on"}
     if suites is not None:
         payload["s"] = ",".join(suites)
+    if session is None:
+        session = requests.Session()
 
-    response = requests.get("https://qa.debian.org/madison.php", params=payload)
+    response = session.get("https://qa.debian.org/madison.php", params=payload)
     response.raise_for_status()
     return response.text.encode("utf-8")
