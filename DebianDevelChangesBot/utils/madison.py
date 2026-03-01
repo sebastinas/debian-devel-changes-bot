@@ -23,7 +23,7 @@ def madison(
     package,
     suites: None | Sequence[str] = None,
     session: None | requests.Session = None,
-):
+) -> str:
     payload = {"package": package, "text": "on"}
     if suites is not None:
         payload["s"] = ",".join(suites)
@@ -32,4 +32,4 @@ def madison(
 
     response = session.get("https://qa.debian.org/madison.php", params=payload)
     response.raise_for_status()
-    return response.text.encode("utf-8")
+    return response.text
