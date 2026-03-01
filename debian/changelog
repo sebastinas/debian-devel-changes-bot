@@ -1,3 +1,14 @@
+debian-devel-changes-bot (20260301) unstable; urgency=medium
+
+  * Remove #debian-mirrors, the bot is banned
+  * Rewrite using pathlib
+  * Refactor build
+  * Convert to deb822
+  * Fix error messages
+  * Reuse requests session
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Sun, 01 Mar 2026 12:11:04 +0100
+
 debian-devel-changes-bot (20250817) unstable; urgency=medium
 
   [ Jérôme Charaoui ]
