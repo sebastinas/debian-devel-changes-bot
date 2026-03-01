@@ -88,8 +88,8 @@ class DebianDevelChanges(Plugin):
         self.last_n_messages = []
 
         # data sources
-        pseudo_packages.pp = PseudoPackages(self.requests_session)
-        self.pseudo_packages = pseudo_packages.pp
+        pseudo_packages.session = self.requests_session
+        self.pseudo_packages = pseudo_packages
         self.stable_rc_bugs = StableRCBugs(self.requests_session)
         self.testing_rc_bugs = TestingRCBugs(self.requests_session)
         self.new_queue = NewQueue(self.requests_session)

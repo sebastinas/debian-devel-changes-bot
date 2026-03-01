@@ -19,33 +19,6 @@
 import requests
 
 
-class PPWrapper:
-    def __init__(self):
-        self.pp = None
-
-    def get_description(self, p):
-        if self.pp is not None:
-            return self.pp.get_description(p)
-        return None
-
-    def get_maintainer(self, p):
-        if self.pp is not None:
-            return self.pp.get_maintainer(p)
-        return None
-
-    def is_pseudo_package(self, p):
-        if self.pp is not None:
-            return self.pp.is_pseudo_package(p)
-        return None
-
-    def update(self):
-        if self.pp is not None:
-            self.pp.update()
-
-
-pseudo_packages = PPWrapper()
-
-
 class DataSource:
     class DataError(Exception):
         pass
@@ -56,6 +29,12 @@ class DataSource:
 
 class MailParser:
     pass
+
+
+from . import datasources
+
+# FIXME: remove global state
+pseudo_packages = datasources.PseudoPackages()
 
 
 class Message:
@@ -82,8 +61,3 @@ class Message:
             return "[pseudo-package]%s[reset]" % self.package
         else:
             return "[package]%s[reset]" % self.package
-
-
-from . import datasources
-
-pseudo_packages.pp = datasources.PseudoPackages()
