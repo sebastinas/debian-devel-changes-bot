@@ -51,14 +51,14 @@ from DebianDevelChangesBot.utils import (
 from DebianDevelChangesBot.utils.decoding import split_address
 
 
-def schedule_remove_event(event):
+def schedule_remove_event(event: str):
     try:
         schedule.removeEvent(event)
     except KeyError:
         pass
 
 
-def schedule_remove_periodic_event(event):
+def schedule_remove_periodic_event(event: str):
     try:
         schedule.removePeriodicEvent(event)
     except KeyError:

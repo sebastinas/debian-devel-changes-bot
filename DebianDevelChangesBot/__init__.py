@@ -50,7 +50,7 @@ class DataSource:
     class DataError(Exception):
         pass
 
-    def __init__(self, session):
+    def __init__(self, session: requests.Session | None):
         self.session = session if session is not None else requests.Session()
 
 

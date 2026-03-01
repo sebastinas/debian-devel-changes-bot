@@ -17,12 +17,12 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import requests
-
 from bs4 import BeautifulSoup
+
 from ..messages.popcon import Popcon
 
 
-def popcon(package, session=None):
+def popcon(package: str, session: None | requests.Session = None):
     if session is None:
         session = requests.Session()
 
