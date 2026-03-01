@@ -11,7 +11,6 @@ classifiers = ["Programming Language :: Python :: 3"]
 dependencies = ["beautifulsoup4", "python-debian", "requests", "python-apt"]
 
 [tool.setuptools]
-include-package-data = true
 packages = [
   "DebianDevelChangesBot",
   "DebianDevelChanges",
@@ -19,6 +18,12 @@ packages = [
   "DebianDevelChangesBot.messages",
   "DebianDevelChangesBot.mailparsers",
   "DebianDevelChangesBot.datasources",
+]
+
+[tool.setuptools.package-data]
+"DebianDevelChangesBot.datasources" = [
+  "pseudo-packages.description",
+  "pseudo-packages.maintainers",
 ]
 
 [tool.black]

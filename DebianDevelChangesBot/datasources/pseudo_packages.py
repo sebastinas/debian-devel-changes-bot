@@ -16,6 +16,7 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+from importlib import resources
 from dataclasses import dataclass
 
 from .. import DataSource
@@ -27,6 +28,31 @@ class PseudoPackage:
     maintainer: str
 
 
+REGEX = re.compile(r"([^\t ]*)[\t ]*(.*)")
+
+
+def parse(descriptions_data: str, maintainers_data: str) -> dict[str, PseudoPackage]:
+    descriptions = {}
+    maintainers = {}
+
+    for line in descriptions_data.split("\n"):
+        match = REGEX.match(line)
+        if match:
+            descriptions[match.group(1)] = match.group(2)
+
+    for line in maintainers_data.split("\n"):
+        match = REGEX.match(line)
+        if match:
+            maintainers[match.group(1)] = match.group(2)
+
+    package_names = set(descriptions.keys()).intersection(set(maintainers.keys()))
+
+    packages = {}
+    for package in package_names:
+        packages[package] = PseudoPackage(descriptions[package], maintainers[package])
+    return packages
+
+
 class PseudoPackages(DataSource):
     NAME = "pseudo packages"
     URL_D = "https://bugs.debian.org/pseudopackages/pseudo-packages.description"
@@ -36,8 +62,15 @@ class PseudoPackages(DataSource):
 
     def __init__(self, session=None):
         super().__init__(session)
-        self.packages = {}
-        self.regex = re.compile(r"([^\t ]*)[\t ]*(.*)")
+
+        self.packages = parse(
+            resources.read_text(
+                "DebianDevelChangesBot.datasources", "pseudo-packages.description"
+            ),
+            resources.read_text(
+                "DebianDevelChangesBot.datasources", "pseudo-packages.maintainers"
+            ),
+        )
 
     def update(self):
         response_d = self.session.get(self.URL_D)
@@ -45,27 +78,7 @@ class PseudoPackages(DataSource):
         response_m = self.session.get(self.URL_M)
         response_m.raise_for_status()
 
-        descriptions = {}
-        maintainers = {}
-
-        for line in response_d.text.split("\n"):
-            match = self.regex.match(line)
-            if match:
-                descriptions[match.group(1)] = match.group(2)
-
-        for line in response_m.text.split("\n"):
-            match = self.regex.match(line)
-            if match:
-                maintainers[match.group(1)] = match.group(2)
-
-        package_names = set(descriptions.keys()).intersection(set(maintainers.keys()))
-
-        packages = {}
-        for package in package_names:
-            packages[package] = PseudoPackage(
-                descriptions[package], maintainers[package]
-            )
-        self.packages = packages
+        self.packages = parse(response_d.text, response_m.text)
 
     def pseudo_packages(self):
         return self.packages.keys()
