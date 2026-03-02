@@ -19,6 +19,7 @@
 import sys
 import syslog
 import traceback
+from pathlib import Path
 
 from DebianDevelChangesBot.datasources import AptArchive
 
@@ -29,8 +30,8 @@ def main():
     ret = 0
     try:
         apt_archive = AptArchive(
-            "/usr/share/debian-devel-changes-bot/bot-config/apt",
-            "/var/lib/debian-devel-changes-bot/apt",
+            Path("/usr/share/debian-devel-changes-bot/bot-config/apt"),
+            Path("/var/lib/debian-devel-changes-bot/apt"),
         )
         apt_archive.update_index()
     except Exception:

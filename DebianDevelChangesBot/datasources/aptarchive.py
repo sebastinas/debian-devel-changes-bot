@@ -27,7 +27,7 @@ class AptArchive(DataSource):
     INTERVAL = 30 * 60
     NAME = "APT archive"
 
-    def __init__(self, config_dir, state_dir):
+    def __init__(self, config_dir: Path, state_dir: Path) -> None:
         super().__init__(None)
 
         config = apt_pkg.config
@@ -37,7 +37,9 @@ class AptArchive(DataSource):
         apt_pkg.init_config()
         apt_pkg.init_system()
 
-        Path(apt_pkg.config.find_dir("Dir::State::Lists")).mkdir(parents=True, exist_ok=True)
+        Path(apt_pkg.config.find_dir("Dir::State::Lists")).mkdir(
+            parents=True, exist_ok=True
+        )
         Path(config["Dir::Cache"]).mkdir(parents=True, exist_ok=True)
 
         self.cache = apt_pkg.Cache(None)

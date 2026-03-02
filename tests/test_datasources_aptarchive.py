@@ -16,8 +16,6 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import io
-import requests
 import requests_mock
 import shutil
 import tempfile
@@ -28,16 +26,17 @@ from pathlib import Path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from DebianDevelChangesBot.datasources import AptArchive, PseudoPackages
-from DebianDevelChangesBot import pseudo_packages
 
 
 class TestDatasourceAptArchive(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # FIXME make sure we do not have to fetch
-        apt_config = Path(os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "..", "bot-config", "apt"
-        ))
+        apt_config = Path(
+            os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), "..", "bot-config", "apt"
+            )
+        )
         cls.statedir = tempfile.mkdtemp()
 
         cls.apt_archive = AptArchive(apt_config, Path(cls.statedir))
@@ -64,10 +63,6 @@ class TestDatasourceAptArchive(unittest.TestCase):
         with open(fixture, encoding="utf-8") as f:
             data = f.read()
         cls.mocker.register_uri("GET", PseudoPackages.URL_D, text=data)
-
-        session = requests.Session()
-        pseudo_packages.pp = PseudoPackages(session)
-        pseudo_packages.update()
 
     @classmethod
     def tearDownClass(cls):
