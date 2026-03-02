@@ -15,13 +15,13 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .. import Message
+from . import Message
 
 
 class Popcon(Message):
     FIELDS = ("package", "inst", "vote", "old", "recent", "nofiles")
 
-    def __init__(self, package, inst, vote, old, recent, nofiles):
+    def __init__(self, package, inst, vote, old, recent, nofiles) -> None:
         self.package = package
         self.inst = inst
         self.vote = vote
@@ -29,7 +29,7 @@ class Popcon(Message):
         self.recent = recent
         self.nofiles = nofiles
 
-    def format(self):
+    def format(self) -> str:
         msg = f"Popcon for [package]{self.package}[reset] - "
         for field in ("inst", "vote", "old", "recent", "nofiles"):
             msg += f"[category]{field}[/category]: {getattr(self, field)} "

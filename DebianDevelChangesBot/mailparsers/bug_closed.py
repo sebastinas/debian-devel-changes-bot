@@ -15,9 +15,9 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from DebianDevelChangesBot import MailParser
-from DebianDevelChangesBot.messages import BugClosedMessage
-from DebianDevelChangesBot.utils import tidy_bug_title, format_email_address
+from . import MailParser
+from ..messages import BugClosedMessage
+from ..utils import tidy_bug_title, format_email_address
 
 import re
 
@@ -27,7 +27,7 @@ SUBJECT = re.compile(r"^Bug#(\d+): marked as done \((.+)\)$")
 
 class BugClosedParser(MailParser):
     @staticmethod
-    def parse(headers, body, **kwargs):
+    def parse(headers, body, **kwargs) -> BugClosedMessage | None:
         if headers.get("List-Id", "") != "<debian-bugs-closed.lists.debian.org>":
             return
 

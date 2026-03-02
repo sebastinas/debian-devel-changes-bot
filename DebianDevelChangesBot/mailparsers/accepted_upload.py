@@ -15,9 +15,9 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from DebianDevelChangesBot import MailParser
-from DebianDevelChangesBot.utils import quoted_printable, format_email_address
-from DebianDevelChangesBot.messages import AcceptedUploadMessage
+from . import MailParser
+from ..utils import quoted_printable, format_email_address
+from ..messages import AcceptedUploadMessage
 
 
 lists = (
@@ -30,7 +30,7 @@ lists = (
 
 class AcceptedUploadParser(MailParser):
     @staticmethod
-    def parse(headers, body, **kwargs):
+    def parse(headers, body, **kwargs) -> AcceptedUploadMessage | None:
         if headers.get("List-Id", "") not in lists:
             return
 

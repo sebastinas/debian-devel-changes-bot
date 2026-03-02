@@ -15,9 +15,9 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from DebianDevelChangesBot import MailParser
-from DebianDevelChangesBot.messages import BugSubmittedMessage
-from DebianDevelChangesBot.utils import tidy_bug_title, format_email_address
+from . import MailParser
+from ..messages import BugSubmittedMessage
+from ..utils import tidy_bug_title, format_email_address
 
 import re
 
@@ -30,18 +30,17 @@ SEVERITY = re.compile(
 
 class BugSubmittedParser(MailParser):
     @staticmethod
-    def parse(headers, body, **kwargs):
+    def parse(headers, body, **kwargs) -> BugSubmittedMessage | None:
         if headers.get("List-Id", "") != "<debian-bugs-dist.lists.debian.org>":
             return
         if not headers.get("X-Debian-PR-Message", "").startswith("report "):
             return
 
-        msg = BugSubmittedMessage()
-
         m = SUBJECT.match(headers["Subject"])
         if m is None:
             return
 
+        msg = BugSubmittedMessage()
         msg.bug_number = int(m.group(1))
         msg.title = m.group(2)
 

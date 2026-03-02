@@ -18,7 +18,7 @@
 import apt_pkg
 from pathlib import Path
 
-from .. import pseudo_packages, DataSource
+from . import DataSource
 from ..utils.decoding import split_address
 
 
@@ -28,7 +28,7 @@ class AptArchive(DataSource):
     NAME = "APT archive"
 
     def __init__(self, config_dir: Path, state_dir: Path) -> None:
-        super().__init__(None)
+        super().__init__()
 
         config = apt_pkg.config
         config["Dir::Etc"] = str(config_dir.resolve())
@@ -47,7 +47,7 @@ class AptArchive(DataSource):
         self.source_list = apt_pkg.SourceList()
         self.source_list.read_main_list()
 
-    def update_index(self, ignore_errors=False):
+    def update_index(self, ignore_errors=False) -> None:
         import apt.progress.base
 
         lists_lock = Path(apt_pkg.config.find_dir("Dir::State::Lists")) / "lock"
@@ -58,11 +58,13 @@ class AptArchive(DataSource):
                 if not ignore_errors:
                     raise DataSource.DataError(f"Failed to update cache: {e}")
 
-    def update(self):
+    def update(self) -> None:
         self.cache = apt_pkg.Cache(None)
         self.depcache = apt_pkg.DepCache(self.cache)
 
     def get_maintainer(self, package):
+        from .. import pseudo_packages
+
         maintainer = pseudo_packages.get_maintainer(package)
         if maintainer is not None:
             return split_address(maintainer)

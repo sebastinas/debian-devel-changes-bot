@@ -16,10 +16,11 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
+import requests
 from importlib import resources
 from dataclasses import dataclass
 
-from .. import DataSource
+from . import DataSource
 
 
 @dataclass
@@ -60,9 +61,10 @@ class PseudoPackages(DataSource):
 
     INTERVAL = 60 * 5
 
-    def __init__(self, session=None):
-        super().__init__(session)
+    def __init__(self, session: requests.Session | None = None) -> None:
+        super().__init__()
 
+        self.session = session
         self.packages = parse(
             resources.read_text(
                 "DebianDevelChangesBot.datasources", "pseudo-packages.description"
@@ -72,7 +74,9 @@ class PseudoPackages(DataSource):
             ),
         )
 
-    def update(self):
+    def update(self) -> None:
+        assert self.session is not None
+
         response_d = self.session.get(self.URL_D)
         response_d.raise_for_status()
         response_m = self.session.get(self.URL_M)
@@ -83,16 +87,16 @@ class PseudoPackages(DataSource):
     def pseudo_packages(self):
         return self.packages.keys()
 
-    def is_pseudo_package(self, package):
+    def is_pseudo_package(self, package) -> bool:
         return package in self.packages
 
-    def get_maintainer(self, package):
+    def get_maintainer(self, package) -> str | None:
         if package not in self.packages:
             return None
 
         return self.packages[package].maintainer
 
-    def get_description(self, package):
+    def get_description(self, package) -> str | None:
         if package not in self.packages:
             return None
 

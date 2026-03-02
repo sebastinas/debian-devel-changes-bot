@@ -16,6 +16,19 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+from abc import abstractmethod
+from typing import Protocol
+
+from ..messages import Message
+
+
+class MailParser(Protocol):
+    @staticmethod
+    @abstractmethod
+    def parse(headers, body, **kwargs) -> Message | None: ...
+
+
 from .accepted_upload import AcceptedUploadParser
 from .bug_closed import BugClosedParser
 from .bug_submitted import BugSubmittedParser
@@ -28,7 +41,7 @@ _PARSERS = (
 )
 
 
-def get_message(email, **kwargs):
+def get_message(email, **kwargs) -> Message | None:
     headers, body = email
 
     for parser in _PARSERS:

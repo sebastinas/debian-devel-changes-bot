@@ -15,13 +15,13 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from DebianDevelChangesBot import Message
+from . import Message
 
 
 class BugSynopsis(Message):
     FIELDS = ("bug_number", "package", "status", "title", "severity")
 
-    def format(self):
+    def format(self) -> str:
         msg = "[bug]#%d[/bug]" % self.bug_number
 
         if self.status == "done":

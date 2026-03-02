@@ -16,19 +16,22 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from .. import DataSource
+import requests
+
+from . import DataSource
 
 
 class RCBugs(DataSource):
     INTERVAL = 60 * 20
     URL = "https://udd.debian.org/bugs.cgi"
 
-    def __init__(self, suite, session=None):
-        super().__init__(session)
+    def __init__(self, suite: str, session: requests.Session) -> None:
+        super().__init__()
+        self.session = session
         self.suite = suite
         self.bugs = None
 
-    def update(self):
+    def update(self) -> None:
         payload = {
             "release": self.suite,
             "notmain": "ign",
@@ -55,10 +58,10 @@ class RCBugs(DataSource):
         else:
             raise DataSource.DataError()
 
-    def get_bugs(self):
+    def get_bugs(self) -> set[str] | None:
         return self.bugs
 
-    def get_number_bugs(self):
+    def get_number_bugs(self) -> int | None:
         if self.bugs is not None:
             return len(self.bugs)
         else:
@@ -68,12 +71,12 @@ class RCBugs(DataSource):
 class TestingRCBugs(RCBugs):
     NAME = "Testing RC Bugs"
 
-    def __init__(self, session=None):
+    def __init__(self, session: requests.Session):
         super().__init__("forky", session)
 
 
 class StableRCBugs(RCBugs):
     NAME = "Stable RC Bugs"
 
-    def __init__(self, session=None):
+    def __init__(self, session: requests.Session):
         super().__init__("trixie", session)

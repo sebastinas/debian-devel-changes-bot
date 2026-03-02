@@ -16,48 +16,8 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import requests
-
-
-class DataSource:
-    class DataError(Exception):
-        pass
-
-    def __init__(self, session: requests.Session | None):
-        self.session = session if session is not None else requests.Session()
-
-
-class MailParser:
-    pass
-
 
 from . import datasources
 
 # FIXME: remove global state
 pseudo_packages = datasources.PseudoPackages()
-
-
-class Message:
-    def __init__(self):
-        if hasattr(self, "FIELDS"):
-            for field in self.FIELDS:
-                setattr(self, field, None)
-        if hasattr(self, "OPTIONAL"):
-            for field in self.OPTIONAL:
-                setattr(self, field, None)
-
-    def __bool__(self):
-        if hasattr(self, "FIELDS"):
-            for field in self.FIELDS:
-                if getattr(self, field) is None:
-                    return False
-        return True
-
-    def for_irc(self):
-        return self.format()
-
-    def package_name(self):
-        if pseudo_packages.is_pseudo_package(self.package):
-            return "[pseudo-package]%s[reset]" % self.package
-        else:
-            return "[package]%s[reset]" % self.package

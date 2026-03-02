@@ -16,8 +16,10 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import requests
 from debian.deb822 import Deb822
-from .. import DataSource
+
+from . import DataSource
 
 
 class NewQueue(DataSource):
@@ -25,13 +27,14 @@ class NewQueue(DataSource):
     URL = "https://ftp-master.debian.org/new.822"
     INTERVAL = 60 * 30
 
-    def __init__(self, session=None):
-        super().__init__(session)
+    def __init__(self, session: requests.Session) -> None:
+        super().__init__()
+        self.session = session
         self.packages = {}
         self.backports_packages = {}
         self.fetched = False
 
-    def update(self):
+    def update(self) -> None:
         response = self.session.get(self.URL)
         response.raise_for_status()
         data = response.text
@@ -51,22 +54,22 @@ class NewQueue(DataSource):
         self.backports_packages = backports_packages
         self.fetched = True
 
-    def check_version(self, packages, package, version):
+    def check_version(self, packages, package, version) -> bool:
         versions = packages.get(package, [])
         return version in versions
 
-    def is_new(self, package, version):
+    def is_new(self, package, version) -> bool:
         return self.check_version(self.packages, package, version)
 
-    def is_backports_new(self, package, version):
+    def is_backports_new(self, package, version) -> bool:
         return self.check_version(self.backports_packages, package, version)
 
-    def get_size(self):
+    def get_size(self) -> int | None:
         if not self.fetched:
             return None
         return len(self.packages)
 
-    def get_backports_size(self):
+    def get_backports_size(self) -> int | None:
         if not self.fetched:
             return None
         return len(self.backports_packages)

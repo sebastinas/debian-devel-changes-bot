@@ -16,7 +16,9 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from .. import DataSource
+import requests
+
+from . import DataSource
 
 
 class Dinstall(DataSource):
@@ -24,11 +26,12 @@ class Dinstall(DataSource):
     URL = "https://ftp-master.debian.org/dinstall.status"
     INTERVAL = 60 * 5
 
-    def __init__(self, session=None):
-        super().__init__(session)
+    def __init__(self, session: requests.Session) -> None:
+        super().__init__()
+        self.session = session
         self.status = "not running"
 
-    def update(self):
+    def update(self) -> None:
         response = self.session.get(self.URL)
         response.raise_for_status()
 
@@ -43,5 +46,5 @@ class Dinstall(DataSource):
 
             break
 
-    def get_status(self):
+    def get_status(self) -> str:
         return self.status

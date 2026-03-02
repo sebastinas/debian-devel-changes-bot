@@ -15,14 +15,14 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from DebianDevelChangesBot import Message
+from . import Message
 
 
 class BugSubmittedMessage(Message):
     FIELDS = ("bug_number", "package", "by", "title")
     OPTIONAL = ("severity", "version")
 
-    def format(self):
+    def format(self) -> str:
         msg = f"Opened [bug]#{self.bug_number}[/bug] "
         if self.severity in ("critical", "grave", "serious"):
             msg += f"([severity]{self.severity}[reset]) "

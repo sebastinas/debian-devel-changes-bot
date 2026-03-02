@@ -19,7 +19,7 @@
 import re
 
 
-def rewrite_topic(topic, prefix, value):
+def rewrite_topic(topic: str, prefix: str, value: str) -> str:
     if not len(prefix):
         return topic
 

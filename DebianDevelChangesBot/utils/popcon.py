@@ -22,7 +22,7 @@ from bs4 import BeautifulSoup
 from ..messages.popcon import Popcon
 
 
-def popcon(package: str, session: None | requests.Session = None):
+def popcon(package: str, session: None | requests.Session = None) -> Popcon:
     if session is None:
         session = requests.Session()
 

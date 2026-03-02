@@ -15,11 +15,11 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from DebianDevelChangesBot import Message
+from . import Message
 
 
 class BugClosedMessage(Message):
     FIELDS = ("bug_number", "package", "by", "title")
 
-    def format(self):
+    def format(self) -> str:
         return f"Closed [bug]#{self.bug_number}[/bug] in {self.package_name()} by [by]{self.by}[reset] «[title]{self.title}[reset]». [url]https://bugs.debian.org/{self.bug_number}[/url]"

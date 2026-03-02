@@ -20,7 +20,7 @@ import re
 WHITESPACE = re.compile(r"\s{2,}")
 
 
-def tidy_bug_title(title, package):
+def tidy_bug_title(title: str, package: str) -> str:
     """
     Strips various package name prefixes from a bug title.
 

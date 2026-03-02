@@ -16,6 +16,41 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from abc import abstractmethod
+from typing import Protocol
+
+
+class Message(Protocol):
+    def __init__(self) -> None:
+        if hasattr(self, "FIELDS"):
+            for field in self.FIELDS:
+                setattr(self, field, None)
+        if hasattr(self, "OPTIONAL"):
+            for field in self.OPTIONAL:
+                setattr(self, field, None)
+
+    def __bool__(self):
+        if hasattr(self, "FIELDS"):
+            for field in self.FIELDS:
+                if getattr(self, field) is None:
+                    return False
+        return True
+
+    @abstractmethod
+    def format(self) -> str: ...
+
+    def for_irc(self) -> str:
+        return self.format()
+
+    def package_name(self) -> str:
+        from .. import pseudo_packages
+
+        if pseudo_packages.is_pseudo_package(self.package):
+            return "[pseudo-package]%s[reset]" % self.package
+        else:
+            return "[package]%s[reset]" % self.package
+
+
 from .accepted_upload import AcceptedUploadMessage
 from .bug_closed import BugClosedMessage
 from .bug_submitted import BugSubmittedMessage

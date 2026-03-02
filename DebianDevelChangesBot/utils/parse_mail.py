@@ -21,7 +21,7 @@ import email.iterators
 from DebianDevelChangesBot.utils import quoted_printable
 
 
-def parse_mail(fileobj):
+def parse_mail(fileobj) -> tuple[dict[str, str], list[str]]:
     msg = email.message_from_binary_file(fileobj)
 
     headers = {

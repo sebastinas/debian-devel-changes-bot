@@ -30,16 +30,16 @@ from supybot import ircdb, log, schedule
 from supybot.commands import wrap, many
 from supybot.callbacks import Plugin
 
-from DebianDevelChangesBot import DataSource, pseudo_packages
+from DebianDevelChangesBot import pseudo_packages
 from DebianDevelChangesBot.mailparsers import get_message
 from DebianDevelChangesBot.datasources import (
+    DataSource,
     TestingRCBugs,
     NewQueue,
     RmQueue,
     StableRCBugs,
     Dinstall,
     AptArchive,
-    PseudoPackages,
 )
 from DebianDevelChangesBot.utils import (
     parse_mail,

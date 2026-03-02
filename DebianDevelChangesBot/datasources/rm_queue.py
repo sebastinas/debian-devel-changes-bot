@@ -18,43 +18,47 @@
 
 import re
 import threading
-
+import requests
 from bs4 import BeautifulSoup
-from .. import DataSource
+
+from . import DataSource
+
+
+MATCHER = re.compile(r"([^:]+): ")
 
 
 class RmQueue(DataSource):
-    MATCHER = re.compile(r"([^:]+): ")
     URL = "https://ftp-master.debian.org/removals.html"
     INTERVAL = 60 * 30
     NAME = "RM queue"
 
-    def __init__(self, session=None):
-        super().__init__(session)
+    def __init__(self, session: requests.Session) -> None:
+        super().__init__()
+        self.session = session
         self.packages = {}
         self.fetched = False
         self.lock = threading.Lock()
 
-    def update(self):
+    def update(self) -> None:
         response = self.session.get(self.URL)
         response.raise_for_status()
 
         soup = BeautifulSoup(response.text, "html.parser")
         packages = []
         for div in soup.find_all("div", class_="subject"):
-            package = self.MATCHER.findall(div.contents[0])
+            package = MATCHER.findall(div.contents[0])
             packages.extend(package)
 
         with self.lock:
             self.packages = packages
             self.fetched = True
 
-    def get_size(self):
+    def get_size(self) -> int | None:
         with self.lock:
             if not self.fetched:
                 return None
             return len(self.packages)
 
-    def is_rm(self, pkg):
+    def is_rm(self, pkg) -> bool:
         with self.lock:
             return pkg in self.packages

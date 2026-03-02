@@ -16,14 +16,14 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from DebianDevelChangesBot import Message
+from . import Message
 
 
 class AcceptedUploadMessage(Message):
     FIELDS = ("package", "version", "distribution", "urgency", "by", "maintainer")
     OPTIONAL = ("closes", "new_upload")
 
-    def format(self):
+    def format(self) -> str:
         msg = f"{self.package_name()} "
         if self.new_upload:
             msg += "[new](NEW)[reset] "

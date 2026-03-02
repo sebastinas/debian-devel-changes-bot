@@ -17,14 +17,13 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import re
-
 import email.header
 import email.quoprimime
 import email.utils
 
 
-def header_decode(s):
-    def unquote_match(match):
+def header_decode(s: str) -> str:
+    def unquote_match(match) -> str:
         s = match.group(0)
         return chr(int(s[1:3], 16))
 
@@ -42,25 +41,23 @@ def _decode_chunk(chunk, encoding):
         return chunk.decode(encoding)
 
 
-def quoted_printable(val):
+def quoted_printable(val: str | bytes) -> str:
     try:
-        if type(val) is str:
-            save = header_decode(val)
-
-            val = "".join(
-                [
-                    _decode_chunk(chunk, encoding)
-                    for chunk, encoding in email.header.decode_header(val)
-                ]
-            )
-
-            val = val.replace(" )", ")")
-
-            if len(val) > len(save):
-                val = save.encode("latin1").decode("utf-8", "replace")
-
-        else:
+        if type(val) is not str:
             return email.quoprimime.header_decode(str(val))
+
+        save = header_decode(val)
+        val = "".join(
+            [
+                _decode_chunk(chunk, encoding)
+                for chunk, encoding in email.header.decode_header(val)
+            ]
+        )
+
+        val = val.replace(" )", ")")
+
+        if len(val) > len(save):
+            val = save.encode("latin1").decode("utf-8", "replace")
 
     except Exception as e:
         # We ignore errors here. Most of these originate from a spam
@@ -68,9 +65,9 @@ def quoted_printable(val):
         if not isinstance(e, ValueError) or "invalid literal" not in str(e):
             raise
 
-    return val
+    return val  # type: ignore
 
 
-def split_address(addr):
+def split_address(addr: str) -> dict[str, str]:
     name, addr = email.utils.parseaddr(addr)
     return {"name": name, "email": addr}

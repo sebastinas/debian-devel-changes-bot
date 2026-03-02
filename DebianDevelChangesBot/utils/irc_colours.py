@@ -64,7 +64,7 @@ _TAGS.update(
 )
 
 
-def colourise(s):
+def colourise(s: str) -> str:
     s = s + "[reset]"
     for k, v in _TAGS.items():
         s = s.replace("[%s]" % k, v)

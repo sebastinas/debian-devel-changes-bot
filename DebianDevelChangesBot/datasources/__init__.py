@@ -16,6 +16,18 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from abc import abstractmethod
+from typing import Protocol
+
+
+class DataSource(Protocol):
+    class DataError(Exception):
+        pass
+
+    @abstractmethod
+    def update(self): ...
+
+
 from .testing_rc_bugs import TestingRCBugs, StableRCBugs
 from .new_queue import NewQueue
 from .rm_queue import RmQueue
