@@ -321,7 +321,7 @@ class DebianDevelChanges(Plugin):
             except KeyError:
                 pass
 
-    def rc(self, irc, msg, args):
+    def _rc(self, irc, msg, args):
         """Link to UDD RC bug overview."""
         num_bugs = self.testing_rc_bugs.get_number_bugs()
         if type(num_bugs) is int:
@@ -331,10 +331,10 @@ class DebianDevelChanges(Plugin):
         else:
             irc.reply("No data at this time.")
 
-    rc = wrap(rc)
-    bugs = wrap(rc)
+    rc = wrap(_rc)
+    bugs = wrap(_rc)
 
-    def update(self, irc, msg, args):
+    def _update(self, irc, msg, args):
         """Trigger an update."""
         if not ircdb.checkCapability(msg.prefix, "owner"):
             irc.reply("You are not authorised to run this command.")
@@ -345,9 +345,9 @@ class DebianDevelChanges(Plugin):
             irc.reply(f"Updated {source.NAME}.")
         self._topic_callback()
 
-    update = wrap(update)
+    update = wrap(_update)
 
-    def madison(self, irc, msg, args, package):
+    def _madison(self, irc, msg, args, package):
         """List packages."""
         try:
             lines = madison(package, session=self.requests_session)
@@ -365,7 +365,7 @@ class DebianDevelChanges(Plugin):
         except Exception as e:
             irc.reply(f"Error: {e}")
 
-    madison = wrap(madison, ["text"])
+    madison = wrap(_madison, ["text"])
 
     def get_pool_url(self, package):
         if package.startswith("lib"):
@@ -393,7 +393,6 @@ class DebianDevelChanges(Plugin):
             irc.reply(colourise(msg), prefixNick=False)
 
     maintainer = wrap(_maintainer, [many("anything")])
-    maint = wrap(_maintainer, [many("anything")])
     who_maintains = wrap(_maintainer, [many("anything")])
 
     def _qa(self, irc, msg, args, items):
