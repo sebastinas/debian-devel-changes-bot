@@ -47,7 +47,6 @@ from DebianDevelChangesBot.utils import (
     rewrite_topic,
     madison,
     format_email_address,
-    popcon,
 )
 from DebianDevelChangesBot.utils.decoding import split_address
 
@@ -451,17 +450,6 @@ class DebianDevelChanges(Plugin):
 
     buildd = wrap(_buildd, [many("anything")])
 
-    def _popcon(self, irc, msg, args, package):
-        """Get popcon data."""
-        try:
-            msg = popcon(package, self.requests_session)
-            if msg:
-                irc.reply(colourise(msg.for_irc()), prefixNick=False)
-        except Exception as e:
-            irc.reply(f"Error: unable to obtain popcon data for {package}: {e}")
-
-    popcon = wrap(_popcon, ["text"])
-
     def _testing(self, irc, msg, args, items):
         """Check testing migration status."""
         for package in items:
@@ -478,8 +466,6 @@ class DebianDevelChanges(Plugin):
         irc.reply(colourise(line))
 
     new = wrap(_new)
-    new_queue = wrap(_new)
-    newqueue = wrap(_new)
 
 
 Class = DebianDevelChanges

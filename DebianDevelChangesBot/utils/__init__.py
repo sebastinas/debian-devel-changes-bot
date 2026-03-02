@@ -22,4 +22,3 @@ from .tidy_bug_title import tidy_bug_title
 from .irc_colours import colourise
 from .rewrite_topic import rewrite_topic
 from .madison import madison
-from .popcon import popcon

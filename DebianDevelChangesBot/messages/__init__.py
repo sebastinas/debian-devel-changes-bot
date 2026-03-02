@@ -54,4 +54,3 @@ class Message(Protocol):
 from .accepted_upload import AcceptedUploadMessage
 from .bug_closed import BugClosedMessage
 from .bug_submitted import BugSubmittedMessage
-from .popcon import Popcon
