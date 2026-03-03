@@ -54,7 +54,7 @@ class TestDatasourceTestingRmQueue(unittest.TestCase):
         """
         Check we have a sane update interval.
         """
-        self.assertTrue(self.datasource.INTERVAL > 60)
+        self.assertTrue(self.datasource.interval() > 60)
 
     def testSize(self):
         self.datasource.update()

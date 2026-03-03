@@ -56,7 +56,7 @@ class BaseTest:
         """
         Check we have a sane update interval.
         """
-        self.assertTrue(self.datasource.INTERVAL > 60)
+        self.assertTrue(self.datasource.interval() > 60)
 
     def testParse(self):
         self.datasource.update()

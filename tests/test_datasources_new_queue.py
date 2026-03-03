@@ -59,7 +59,7 @@ class TestDatasourceTestingNewQueue(unittest.TestCase):
         """
         Check we have a sane update interval.
         """
-        self.assertTrue(self.datasource.INTERVAL > 60)
+        self.assertTrue(self.datasource.interval() > 60)
 
     def testTop(self):
         self.assertTrue(self.is_new("ezmlm-idx", "6.0.1-1"))
