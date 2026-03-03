@@ -55,7 +55,7 @@ class AcceptedUploadParser(MailParser):
         if headers.get("List-Id", "") not in LISTS:
             return
 
-        MAPPING = {
+        mapping = {
             "Source": "package",
             "Version": "version",
             "Distribution": "distribution",
@@ -67,15 +67,15 @@ class AcceptedUploadParser(MailParser):
 
         msg = AcceptedUploadMessage()
         for line in body:
-            for field, target in MAPPING.items():
-                if line.startswith("%s: " % field):
+            for field, target in mapping.items():
+                if line.startswith(f"{field}: "):
                     val = line[len(field) + 2 :]
                     setattr(msg, target, val)
-                    del MAPPING[field]
+                    del mapping[field]
                     break
 
             # If we have found all the fields, stop looking
-            if len(MAPPING) == 0:
+            if len(mapping) == 0:
                 break
 
         if msg.by:
