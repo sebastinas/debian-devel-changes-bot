@@ -9,8 +9,6 @@ then
      db_purge
   fi
 
-  rm -rf /var/lib/debian-devel-changes-bot
-  rm -rf /var/log/debian-devel-changes-bot
   rm -f /etc/debian-devel-changes-bot.config
 fi
 
