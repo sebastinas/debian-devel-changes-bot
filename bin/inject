@@ -54,7 +54,7 @@ def main():
         shutil.move(out_name, TARGET_DIR)
     except Exception as e:
         syslog.syslog(syslog.LOG_ERR, f"Failed to move mail: {e}")
-        outname.unlink()
+        out_name.unlink()
         return 75
 
     return 0
