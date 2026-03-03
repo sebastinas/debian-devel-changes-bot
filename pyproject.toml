@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "debian-devel-changes-bot"
-version = "20250817"
+version = "20260303"
 description = "Debian development activity IRC bot"
 requires-python = ">=3.13"
 classifiers = ["Programming Language :: Python :: 3"]
