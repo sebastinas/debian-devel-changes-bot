@@ -22,8 +22,11 @@ from . import DataSource
 
 
 class RCBugs(DataSource):
-    INTERVAL = 60 * 20
     URL = "https://udd.debian.org/bugs.cgi"
+
+    @staticmethod
+    def interval() -> int:
+        return 60 * 10
 
     def __init__(self, suite: str, session: requests.Session) -> None:
         super().__init__()
@@ -69,14 +72,18 @@ class RCBugs(DataSource):
 
 
 class TestingRCBugs(RCBugs):
-    NAME = "Testing RC Bugs"
+    @staticmethod
+    def name() -> str:
+        return "Testing RC Bugs"
 
     def __init__(self, session: requests.Session):
         super().__init__("forky", session)
 
 
 class StableRCBugs(RCBugs):
-    NAME = "Stable RC Bugs"
+    @staticmethod
+    def name() -> str:
+        return "Stable RC Bugs"
 
     def __init__(self, session: requests.Session):
         super().__init__("trixie", session)

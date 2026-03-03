@@ -22,9 +22,15 @@ from . import DataSource
 
 
 class Dinstall(DataSource):
-    NAME = "dinstall"
     URL = "https://ftp-master.debian.org/dinstall.status"
-    INTERVAL = 60 * 5
+
+    @staticmethod
+    def interval() -> int:
+        return 60 * 5
+
+    @staticmethod
+    def name() -> str:
+        return "dinstall"
 
     def __init__(self, session: requests.Session) -> None:
         super().__init__()

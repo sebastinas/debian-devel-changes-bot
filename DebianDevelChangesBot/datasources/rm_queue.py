@@ -29,8 +29,14 @@ MATCHER = re.compile(r"([^:]+): ")
 
 class RmQueue(DataSource):
     URL = "https://ftp-master.debian.org/removals.html"
-    INTERVAL = 60 * 30
-    NAME = "RM queue"
+
+    @staticmethod
+    def interval() -> int:
+        return 60 * 30
+
+    @staticmethod
+    def name() -> str:
+        return "RM queue"
 
     def __init__(self, session: requests.Session) -> None:
         super().__init__()

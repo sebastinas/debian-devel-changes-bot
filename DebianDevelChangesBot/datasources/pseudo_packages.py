@@ -55,11 +55,16 @@ def parse(descriptions_data: str, maintainers_data: str) -> dict[str, PseudoPack
 
 
 class PseudoPackages(DataSource):
-    NAME = "pseudo packages"
     URL_D = "https://bugs.debian.org/pseudopackages/pseudo-packages.description"
     URL_M = "https://bugs.debian.org/pseudopackages/pseudo-packages.maintainers"
 
-    INTERVAL = 60 * 5
+    @staticmethod
+    def interval() -> int:
+        return 60 * 60
+
+    @staticmethod
+    def name() -> str:
+        return "pseudo packages"
 
     def __init__(self, session: requests.Session | None = None) -> None:
         super().__init__()

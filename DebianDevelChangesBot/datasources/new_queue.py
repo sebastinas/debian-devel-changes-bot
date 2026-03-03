@@ -23,9 +23,15 @@ from . import DataSource
 
 
 class NewQueue(DataSource):
-    NAME = "NEW queue"
     URL = "https://ftp-master.debian.org/new.822"
-    INTERVAL = 60 * 30
+
+    @staticmethod
+    def interval() -> int:
+        return 60 * 30
+
+    @staticmethod
+    def name() -> str:
+        return "NEW queue"
 
     def __init__(self, session: requests.Session) -> None:
         super().__init__()

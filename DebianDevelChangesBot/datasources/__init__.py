@@ -24,6 +24,14 @@ class DataSource(Protocol):
     class DataError(Exception):
         pass
 
+    @staticmethod
+    @abstractmethod
+    def name() -> str: ...
+
+    @staticmethod
+    @abstractmethod
+    def interval() -> int: ...
+
     @abstractmethod
     def update(self): ...
 

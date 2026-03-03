@@ -1,6 +1,6 @@
 #
 #   Debian Changes Bot
-#   Copyright (C) 2016 Sebastian Ramacher <sramacher@debian.org>
+#   Copyright (C) 2016-2026 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -23,9 +23,14 @@ from ..utils.decoding import split_address
 
 
 class AptArchive(DataSource):
-    # re-open cache every 30 min
-    INTERVAL = 30 * 60
-    NAME = "APT archive"
+    @staticmethod
+    def interval() -> int:
+        # re-open cache every 30 min
+        return 30 * 60
+
+    @staticmethod
+    def name() -> str:
+        return "APT archive"
 
     def __init__(self, config_dir: Path, state_dir: Path) -> None:
         super().__init__()

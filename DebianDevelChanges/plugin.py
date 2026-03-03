@@ -122,7 +122,7 @@ class DebianDevelChanges(Plugin):
         for source in self.data_sources:
             # schedule periodic events
             schedule.addPeriodicEvent(
-                wrapper(source), source.INTERVAL, source.NAME, now=False
+                wrapper(source), source.interval(), source.name(), now=False
             )
             # and run them now once
             schedule.addEvent(wrapper(source), time.time() + 1)
@@ -144,7 +144,7 @@ class DebianDevelChanges(Plugin):
         schedule_remove_periodic_event("rejoin")
         schedule_remove_periodic_event("process-mail")
         for source in self.data_sources:
-            schedule_remove_periodic_event(source.NAME)
+            schedule_remove_periodic_event(source.name())
 
         super().die()
 
@@ -342,7 +342,7 @@ class DebianDevelChanges(Plugin):
 
         for source in self.data_sources:
             source.update()
-            irc.reply(f"Updated {source.NAME}.")
+            irc.reply(f"Updated {source.name()}.")
         self._topic_callback()
 
     update = wrap(_update)
