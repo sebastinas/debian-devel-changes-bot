@@ -27,7 +27,6 @@ from DebianDevelChangesBot.datasources import AptArchive
 def main():
     syslog.openlog("ddc-bot-update-apt-cache")
 
-    ret = 0
     try:
         apt_archive = AptArchive(
             Path("/usr/share/debian-devel-changes-bot/bot-config/apt"),
@@ -36,9 +35,9 @@ def main():
         apt_archive.update_index()
     except Exception:
         syslog.syslog(traceback.format_exc())
-        ret = -1
+        return -1
 
-    return ret
+    return 0
 
 
 if __name__ == "__main__":
