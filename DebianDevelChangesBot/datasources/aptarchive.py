@@ -52,7 +52,7 @@ class AptArchive(DataSource):
         self.source_list = apt_pkg.SourceList()
         self.source_list.read_main_list()
 
-    def update_index(self, ignore_errors=False) -> None:
+    def update_index(self, ignore_errors: bool = False) -> None:
         import apt.progress.base
 
         lists_lock = Path(apt_pkg.config.find_dir("Dir::State::Lists")) / "lock"
@@ -67,7 +67,7 @@ class AptArchive(DataSource):
         self.cache = apt_pkg.Cache(None)
         self.depcache = apt_pkg.DepCache(self.cache)
 
-    def get_maintainer(self, package):
+    def get_maintainer(self, package: str) -> dict[str, str]:
         from .. import pseudo_packages
 
         maintainer = pseudo_packages.get_maintainer(package)

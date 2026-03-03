@@ -60,14 +60,16 @@ class NewQueue(DataSource):
         self.backports_packages = backports_packages
         self.fetched = True
 
-    def check_version(self, packages, package, version) -> bool:
+    def check_version(
+        self, packages: dict[str, list[str]], package: str, version: str
+    ) -> bool:
         versions = packages.get(package, [])
         return version in versions
 
-    def is_new(self, package, version) -> bool:
+    def is_new(self, package: str, version: str) -> bool:
         return self.check_version(self.packages, package, version)
 
-    def is_backports_new(self, package, version) -> bool:
+    def is_backports_new(self, package: str, version: str) -> bool:
         return self.check_version(self.backports_packages, package, version)
 
     def get_size(self) -> int | None:
