@@ -1,6 +1,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
+#   Copyirhgt (C) 2026 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -15,12 +16,11 @@
 #   You should have received a copy of the GNU Affero General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from . import MailParser
+from . import MailParser, Message
 from ..utils import quoted_printable, format_email_address
-from ..messages import AcceptedUploadMessage
 
 
-lists = (
+LISTS = (
     "<debian-devel-changes.lists.debian.org>",
     "<debian-backports-changes.lists.debian.org>",
     "<debian-lts-changes.lists.debian.org>",
@@ -28,13 +28,34 @@ lists = (
 )
 
 
+class AcceptedUploadMessage(Message):
+    FIELDS = ("package", "version", "distribution", "urgency", "by", "maintainer")
+    OPTIONAL = ("closes", "new_upload")
+
+    def format(self) -> str:
+        msg = f"{self.package_name()} "
+        if self.new_upload:
+            msg += "[new](NEW)[reset] "
+        msg += f"[version]{self.version}[reset] uploaded "
+        if self.distribution not in ("unstable", "sid"):
+            msg += f"to [distribution]{self.distribution}[reset] "
+        if self.urgency == "high":
+            msg += "with urgency [urgency]high[reset] "
+        msg += f"by [by]{self.by}[reset] "
+        if self.closes and "-backports" not in self.distribution:
+            bug_list = ", ".join(f"[bug]#{x}[/bug]" for x in self.closes)
+            msg += f"(Closes: {bug_list}) "
+        msg += f"[url]https://tracker.debian.org/{self.package}[/url]"
+        return msg
+
+
 class AcceptedUploadParser(MailParser):
     @staticmethod
     def parse(headers, body, **kwargs) -> AcceptedUploadMessage | None:
-        if headers.get("List-Id", "") not in lists:
+        if headers.get("List-Id", "") not in LISTS:
             return
 
-        mapping = {
+        MAPPING = {
             "Source": "package",
             "Version": "version",
             "Distribution": "distribution",
@@ -46,15 +67,15 @@ class AcceptedUploadParser(MailParser):
 
         msg = AcceptedUploadMessage()
         for line in body:
-            for field, target in mapping.items():
+            for field, target in MAPPING.items():
                 if line.startswith("%s: " % field):
                     val = line[len(field) + 2 :]
                     setattr(msg, target, val)
-                    del mapping[field]
+                    del MAPPING[field]
                     break
 
             # If we have found all the fields, stop looking
-            if len(mapping) == 0:
+            if len(MAPPING) == 0:
                 break
 
         if msg.by:

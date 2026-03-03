@@ -21,14 +21,12 @@ import unittest
 import os
 from glob import glob
 
-from DebianDevelChangesBot.messages import (
-    AcceptedUploadMessage,
-    BugClosedMessage,
-    BugSubmittedMessage,
-)
 from DebianDevelChangesBot.mailparsers import (
+    AcceptedUploadMessage,
     AcceptedUploadParser,
+    BugClosedMessage,
     BugClosedParser,
+    BugSubmittedMessage,
     BugSubmittedParser,
 )
 from DebianDevelChangesBot.utils import parse_mail, colourise

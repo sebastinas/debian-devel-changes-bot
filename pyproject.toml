@@ -15,7 +15,6 @@ packages = [
   "DebianDevelChangesBot",
   "DebianDevelChanges",
   "DebianDevelChangesBot.utils",
-  "DebianDevelChangesBot.messages",
   "DebianDevelChangesBot.mailparsers",
   "DebianDevelChangesBot.datasources",
 ]

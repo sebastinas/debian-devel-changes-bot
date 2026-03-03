@@ -1,7 +1,7 @@
 #
 #   Debian Changes Bot
 #   Copyright (C) 2008 Chris Lamb <chris@chris-lamb.co.uk>
-#   Copyright (C) 2015 Sebastian Ramacher <sramacher@debian.org>
+#   Copyright (C) 2015-2026 Sebastian Ramacher <sramacher@debian.org>
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU Affero General Public License as
@@ -20,7 +20,36 @@
 from abc import abstractmethod
 from typing import Protocol
 
-from ..messages import Message
+
+class Message(Protocol):
+    def __init__(self) -> None:
+        if hasattr(self, "FIELDS"):
+            for field in self.FIELDS:
+                setattr(self, field, None)
+        if hasattr(self, "OPTIONAL"):
+            for field in self.OPTIONAL:
+                setattr(self, field, None)
+
+    def __bool__(self):
+        if hasattr(self, "FIELDS"):
+            for field in self.FIELDS:
+                if getattr(self, field) is None:
+                    return False
+        return True
+
+    @abstractmethod
+    def format(self) -> str: ...
+
+    def for_irc(self) -> str:
+        return self.format()
+
+    def package_name(self) -> str:
+        from .. import pseudo_packages
+
+        if pseudo_packages.is_pseudo_package(self.package):
+            return "[pseudo-package]%s[reset]" % self.package
+        else:
+            return "[package]%s[reset]" % self.package
 
 
 class MailParser(Protocol):
@@ -29,9 +58,9 @@ class MailParser(Protocol):
     def parse(headers, body, **kwargs) -> Message | None: ...
 
 
-from .accepted_upload import AcceptedUploadParser
-from .bug_closed import BugClosedParser
-from .bug_submitted import BugSubmittedParser
+from .accepted_upload import AcceptedUploadParser, AcceptedUploadMessage
+from .bug_closed import BugClosedParser, BugClosedMessage
+from .bug_submitted import BugSubmittedParser, BugSubmittedMessage
 
 
 _PARSERS = (
