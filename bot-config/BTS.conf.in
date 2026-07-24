@@ -806,7 +806,7 @@ supybot.plugins.DebianDevelChanges.package_regex.#debian-js: /^(libjs-.*|node(js
 # Requested by Md
 supybot.plugins.DebianDevelChanges.package_regex.#debian-systemd: /^usrmerge$/
 # Requested by lavamind
-supybot.plugins.DebianDevelChanges.package_regex.#debian-puppet: /^(hiera(-.*)|facter|librarian-puppet|puppet(-agent|-lint|-module|-strings|db|server)|ruby-puppet.*|r10k)/
+supybot.plugins.DebianDevelChanges.package_regex.#debian-puppet: /^(hiera(-.*)|facter|librarian-puppet|openfact|openvox-.*|puppet(-agent|-lint|-module|-strings|db|server)|ruby-puppet.*|r10k)/
 # Requested by lavamind
 supybot.plugins.DebianDevelChanges.package_regex.#debian-java-changes: /^(.*-java|*.-maven-plugin|default-(jdk|jre)|gradle|jakarta-|java-|jetty|jnr-|jruby|openjdk|maven|tomcat)/
 
