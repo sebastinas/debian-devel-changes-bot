@@ -1,3 +1,13 @@
+debian-devel-changes-bot (20260902) unstable; urgency=medium
+
+  [ Jerome Charaoui ]
+  * Update package regex for debian-puppet channel
+
+  [ mohawk2 ]
+  * `colourise` "by" with bold, not `lightcyan`, so can read non-dark mode
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Wed, 02 Sep 2026 22:30:43 +0200
+
 debian-devel-changes-bot (20260303) unstable; urgency=medium
 
   * Upgrade to setuptools >= 61
