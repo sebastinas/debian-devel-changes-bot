@@ -718,7 +718,7 @@ supybot.plugins.Config: True
 #
 # Default value: True
 ###
-supybot.plugins.Config.public: True
+supybot.plugins.Config.public: False
 
 ###
 # Determines whether this plugin is loaded by default.
@@ -1444,3 +1444,6 @@ supybot.capabilities: -owner -admin -trusted
 # Default value: True
 ###
 supybot.capabilities.default: True
+
+supybot.capabilities.allowShell: False
+supybot.protocols.ssl.verifyCertificates: True
