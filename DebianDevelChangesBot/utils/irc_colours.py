@@ -42,7 +42,7 @@ _TAGS = {
 # Stylesheet
 _TAGS.update(
     {
-        "by": _TAGS["lightcyan"],
+        "by": _TAGS["b"], # lightcyan is illegible on non-dark mode
         "package": _TAGS["darkgreen"],
         "pseudo-package": _TAGS["lightblue"],
         "version": _TAGS["darkcyan"],
